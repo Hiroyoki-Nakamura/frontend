@@ -1,0 +1,35 @@
+.dropdown:hover>.dropdown-menu {
+    display: block;
+    position: absolute;
+    z-index: 9000;
+}
+
+.dropdown-item {
+    background-color: #3a4147;
+    color: white;
+}
+
+.dropdown-menu {
+    background-color: #3a4147;
+    position: relative;
+}
+
+#barraNav {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+#botao_tela_menor {
+    width: 20%;
+    display: none;
+}
+
+.lupa_icon {
+    background-image: url(/img/lupa_icon.png);
+    background-size: 400%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 50px;
+    height: 50px;
+}

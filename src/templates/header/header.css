@@ -1,0 +1,67 @@
+header {
+    color: white;
+    background-color: #660033;
+    box-sizing: border-box;
+    overflow: auto;
+    width: 100%;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Header {
+    background-color: black;
+    position: relative;
+}
+
+.logo {
+    width: 100%;
+    margin: 0;
+    background-color: #660033;
+    padding: 10px;
+    border-bottom: 1px solid #fff;
+}
+
+.logotipo {
+    width: 300px;
+    height: 50px;
+    background-image: url(/img/desvinho_logo.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 70%;
+}
+
+.acoes {
+    position: absolute;
+    right: 0;
+}
+
+.acoes * {
+    margin: 5px;
+}
+
+.logoUser {
+    width: 50px;
+    height: 50px;
+    background-image: url(/img/user_icon.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.logoCar {
+    width: 50px;
+    height: 50PX;
+    background-image: url(/img/cart_icon.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 170%;
+}
+
+.separator {
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+}
