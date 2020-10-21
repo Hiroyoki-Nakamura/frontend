@@ -41,7 +41,7 @@ export default props => (
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search"/>
-          <button class=" lupa_icon btn btn-outline-dark my-2 my-sm-0" type="submit"></button>
+          <button class=" lupa_icon btn btn-outline-dark my-2 my-sm-0 btn_lupa" type="submit"></button>
         </form>
       </div>
     </nav>

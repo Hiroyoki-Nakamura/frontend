@@ -7,10 +7,10 @@ export default props => (
     <div className="center logotipo"></div>
     <div className="acoes center">
       <div className="center">
-        <div className="logoUser"></div>login
+        <div className="logoUser btn btn_login"></div> login
       </div>
       <div className="center">
-        <div className="logoCar"></div> carrinho
+        <div className="logoCar btn btn_cart"></div>carrinho 
       </div>
     </div>
   </div>
