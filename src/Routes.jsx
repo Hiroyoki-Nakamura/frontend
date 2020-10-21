@@ -10,8 +10,9 @@ import Contato from './pages/Contato';
 import Index from './pages/Index';
 import Login from './pages/Login';
 import Pedido from './pages/Pedido';
+import Perfil from './pages/Perfil'
 import Produto from './pages/Produto';
-import Sucesso from './pages/Sucesso';
+import Sucesso from './pages/SucessoCompra';
 
 
 export default props => (
