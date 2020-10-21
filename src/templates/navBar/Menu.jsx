@@ -9,7 +9,7 @@ export default props => (
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="#/index">Home</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
@@ -27,16 +27,16 @@ export default props => (
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Vinhos</a>
+            <a class="nav-link" href="#/produto">Vinhos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Destilados</a>
+            <a class="nav-link" href="/produto">Destilados</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Champagnes</a>
+            <a class="nav-link" href="#/produto">Champagnes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contato</a>
+            <a class="nav-link" href="#/produto">Contato</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
