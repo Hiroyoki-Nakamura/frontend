@@ -3,14 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './checkout.css';
 
 export default props => (
-<html lang="pt-br" className='color_back'>
 
-{/* <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Checkout</title>
-</head> */}
-    <div class="flex-container cima">
+    <div class="flex-container cima color_back">
 
 
         <div className="ede">
@@ -105,8 +99,4 @@ export default props => (
 
 
 
-{/* <script src="../js/app.js "></script> */}
-
-
-</html>
 )

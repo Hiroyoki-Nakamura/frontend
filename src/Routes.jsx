@@ -2,17 +2,17 @@ import React from 'react';
 import {Router, Route, Redirect, hashHistory} from 'react-router';
 
 
-import Cadastro from './pages/Cadastro';
-import Carrinho from './pages/Carrinho';
-import Categoria from './pages/Categoria';
+import Cadastro from './pages/Cadastro/Cadastro';
+import Carrinho from './pages/Carrinho/Carrinho';
+import Categoria from './pages/Categoria/Categoria';
 import Checkout from './pages/Checkout/Checkout';
-import Contato from './pages/Contato';
-import Index from './pages/Index';
-import Login from './pages/Login';
-import Pedido from './pages/Pedido';
-import Perfil from './pages/Perfil';
-import Produto from './pages/Produto';
-import Sucesso from './pages/SucessoCompra';
+import Contato from './pages/Contato/Contato';
+import Index from './pages/Index/Index';
+import Login from './pages/Login/Login';
+import Pedido from './pages/Pedido/Pedido';
+import Perfil from './pages/Perfil/Perfil';
+import Produto from './pages/Produto/Produto';
+import Sucesso from './pages/SucessoCompra/SucessoCompra';
 
 
 export default props => (
@@ -28,6 +28,6 @@ export default props => (
         <Route path='/perfil' component={Perfil}/>
         <Route path='/produto' component={Produto}/>
         <Route path='/sucesso' component={Sucesso}/>
-        <Redirect from='*' to='/checkout'/>
+        <Redirect from='*' to='/sucesso'/>
     </Router>
 );

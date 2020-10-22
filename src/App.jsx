@@ -7,11 +7,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 
 export default props => (
-    <>
+    <body className='color_back'>
         <Header/>
         <Menu/>
         <Routes/> 
         <Footer/>
-    </>
+    </body>
     
 )
