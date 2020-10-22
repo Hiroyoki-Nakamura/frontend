@@ -1,0 +1,23 @@
+footer {
+    color: white;
+    background-color: #660033;
+    box-sizing: border-box;
+    overflow: auto;
+    width: 100%;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Footer {
+    justify-content: space-around;
+}
+
+.Footer *,
+.copyright {
+    text-align: center;
+    margin: 0;
+}

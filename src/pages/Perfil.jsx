@@ -12,7 +12,7 @@ export default props => (
     <title>Home</title>
 </head>
 
-<body>
+ <body>
 
 
     <header className="meuHeader">
@@ -72,29 +72,11 @@ export default props => (
         <span className="navbar-toggler-icon">Menu</span>
     </button>
 
-
-    <div style="width: 1000px; height: 1000px; background-color: #3d3c3c;"></div>
-
+     <div style="width: 1000px; height: 1000px; background-color: #3d3c3c;"></div>
 
 
-    <footer>
-        <div className="center meuFooter">
-            <div className="textos">
-                <p>Lorem ipsum dolor sit amet consectetur dicta quisquam! Tenetur labore esse dolor quidem beatae
-                    consequuntur cum.</p>
-                <pb>Lorem, ipsum dolor sit amet consectetur a autem dolorum culpa modi tenetur, velit magni. Ad ab quod
-                    eius?</pb>
-            </div>
-            <div className="telefone">
-                <p>(11)91234-5678</p>
-                <p>(11)91234-5678</p>
-            </div>
-        </div>
 
-        <p className="copyright">copyright &copy 2020</p>
-
-    </footer>
-</body>
+ </body>
 
 </html>
 )

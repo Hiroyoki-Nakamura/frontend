@@ -79,7 +79,7 @@ export default props => (
     
 
 
-</body>
+ </body>
 
 </html>
 )

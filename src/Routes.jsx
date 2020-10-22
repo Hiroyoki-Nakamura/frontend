@@ -1,11 +1,11 @@
 import React from 'react';
-import { Router, Route, Redirect, hashHistory } from 'react-router';
+import {Router, Route, Redirect, hashHistory} from 'react-router';
 
 
 import Cadastro from './pages/Cadastro';
 import Carrinho from './pages/Carrinho';
 import Categoria from './pages/Categoria';
-import Checkout from './pages/Checkout';
+import Checkout from './pages/Checkout/Checkout';
 import Contato from './pages/Contato';
 import Index from './pages/Index';
 import Login from './pages/Login';
@@ -28,7 +28,6 @@ export default props => (
         <Route path='/perfil' component={Perfil}/>
         <Route path='/produto' component={Produto}/>
         <Route path='/sucesso' component={Sucesso}/>
-        <Redirect from='*' to='/index'/>
+        <Redirect from='*' to='/checkout'/>
     </Router>
-)
-
+);

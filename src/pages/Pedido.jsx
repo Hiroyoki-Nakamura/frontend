@@ -102,7 +102,7 @@ export default props => (
                                     <label>Pendente</label>
                                 </div>
                                 
-                            </div>
+//                             </div>
                             
                         </div>
 
