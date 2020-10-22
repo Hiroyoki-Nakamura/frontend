@@ -2,12 +2,6 @@ h1 {
     color: #ffffff;
 }
 
-.center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 #teste-botao {
     background-color: #660033;
     color: #ffffff;
