@@ -6,12 +6,6 @@ footer {
     width: 100%;
 }
 
-.center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .Footer {
     justify-content: space-around;
 }

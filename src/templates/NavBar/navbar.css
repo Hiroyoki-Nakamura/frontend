@@ -14,11 +14,16 @@
     position: relative;
 }
 
-#barraNav {
+/* só pra tirar o margin do #barranav */
+#barraNav{
+    margin: 0;
+}
+
+/* #barraNav {
     position: fixed;
     width: 100%;
     z-index: 1;
-}
+} */
 
 #botao_tela_menor {
     width: 20%;
