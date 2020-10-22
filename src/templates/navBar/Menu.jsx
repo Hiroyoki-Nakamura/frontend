@@ -36,7 +36,7 @@ export default props => (
             <a class="nav-link" href="#/produto">Champagnes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#/produto">Contato</a>
+            <a class="nav-link" href="#/contato">Contato</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">

@@ -3,7 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './checkout.css';
 
 export default props => (
-
+    <>
+    
     <div class="flex-container cima color_back">
 
 
@@ -33,6 +34,7 @@ export default props => (
                 <label>Nome no cartão</label>
                 <br/>
                 <input type="text-area" className="input_nomeCartao" placeholder="NOME ESCRITO NO CARTÃO" />
+                <input type="text-area" className='.input_nomeCartao' placeholder="NOME ESCRITO NO CARTÃO" />
                 <br/>
                 <label>Validade</label><br/><input type="text-area" className='input_valCartao' placeholder="mês/ano" />
                 <br/>
@@ -52,10 +54,13 @@ export default props => (
                     <option>7x sem juros</option>
                     <option>8x sem juros</option>
                     <option>9x sem juros</option>
-                    <option>10x sem juros</option>                    
+                    <option>10x sem juros</option>
+                             
                 </select>
+                </form>  
                 <br/>
-            </form>
+
+            </div>
             <img className=" img " src="/img/visa.png " width="40px " height="40px" />
             <img className="img " src="/img/master.png " width="40px " height="40px " />
             <img className="img " src="/img/boleto.png " width="40px " height="40px " />
@@ -64,6 +69,7 @@ export default props => (
         <div className="confirmadados">
             <h3>Confirmar Dados</h3>
             <label>Entrega:</label>
+            
             <div className="input-group mb-3 ">
                 <select className="custom-select select_confirmaEndEntrega " id="inputGroupSelect01 ">
                     <option selected>Endereço cadastrado no sistema</option>
@@ -79,6 +85,7 @@ export default props => (
                 </select>
             </div>
 
+            <div>
             <label>Valor Frete:</label>
             <br/>
             <input type="text-area " className='input_frete' /*style="border-radius: 10px; width: 200px; "*/ placeholder="R$ 000,00 " />
@@ -93,10 +100,18 @@ export default props => (
         </div>
 
         </div>
+    </>
+
+
+    
 
 
 
 
+
+
+
+// {/* <script src="../js/app.js "></script> */}
 
 
 )
