@@ -3,7 +3,7 @@ import Axios from 'axios';
 import React from 'react';
 
 getCategoria = () => {
-      Axios.get('').then(
+      Axios.get('http://localhost:8000/api').then(
           resp => {
               this.setState({produtos: resp.data})
           });
