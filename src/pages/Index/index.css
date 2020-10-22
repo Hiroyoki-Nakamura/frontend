@@ -1,12 +1,15 @@
+.color_back{
+  background-color: #3d3c3c;
+}
+
 /* BANNERS */
 .carousel {
     height: 300px;
   }
-  .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
+  .margin_topo{
+    margin: auto;
+  }
   
   .banners-carousel {
     background-color: #fff;
@@ -67,3 +70,19 @@
   .filter {
     color: #fff;
   }
+
+  h1 {
+    margin: 0;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}

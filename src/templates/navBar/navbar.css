@@ -37,3 +37,15 @@
 .btn_lupa:hover{
     opacity: 80%;
 }
+
+@media (max-width:991px) {
+    #barraNav {
+        display: none;
+    }
+    #botao_tela_menor {
+        background-color: #3a4147;
+        color: white;
+        display: inline-block;
+        position: fixed;
+    }
+}
