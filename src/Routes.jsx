@@ -2,17 +2,17 @@ import React from 'react';
 import {Router, Route, Redirect, hashHistory} from 'react-router';
 
 
-import Cadastro from './pages/Cadastro';
-import Carrinho from './pages/Carrinho';
-import Categoria from './pages/Categoria';
-import Checkout from './pages/Checkout/Checkout';
-import Contato from './pages/Contato';
-import Index from './pages/Index';
-import Login from './pages/Login';
-import Pedido from './pages/Pedido';
-import Perfil from './pages/Perfil'
-import Produto from './pages/Produto';
-import Sucesso from './pages/SucessoCompra';
+import Cadastro from './pages/Cadastro/Cadastro';
+import Carrinho from './pages/Carrinho/Index';
+import Categoria from './pages/Categoria/Index';
+import Checkout from './pages/Checkout/Index';
+import Contato from './pages/Contato/Index';
+import Index from './pages/Index/Index';
+import Login from './pages/Login/Index';
+import Pedido from './pages/Pedido/Index';
+import Perfil from './pages/Perfil/Index'
+import Produto from './pages/Produto/Index';
+import Sucesso from './pages/SucessoCompras/Index';
 
 
 export default props => (

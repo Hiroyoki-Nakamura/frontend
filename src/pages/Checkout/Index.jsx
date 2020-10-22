@@ -4,22 +4,13 @@ import './checkout.css';
 export default props => (
 <html lang="pt-br">
 
-{/* <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Checkout</title>
-</head> */}
 
 
         <div className="ede">
 
             <h3>Endereço de Entrega</h3>
             <label className="ed">Endereço cadastrado: </label>
-<<<<<<< HEAD:src/pages/Checkout.jsx
-            <select style={{borderRadius: + '15px'}} className="custom-select" id="inputGroupSelect02">
-=======
             <select  className=".select_endereco custom-select" id="inputGroupSelect02">
->>>>>>> 1f185c5f7ac249af176bdfb4528e913cacb732eb:src/pages/Checkout/Checkout.jsx
                 <option selected>Endereço cadastrado no sistema</option>
                 <option value="1">R. numero um, nº1, cep: 00000-00</option>
             </select>
@@ -39,19 +30,6 @@ export default props => (
                 <label>Nº do cartão </label>
                 <input type="text-area" className="input_nCartao" placeholder="0000-0000-0000-0000" />
                 <label>Nome no cartão</label>
-<<<<<<< HEAD:src/pages/Checkout.jsx
-                <input type="text-area" style={{borderRadius: + '10px'}} style={{width: '300px'}} style={{height: + '30px'}} placeholder="NOME ESCRITO NO CARTÃO" />
-                <br/>
-                <label>Validade</label><br/><input type="text-area" style={{borderRadius: + '10px'}} width= '100px' height= '30px' style={{textAlign: + 'center'}} placeholder="mês/ano" />
-                <br/>
-                <label>CVV</label>
-                <br/>
-                <input type="text-area" style={{bordeRadius: + '10px' , width: + '100px' , height: + '30px' , textAlign: + 'center'}} placeholder="000"/>
-                <br/>
-                <label>Quantidade de Parcelas</label>
-                <br/>
-                <select style={{bordeRadius: + '15px', width: + '300px'}} className="custom-select" id="inputGroupSelect02">
-=======
                 <input type="text-area" className='.input_nomeCartao' placeholder="NOME ESCRITO NO CARTÃO" />
                 <br/>
                 <label>Validade</label><br/><input type="text-area" className='input_valCartao' placeholder="mês/ano" />
@@ -63,7 +41,6 @@ export default props => (
                 <label>Quantidade de Parcelas</label>
                 <br/>
                 <select  className="custom-select select_parcelamento" id="inputGroupSelect02">
->>>>>>> 1f185c5f7ac249af176bdfb4528e913cacb732eb:src/pages/Checkout/Checkout.jsx
                     <option>1x sem juros</option>
                     <option>2x sem juros</option>
                     <option>3x sem juros</option>
@@ -78,18 +55,11 @@ export default props => (
                 </select>
                 </form>  
                 <br/>
-<<<<<<< HEAD:src/pages/Checkout.jsx
             
             <img className=" img " src="../img/visa.png " width= "40px"  height= "40px" />
             <img className="img " src="../img/master.png " width=  "40px"  height= "40px" />
             <img className="img " src="../img/boleto.png " width=  "40px"  height=  "40px" />
             
-=======
-            </form>
-            <img className=" img " src="/img/visa.png " width="40px " height="40px" />
-            <img className="img " src="/img/master.png " width="40px " height="40px " />
-            <img className="img " src="/img/boleto.png " width="40px " height="40px " />
->>>>>>> 1f185c5f7ac249af176bdfb4528e913cacb732eb:src/pages/Checkout/Checkout.jsx
         </div>
 
         <div className="confirmadados">
@@ -97,27 +67,20 @@ export default props => (
             <label>Entrega:</label>
             
             <div className="input-group mb-3 ">
-<<<<<<< HEAD:src/pages/Checkout.jsx
-                <select style={{bordeRadius: + '15px'}} className="custom-select " id="inputGroupSelect01 ">
-=======
                 <select className="custom-select select_confirmaEndEntrega " id="inputGroupSelect01 ">
->>>>>>> 1f185c5f7ac249af176bdfb4528e913cacb732eb:src/pages/Checkout/Checkout.jsx
                     <option selected>Endereço cadastrado no sistema</option>
                     <option value="1 ">R. numero um, nº1, cep: 00000-00</option>
                 </select>
             </div>
             <label>Forma de Pagamento:</label>
             <div className="input-group mb-3 ">
-<<<<<<< HEAD:src/pages/Checkout.jsx
-                <select style={{bordeRadius: + '15px'}} className="custom-select " id="inputGroupSelect01 ">
-=======
                 <select  className="custom-select select_confirmaMetPagamento" id="inputGroupSelect01 ">
->>>>>>> 1f185c5f7ac249af176bdfb4528e913cacb732eb:src/pages/Checkout/Checkout.jsx
                     <option selected>Opção Selecionada</option>
                     <option value="1 ">Cartão de crédito</option>
                     <option value="1 ">Boleto</option>
                 </select>
             </div>
+            
 
             <div>
             <label>Valor Frete:</label>
@@ -131,24 +94,9 @@ export default props => (
             <br/>
             <a href="../html/index.html"><button type="button" className="btn btn-success btcc ">Continuar Comprando</button></a>
             <a href="../html/sucesso_compra.html"><button type="button " className="btn btn-success btfc ">Finalizar Compra</button></a>
+        
         </div>
-
-<<<<<<< HEAD:src/pages/Checkout.jsx
-        </div>
-
-    
-
-
-=======
-
-
-
-
-
-{/* <script src="../js/app.js "></script> */}
->>>>>>> 1f185c5f7ac249af176bdfb4528e913cacb732eb:src/pages/Checkout/Checkout.jsx
-
-</body>
+</div>
 
 </html>
 )
