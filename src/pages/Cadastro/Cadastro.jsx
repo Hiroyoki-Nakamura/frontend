@@ -1,6 +1,6 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
-import './cadastro.css'
+
+import './cadastro.css';
 
 
 
@@ -17,8 +17,6 @@ export default props => (
                             Cadastro
                         </center>
                     </h1>
-
-
                     <div className="row">
                         <div className="col-12 center">
                             <div className="row" id="container1">
