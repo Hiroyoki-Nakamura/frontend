@@ -6,7 +6,7 @@ export default class props extends React.Component {
 
   getProdutos = async () => {
     const produtos = await API.get('/produto/listar');
-
+    
     console.log(produtos.data);
   }
 
