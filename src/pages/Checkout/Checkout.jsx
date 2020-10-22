@@ -1,14 +1,16 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 import './checkout.css';
 
 export default props => (
-<html lang="pt-br">
+<html lang="pt-br" className='color_back'>
 
 {/* <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Checkout</title>
 </head> */}
+    <div class="flex-container cima">
 
 
         <div className="ede">
@@ -35,7 +37,8 @@ export default props => (
                 <label>Nº do cartão </label>
                 <input type="text-area" className="input_nCartao" placeholder="0000-0000-0000-0000" />
                 <label>Nome no cartão</label>
-                <input type="text-area" className='.input_nomeCartao' placeholder="NOME ESCRITO NO CARTÃO" />
+                <br/>
+                <input type="text-area" className="input_nomeCartao" placeholder="NOME ESCRITO NO CARTÃO" />
                 <br/>
                 <label>Validade</label><br/><input type="text-area" className='input_valCartao' placeholder="mês/ano" />
                 <br/>
@@ -91,8 +94,10 @@ export default props => (
             <br/>
             <input type="text-area " className='input_valorTotal'/*style="border-radius: 10px; width: 2 00px; "*/ placeholder="R$ 000,00 " />
             <br/>
-            <a href="../html/index.html"><button type="button" className="btn btn-success btcc ">Continuar Comprando</button></a>
+            <a href="../html/index.html"><button type="button" className="btn btn-success btcc">Continuar Comprando</button></a>
             <a href="../html/sucesso_compra.html"><button type="button " className="btn btn-success btfc ">Finalizar Compra</button></a>
+        </div>
+
         </div>
 
 

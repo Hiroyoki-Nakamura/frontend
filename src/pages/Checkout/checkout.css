@@ -1,3 +1,6 @@
+.color_back{
+    background-color: #660033;;
+}
 .flex-container {
     width: 95%;
     height: 700px;
@@ -111,9 +114,10 @@ h3 {
 }
 
 .input_nomeCartao{
+    width:  300px;
+    height: 30px;
+    text-align: center;
     border-radius: 10px;
-    width: 300px;
-    height:30px;
 }
 
 .input_valCartao{
@@ -125,7 +129,7 @@ h3 {
 
 .input_cvvCartao{
     border-radius: 10px;
-    width:  100px;
+    width:  70px;
     height: 30px;
     text-align: center;
 }
