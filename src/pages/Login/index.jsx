@@ -4,9 +4,7 @@ import './styles.css';
 export default props => (
   <div className="col-lg-12">
     <form className="col-lg-12 form-group" id="formulario">
-      <h1 className="center">
-        Login
-          </h1>
+      <h1 className="center">Login</h1>
       <div className="row">
         <div className="col-lg-1"></div>
         <div className="col-lg-4" id="container1">

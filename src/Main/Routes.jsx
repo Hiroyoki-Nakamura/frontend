@@ -2,7 +2,7 @@ import React from 'react';
 import {Router, Route, Redirect, hashHistory} from 'react-router';
 
 import Cadastro from '../pages/Cadastro';
-import Carrinho from '../pages/Carrinho/Carrinho';
+import Carrinho from '../pages/Carrinho';
 import Categoria from '../pages/Categoria/Categoria';
 import Checkout from '../pages/Checkout';
 import Contato from '../pages/Contato/Contato';
