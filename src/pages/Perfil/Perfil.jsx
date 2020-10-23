@@ -1,83 +1,114 @@
 import React from 'react';
 import './perfil.css';
-
 export default props => (
-<html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="./../css/main.css"/>
-    <title>Home</title>
-</head>
-
- <body>
+    <body>
 
 
-    <header className="meuHeader">
-        <div className="center logo">
-            <h1>Desvinho</h1>
-        </div>
-    </header>
+        <div className="container" id="principal">
+            <div className="row">
+                <div className="col-12">
+                    <h1 className="center">Meus Pedidos</h1>
+                    <div className="container" id="topo">
+                        <div className="row">
+                            <div className="col-12">
+                                <div className="row">
+                                    <div className="col-3">
 
+                                    </div>
 
-    <section id="barraNav">
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a className="navbar-brand" href="#"></a>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item">
-                        <a className="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li className="nav-item dropdown">
-                        <a className="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Todas as categorias
-                        </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a className="dropdown-item" href="#">Categoria</a>
-                            <a className="dropdown-item" href="#">Categoria</a>
-                            <a className="dropdown-item" href="#">Categoria</a>
-                            <a className="dropdown-item" href="#">Categoria</a>
-                            <a className="dropdown-item" href="#">Categoria</a>
-                            <a className="dropdown-item" href="#">Categoria</a>
-                            <a className="dropdown-item" href="#">Categoria</a>
+                                    <div className="col-9" id="labels">
+                                        <label>Numero Pedido</label>
+                                        <label>Vlr Pedido</label>
+                                        <label>Data Pedido</label>
+                                        <label>Status</label>
+                                    </div>
+                                    <div className="col-2 center ">
+                                        <h5>Nr Pedido</h5>
+                                    </div>
+                                    <div className="col-2 center">
+                                        <h5>Vlr Pedido</h5>
+                                    </div>
+                                    <div className="col-2 center">
+                                        <h5>Data Pedido</h5>
+                                    </div>
+                                    <div className="col-2 center">
+                                        <h5>Status</h5>
+                                    </div>
+
+                                </div>
+
+                            </div>
                         </div>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="produto.html">Vinhos</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Destilados</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Champagnes</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="contato.html">Contato</a>
-                    </li>
-                </ul>
-                <form className="form-inline my-2 my-lg-0">
-                    <input className="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" />
-                    <button className=" lupa_icon btn btn-outline-dark my-2 my-sm-0" type="submit"></button>
+                    </div>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-3" id="menu_lat">
+                                <br />
+                                <li>Meu Cadastro</li>
+                                <hr />
+                                <li>Meus Pedidos</li>
+                                <hr />
+                                <li>Endereco</li>
+                                <hr />
+                                <li>Alterar senha</li>
+                                <hr />
+                                <li>Logout</li>
+                                <hr />
+                            </div>
 
-                </form>
+
+
+                            <div className="col-9" id="pedido">
+                                <br />
+                                <div className="row">
+                                    <div className="col-12 center" id="labels">
+                                        <label>12345</label>
+                                        <label>R$ 120,00</label>
+                                        <label>28/7/2019</label>
+                                        <label>Finalizado</label>
+                                    </div>
+
+                                </div>
+                                <hr />
+
+                                <div className="row">
+                                    <div className="col-12 center" id="labels">
+                                        <label>13401</label>
+                                        <label>R$ 550,00</label>
+                                        <label>10/3/2020</label>
+                                        <label>Cancelado</label>
+                                    </div>
+
+                                </div>
+
+                                <hr />
+                                <div className="row">
+                                    <div className="col-12 center" id="labels">
+                                        <label>14599</label>
+                                        <label>R$ 800,00</label>
+                                        <label>05/9/2020</label>
+                                        <label>Pendente</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div className="container" id="base">
+                        <div className="row">
+                            <div className="col-12">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </nav>
-    </section>
-    <button id="botao_tela_menor" className="navbar-toggler" type="button" data-toggle="collapse"
-        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon">Menu</span>
-    </button>
+        </div>
 
-     {/* <div style="width: 1000px; height: 1000px; background-color: #3d3c3c;"></div> */}
+    </body>
 
-
-
- </body>
-
-</html>
 )

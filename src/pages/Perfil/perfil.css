@@ -1,3 +1,55 @@
+#principal{
+    background-color: grey;
+    margin-top: 70px;
+    margin-bottom: 20px;
+    /* height: 460px; */
+    border-radius: 20px;
+    padding-bottom: 10px;
+}
+
+#topo{
+    background-color: #660033;
+    color: #fff;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+   
+    
+}
+
+#pedido{
+    background-color: white;
+    overflow: auto;
+    height: 330px;
+    
+}
+
+#base{
+    background-color: #660033;
+   
+    height: 30px; 
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+}
+#menu_lat{
+    background-color: #660033;
+    overflow: auto;
+    height: 330px;
+    color: white;
+    font-size: 20px;
+
+
+}
+
+#labels
+{
+  justify-content: space-around;
+}
+
+h5{
+    justify-content: space-around;
+}
+
 body {
     background-color: #3d3c3c;
 }
@@ -41,15 +93,6 @@ header, footer {
     border-bottom: 1px solid #fff;
 }
 
-.logotipo {
-    width: 300px;
-    height: 50px;
-    background-image: url(/img/desvinho_logo.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 70%;
-}
-
 .acoes {
     position: absolute;
     right: 0;
@@ -59,23 +102,6 @@ header, footer {
     margin: 5px;
 }
 
-.logoUser {
-    width: 50px;
-    height: 50px;
-    background-image: url(/img/user_icon.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100%;
-}
-
-.logoCar {
-    width: 50px;
-    height: 50PX;
-    background-image: url(/img/cart_icon.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 170%;
-}
 
 .separator {
     width: 100%;
@@ -89,46 +115,8 @@ header, footer {
     justify-content: space-around;
 }
 
-.Footer *,
-.copyright {
-    text-align: center;
-    margin: 0;
-}
-
-.dropdown:hover>.dropdown-menu {
-    display: block;
-    position: absolute;
-    z-index: 9000;
-}
-
-.dropdown-item {
-    background-color: #3a4147;
-    color: white;
-}
-
-.dropdown-menu {
-    background-color: #3a4147;
-    position: relative;
-}
-
-#barraNav {
-    position: fixed;
-    width: 100%;
-    z-index: 1;
-}
-
-#botao_tela_menor {
-    width: 20%;
-    display: none;
-}
-
-.lupa_icon {
-    background-image: url(/img/lupa_icon.png);
-    background-size: 400%;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 50px;
-    height: 50px;
+.textos, .telefone {
+    line-height: normal;
 }
 
 @media (max-width:991px) {
