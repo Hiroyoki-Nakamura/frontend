@@ -6,32 +6,29 @@ h1 {
     background-color: #660033;
     color: #ffffff;
     border-radius: 20px;
-    margin-left: 50%;
     margin-top: 5%;
 }
 
-#formulario {
+#formulario1 {
     border-radius: 30px;
     background-color: rgba(219, 212, 212, 0.589);
     justify-content: space-between;
     margin-top: 20px;
 }
 
-#container1 {
+#container3 {
     background-color: #ffffff;
     border-radius: 15px;
     box-sizing: border-box;
     width: 80%;
-    margin-left: 4%;
 }
 
-#container2 {
+#container4 {
     background-color: #ffffff;
     border-radius: 15px;
     box-sizing: border-box;
     width: 90%;
-    
-}
+} 
 
 .form-control {
     border-radius: 20px;

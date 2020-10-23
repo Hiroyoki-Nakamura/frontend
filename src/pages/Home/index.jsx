@@ -21,7 +21,7 @@ export default class Home extends React.Component {
         <div className="col-12">
           <section>
 
-            <Banners />
+            <Banners /> 
 
             <div className="products">
 

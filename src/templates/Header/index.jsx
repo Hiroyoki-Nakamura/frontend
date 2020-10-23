@@ -6,7 +6,7 @@ export default props => (
   <div className="center logo">
     <div className="center logotipo"></div>
     <div className="acoes center">
-      <div className="center">
+      <div className="center icons">
         <a href="#/login"><div className="logoUser btn btn_login"></div>login</a>
       </div>
       <div className="center">
