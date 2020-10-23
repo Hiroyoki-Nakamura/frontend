@@ -38,7 +38,7 @@ header {
 }
 
 .logoUser {
-    width: 70px;
+    width: 80px;
     height: 40px;
     background-image: url(/img/user_icon.png);
     background-position: center;
@@ -47,7 +47,7 @@ header {
 }
 
 .logoCar {
-    width: 70px;
+    width: 80px;
     height: 40px;
     background-image: url(/img/cart_icon.png);
     background-position: center;
@@ -61,7 +61,6 @@ header {
     background-color: #fff;
 }
 
-/* style={{color: + '#ffffff'}} */
 
 .btn_cart{
     width: 100px;

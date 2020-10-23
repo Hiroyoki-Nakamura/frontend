@@ -1,5 +1,6 @@
 import React from 'react';
 import './produto.css';
+import Product from '../../Components/Produto';
 export default props => (
   <>
     <section id="sectionproduto">
