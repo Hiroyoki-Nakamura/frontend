@@ -4,12 +4,7 @@ header {
     box-sizing: border-box;
     overflow: auto;
     width: 100%;
-}
-
-.Header {
-    background-color: black;
-    position: relative;
-}
+}   
 
 .logo {
     width: 100%;
@@ -26,6 +21,10 @@ header {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 70%;
+}
+
+.icons {
+    max-height: 30px;
 }
 
 .acoes {

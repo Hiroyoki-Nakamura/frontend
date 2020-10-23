@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles.css';
 
 export default props => (
 <html lang="pt-br">
@@ -6,19 +7,21 @@ export default props => (
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
     <link rel="stylesheet" href="./../css/main.css"/>
-    <link rel="stylesheet" href="../css/sucessComp.css"/>
-    <title>Desvinhos</title>
+    <title>Home</title>
 </head>
 
-<body>
+ <body>
+
 
     <header className="meuHeader">
         <div className="center logo">
-            <div className="center logotipo"></div>
+            <h1>Desvinho</h1>
         </div>
     </header>
+
 
     <section id="barraNav">
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -29,9 +32,10 @@ export default props => (
                         <a className="nav-link" href="index.html">Home</a>
                     </li>
                     <li className="nav-item dropdown">
-                        <a className="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Todas as categorias
-                    </a>
+                        <a className="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Todas as categorias
+                        </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a className="dropdown-item" href="#">Categoria</a>
                             <a className="dropdown-item" href="#">Categoria</a>
@@ -63,35 +67,17 @@ export default props => (
             </div>
         </nav>
     </section>
-    <button id="botao_tela_menor" className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon">Menu</span>
-</button>
+    <button id="botao_tela_menor" className="navbar-toggler" type="button" data-toggle="collapse"
+        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon">Menu</span>
+    </button>
+
+     {/* <div style="width: 1000px; height: 1000px; background-color: #3d3c3c;"></div> */}
 
 
 
-    <section className="fundo">
-        <div className="fundobr">
-            <div className="fundonota">
-                <br/>
-                <br/>
-                <img src="../img/check.png" width="100px"  height="100px" />
-                <br/>
-                <br/>
-                <h2>Pedido Concluido Com Sucesso!</h2>
-                <br/>
-                <br/>
-                <p className="ps">Numero do Pedido: #00001</p>
-                <br/>
-                <p className="ps">Data: 01/01/2020 Horario:23h:59m</p>
-                <br/>
-                <p className="ps">Endereço De Entrega: Rua dois, nº 01 - Cep: 01234-56 - Cidade: São Paulo - Bairro: Centro.</p>
-                <br/>
-                <a href="../html/index.html"><button type="button " className="btn btn-success btcc ">Continuar Comprando</button></a>
-            </div>
-        </div>
-    </section>
-
-</body>
+ </body>
 
 </html>
 )

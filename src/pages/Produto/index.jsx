@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles.css';
 
 export default props => (
   <>
@@ -6,7 +7,7 @@ export default props => (
       <div className="container">
         <div className="row">
           <div className="col-3">
-            <div className="card" style={{ width: + '18rem' }}>
+            <div className="card style_card">
               <div className="card-body">
                 <img src="../img/Chivas-12-anos (3).png" />
               </div>
@@ -19,7 +20,7 @@ export default props => (
             <div className="col-12 ">
               <h4>Chivas 12 anos</h4>
               <hr />
-              <h6>De: <strike>R$ 100,00</strike> &nbsp; <id style="font-size:20px;">Por: R$ 90,99</id>
+              <h6>De: <strike>R$ 100,00</strike> &nbsp; <id className='id_style'>Por: R$ 90,99</id>
               </h6>
               <br />
 
