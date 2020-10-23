@@ -1,41 +1,17 @@
 
-import Axios from 'axios';
+import API from '../../Services/api';
 import React from 'react';
 
-getCategoria = () => {
-      Axios.get('http://localhost:8000/api').then(
-          resp => {
-              this.setState({produtos: resp.data})
-          });
-          let nome = ' meu nome'
-          console.log('oi' + nome )
-
-          console.log(`oi ${nome}`)
-
-        //   return
-        //   this.state.produto.map((item => {
-        //       return <li><a href={"#/" + item.nome} className={item.nome}>
-        //           {item.nome}</a></li>
-        //   }))
-}
-
-export default props => (
-    <html lang="pt-br">
-
-        <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-                integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 
 
-            <link rel="stylesheet" href="./../css/main.css" />
-            <link rel="stylesheet" href="./../css/produto.css" />
-            <title>Produto</title>
-        </head>
+export default class props extends React.Component {
 
-        <body>
+    
+
+render() {
+    return  (
+
+<>
 
             <section id="sectionproduto">
                 <div className="container">
@@ -80,7 +56,7 @@ export default props => (
 
             </section>
 
-        </body>
-
-    </html>
-)
+            </>
+);
+    }
+}

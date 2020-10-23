@@ -1,7 +1,7 @@
 import React from 'react';
 import {Router, Route, Redirect, hashHistory} from 'react-router';
 
-import Cadastro from '../pages/Cadastro/';
+import Cadastro from '../pages/Cadastro';
 import Carrinho from '../pages/Carrinho';
 import Categoria from '../pages/Categoria';
 import Checkout from '../pages/Checkout';
@@ -11,7 +11,7 @@ import Login from '../pages/Login';
 import Pedido from '../pages/Pedido';
 import Perfil from '../pages/Perfil'
 import Produto from '../pages/Produto';
-import Sucesso from '../pages/SucessoCompra';
+import Sucesso from '../pages/SucessoCompras';
 
 export default props => (
     <Router history={hashHistory}>
