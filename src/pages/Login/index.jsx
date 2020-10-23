@@ -29,7 +29,7 @@ export default props => (
               <label for="">Ou então cadastre-se</label>
             </div>
             <div className="form-group">
-              <button className="btn btn-success" type="submit" ><a href="cadastro.html">Ir para cadastro</a></button>
+              <button className="btn btn-success" type="submit" ><a href="#/cadastro">Ir para cadastro</a></button>
             </div>
           </form>
         </div>

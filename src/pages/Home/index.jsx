@@ -3,10 +3,17 @@ import './styles.css';
 
 import API from '../../Services/api';
 
+import $ from 'jquery';
+
+
 import Banners from '../../Components/Banners';
 import Product from '../../Components/Produto';
 
 export default class Home extends React.Component {
+
+  componentDidMount() {
+    $('.carousel').carousel()
+  }
 
   getProdutos = async () => {
     const produtos = await API.get('/produto/listar');

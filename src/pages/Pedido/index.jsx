@@ -44,13 +44,13 @@ export default class Pedido extends Component {
                       <li>Alterar senha</li>
                       <hr />
                       <li>Logout</li>
-                      {/* <hr /> */}
                     </ul>
                   </div>
 
 
 
                   <div className="col-9" id="pedido">
+
                     <br />
                     <div className="row">
                       <div className="col-12 center" id="labels">
@@ -59,8 +59,8 @@ export default class Pedido extends Component {
                         <label>28/7/2019</label>
                         <label>Finalizado</label>
                       </div>
-
                     </div>
+
                     <hr />
 
                     <div className="row">
