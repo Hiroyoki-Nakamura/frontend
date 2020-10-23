@@ -15,14 +15,12 @@
 }
 
 /* só pra tirar o margin do #barranav */
-#barraNav{
-    margin: 0;
-}
 
 /* #barraNav {
     position: fixed;
     width: 100%;
     z-index: 1;
+    margin: 0;
 } */
 
 #botao_tela_menor {

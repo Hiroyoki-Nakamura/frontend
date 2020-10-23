@@ -1,5 +1,6 @@
 import React from 'react';
-import './perfil.css';
+import './styles.css';
+
 export default props => (
 
     <body>

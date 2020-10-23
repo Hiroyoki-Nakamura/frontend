@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './contato.css';
+import './styles.css';
 
 export default props => (
 

@@ -1,6 +1,5 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
-import './sucessoCompra.css';
+import './styles.css';
 
 export default props => (
 

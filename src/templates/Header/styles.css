@@ -4,12 +4,7 @@ header {
     box-sizing: border-box;
     overflow: auto;
     width: 100%;
-}
-
-.Header {
-    background-color: black;
-    position: relative;
-}
+}   
 
 .logo {
     width: 100%;
@@ -28,6 +23,10 @@ header {
     background-size: 70%;
 }
 
+.icons {
+    max-height: 30px;
+}
+
 .acoes {
     position: absolute;
     right: 0;
@@ -38,8 +37,8 @@ header {
 }
 
 .logoUser {
-    width: 80px;
-    height: 40px;
+    width: 90px;
+    height: 50px;
     background-image: url(/img/user_icon.png);
     background-position: center;
     background-repeat: no-repeat;
@@ -47,8 +46,8 @@ header {
 }
 
 .logoCar {
-    width: 80px;
-    height: 40px;
+    width: 90px;
+    height: 50px;
     background-image: url(/img/cart_icon.png);
     background-position: center;
     background-repeat: no-repeat;
@@ -61,6 +60,7 @@ header {
     background-color: #fff;
 }
 
+/* style={{color: + '#ffffff'}} */
 
 .btn_cart{
     width: 100px;

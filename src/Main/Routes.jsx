@@ -3,15 +3,15 @@ import {Router, Route, Redirect, hashHistory} from 'react-router';
 
 import Cadastro from '../pages/Cadastro';
 import Carrinho from '../pages/Carrinho';
-import Categoria from '../pages/Categoria/Categoria';
+import Categoria from '../pages/Categoria';
 import Checkout from '../pages/Checkout';
-import Contato from '../pages/Contato/Contato';
+import Contato from '../pages/Contato';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
-import Pedido from '../pages/Pedido/Pedido';
-import Perfil from '../pages/Perfil/Perfil'
-import Produto from '../pages/Produto/Produto';
-import Sucesso from '../pages/SucessoCompra/SucessoCompra';
+import Pedido from '../pages/Pedido';
+import Perfil from '../pages/Perfil'
+import Produto from '../pages/Produto';
+import Sucesso from '../pages/SucessoCompra';
 
 export default props => (
     <Router history={hashHistory}>
