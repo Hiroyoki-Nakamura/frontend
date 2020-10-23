@@ -6,6 +6,7 @@ import './cadastro.css'
 
 export default props => (
 
+    <body className="cinza">
     <div className="container main">
         <div className="row">
             <div className="col-lg-12">
@@ -157,6 +158,8 @@ export default props => (
         </div>
 
     </div>
+
+    </body>
 
 
 )

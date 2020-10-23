@@ -1,21 +1,10 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css'
+import './categoria.css'
 
 export default props => (
-<html lang="pt-br">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../css/main.css" />
-  <link rel="stylesheet" href="../css/index.css" />
-  <link rel="stylesheet" href="../css/categorias.css" />
-  <link rel="icon" href="../img/glasswine_icon.png" />
-  <title>Categorias</title>
-</head>
-
-<body>
+  <>
+<body className="cinza">
 
   <div className="container">
     <div className="row"></div>
@@ -124,7 +113,7 @@ export default props => (
                         <div className="center product">
                           <div className="image-product">
                             <img
-                              src="../img/Chivas-12-anos (3).png"
+                              src="./img/Chivas-12-anos (3).png"
                               alt="Chivas 12 anos" />
                           </div>
                           <div className="header-product">
@@ -141,7 +130,7 @@ export default props => (
                         <div className="center product">
                           <div className="image-product">
                             <img
-                              src="../img/Chivas-12-anos (3).png"
+                              src="./img/Chivas-12-anos (3).png"
                               alt="Chivas 12 anos" />
                           </div>
                           <div className="header-product">
@@ -158,7 +147,7 @@ export default props => (
                         <div className="center product">
                           <div className="image-product">
                             <img
-                              src="../img/Chivas-12-anos (3).png"
+                              src="./img/Chivas-12-anos (3).png"
                               alt="Chivas 12 anos" />
                           </div>
                           <div className="header-product">
@@ -175,7 +164,7 @@ export default props => (
                         <div className="center product">
                           <div className="image-product">
                             <img
-                              src="../img/Chivas-12-anos (3).png"
+                              src="./img/Chivas-12-anos (3).png"
                               alt="Chivas 12 anos" />
                           </div>
                           <div className="header-product">
@@ -208,5 +197,5 @@ export default props => (
 
 </body>
 
-</html>
+</>
 )

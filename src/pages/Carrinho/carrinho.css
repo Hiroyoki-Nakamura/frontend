@@ -26,6 +26,7 @@
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     flex-direction: row;
+    
 }
 
 .card{
@@ -39,7 +40,7 @@
     color: black;
 }
 
-#botao{
+.botao{
     border-radius: 20px;
 }
 .valortotal{
@@ -64,3 +65,16 @@
     text-align: center;
 }
 
+.cinza{
+    background-color: #3d3c3c;
+}
+
+.subtotalproduto{
+    border: none;
+    border-color: white;
+    background-color: transparent; 
+}
+
+.corvalor{
+    color: #fff;
+}
