@@ -6,7 +6,6 @@ export default props => (
     <div className="container" id="container">
       <div className="row">
         <div className="col-lg-12">
-          <br/>
           <h2 className="center">Carrinho</h2>
           <div className="container" id="topo">
             <div className="row">
