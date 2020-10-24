@@ -25,7 +25,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
-        <div className="col-12">
+        <div className="col-12 mt-3">
           <section>
 
             <Banners />
@@ -40,35 +40,7 @@ export default class Home extends React.Component {
                 <div className="row">
 
                   <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
-                  />
-
-                  <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
-                  />
-
-                  <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
-                  />
-
-                  <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
-                  />
-
-                  <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
-                  />
-
-                  <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
-                  />
-
-                  <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
-                  />
-
-                  <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
+                    name='Chivas 12 anos' value='99,99' valueOff='69,99' image="../img/Chivas-12-anos (3).png" alt="Chivas 12 anos" 
                   />
 
                 </div>

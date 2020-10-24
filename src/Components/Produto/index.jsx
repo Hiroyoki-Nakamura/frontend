@@ -7,7 +7,7 @@ export default props => (
     <div className="center product">
       <div className="image-product">
         <img
-          src="../img/Chivas-12-anos (3).png" alt="Chivas 12 anos" />
+          src={props.image}/>
       </div>
       <div className="header-product">
         <h1 className="header-product">{props.name}</h1>
