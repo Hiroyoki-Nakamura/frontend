@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles.css';
 
 export default props => (
 <html lang="pt-br">
@@ -72,7 +73,7 @@ export default props => (
         <span className="navbar-toggler-icon">Menu</span>
     </button>
 
-     <div style="width: 1000px; height: 1000px; background-color: #3d3c3c;"></div>
+     {/* <div style="width: 1000px; height: 1000px; background-color: #3d3c3c;"></div> */}
 
 
 

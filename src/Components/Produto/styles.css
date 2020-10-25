@@ -1,0 +1,40 @@
+.product {
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.image-product *{
+  max-height: 140px;
+}
+
+.header-product {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.buy-product {
+  padding: 2px 10px;
+  color: white;
+  background-color: green;
+  border: none;
+  border-radius: 20px;
+}
+
+.buy-product:hover {
+  color: green;
+  background-color: #fff;
+}
+
+.price-line {
+  text-decoration: line-through;
+  color: #585858;
+}
+
+.price-product{
+  color: white;
+}
+
+.filter {
+  color: #fff;
+} 
