@@ -17,7 +17,7 @@ export default props => (
                 Todas as categorias
             </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a className="dropdown-item" href="#">Categoria</a>
+                <a className="dropdown-item" href="#/categoria">Categoria</a>
                 <a className="dropdown-item" href="#">Categoria</a>
                 <a className="dropdown-item" href="#">Categoria</a>
                 <a className="dropdown-item" href="#">Categoria</a>
