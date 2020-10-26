@@ -25,7 +25,7 @@ export default class Produto extends Component {
               <div className="col-3">
                 <div className="card style_card">
                   <div className="card-body">
-                    <img className='w-100' src={this.state.product.ds_imagem} />
+                    {/* <img className='w-100' src={this.state.product.ds_imagem} /> */}
                   </div>
                 </div>
               </div>
