@@ -1,0 +1,14 @@
+.carousel, .banners-carousel {
+  height: 360px;
+}
+
+.carousel {
+  
+  width: 100%;
+}
+
+.banners-carousel {
+  background-color: #fff;
+  width: 95%;
+  max-width: 1200px;
+}
