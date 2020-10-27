@@ -29,11 +29,13 @@ export default class Checkout extends React.Component {
           <h3>Endereço de Entrega</h3>
           <label className="ed">Endereço cadastrado: </label>
           <select className=".select_endereco custom-select" id="inputGroupSelect02">
-            <option selected>Endereço cadastrado no sistema</option>
+            <option selected>Endereço cadastrado</option>
             <option value="1">R. numero um, nº1, cep: 00000-00</option>
           </select>
-          <div></div>
+          <div className='center'>
+
           <a href="#" className="btn btnl btn-primary btn-lg active" role="button" aria-pressed="true">Entregar em outro Endereço</a>
+          </div>
         </div>
 
         <div className="modopg">
@@ -111,9 +113,6 @@ export default class Checkout extends React.Component {
           <input type="text-area " className='input_valorTotal' placeholder="R$ 000,00 " />
           <div className='center'>
           <a href="../html/index.html"><button type="button" className="btn btn-success btcc ">Continuar Comprando</button></a>
-          </div>
-          <div className='center' >
-
           <a href="../html/sucesso_compra.html"><button type="button " className="btn btn-success btfc ">Finalizar Compra</button></a>
           </div>
         </div>
