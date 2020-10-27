@@ -12,7 +12,7 @@ export default props => (
 
 <body>
 
-    <div className="container">
+    <div className="container margin_null">
         <div className="row">
             <div className="col-lg-12">
 
