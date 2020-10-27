@@ -27,8 +27,8 @@ export default props => (
         <p>(11)91234-5678</p>
         <p>(11)91234-5678</p>
         <img className='phone_icon' src="./img/phone_icon.svg" alt=""/>
-        <img className='insta_icon' src="./img/instagram_icon.svg" alt=""/>
-        <img className='mail_icon' src="./img/email_icon.png" alt=""/>
+        <a href="https://instagram.com"><img className='insta_icon' src="./img/instagram_icon.svg" alt=""/></a>
+        <a href="#/contato"><img className='mail_icon' src="./img/email_icon.png" alt=""/></a>
       </div>
     </div>
     <p className='center'>Site focado exclusivamente na venda de Bebidas Alcoólicas como, vinhos, champanhes e  destilados com os produtos de alta qualidade </p>

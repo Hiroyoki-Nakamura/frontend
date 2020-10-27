@@ -35,8 +35,8 @@ export default class Carrinho extends Component {
                 <body className="cinza">
                     <div className="container" id="">
                         <div className="row">
-                            <div className="col-lg-12">
-                                <h2 className="center">Carrinho</h2>
+                            <div className="col-12 mb-5">
+                                <h2 className="center text_top">Carrinho</h2>
                                 <div className="container" id="topo">
                                     <div className="row">
                                         <div className="col-lg-12">
