@@ -19,17 +19,17 @@ export default class Produto extends Component {
   render() {
     return (
       <>
-        <section id="sectionproduto">
+        <section id="sectionproduto" className="center">
           <div className="container">
             <div className="row">
               <div className="col-3">
                 <div className="card style_card">
-                  <div className="card-body">
-                    <img className='w-100' src={this.state.product.ds_imagem} />
+                  <div className="card-body center">
+                    <img className='imageProduct' src={this.state.product.ds_imagem} />
                   </div>
                 </div>
               </div>
-              <article>
+              <article className='col-9'>
                 <div className="col-lg-3">
     
                 </div>

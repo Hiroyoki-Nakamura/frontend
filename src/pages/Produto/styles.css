@@ -3,8 +3,8 @@
 } */
 
 article {
-    margin-left: 100px;
-    margin-top: 60px;
+    /* margin-left: 100px;
+    margin-top: 60px; */
     width: 65%;
     color: white;
 }
@@ -14,7 +14,12 @@ article {
 }
 
 .style_card{
-    width: 18rem;
+    width: 100%;
+}
+
+.imageProduct {
+    max-width: 260px;
+    max-height: 308px;
 }
 
 .id_style{
@@ -41,7 +46,5 @@ strike {
 }
 
 #sectionproduto {
-    margin-top: 100px;
-    margin-left: 40px;
-    
+    margin: 100px 0;
 }

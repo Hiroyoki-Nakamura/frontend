@@ -3,9 +3,7 @@ import React from 'react';
 import './styles.css';
 
 export default props => (
-
   <>
-
     <div className="container">
       <div className="row">
         <div className="col-lg-12">
@@ -16,7 +14,6 @@ export default props => (
               <h1 className='center'>Central de Atendimento</h1>
               <h3 className='center'>Fale conosco!</h3>
             </div>
-
 
             <div className="row" >
               <div className="col-lg 6 " id="container">
@@ -33,7 +30,7 @@ export default props => (
 
                   <div className="col-12 form-group">
                     <label for="exampleFormControlTextarea1">Descrição</label>
-                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea className="form-control" id="exampleFormControlTe xtarea1" rows="3"></textarea>
                   </div>
 
                   <div className="col-12">
@@ -57,12 +54,5 @@ export default props => (
       </div>
 
     </div>
-
-
-
-
-
   </>
-
-
 )
