@@ -14,7 +14,7 @@ export default props => (
           <ul className="navbar-nav mr-auto">
 
             <ItemMenu href='#/index' value='Home' />
-            <Dropdown_menu value='Todas as categorias'>
+            <Dropdown_menu value='Todas as categorias' href='#/categoria'>
               <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <Categoria value='Destilados' />
                 <Categoria value='Vinhos' />
