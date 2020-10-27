@@ -1,7 +1,14 @@
 import React from 'react';
 import './styles.css';
 
+
+const BEFORE = {
+  banners: []
+}
+
 export default props => (
+
+  
 <html lang="pt-br">
 
 <head>
@@ -27,7 +34,7 @@ export default props => (
        
           <div className="center carousel">
             <div className="banners-carousel">
-              <h2>BANNERS</h2>
+            <h2>BANNERS</h2>
             </div>
           </div>
        

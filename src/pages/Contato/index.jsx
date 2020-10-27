@@ -31,6 +31,8 @@ export default props => (
 
                     <div className="row" > 
                         <div className="col-lg 6 " id="container">
+                                <form action="mailto:desvinho@gmail.com" method='post'>
+
                             <div className="row">
                                 <div className="col-12">
                                     <br/>
@@ -54,14 +56,15 @@ export default props => (
                                 <div className="col-12">
                                   <p> Iremos retornar sua resposta para o seu e-mail.</p>
                                   <div className="col-8">
-                                  <label for="inputAddress"></label>
-                                  <button type="submit" className="btn btn-primary btn-lg btn-block" id="teste-botao"onclick="validar()" >Enviar</button>
-                                  <br/>
-                              </div>
+                                    <label for="inputAddress"></label>
+                                    <button type="submit" className="btn btn-primary btn-lg btn-block" id="teste-botao"onclick="validar()" >Enviar</button>
+                                    <br/>
+                                </div>
+
+                                </div>
 
                             </div>
-
-                        </div>
+                                </form>
 
                     </div> 
 </div>
