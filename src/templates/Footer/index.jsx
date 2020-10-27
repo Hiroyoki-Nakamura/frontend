@@ -1,22 +1,23 @@
 import React from 'react';
-import './footer.css'
+import './styles.css';
 
 export default props => (
 <footer>
-    <div class="center Footer">
+
+    <div className="center Footer">
       <div>
-        <p>Lorem ipsum dolor sit amet consectetur dicta quisquam! Tenetur labore esse dolor quidem beatae
-          consequuntur cum.</p>
+        <h4>Title</h4>
+        <p>Site focado exclusivamente na venda de Bebidas Alcoólicas como, vinhos, champanhes e  destilados com os produtos de alta qualidade </p>
         <p>Lorem, ipsum dolor sit amet consectetur a autem dolorum culpa modi tenetur, velit magni. Ad ab quod
           eius?</p>
       </div>
       <div>
+        <h4>Contatos</h4>
         <p>(11)91234-5678</p>
         <p>(11)91234-5678</p>
       </div>
     </div>
 
-    <p class="copyright">copyright & copy 2020</p>
-
+    <p className="copyright">Desvinho &copy; 2020</p>
   </footer> 
 )

@@ -1,26 +1,50 @@
 import React from 'react';
+import './styles.css';
 
 import API from '../../Services/api';
 
-export default class props extends React.Component {
+import $ from 'jquery';
+
+import Banners from '../../Components/Banners';
+import Product from '../../Components/Produto';
+
+const BEFORE = {
+  banners: [],
+  products: []
+}
+
+export default class Home extends React.Component {
+  state = { ...BEFORE }
+
+  componentDidMount() {
+    $('.carousel').carousel()
+    this.getProdutos();
+  }
 
   getProdutos = async () => {
-    const produtos = await API.get('/produto/listar');
-    
-    console.log(produtos.data);
+    const products = await API.get('/produto/listar');
+    const banners = await API.get('/imagens/Banner');
+
+    this.setState({
+      banners: [...banners.data],
+      products: [...products.data]
+    });
+  }
+
+  productSelected = product => {
+    this.props.route.render(product);
+    console.log( this.props);
   }
 
   render() {
     return (
       <>
-        <div className="col-12">
+        <div className="col-12 mt-3">
           <section>
 
-            <div className="center carousel">
-              <div className="banners-carousel">
-
-              </div>
-            </div>
+            <Banners
+              images={this.state.banners}
+            />
 
             <div className="products">
 
@@ -31,91 +55,13 @@ export default class props extends React.Component {
               <div className="container">
                 <div className="row">
 
-                  <div className="col-6 col-md-3">
-                    <div className="center product">
-                      <div className="image-product">
-                        <img
-                          src="../img/Chivas-12-anos (3).png" alt="Chivas 12 anos" />
-                      </div>
-                      <div className="header-product">
-                        <h1 className="header-product">Chivas 12 anos</h1>
-                      </div>
-                      <div className="price-product"><label className="price-line">R$ 99,99</label> <label>R$ 90,99</label></div>
-                      <div>
-                        <button className="buy-product">comprar</button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-6 col-md-3">
-                    <div className="center product">
-
-                      <div className="image-product">
-                        <img
-                          src="../img/Chivas-12-anos (3).png"
-                          alt="Chivas 12 anos" />
-                      </div>
-                      <div className="header-product">
-                        <h1 className="header-product">Chivas 12 anos</h1>
-                      </div>
-                      <div className="price-product"><label className="price-line">R$ 99,99</label> <label>R$ 90,99</label></div>
-                      <div>
-                        <button className="buy-product">comprar</button>
-                      </div>
-
-                    </div>
-                  </div>
-
-                  <div className="col-6 col-md-3">
-                    <div className="center product">
-                      <div className="image-product">
-                        <img
-                          src="../img/Chivas-12-anos (3).png"
-                          alt="Chivas 12 anos" />
-                      </div>
-                      <div className="header-product">
-                        <h1 className="header-product">Chivas 12 anos</h1>
-                      </div>
-                      <div className="price-product"><label className="price-line">R$ 99,99</label> <label>R$ 90,99</label></div>
-                      <div>
-                        <button className="buy-product">comprar</button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-6 col-md-3">
-                    <div className="center product">
-                      <div className="image-product">
-                        <img
-                          src="../img/Chivas-12-anos (3).png"
-                          alt="Chivas 12 anos" />
-                      </div>
-                      <div className="header-product">
-                        <h1 className="header-product">Chivas 12 anos</h1>
-                      </div>
-                      <div className="price-product"><label className="price-line">R$ 99,99</label> <label>R$ 90,99</label></div>
-                      <div>
-                        <button className="buy-product">comprar</button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-6 col-md-3">
-                    <div className="center product">
-                      <div className="image-product">
-                        <img
-                          src="../img/Chivas-12-anos (3).png"
-                          alt="Chivas 12 anos" />
-                      </div>
-                      <div className="header-product">
-                        <h1 className="header-product">Chivas 12 anos</h1>
-                      </div>
-                      <div className="price-product"><label className="price-line">R$ 99,99</label> <label>R$ 90,99</label></div>
-                      <div>
-                        <button className="buy-product">comprar</button>
-                      </div>
-                    </div>
-                  </div>
+                  {this.state.products.map(product => {
+                    return (
+                      <Product key={product.id}
+                        name={product.nome_produto} value={product.valor_produto} valueOff={product.desconto_produto} image={product.ds_imagem} click={() => this.productSelected(product)}
+                      />
+                    );
+                  })}
 
                 </div>
               </div>
