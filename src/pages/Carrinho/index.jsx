@@ -1,206 +1,257 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './styles.css';
 
-export default props => (
-  <body>
-    <div className="container" id="container">
-      <div className="row">
-        <div className="col-12">
-          <h2 className="center">Carrinho</h2>
-          <div className="container" id="topo">
-            <div className="row">
-              <div className="col-12">
-                <div className="row">
-                  <div className="col-4">
-                    <h4 className="Produto"></h4>
-                  </div>
-                  <div className="col-2">
-                    <h4 className="Valor Unitario"></h4>
-                  </div>
-                  <div className="col-2">
-                    <h4>Quantidade</h4>
-                  </div>
-                  <div className="col-2">
-                    <h4>Subtotal</h4>
-                  </div>
-                  <div className="col-2">
-                    <h4>Remover</h4>
-                  </div>
-                </div>
+export default class Carrinho extends Component {
 
+    state = {
+        display: 1,
+        price: 90.99
+    }
 
-              </div>
+    plus = () => {
+        this.setState({ display: this.state.display + 1 })
+    }
 
-            </div>
-          </div>
-          <div className="container" id="carrinho">
-            <div className="row">
-              <div className="col-12">
+    minus = () => {
+        if (this.state.display !== 1) {
+            this.setState({ display: this.state.display - 1 })
+        }
+        return this.state.display
+    }
 
-                <br />
-                <div className="row" id="linha-1">
+    valor = () => {
+        this.price = this.state.price
+        if (this.state.display !== 1) {
+            this.setState({ price: this.state.price * this.state.display })
+            return this.price
+        }
 
-                  <div className="col-1">
-                    <div className="card">
-                      <div className="card-body">
+        return this.state.price
+    }
 
-                      </div>
+    render() {
+        return (
+            <>
+                <body className="cinza">
+                    <div className="container" id="">
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <h2 className="center">Carrinho</h2>
+                                <div className="container" id="topo">
+                                    <div className="row">
+                                        <div className="col-lg-12">
+                                            <div className="row">
+                                                <div className="col-lg-4">
+                                                    <h4 className="center">Produto</h4>
+                                                </div>
+                                                <div className="col-lg-2">
+                                                    <h4 className="center">Vlr Unidade</h4>
+                                                </div>
+                                                <div className="col-lg-2">
+                                                    <h4 className="center">Quantidade</h4>
+                                                </div>
+                                                <div className="col-lg-2">
+                                                    <h4 className="center">Subtotal</h4>
+                                                </div>
+                                                <div className="col-lg-2">
+                                                    <h4 className="center">Remover</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br/><br/>
+
+                                <div>
+
+                                    <div className="container" id="carrinho">
+                                        <div className="row">
+                                            <div className="col-lg-12">
+
+                                                <br />
+
+                                                <div className="row">
+                                                    <div className="col-lg-1">
+                                                        <div className="center">
+                                                            <div className="card-body">
+                                                                <img className="imagem" src="./img/Chivas-carrinho.png" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-lg-3" id="nomeProduto">
+                                                        <h5>Chivas Whisky 12 Anos</h5>
+                                                    </div>
+
+                                                    <div className="col-lg-2">
+                                                        <br />
+                                                        <input disabled className="valor-unit center" placeholder="R$ 90,99" />
+                                                    </div>
+                                                    <div className="col-lg-2">
+                                                        <br />
+                                                        <div className="input-group">
+                                                            <button className='btn btn-danger' type="button" onClick={this.minus}>-</button>
+                                                            <input type="text" id="quantity" name="quantity"
+                                                                className="form-control input-number" value={this.state.display} />
+                                                            <button className='btn btn-success' type="button" onClick={this.plus}>+</button>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-lg-2">
+                                                        <br />
+                                                        <input disabled className="valor-unit center" placeholder="R$ 90,99" />
+                                                    </div>
+                                                    <div className="col-lg-2 center">
+                                                        <div className="custom-control custom-checkbox">
+                                                            <input type="checkbox" className="custom-control-input" id="customCheck1" />
+                                                            <label className="custom-control-label" for="customCheck1">
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <hr />
+                                        <div className="row">
+                                            <div className="col-lg-1">
+                                                <div className="center">
+                                                    <div className="card-body">
+                                                        <img className="imagem" src="./img/Chivas-carrinho.png" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                <div className="col-lg-3" id="nomeProduto">
+                                                <h5>Chivas Whisky 12 Anos</h5>
+                                            </div>
+                                            <div className="col-lg-2">
+                                                <br />
+                                                <input disabled className="valor-unit center" placeholder="R$ 90,99" />
+                                            </div>
+                                            <div className="col-lg-2">
+                                                <br />
+                                                <div className="input-group">
+                                                            <button className='btn btn-danger' type="button" onClick={this.minus}>-</button>
+                                                            <input type="text" id="quantity" name="quantity"
+                                                                className="form-control input-number" value={this.state.display} />
+                                                            <button className='btn btn-success' type="button" onClick={this.plus}>+</button>
+                                                        </div>
+                                                    </div>
+                                            <div className="col-lg-2">
+                                                <br />
+                                                <input disabled className="valor-unit center" placeholder="R$ 181,98" />
+                                            </div>
+                                            <div className="col-lg-2 center">
+                                                <div className="custom-control custom-checkbox">
+                                                    <input type="checkbox" className="custom-control-input" id="customCheck2" />
+                                                    <label className="custom-control-label" for="customCheck2">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div className="row">
+                                            <div className="col-lg-1">
+                                                <div className="center">
+                                                    <div className="card-body">
+                                                        <img className="imagem" src="./img/Chivas-carrinho.png" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-3" id="nomeProduto">
+                                                <h5>Chivas Whisky 12 Anos</h5>
+                                            </div>
+                                            <div className="col-lg-2">
+                                                <br />
+                                                <input disabled className="valor-unit center" placeholder="R$ 90,99" />
+                                            </div>
+                                            <div className="col-lg-2">
+                                                <br />
+                                                <div className="input-group">
+                                                            <button className='btn btn-danger' type="button" onClick={this.minus}>-</button>
+                                                            <input type="text" id="quantity" name="quantity"
+                                                                className="form-control input-number" value={this.state.display} />
+                                                            <button className='btn btn-success' type="button" onClick={this.plus}>+</button>
+                                                        </div>
+                                                    </div>
+                                            <div className="col-lg-2">
+                                                <br />
+                                                <input disabled className="valor-unit center" placeholder="R$ 272,97" />
+                                            </div>
+                                            <div className="col-lg-2 center">
+                                                <div className="custom-control custom-checkbox">
+                                                    <input type="checkbox" className="custom-control-input" id="customCheck3" />
+                                                    <label className="custom-control-label" for="customCheck3">
+
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div className="row">
+                                            <div className="col-lg-1">
+                                                <div className="center">
+                                                    <div className="card-body">
+                                                        <img className="imagem" src="./img/Chivas-carrinho.png" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-3" id="nomeProduto">
+                                                <h5>Chivas Whisky 12 Anos</h5>
+                                            </div>
+                                            <div className="col-lg-2">
+                                                <br />
+                                                <input disabled className="valor-unit center" placeholder="R$ 90,99" />
+                                            </div>
+                                            <div className="col-lg-2">
+                                                <br />
+                                                <div className="input-group">
+                                                            <button className='btn btn-danger' type="button" onClick={this.minus}>-</button>
+                                                            <input type="text" id="quantity" name="quantity"
+                                                                className="form-control input-number" value={this.state.display} />
+                                                            <button className='btn btn-success' type="button" onClick={this.plus}>+</button>
+                                                        </div>
+                                                    </div>
+                                            <div className="col-lg-2">
+                                                <br />
+                                                <input disabled className="valor-unit" placeholder="R$ 363,96" />
+                                            </div>
+                                            <div className="col-lg-2 center">
+                                                <div className="custom-control custom-checkbox">
+                                                    <input type="checkbox" className="custom-control-input" id="customCheck4" />
+                                                    <label className="custom-control-label" for="customCheck4">         </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                    </div>
+                                </div>
+
+                                <div className="container col-lg-12 base">
+                                    <div className="row">
+                                        <div className="col-lg-12">
+                                        <label className="corvalor">Valor Total</label>
+                                        <input className="valortotal" disabled placeholder="R$ 00,00" />
+
+                                        <div className="row">
+                                            <div className="col-lg-1" id="voltar">
+                                            <a href="index.html"><button type="button" className="btn btn-secondary botao" id="botao">Voltar</button></a>
+                                            </div>
+                                            <div className="col-lg-2">
+                                            <a href="checkout.html"><button type="button" className="btn btn-success btn-md btn-block botao"
+                                                id="botao">Confirmar</button></a>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div className="col-3" id="nomeProduto">
-                    <h5>Chivas Whisky 12 Anos</h5>
-
-                  </div>
-                  <div className="col-2 center">
-                    <input disabled placeholder="R$ 90,99" />
-
-                  </div>
-
-
-                  <div className="col-2 center">
-                    <div className="input-group">
-                      <span className="input-group-btn">
-                        <button type="button" className="quantity-left-minus btn btn-danger btn-number"
-                          data-type="minus" data-field="">
-                          <span className="glyphicon glyphicon-minus"></span>
-                        </button>
-                      </span>
-                      <input type="text" id="quantity" name="quantity"
-                        className="form-control input-number" value="10" min="1" max="100" />
-                      <span className="input-group-btn">
-                        <button type="button" className="quantity-right-plus btn btn-success btn-number"
-                          data-type="plus" data-field="">
-                          <span className="glyphicon glyphicon-plus"></span>
-                        </button>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="col-2 center">
-                    <input disabled placeholder="R$ 90,99" />
-                  </div>
-                  <div className="col-2 center">
-                    <div className="form-check">
-                      <input className="form-check-input position-static" type="checkbox"
-                        id="blankCheckbox" value="option1" aria-label="..." />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <hr />
-            <div className="row">
-
-              <div className="col-1">
-                <div className="card">
-                  <div className="card-body">
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-3" id="nomeProduto">
-                <h5>Chivas Whisky 12 Anos</h5>
-
-              </div>
-            </div>
-            <hr />
-            <div className="row">
-
-              <div className="col-1">
-                <div className="card">
-                  <div className="card-body">
-
-                  </div>
-                </div>
-              </div>
-              <div className="col-3" id="nomeProduto">
-                <h5>Chivas Whisky 12 Anos</h5>
-
-              </div>
-            </div>
-            <hr />
-            <div className="row">
-
-              <div className="col-1">
-                <div className="card">
-                  <div className="card-body">
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-3" id="nomeProduto">
-
-                <h5>Chivas Whisky 12 Anos</h5>
-
-              </div>
-            </div>
-            <hr />
-            <div className="col-12">
-              <div className="row">
-
-                <div className="col-1">
-                  <div className="card">
-                    <div className="card-body">
-                    </div>
-                  </div>
-                </div>
-                <div className="col-3" id="nomeProduto">
-
-                  <h5>Chivas Whisky 12 Anos</h5>
-
-                </div>
-                <input disabled placeholder="R$ 90,99" />
-                <div className="input-group">
-                  <span className="input-group-btn">
-                    <button type="button" className="quantity-left-minus btn btn-danger btn-number"
-                      data-type="minus" data-field="">
-                      <span className="glyphicon glyphicon-minus"></span>
-                    </button>
-                  </span>
-                  <input type="text" id="quantity" name="quantity"
-                    className="form-control input-number" value="10" min="1" max="100" />
-                  <span className="input-group-btn">
-                    <button type="button" className="quantity-right-plus btn btn-success btn-number"
-                      data-type="plus" data-field="">
-                      <span className="glyphicon glyphicon-plus"></span>
-                    </button>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <hr />
-          </div>
-        </div>
-      </div>
-      <div className="container" id="base">
-        <div className="row">
-          <div className="col-12">
-            <h6 style={{ color: + '#fff' }}>Valor Total</h6>
-            <div className="row">
-              <div className="col-4">
-
-                <input disabled placeholder="R$ 00,00" />
-              </div>
-              <div className="col-4">
-
-                <button>Confirmar Compra</button>
-
-              </div>
-
-            </div>
-
-
-          </div>
-
-        </div>
-      </div>
-
-
-    </div>
-
-  </body>
-
-
-
-
-
-)
+                </body>
+            </>
+        )
+    }
+}

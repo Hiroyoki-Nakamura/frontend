@@ -1,6 +1,14 @@
 
-h1, h3 {
-    color: #ffffff;
+.text_color_faleConosco{
+    color:#ffffff;
+}
+
+.back_color{
+    background-color: #3d3c3c;
+}
+
+.margin_null{
+    margin-left: 100px;
 }
 
 #central {
@@ -20,4 +28,3 @@ h1, h3 {
     background-color: #660033;
     margin-left: 25%;
 }
-

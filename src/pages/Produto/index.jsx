@@ -12,7 +12,7 @@ export default class Produto extends Component {
 
   setProduto = async () => {
     const product = await this.props.route.render();
-    this.setState({product: { ...product }});
+    this.setState({ product: { ...product } });
     console.log(product);
   }
 
@@ -31,7 +31,7 @@ export default class Produto extends Component {
               </div>
               <article className='col-9'>
                 <div className="col-lg-3">
-    
+
                 </div>
                 <div className="col-12 ">
                   <h4>{this.state.product.nome_produto}</h4>
@@ -39,7 +39,7 @@ export default class Produto extends Component {
                   <h6>De: <strike>R$ {`${this.state.product.valor_produto}`.replace('.', ',')}</strike> &nbsp; <h6 className='id_style'>Por: {`${this.state.product.desconto_produto}`.replace('.', ',')}</h6>
                   </h6>
                   <br />
-    
+
                   <p>{this.state.product.ds_produto}</p>
                   <hr />
                   <div className="col-6" id="comprar">
@@ -52,7 +52,6 @@ export default class Produto extends Component {
               </article>
             </div>
           </div>
-    
         </section>
       </>
     )

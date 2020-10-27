@@ -9,7 +9,6 @@ import Contato from '../pages/Contato';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Pedido from '../pages/Pedido';
-import Perfil from '../pages/Perfil'
 import Produto from '../pages/Produto';
 import Sucesso from '../pages/SucessoCompra';
 
@@ -36,7 +35,6 @@ export default class Routes extends Component {
         <Route path='/' component={Home} render={this.select} />
         <Route path='/login' component={Login} />
         <Route path='/pedido' component={Pedido} />
-        <Route path='/perfil' component={Perfil} />
         <Route path='/produto' component={Produto} render={this.getProduct} />
         <Route path='/sucesso' component={Sucesso} />
         <Redirect from='*' to='/' />
