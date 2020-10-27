@@ -5,24 +5,24 @@ export default props => (
 <footer>
 
     <div className="center Footer">
-      <div className='col-3 list_footer'>
+      <div className='col-3 col-sm-auto list_footer'>
         <ul>
           <li><a href="#/home">Home</a></li>
           <li><a href="#/">About us</a></li>
           <li><a href="#/Contato">Fale conosco</a></li>
         </ul>
       </div>
-      <div className='col-3'>
+      <div className='col-3 col-sm-auto'>
         <img className='bottle_icon' src="./img/bottle_icon.png" alt=""/>
       </div>
-      <div className='col-3 list_footer'>
+      <div className='col-3 col-sm-auto list_footer'>
         <ul>
           <li><a href="">Vinhos</a></li>
           <li><a href="">Champagnes</a></li>
           <li><a href="">Destilados</a></li>
         </ul>
       </div>  
-      <div className='col-3'>
+      <div className='col-3 col-sm-auto'>
         <h4>Contatos</h4>
         <p>(11)91234-5678</p>
         <p>(11)91234-5678</p>
