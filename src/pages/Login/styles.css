@@ -10,17 +10,17 @@ h1 {
     padding: 10px 50px;
 }
 
-#container1,
-#container2 {
-    background-color: #660033;
-    color: white;
-    border-radius: 15px;
-    box-sizing: border-box;
-    text-align: center;
-    align-self: center;
-    height: 250px;
-    font-weight: 400;
-    line-height: 1.5;
+#container1, #container2
+{
+  background-color: #660033;
+  color: white;
+  border-radius: 15px;
+  text-align: center;
+  align-self: center;
+  margin: 20px 0;
+  height: 270px;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 a {
@@ -33,20 +33,10 @@ a:hover {
     text-decoration: none;
 }
 
-.imagem_centro {
-    min-width: 100%;
-    min-height: 42%;
-}
 
-.form-group input {
-    border-radius: 20px;
-}
 
-.form-control {
-    border-radius: 20px;
+.form-group input  {
+  border-radius: 20px;
+  border: none;
+  padding: 4px;
 }
-/* 
-.container {
-    margin-top: 50px;
-    margin-bottom: 50px;
-} */
