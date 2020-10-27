@@ -3,25 +3,48 @@ import './styles.css';
 
 import API from '../../Services/api';
 
+import $ from 'jquery';
+
 import Banners from '../../Components/Banners';
 import Product from '../../Components/Produto';
 
+const BEFORE = {
+  banners: [],
+  products: []
+}
+
 export default class Home extends React.Component {
+  state = { ...BEFORE }
+
+  componentDidMount() {
+    $('.carousel').carousel()
+    this.getProdutos();
+  }
 
   getProdutos = async () => {
-    const produtos = await API.get('/produto/listar');
+    const products = await API.get('/produto/listar');
+    const banners = await API.get('/imagens/Banner');
 
-    console.log(produtos.data);
+    this.setState({
+      banners: [...banners.data],
+      products: [...products.data]
+    });
+  }
 
+  productSelected = product => {
+    this.props.route.render(product);
+    console.log( this.props);
   }
 
   render() {
     return (
       <>
-        <div className="col-12">
+        <div className="col-12 mt-3">
           <section>
 
-            <Banners />
+            <Banners
+              images={this.state.banners}
+            />
 
             <div className="products">
 
@@ -32,37 +55,13 @@ export default class Home extends React.Component {
               <div className="container">
                 <div className="row">
 
-                  <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
-                  />
-
-                  <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
-                  />
-
-                  <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
-                  />
-
-                  <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
-                  />
-
-                  <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
-                  />
-
-                  <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
-                  />
-
-                  <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
-                  />
-
-                  <Product
-                    name='Chivas 12 anos' value='99,99' valueOff='69,99'
-                  />
+                  {this.state.products.map(product => {
+                    return (
+                      <Product key={product.id}
+                        name={product.nome_produto} value={product.valor_produto} valueOff={product.desconto_produto} image={product.ds_imagem} click={() => this.productSelected(product)}
+                      />
+                    );
+                  })}
 
                 </div>
               </div>

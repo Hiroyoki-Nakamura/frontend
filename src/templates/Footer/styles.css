@@ -8,10 +8,11 @@ footer {
 
 .Footer {
     justify-content: space-around;
+    padding: 10px;
 }
 
 .Footer *,
 .copyright {
     text-align: center;
-    margin: 0;
+    margin: 10px;
 }
