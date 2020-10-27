@@ -33,7 +33,7 @@ export default class Product extends Component {
           </div>
           <div className="price-product"><label className="price-line">R$ {this.state.valor}</label> <label>R$ {this.state.desconto}</label></div>
           <div>
-            <Link  to='/produto' onClick={this.props.click} className="buy-product">comprar</Link>
+            <Link to='/produto' onClick={this.props.click} className="buy-product">comprar</Link>
           </div>
         </div>
       </div>

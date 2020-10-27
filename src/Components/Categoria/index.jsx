@@ -3,11 +3,10 @@ import {Link} from 'react-router';
 
 
 export default class Categoria extends Component{
- state = {
-     categoria = ''
- }
 
     render(){
-
+        return (
+            <a className="dropdown-item" href="#">{this.props.value}</a>
+        )
     }
 }
