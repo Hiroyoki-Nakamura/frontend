@@ -23,9 +23,9 @@ export default class Checkout extends React.Component {
 
   render() {
     return (
-      <div className="flex-container cima">
+      <div className="flex-container cima col-12">
 
-        <div className="ede">
+        <div className="ede col-4">
           <h3>Endereço de Entrega</h3>
           <label className="ed">Endereço cadastrado: </label>
           <select className=".select_endereco custom-select" id="inputGroupSelect02">
@@ -38,7 +38,7 @@ export default class Checkout extends React.Component {
           </div>
         </div>
 
-        <div className="modopg">
+        <div className="modopg col-4">
           <h3>Forma de Pagamento</h3>
           <input type="radio" name="radiof" value="boleto" className="radio" id="radio" aria-label="Radio button for following text input" />
           <label>Boleto</label>
@@ -83,7 +83,7 @@ export default class Checkout extends React.Component {
           </div>
         </div>
 
-        <div className="confirmadados">
+        <div className="confirmadados col-4">
           <h3>Confirmar Dados</h3>
           <label>Entrega:</label>
 
