@@ -1,7 +1,12 @@
 import React from 'react';
 import './styles.css'
 
+
+
+
+
 export default props => (
+
   <>
     <section id="barraNav">
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
