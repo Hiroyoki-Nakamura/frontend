@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles.css';
 
 export default props => (
 <html lang="pt-br">
@@ -6,9 +7,6 @@ export default props => (
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-    <link rel="stylesheet" href="./../css/main.css" />
-    <link rel="stylesheet" href="./../css/contato.css" />
     <title>Contato</title>
 </head>
 
@@ -40,12 +38,12 @@ export default props => (
                                         <input type="text" className="form-control" placeholder="Digite seu nome" />
                                 </div>
                                 <div className="col-12">
-                                    <label for="exampleInputPassword1">CPF/CNPJ</label>
-                                    <input type="text" className="form-control valida-cpf-cnpj"  placeholder="000-000-000-00 / XX.XXX.XXX/XXXX-XX" />
+                                    <label for="exampleInputPassword1">E-mail para respondermos</label>
+                                    <input type="text" className="form-control valida-cpf-cnpj"  placeholder="example@example.com" />
                                 </div>
                                 <div className="col-12">
                                     <label for="exampleInputPassword1">Assunto</label>
-                                    <input type="text" className="form-control" placeholder="Digite seu nome" />
+                                    <input type="text" className="form-control" placeholder="Assunto" />
                                 </div>
 
                                 <div className="col-12 form-group">

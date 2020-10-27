@@ -3,6 +3,14 @@ h1, h3 {
     color: #ffffff;
 }
 
+.back_color{
+    background-color: #3d3c3c;
+}
+
+.margin_null{
+    margin: 0;
+}
+
 #central {
     /* margin-top: 100px;  */
     margin-bottom: 20px;
