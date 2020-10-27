@@ -21,11 +21,10 @@ export default class Checkout extends React.Component {
 
   }
 
-
-
   render() {
     return (
-      <>
+      <div className="flex-container cima">
+
         <div className="ede">
           <h3>Endereço de Entrega</h3>
           <label className="ed">Endereço cadastrado: </label>
@@ -33,6 +32,7 @@ export default class Checkout extends React.Component {
             <option selected>Endereço cadastrado no sistema</option>
             <option value="1">R. numero um, nº1, cep: 00000-00</option>
           </select>
+          <div></div>
           <a href="#" className="btn btnl btn-primary btn-lg active" role="button" aria-pressed="true">Entregar em outro Endereço</a>
         </div>
 
@@ -48,9 +48,9 @@ export default class Checkout extends React.Component {
             <label>Nº do cartão </label>
             <input type="text-area" className="input_nCartao" placeholder="0000-0000-0000-0000" />
             <label>Nome no cartão</label>
-            <input type="text-area" className='.input_nomeCartao' placeholder="NOME ESCRITO NO CARTÃO" onInput={this.setState.nome_titular} />
+            <input type="text-area" className='input_nomeCartao' placeholder="NOME ESCRITO NO CARTÃO" onInput={this.setState.nome_titular} />
             <br />
-            <label>Validade</label><br /><input type="text-area" className='input_valCartao' placeholder="mês/ano"  />
+            <label>Validade</label><br /><input type="text-area" className='input_valCartao' placeholder="mês/ano" />
             <br />
             <label>CVV</label>
             <br />
@@ -74,10 +74,11 @@ export default class Checkout extends React.Component {
           </form>
           <br />
 
-
+          <div className='center icon_payMethods'>
           <img className=" img " src="/img/visa.png " width="40px " height="40px" />
           <img className="img " src="/img/master.png " width="40px " height="40px " />
           <img className="img " src="/img/boleto.png " width="40px " height="40px " />
+          </div>
         </div>
 
         <div className="confirmadados">
@@ -99,22 +100,25 @@ export default class Checkout extends React.Component {
             </select>
           </div>
 
-          <div>
-            <label>Valor Frete:</label>
-            <br />
-            <input type="text-area " className='input_frete' /*style="border-radius: 10px; width: 200px; "*/ placeholder="R$ 000,00 " />
-            <br />
-            <br />
-            <label>Valor Total:</label>
-            <br />
-            <input type="text-area " className='input_valorTotal'/*style="border-radius: 10px; width: 2 00px; "*/ placeholder="R$ 000,00 " />
-            <br />
-            <a href="../html/index.html"><button type="button" className="btn btn-success btcc ">Continuar Comprando</button></a>
-            <a href="../html/sucesso_compra.html"><button type="button " className="btn btn-success btfc ">Finalizar Compra</button></a>
+
+          <label>Valor Frete:</label>
+          <br />
+          <input type="text-area " className='input_frete' placeholder="R$ 000,00 " />
+          <br />
+          <br />
+          <label>Valor Total:</label>
+          <br />
+          <input type="text-area " className='input_valorTotal' placeholder="R$ 000,00 " />
+          <div className='center'>
+          <a href="../html/index.html"><button type="button" className="btn btn-success btcc ">Continuar Comprando</button></a>
+          </div>
+          <div className='center' >
+
+          <a href="../html/sucesso_compra.html"><button type="button " className="btn btn-success btfc ">Finalizar Compra</button></a>
           </div>
         </div>
-      </>
-    );;
+      </div>
+    );
   }
 
 }

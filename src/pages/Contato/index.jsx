@@ -20,11 +20,11 @@ export default props => (
                         <form className="col-lg-8" id="central">
                             <br />
                             <br />
-                            <h1><center>
+                            <h1 className='text_color_faleConosco'><center>
                                 Central de Atendimento
                         </center>
                             </h1>
-                            <h3> <center>
+                            <h3 className='text_color_faleConosco'> <center>
                                 Fale conosco!
                         </center>
                             </h3>

@@ -33,7 +33,7 @@ export default class Carrinho extends Component {
         return (
             <>
                 <body className="cinza">
-                    <div className="container" id="container">
+                    <div className="container" id="">
                         <div className="row">
                             <div className="col-lg-12">
                                 <h2 className="center">Carrinho</h2>
