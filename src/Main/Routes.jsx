@@ -11,7 +11,7 @@ import Login from '../pages/Login';
 import Pedido from '../pages/Pedido';
 // import Perfil from '../pages/Perfil'
 import Produto from '../pages/Produto';
-import Sucesso from '../pages/SucessoCompras';
+import Sucesso from '../pages/SucessoCompra';
 
 export default class Routes extends Component {
   state = {

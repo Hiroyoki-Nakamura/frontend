@@ -9,6 +9,66 @@ footer {
 .Footer {
     justify-content: space-around;
     padding: 10px;
+    overflow: hidden;
+}
+
+.list_footer{
+    text-decoration: underline;
+    color: white;
+    font-size: 18px;
+    list-style-type: none;
+}
+
+.list_footer:hover{
+    opacity: 80%;
+}
+
+.phone_icon {
+    background-image: url(/img/phone_icon.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 50px;
+    height: 50px;
+}
+
+.phone_icon:hover{
+    opacity: 80%;
+}
+
+.insta_icon {
+    background-image: url(/img/instagram_icon.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 50px;
+    height: 50px;
+}
+
+.insta_icon:hover{
+    opacity: 80%;
+}
+
+.mail_icon {
+    background-image: url(/img/email_icon.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 50px;
+    height: 50px;
+}
+
+.mail_icon:hover{
+    opacity: 80%;
+}
+
+.bottle_icon {
+    background-image: url(/img/bootle_icon.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 150px;
+    height: 150px;
 }
 
 .Footer *,

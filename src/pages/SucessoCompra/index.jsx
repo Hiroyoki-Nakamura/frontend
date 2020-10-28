@@ -5,9 +5,6 @@ export default props => (
 
 
 <body className='color_back'>
-
-
-
     <section className="fundo">
         <div className="fundobr">
             <div className="fundonota">
