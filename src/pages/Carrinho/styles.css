@@ -6,6 +6,10 @@
     border-radius: 20px;
 }
 
+.container{
+    margin-left: 0;
+}
+
 #topo{
     background-color: #660033;
     color: #fff;

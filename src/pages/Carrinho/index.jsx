@@ -61,6 +61,8 @@ export default class Carrinho extends Component {
                                     </div>
                                 </div>
 
+                                <br/><br/>
+
                                 <div>
 
                                     <div className="container" id="carrinho">
@@ -71,7 +73,7 @@ export default class Carrinho extends Component {
 
                                                 <div className="row">
                                                     <div className="col-lg-1">
-                                                        <div className="card center">
+                                                        <div className="center">
                                                             <div className="card-body">
                                                                 <img className="imagem" src="./img/Chivas-carrinho.png" />
                                                             </div>
@@ -89,10 +91,10 @@ export default class Carrinho extends Component {
                                                     <div className="col-lg-2">
                                                         <br />
                                                         <div className="input-group">
-                                                            <button type="button" onClick={this.minus}>-</button>
+                                                            <button className='btn btn-danger' type="button" onClick={this.minus}>-</button>
                                                             <input type="text" id="quantity" name="quantity"
                                                                 className="form-control input-number" value={this.state.display} />
-                                                            <button type="button" onClick={this.plus}>+</button>
+                                                            <button className='btn btn-success' type="button" onClick={this.plus}>+</button>
                                                         </div>
                                                     </div>
                                                     <div className="col-lg-2">
@@ -114,13 +116,13 @@ export default class Carrinho extends Component {
                                         <hr />
                                         <div className="row">
                                             <div className="col-lg-1">
-                                                <div className="card center">
+                                                <div className="center">
                                                     <div className="card-body">
                                                         <img className="imagem" src="./img/Chivas-carrinho.png" />
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="col-lg-3" id="nomeProduto">
+                                                <div className="col-lg-3" id="nomeProduto">
                                                 <h5>Chivas Whisky 12 Anos</h5>
                                             </div>
                                             <div className="col-lg-2">
@@ -130,10 +132,10 @@ export default class Carrinho extends Component {
                                             <div className="col-lg-2">
                                                 <br />
                                                 <div className="input-group">
-                                                            <button type="button" onClick={this.minus}>-</button>
+                                                            <button className='btn btn-danger' type="button" onClick={this.minus}>-</button>
                                                             <input type="text" id="quantity" name="quantity"
                                                                 className="form-control input-number" value={this.state.display} />
-                                                            <button type="button" onClick={this.plus}>+</button>
+                                                            <button className='btn btn-success' type="button" onClick={this.plus}>+</button>
                                                         </div>
                                                     </div>
                                             <div className="col-lg-2">
@@ -151,7 +153,7 @@ export default class Carrinho extends Component {
                                         <hr />
                                         <div className="row">
                                             <div className="col-lg-1">
-                                                <div className="card center">
+                                                <div className="center">
                                                     <div className="card-body">
                                                         <img className="imagem" src="./img/Chivas-carrinho.png" />
                                                     </div>
@@ -167,10 +169,10 @@ export default class Carrinho extends Component {
                                             <div className="col-lg-2">
                                                 <br />
                                                 <div className="input-group">
-                                                            <button type="button" onClick={this.minus}>-</button>
+                                                            <button className='btn btn-danger' type="button" onClick={this.minus}>-</button>
                                                             <input type="text" id="quantity" name="quantity"
                                                                 className="form-control input-number" value={this.state.display} />
-                                                            <button type="button" onClick={this.plus}>+</button>
+                                                            <button className='btn btn-success' type="button" onClick={this.plus}>+</button>
                                                         </div>
                                                     </div>
                                             <div className="col-lg-2">
@@ -189,7 +191,7 @@ export default class Carrinho extends Component {
                                         <hr />
                                         <div className="row">
                                             <div className="col-lg-1">
-                                                <div className="card center">
+                                                <div className="center">
                                                     <div className="card-body">
                                                         <img className="imagem" src="./img/Chivas-carrinho.png" />
                                                     </div>
@@ -205,10 +207,10 @@ export default class Carrinho extends Component {
                                             <div className="col-lg-2">
                                                 <br />
                                                 <div className="input-group">
-                                                            <button type="button" onClick={this.minus}>-</button>
+                                                            <button className='btn btn-danger' type="button" onClick={this.minus}>-</button>
                                                             <input type="text" id="quantity" name="quantity"
                                                                 className="form-control input-number" value={this.state.display} />
-                                                            <button type="button" onClick={this.plus}>+</button>
+                                                            <button className='btn btn-success' type="button" onClick={this.plus}>+</button>
                                                         </div>
                                                     </div>
                                             <div className="col-lg-2">
@@ -226,24 +228,25 @@ export default class Carrinho extends Component {
                                     </div>
                                 </div>
 
-                                <div className="container col-lg-12" id="base">
+                                <div className="container col-lg-12 base">
                                     <div className="row">
                                         <div className="col-lg-12">
-                                            <label className="corvalor">Valor Total</label>
-                                            <input className="valortotal" disabled placeholder="R$ 00,00" />
+                                        <label className="corvalor">Valor Total</label>
+                                        <input className="valortotal" disabled placeholder="R$ 00,00" />
 
-                                            <div className="row">
-                                                <div className="col-lg-1" id="voltar">
-                                                    <a href="index.html"><button type="button" className="btn btn-secondary botao" id="botao">Voltar</button></a>
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <a href="checkout.html"><button type="button" className="btn btn-success btn-md btn-block botao"
-                                                        id="botao">Confirmar</button></a>
-                                                </div>
+                                        <div className="row">
+                                            <div className="col-lg-1" id="voltar">
+                                            <a href="index.html"><button type="button" className="btn btn-secondary botao" id="botao">Voltar</button></a>
+                                            </div>
+                                            <div className="col-lg-2">
+                                            <a href="checkout.html"><button type="button" className="btn btn-success btn-md btn-block botao"
+                                                id="botao">Confirmar</button></a>
                                             </div>
                                         </div>
+                                        </div>
                                     </div>
-                                </div>
+                                    </div>
+
                             </div>
                         </div>
                     </div>
