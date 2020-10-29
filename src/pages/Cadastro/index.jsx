@@ -252,9 +252,9 @@ export default class Cadastro extends React.Component {
                     </div>
                     <div className="col-3">
                       <label for="inputAddress">UF</label>
-                      <select onClick={this.onChange} id="uf" className="form-control">
+                      <select className="form-control" id="uf">
                         {this.state.ufs.map(uf => {
-                          return <option key={uf.id} value={uf.id} >{uf.ds_uf}</option>
+                          return <option value={uf.id}>{uf.ds_uf}</option>
                         })}
                       </select>
                     </div>
