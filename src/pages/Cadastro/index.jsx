@@ -85,45 +85,14 @@ export default class Cadastro extends React.Component {
         console.log(error.response)
     });
 
-    let mandando = ({
-    nome: this.state.nome,
-    cpf: this.state.cpf,
-    rg: this.state.rg,
-    data_nascimento: this.state.data_nascimento,
-    contatos: [
-      {
-        ds_contato1: this.state.ds_contato1
-      },
-      {
-        ds_contato2: this.state.ds_contato2
-      }
-    ],
-    genero: this.state.genero,
-    email: this.state.email,
-    senha: this.state.senha,
-    endereco: {
-      cep: this.state.cep,
-      cidade: this.state.cidade,
-      bairro: this.state.bairro,
-      rua: this.state.rua,
-      uf: this.state.ufselecionado,
-      numero: this.state.numero,
-      complemento: this.state.complemento,
-      referencia: this.state.referencia
-    }
-  }
-)  
-
-console.log(mandando)
-
   }
 
   onChange = (event) => {
 
     const e = (event.target.value);
     const i = (event.target.id);
-
-
+ 
+   
     switch (i) {
       case 'nome':
         this.setState({ nome: e })

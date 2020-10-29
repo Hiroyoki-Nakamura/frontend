@@ -8,9 +8,9 @@ import API from '../../Services/api';
 export default class Checkout extends React.Component {
 
   state = {
-    nome_titular: [],
-    cpf_titular: [],
-    numero_cartão: []
+    nome_titular: "",
+    cpf_titular: "",
+    numero_cartão: ""
   }
 
   async componentDidMount() {
