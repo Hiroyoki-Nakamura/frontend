@@ -23,4 +23,13 @@
 #teste-botao{
     background-color: #660033;
     margin-left: 25%;
+    width: 100px;
+}
+
+.top_text{
+    font-size: 2rem;
+}
+
+.second_text{
+    font-size: 1rem;
 }

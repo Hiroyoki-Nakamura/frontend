@@ -8,7 +8,7 @@ export default props => (
       <div className="row">
         <div className="col-5">
           <div id="container1">
-            <div className="form-group">Login</div>
+            <div className="form-group center">Login</div>
             <div className="form-group">
               <input type="text" placeholder="username" style={{ textAlign: + 'center' }} />
             </div>

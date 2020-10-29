@@ -50,6 +50,6 @@
         background-color: #3a4147;
         color: white;
         display: inline-block;
-        position: fixed;
+        /* position: fixed; */
     }
 }
