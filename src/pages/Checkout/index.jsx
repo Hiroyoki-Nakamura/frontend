@@ -1,33 +1,49 @@
-import { get } from 'jquery';
-import React from 'react';
-import { render } from 'react-dom';
+import React, { Component } from 'react';
 import './styles.css';
 import API from '../../Services/api';
 
 
-const data = {
+
+
+export default class Checkout extends Component {
+  
+state = {
+  id: '',
   nome_titular: '',
   cpf_titular: '',
-  numero_cartão: ''
+  numero_cartao: '',
+  cd_cliente: ''
+}
+
+  postCards = async () => {
+      await API.post('/cartaoCredito/adicionarCartao',{
+      nome_titular: this.nome_titular,
+      cpf_titular: this.cpf_titular,
+      numero_cartao: this.numero_cartao
+    });
+
+  };
+
+  onChange = (event) => {
+    const a = (event.target.value);
+    const b = (event.target.id);
+  
+    switch (b) {
+    case 'nome_titular':
+    this.setState({nome_titular: a});
+    break;
+    case 'cpf_titular':
+    this.setState({cpf_titular: a});
+    break;
+    case 'numero_cartao':
+    this.setState({numero_cartao: a});
+    break;
+
+  }
+
 }
 
 
-export default class Checkout extends React.Component {
-  state = {...data}
-
-  getCards = async () => {
-    const cards = await API.get('/cartaoCredito/listarCartao/{id}');
-
-    this.setState({
-      cards: [...nome_titular.data],
-      cards: [...cpf_titular.data],
-      cards: [...numero_cartão.data]
-    });
-  }
-
-  postCards = async () => {
-
-  }
 
 
 
@@ -54,11 +70,11 @@ export default class Checkout extends React.Component {
           <br />
           <form id="formulariocartao">
             <label>Nº do cartão </label>
-            <input type="text-area" className="input_nCartao" placeholder="0000-0000-0000-0000" />
+            <input type="text-area" className="input_nCartao" id='cpf_titular' placeholder="0000-0000-0000-0000" onChange={this.onChange} value={this.cpf_titular}/>
             <label>Nome no cartão</label>
-            <input type="text-area" className='.input_nomeCartao' placeholder="NOME ESCRITO NO CARTÃO" onInput={this.setState.nome_titular} />
+            <input type="text-area" className='.input_nomeCartao' id='nome_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.nome_titular}/>
             <br />
-            <label>Validade</label><br /><input type="text-area" className='input_valCartao' placeholder="mês/ano"  />
+            <label>Validade</label><br /><input type="text-area" className='input_valCartao' id='numero_cartao' placeholder="mês/ano" onChange={this.onChange} value={this.numero_cartao}/>
             <br />
             <label>CVV</label>
             <br />
@@ -118,7 +134,7 @@ export default class Checkout extends React.Component {
             <input type="text-area " className='input_valorTotal'/*style="border-radius: 10px; width: 2 00px; "*/ placeholder="R$ 000,00 " />
             <br />
             <a href="../html/index.html"><button type="button" className="btn btn-success btcc ">Continuar Comprando</button></a>
-            <a href="../html/sucesso_compra.html"><button type="button " className="btn btn-success btfc ">Finalizar Compra</button></a>
+            <a href="../html/sucesso_compra.html"><button type="button " className="btn btn-success btfc " onClick={this.postCards}>Finalizar Compra</button></a>
           </div>
         </div>
       </>
