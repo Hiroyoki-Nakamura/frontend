@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './styles.css';
+import API from '../../Services/api'
 
 export default class Login extends Component{
 
@@ -12,18 +13,18 @@ export default class Login extends Component{
     }
   }
 
- Email = (request) => {
-  console.log (request.target.value)
+  onChange = (event) => {
+    const valor= (event.target.value)
+    console.log (valor)
+    this.setState ({login: valor})
 
-  this.setState({login: request.target.value})
- }
-
- Valor = (request) =>{
-  console.log (request.target.value)
-
-  this.setState({senha: request.target.value})
- }
+    const verificar= (event.target.id)
+    console.log (verificar)
+    }
   
+ postLogin = async () => {
+
+ }
  
 
 
@@ -37,11 +38,11 @@ export default class Login extends Component{
             <div id="container1">
               <div className="form-group">Login</div>
               <div className="form-group">
-                <input type="text" placeholder="username" onChange={this.Email} value={this.state.login} style={{ textAlign: + 'center' }} />
+                <input type="text" placeholder="username" id= "login-conf" onChange={this.onChange} value={this.state.login} style={{ textAlign: + 'center' }} />
               </div>
               <div className="form-group">Senha</div>
               <div className="form-group">
-                <input type="password" placeholder="digite sua senha" onChange={this.Valor} value={this.state.senha} style={{ textAlign: + 'center' }} />
+                <input type="password" placeholder="digite sua senha" id= "senha-conf" onChange={this.onChange} value={this.state.senha} style={{ textAlign: + 'center' }} />
               </div>
               <div className="form-group">
                 <button className="btn btn-success" onclick >Login</button>

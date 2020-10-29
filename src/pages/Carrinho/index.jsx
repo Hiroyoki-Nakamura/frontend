@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './styles.css';
 
+
 export default class Carrinho extends Component {
 
     state = {

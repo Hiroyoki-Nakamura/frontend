@@ -6,8 +6,13 @@ header {
     width: 100%;
 }   
 
+.icons {
+    max-height: 20px;
+}
+
 .logo {
     width: 100%;
+    height: 80%;
     margin: 0;
     background-color: #660033;
     padding: 10px;
@@ -64,16 +69,17 @@ header {
     background-color: #fff;
 }
 
+
 /* style={{color: + '#ffffff'}} */
 
-.btn_cart{
+.btn_cart {
     width: 100px;
 }
 
-.btn_cart:hover{
+.btn_cart:hover {
     opacity: 80%;
 }
 
-.btn_login:hover{
+.btn_login:hover {
     opacity: 80%;
 }
