@@ -37,8 +37,11 @@
     height: 330px;
     color: white;
     font-size: 20px;
+    overflow: hidden;
+}
 
-
+.menu_lat_li:hover{
+    opacity: 80%;
 }
 
 #labels

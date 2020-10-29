@@ -15,16 +15,9 @@ export default props => (
                     <div className="row">
                         <div className="col-12">
                             <div className="row">
-                                <div className="col-3">
+                                <div className="col-4">
 
                                 </div> 
-                                
-                                <div className="col-9" id="labels">
-                                    <label>Numero Pedido</label>
-                                    <label>Vlr Pedido</label>
-                                    <label>Data Pedido</label>
-                                    <label>Status</label>
-                                </div>
                                 <div className="col-2 center ">
                                     <h5>Nr Pedido</h5>
                                 </div>
@@ -40,28 +33,30 @@ export default props => (
                           
                             </div>
 
+                            <br/><br/>
+
                         </div>
                     </div>
                 </div>
                 <div className="container">
                     <div className="row">
-                        <div className="col-3" id="menu_lat">
+                        <div className="col-4" id="menu_lat">
                             <br/>
-                            <li>Meu Cadastro</li>
+                            <a href=""><li className='menu_lat_li'>Meu Cadastro</li></a>
                             <hr/>
-                            <li>Meus Pedidos</li>
+                            <a href="#/pedido"><li className='menu_lat_li'>Meus Pedidos</li></a>
                             <hr/>
-                            <li>Endereco</li>
+                            <a href=""><li className='menu_lat_li'>Endereco</li></a>
                             <hr/>
-                            <li>Alterar senha</li>
+                            <a href=""><li className='menu_lat_li'>Alterar senha</li></a>
                             <hr/>
-                            <li>Logout</li>
+                            <a href=""><li className='menu_lat_li'>Logout</li></a>
                             <hr/>
                         </div>
 
 
 
-                        <div className="col-9" id="pedido">
+                        <div className="col-8" id="pedido">
                             <br/>
                             <div className="row">
                                 <div className="col-12 center" id="labels">
@@ -89,7 +84,7 @@ export default props => (
                                 <div className="col-12 center" id="labels">
                                     <label>14599</label>
                                     <label>R$ 800,00</label>
-                                    <label>05/9/2020</label>
+                                    <label>05/10/2020</label>
                                     <label>Pendente</label>
                                 </div>
                                 

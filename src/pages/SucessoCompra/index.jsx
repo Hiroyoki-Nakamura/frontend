@@ -22,7 +22,7 @@ export default props => (
                 <br/>
                 <p className="ps">Endereço De Entrega: Rua dois, nº 01 - Cep: 01234-56 - Cidade: São Paulo - Bairro: Centro.</p>
                 <br/>
-                <a href="../html/index.html"><button type="button " className="btn btn-success btcc ">Continuar Comprando</button></a>
+                <a href="../html/index.html"><button type="button " className="btn btn-success continuar_comp ">Continuar Comprando</button></a>
             </div>
         </div>
     </section>

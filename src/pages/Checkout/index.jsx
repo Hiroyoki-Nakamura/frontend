@@ -112,8 +112,8 @@ export default class Checkout extends React.Component {
           <br />
           <input type="text-area " className='input_valorTotal' placeholder="R$ 000,00 " />
           <div className='center'>
-          <a href="../html/index.html"><button type="button" className="btn btn-success btcc ">Continuar Comprando</button></a>
-          <a href="../html/sucesso_compra.html"><button type="button " className="btn btn-success btfc ">Finalizar Compra</button></a>
+          <a href="#" className="btn btn-success btcc">Prosseguir</a>
+          <a href="#" className="btn btn-success btfc">Finalizar Compra</a>
           </div>
         </div>
       </div>
