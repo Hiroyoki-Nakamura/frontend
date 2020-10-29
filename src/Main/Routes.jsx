@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Route, Redirect, hashHistory } from 'react-router';
 
-import Cadastro from '../pages/Cadastro';
+import Cadastro from '../pages/Cadastro/';
 import Carrinho from '../pages/Carrinho';
 import Categoria from '../pages/Categoria';
 import Checkout from '../pages/Checkout';
