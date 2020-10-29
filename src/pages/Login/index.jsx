@@ -26,7 +26,7 @@ export default props => (
 
         </div>
         <div className='col-2 center'>
-          <img className="w-100 h-50" src='img/taca_uvas.png' />
+          <img className="w-100 h-50" src='img/taca.png' />
         </div>
 
         <div className="col-5"  >

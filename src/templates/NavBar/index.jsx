@@ -44,9 +44,9 @@ export default class NavBar extends Component {
                     })}
                   </div>
                 </Dropdown_menu>
-                <ItemMenu href='#/produto' value='Vinhos' />
-                <ItemMenu href='#/produto' value='Destilados' />
-                <ItemMenu href='#/produto' value='Champagnes' />
+                <ItemMenu href='#/categoria' value='Vinhos' />
+                <ItemMenu href='#/categoria' value='Destilados' />
+                <ItemMenu href='#/categoria' value='Champagnes' />
                 <ItemMenu href='#/contato' value='Contato' />
               </ul>
               <form className="form-inline my-2 my-lg-0">
