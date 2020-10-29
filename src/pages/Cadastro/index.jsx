@@ -52,16 +52,16 @@ export default class Cadastro extends React.Component {
 
   postCliente = () => {
     api.post('/cliente/cadastro',{
-        nome: this.state.nome,
+        nome: this.state.nome, 
         cpf: this.state.cpf,
         rg: this.state.rg,
         data_nascimento: this.state.data_nascimento,
-        contatos: [
+        contato: [
           {
-            ds_contato1: this.state.ds_contato1
+            ds_contato: this.state.ds_contato1
           },
           {
-            ds_contato2: this.state.ds_contato2
+            ds_contato: this.state.ds_contato1
           }
         ],
         genero: this.state.genero,
@@ -72,7 +72,7 @@ export default class Cadastro extends React.Component {
           cidade: this.state.cidade,
           bairro: this.state.bairro,
           rua: this.state.rua,
-          uf: this.state.ufselecionado,
+          cd_uf: this.state.ufselecionado,
           numero: this.state.numero,
           complemento: this.state.complemento,
           referencia: this.state.referencia
@@ -85,7 +85,37 @@ export default class Cadastro extends React.Component {
         console.log(error.response)
     });
 
-    
+    let mandando = ({
+    nome: this.state.nome,
+    cpf: this.state.cpf,
+    rg: this.state.rg,
+    data_nascimento: this.state.data_nascimento,
+    contatos: [
+      {
+        ds_contato1: this.state.ds_contato1
+      },
+      {
+        ds_contato2: this.state.ds_contato2
+      }
+    ],
+    genero: this.state.genero,
+    email: this.state.email,
+    senha: this.state.senha,
+    endereco: {
+      cep: this.state.cep,
+      cidade: this.state.cidade,
+      bairro: this.state.bairro,
+      rua: this.state.rua,
+      uf: this.state.ufselecionado,
+      numero: this.state.numero,
+      complemento: this.state.complemento,
+      referencia: this.state.referencia
+    }
+  }
+)  
+
+console.log(mandando)
+
   }
 
   onChange = (event) => {
@@ -252,9 +282,9 @@ export default class Cadastro extends React.Component {
                     </div>
                     <div className="col-3">
                       <label for="inputAddress">UF</label>
-                      <select className="form-control" id="uf">
+                      <select onClick={this.onChange} id="uf" className="form-control">
                         {this.state.ufs.map(uf => {
-                          return <option value={uf.id}>{uf.ds_uf}</option>
+                          return <option key={uf.id} value={uf.id} >{uf.ds_uf}</option>
                         })}
                       </select>
                     </div>
