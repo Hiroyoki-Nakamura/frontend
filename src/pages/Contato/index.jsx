@@ -7,7 +7,7 @@ export default props => (
       <div className="row">
         <div className="col-lg-12">
 
-          <form className="col-lg-8" id="central">
+          <form className="col-lg-8 col-md-8 col-sm-8 col-8" id="central">
 
             <div className="titleContato">
               <h1 className='center'>Central de Atendimento</h1>
@@ -15,7 +15,7 @@ export default props => (
             </div>
 
             <div className="row" >
-              <div className="col-lg 6 " id="container">
+              <div className="col-lg " id="container">
                 <div className="row">
                   <div className="col-12">
                     <br />
