@@ -1,6 +1,14 @@
 
-h1, h3 {
-    color: #ffffff;
+.text_color_faleConosco{
+    color:#ffffff;
+}
+
+.back_color{
+    background-color: #3d3c3c;
+}
+
+.margin_null{
+    margin-left: 100px;
 }
 
 #central {
@@ -13,12 +21,10 @@ h1, h3 {
 }
 
 #container{
-    margin-left: 10%;
-    margin-right: 10%;
+    margin: 10px 10%;
 }
 
 #teste-botao{
     background-color: #660033;
     margin-left: 25%;
 }
-
