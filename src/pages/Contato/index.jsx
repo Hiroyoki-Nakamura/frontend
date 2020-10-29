@@ -7,15 +7,15 @@ export default props => (
       <div className="row">
         <div className="col-lg-12">
 
-          <form className="col-lg-8" id="central">
+          <form className="col-lg-8 col-md-8 col-sm-8 col-8" id="central">
 
             <div className="titleContato">
-              <h1 className='center'>Central de Atendimento</h1>
-              <h3 className='center'>Fale conosco!</h3>
+              <h1 className='center top_text'>Central de Atendimento</h1>
+              <h3 className='center second_text'>Fale conosco!</h3>
             </div>
 
             <div className="row" >
-              <div className="col-lg 6 " id="container">
+              <div className="col-lg " id="container">
                 <div className="row">
                   <div className="col-12">
                     <br />
@@ -34,9 +34,9 @@ export default props => (
 
                   <div className="col-12">
                     <p> Iremos retornar sua resposta para o seu e-mail.</p>
-                    <div className="col-8">
+                    <div className="center col-8">
                       <label for="inputAddress"></label>
-                      <button type="submit" className="btn btn-primary btn-lg btn-block" id="teste-botao" onclick="validar()" >Enviar</button>
+                      <button type="submit" className="btn btn-primary btn-lg btn-block" id="teste-botao" onclick="validar()">Enviar</button>
                       <br />
                     </div>
 
