@@ -95,8 +95,14 @@ export default class Cadastro extends React.Component {
    
     switch (i) {
       case 'nome':
+        var regex = /^[a-zA-ZéúíóáÉÚÍÓÁèùìòàçÇÈÙÌÒÀõãñÕÃÑêûîôâÊÛÎÔÂëÿüïöäËYÜÏÖÄ\-\ \s]+$/;;
+        if(i != regex){
+            console.log("NOME INCORRETO");
+        }else{
+          return false;
+        }
         this.setState({ nome: e })
-        break;
+        break;  
       case 'cpf':
         this.setState({ cpf: e })
         break;
