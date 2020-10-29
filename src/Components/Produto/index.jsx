@@ -22,9 +22,9 @@ export default class Product extends Component {
 
   render() {
     return (
-      <div className="col-6 col-md-3">
+      <div className="col-12 col-sm-6 col-md-3">
         <div className="center product">
-          <div className="image-product">
+          <div className="image-product center">
             <img
               src={this.props.image} />
           </div>

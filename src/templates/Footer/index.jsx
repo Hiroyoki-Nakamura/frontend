@@ -27,7 +27,7 @@ export default props => (
         <p>(11)91234-5678</p>
         <p>(11)91234-5678</p>
         <img className='phone_icon' src="./img/phone_icon.svg" alt=""/>
-        <a href="https://instagram.com" target='blank'><img className='insta_icon' src="./img/instagram_icon.svg" alt=""/></a>
+        <a href="https://www.instagram.com/pi_desvinhos/" target='blank'><img className='insta_icon' src="./img/instagram_icon.svg" alt=""/></a>
         <a href="#/contato"><img className='mail_icon' src="./img/email_icon.png" alt=""/></a>
       </div>
     </div>

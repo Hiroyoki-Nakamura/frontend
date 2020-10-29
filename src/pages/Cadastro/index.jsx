@@ -119,9 +119,9 @@ export default class Cadastro extends Component {
                     </div>
                     <div className="col-3">
                       <label for="inputAddress">UF</label>
-                      <select className="form-control" name="">
+                      <select className="form-control" id="uf">
                         {this.state.ufs.map(uf => {
-                          return <option>{uf.ds_uf}</option>
+                          return <option value={uf.id}>{uf.ds_uf}</option>
                         })}
                       </select>
                     </div>

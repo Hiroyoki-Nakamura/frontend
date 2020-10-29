@@ -42,7 +42,7 @@ export default props => (
                     <div className="row">
                         <div className="col-4" id="menu_lat">
                             <br/>
-                            <a href=""><li className='menu_lat_li'>Meu Cadastro</li></a>
+                            <a href="#/cadastro"><li className='menu_lat_li'>Meu Cadastro</li></a>
                             <hr/>
                             <a href="#/pedido"><li className='menu_lat_li'>Meus Pedidos</li></a>
                             <hr/>
