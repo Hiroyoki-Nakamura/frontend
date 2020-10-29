@@ -13,6 +13,10 @@ state = {
   numero_cartao: ''
 }
 
+  endereco = () => {
+    
+  }
+
   postCards = async () => {
       await API.post('/cartaoCredito/adicionarCartao',{
       nome_titular: this.nome_titular,
@@ -61,6 +65,7 @@ state = {
 
           <a href="#" className="btn btnl btn-primary btn-lg active" role="button" aria-pressed="true">Entregar em outro Endereço</a>
           </div>
+          
         </div>
 
         <div className="modopg col-4">
@@ -141,7 +146,9 @@ state = {
             <a href="../html/sucesso_compra.html"><button type="button " className="btn btn-success btfc " onClick={this.postCards}>Finalizar Compra</button></a>
           </div>
         </div>
-      </div>
+      
+</div>
+          
     );
   }
 
