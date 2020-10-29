@@ -5,19 +5,27 @@ import './styles.css';
 import API from '../../Services/api';
 
 
-export default class Checkout extends React.Component {
+const data = {
+  nome_titular: '',
+  cpf_titular: '',
+  numero_cartão: ''
+}
 
-  state = {
-    nome_titular: [],
-    cpf_titular: [],
-    numero_cartão: []
+
+export default class Checkout extends React.Component {
+  state = {...data}
+
+  getCards = async () => {
+    const cards = await API.get('/cartaoCredito/listarCartao/{id}');
+
+    this.setState({
+      cards: [...nome_titular.data],
+      cards: [...cpf_titular.data],
+      cards: [...numero_cartão.data]
+    });
   }
 
-  async componentDidMount() {
-    const response = await API.get('');
-    console.log(response.data);
-
-    this.setState({ nome_titular: response.data });
+  postCards = async () => {
 
   }
 

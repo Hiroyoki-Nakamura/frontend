@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './styles.css';
 
+
+
 export default class Carrinho extends Component {
 
     state = {
@@ -13,6 +15,7 @@ export default class Carrinho extends Component {
     }
 
     minus = () => {
+        
         if (this.state.display !== 1) {
             this.setState({ display: this.state.display - 1 })
         }
