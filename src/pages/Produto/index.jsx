@@ -12,6 +12,9 @@ export default class Produto extends Component {
 
   setProduto = async () => {
     const product = await this.props.route.render();
+    if (product == '') {
+      window.location.href = '/';     
+    }
     this.setState({ product: { ...product } });
   }
 

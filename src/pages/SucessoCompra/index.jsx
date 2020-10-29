@@ -5,7 +5,7 @@ export default props => (
   <>
     <section className="fundo color_back">
       <div className="fundobr">
-        <div className="fuIndonota">
+        <div className="fundonota">
           <br />
           <br />
           <img src="../img/check.png" width="100px" height="100px" />
