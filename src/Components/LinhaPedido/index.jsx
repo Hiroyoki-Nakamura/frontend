@@ -12,14 +12,14 @@ export default class Linha extends Component {
   state = { ...BEFORE };
 
   componentDidMount() {
-    this.inicialization();
+    this.initialization();
   }
 
-  inicialization = () => {
-    const product = this.props.render;  
+  initialization = () => {
+    const product = this.props.render;
     this.setState({
-      priceTotal: product.desconto_produto,
-      priceUnique: product.desconto_produto,  
+      priceTotal: product.desconto_produto.toFixed(2),
+      priceUnique: product.desconto_produto.toFixed(2),
       product
     });
   }
@@ -27,7 +27,7 @@ export default class Linha extends Component {
   plus = () => {
     this.setState({
       amount: this.state.amount + 1,
-      priceTotal: (this.state.priceUnique * (this.state.amount + 1))
+      priceTotal: ((this.state.priceUnique * (this.state.amount + 1)).toFixed(2))
     });
     this.props.cart(this.state.priceUnique);
   }
@@ -36,7 +36,7 @@ export default class Linha extends Component {
     if (this.state.amount > 1) {
       this.setState({
         amount: this.state.amount - 1,
-        priceTotal: (this.state.priceUnique * (this.state.amount - 1))
+        priceTotal: ((this.state.priceUnique * (this.state.amount - 1)).toFixed(2))
       });
     }
     this.props.cart(-this.state.priceUnique);
@@ -47,7 +47,7 @@ export default class Linha extends Component {
     if (amount >= 1) {
       this.setState({
         amount,
-        priceTotal: (this.state.priceUnique * amount)
+        priceTotal: (this.state.priceUnique * amount).toFixed(2)
       });
     } else {
       this.setState({ amount: 1 });
@@ -61,7 +61,6 @@ export default class Linha extends Component {
   render() {
     return (
       <>
-        <br />
         <div className="row">
 
           <div className="col-1">
@@ -77,7 +76,7 @@ export default class Linha extends Component {
           </div>
 
           <div className="col-2 center">
-            <label htmlFor="">{`${this.state.priceUnique.toFixed(2)}`.replace('.', ',')}</label>
+            <label htmlFor="">{`${this.state.priceUnique}`.replace('.', ',')}</label>
           </div>
 
           <div className="col-2">
@@ -91,19 +90,21 @@ export default class Linha extends Component {
 
           </div>
           <div className="col-2 center">
-            <label htmlFor="">{`${this.state.priceTotal.toFixed(2)}`.replace('.', ',')}</label>
+            <label htmlFor="">{`${this.state.priceTotal}`.replace('.', ',')}</label>
           </div>
 
           <div className="col-2 center">
             <div className="custom-control custom-checkbox">
-              <input type="checkbox" className="custom-control-input" id="customCheck1" />
-              <label className="custom-control-label" htmlFor="customCheck1">
-
+              <input type="checkbox" className="custom-control-input" id={this.props.chave} />
+              <label className="custom-control-label"
+                onClick={() => this.props.removeItem(this.props.chave)}
+                htmlFor={this.props.chave}>
               </label>
             </div>
           </div>
 
         </div>
+        <hr />
       </>
     );
   }

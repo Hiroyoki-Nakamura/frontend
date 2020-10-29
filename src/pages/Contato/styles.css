@@ -7,10 +7,6 @@
     background-color: #3d3c3c;
 }
 
-.margin_null{
-    margin-left: 100px;
-}
-
 #central {
     /* margin-top: 100px;  */
     margin-bottom: 20px;
@@ -27,4 +23,13 @@
 #teste-botao{
     background-color: #660033;
     margin-left: 25%;
+    width: 100px;
+}
+
+.top_text{
+    font-size: 2rem;
+}
+
+.second_text{
+    font-size: 1rem;
 }
