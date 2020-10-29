@@ -11,8 +11,8 @@ header {
 }
 
 .logo {
-    width: 100%;
-    height: 80%;
+    width: auto;
+    height: 100%;
     margin: 0;
     background-color: #660033;
     padding: 10px;
@@ -20,12 +20,13 @@ header {
 }
 
 .logotipo {
-    width: 300px;
+    width: 400px;
     height: 50px;
     background-image: url(/img/desvinho_logo.png);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 70%;
+    background-size: 100%;
+    margin-left: 40px;
 }
 
 .icons {
@@ -42,8 +43,8 @@ header {
 }
 
 .logoUser {
-    width: 90px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     background-image: url(/img/user_icon.png);
     background-position: center;
     background-repeat: no-repeat;
@@ -53,12 +54,12 @@ header {
 }
 
 .logoCar {
-    width: 90px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     background-image: url(/img/cart_icon.png);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 160%;
+    background-size: 100%;
     padding: 0;
     margin: 0;
 }

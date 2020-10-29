@@ -52,35 +52,36 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
-        <div className="col-12 mt-3">
-          <section>
 
-            <Banners
-              images={this.state.banners}
-            />
+        <div className="mt-3">
 
-            <div className="products">
 
-              <div className="header-products">
-                <h2>Bebidas</h2>
-              </div>
+          <Banners
+            images={this.state.banners}
+          />
 
-              <div className="container">
-                <div className="row">
+          <div className="products">
 
-                  {this.state.products.map(product => {
-                    return (
-                      <Product key={product.id}
-                        name={product.nome_produto} value={product.valor_produto} valueOff={product.desconto_produto} image={product.ds_imagem} click={() => this.productSelected(product)}
-                      />
-                    );
-                  })}
-
-                </div>
-              </div>
-
+            <div className="header-products">
+              <h2>Bebidas</h2>
             </div>
-          </section>
+
+            <div className="container">
+              <div className="row">
+
+                {this.state.products.map(product => {
+                  return (
+                    <Product key={product.id}
+                      name={product.nome_produto} value={product.valor_produto} valueOff={product.desconto_produto} image={product.ds_imagem} click={() => this.productSelected(product)}
+                    />
+                  );
+                })}
+
+              </div>
+            </div>
+
+          </div>
+
         </div>
       </>
     );

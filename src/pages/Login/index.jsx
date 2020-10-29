@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './styles.css';
-import API from '../../Services/api'
+import api from '../../Services/api'
 
 export default class Login extends Component{
 
@@ -20,12 +20,24 @@ export default class Login extends Component{
 
     const verificar= (event.target.id)
     console.log (verificar)
-    }
-  
- postLogin = async () => {
 
- }
- 
+    switch (verificar) {
+      case 'login-conf':
+        this.setState ({login: valor})
+      break;
+      default:
+        this.setState ({senha: valor})
+    }
+    }
+
+
+  postLogin = () => {
+      api.post('/cliente/login', {
+        email: this.state.login,
+        senha: this.state.senha,
+       }
+      )
+  }
 
 
   render(){
