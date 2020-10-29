@@ -6,15 +6,15 @@ export default props => (
     <form className="col-12 mt-5 mb-5" id="formulario">
       <h1 className="center">Login</h1>
       <div className="row">
-        <div className="col-5">
+        <div className="col-12 col-md-5">
           <div id="container1">
             <div className="form-group center">Login</div>
             <div className="form-group">
-              <input type="text" placeholder="username" style={{ textAlign: + 'center' }} />
+              <input type="text" className="col-9" placeholder="username" style={{ textAlign: + 'center' }} />
             </div>
             <div className="form-group">Senha</div>
             <div className="form-group">
-              <input type="password" placeholder="digite sua senha" style={{ textAlign: + 'center' }} />
+              <input type="password" className="col-9" placeholder="digite sua senha" style={{ textAlign: + 'center' }} />
             </div>
             <div className="form-group">
               <button className="btn btn-success">Login</button>
@@ -25,11 +25,11 @@ export default props => (
           </div>
 
         </div>
-        <div className='col-2 center'>
+        <div className='col-12 col-md-2 center'>
           <img className="w-100 h-50" src='img/taca.png' />
         </div>
 
-        <div className="col-5"  >
+        <div className="col-12 col-md-5"  >
           <div className='center' id='container2'>
             <form>
               <div className="form-group">

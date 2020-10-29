@@ -1,10 +1,9 @@
 import React from 'react';
 import './styles.css'
+
 import api from '../../Services/api';
 
 export default class Cadastro extends React.Component {
-
-
   constructor() {
     super()
     this.state = {
@@ -37,9 +36,6 @@ export default class Cadastro extends React.Component {
     }
   }
 
-
-
-
   componentDidMount() {
     this.getUfs();
   }
@@ -49,39 +45,37 @@ export default class Cadastro extends React.Component {
     this.setState({ ufs: [...ufs.data] });
   }
 
-
   postCliente = () => {
-    api.post('/cliente/cadastro',{
-        nome: this.state.nome, 
-        cpf: this.state.cpf,
-        rg: this.state.rg,
-        data_nascimento: this.state.data_nascimento,
-        contato: [
-          {
-            ds_contato: this.state.ds_contato1
-          },
-          {
-            ds_contato: this.state.ds_contato1
-          }
-        ],
-        genero: this.state.genero,
-        email: this.state.email,
-        senha: this.state.senha,
-        endereco: {
-          cep: this.state.cep,
-          cidade: this.state.cidade,
-          bairro: this.state.bairro,
-          rua: this.state.rua,
-          cd_uf: this.state.ufselecionado,
-          numero: this.state.numero,
-          complemento: this.state.complemento,
-          referencia: this.state.referencia
+    api.post('/cliente/cadastro', {
+      nome: this.state.nome,
+      cpf: this.state.cpf,
+      rg: this.state.rg,
+      data_nascimento: this.state.data_nascimento,
+      contato: [
+        {
+          ds_contato: this.state.ds_contato1
+        },
+        {
+          ds_contato: this.state.ds_contato1
         }
+      ],
+      genero: this.state.genero,
+      email: this.state.email,
+      senha: this.state.senha,
+      endereco: {
+        cep: this.state.cep,
+        cidade: this.state.cidade,
+        bairro: this.state.bairro,
+        rua: this.state.rua,
+        cd_uf: this.state.ufselecionado,
+        numero: this.state.numero,
+        complemento: this.state.complemento,
+        referencia: this.state.referencia
       }
-    ).then(response => { 
+    }).then(response => {
       console.log(response)
     })
-    .catch(error => {
+      .catch(error => {
         console.log(error.response)
     });
 
@@ -152,13 +146,13 @@ export default class Cadastro extends React.Component {
         this.setState({ referencia: e })
         break;
       default:
+        break;
     }
-
   }
 
   render() {
     return (
-      <form className="col-lg-12" id="formularioCadastro">
+      <form className="col-12" id="formularioCadastro">
         <h1><center>Cadastro</center></h1>
         <div className="row">
           <div className="col-12 center">
@@ -242,7 +236,7 @@ export default class Cadastro extends React.Component {
                     <div className="col-6">
                       <br />
                       <label for="inputAddress">CEP</label>
-                      <input onChange={this.onChange} value={this.state.endereco[this.state.cep] } type="text" id="cep" className="form-control" placeholder="00000-000" />
+                      <input onChange={this.onChange} value={this.state.endereco[this.state.cep]} type="text" id="cep" className="form-control" placeholder="00000-000" />
                     </div>
 
                     <div className="col-6">
@@ -288,7 +282,6 @@ export default class Cadastro extends React.Component {
 
             </div>
 
-
           </div>
 
           <div className="col-12 center">
@@ -300,6 +293,5 @@ export default class Cadastro extends React.Component {
 
       </form>
     );
-
   }
 }

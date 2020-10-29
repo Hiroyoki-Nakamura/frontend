@@ -15,7 +15,7 @@ export default class Carrinho extends Component {
   }
 
   getProducts = () => {
-    const products = JSON.parse(localStorage.getItem('cart'));
+    const products = JSON.parse(localStorage.getItem('cart')) || [];
     this.setState({ products });
     let minValue = 0;
     products.map(product => {
@@ -26,8 +26,9 @@ export default class Carrinho extends Component {
   }
 
   setTotalPriceCart = price => {
-    if ((this.state.totalPrice + price) >= this.state.minValue) {
-      this.setState({ totalPrice: (this.state.totalPrice + price) });
+    const newTotalPrice = (parseFloat(this.state.totalPrice) + parseFloat(price)).toFixed(2);
+    if (newTotalPrice >= this.state.minValue) {
+      this.setState({ totalPrice: newTotalPrice });
     }
   }
 
@@ -37,19 +38,31 @@ export default class Carrinho extends Component {
     return response;
   }
 
+  removeItem = productId => {
+    const products = this.state.products;
+    let productsRemoved = []
+    products.forEach((product, key) => {
+      if (productId != key) {
+        productsRemoved.push(product);
+      }
+    });
+    localStorage.setItem('cart', JSON.stringify(productsRemoved));
+    this.getProducts();
+  }
+
   render() {
     return (
       <>
         <div className="container" id="">
           <div className="row">
-            <div className="col-12 my-4 ">
+            <div className="col-12 mt-1 mb-4">
 
-              <h2 className="center text_top">Carrinho</h2>
+              <h2 className="center corvalor">Carrinho</h2>
 
               <div className="container" id="topo">
                 <div className="row">
 
-                  <div className="col-12">
+                  <div className="col-12 pb-5">
 
                     <div className="row">
                       <div className="col-4">
@@ -74,14 +87,18 @@ export default class Carrinho extends Component {
                 </div>
               </div>
 
-              <br />
-              <br />
-
               <div>
 
                 <div className="container" id="carrinho">
-                  {this.state.products.map(product => {
-                    return (<Linha cart={this.setTotalPriceCart} render={product} />);
+                  {this.state.products.map((product, key) => {
+                    return (
+                      <Linha
+                        key={key}
+                        chave={key}
+                        cart={this.setTotalPriceCart}
+                        removeItem={this.removeItem}
+                        render={product} />
+                    );
                   })}
                 </div>
 
@@ -93,7 +110,7 @@ export default class Carrinho extends Component {
                   <div className="col-12">
 
                     <label className="corvalor">Valor Total</label>
-                    <input className="valortotal" disabled value={'R$ ' + `${this.state.totalPrice.toFixed(2)}`.replace('.', ',')} />
+                    <input className="valortotal" disabled value={'R$ ' + `${this.state.totalPrice}`.replace('.', ',')} />
 
                     <div className="row">
                       <div className="col-1" id="voltar">

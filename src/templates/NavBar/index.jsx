@@ -20,7 +20,7 @@ export default class NavBar extends Component {
     const localCategorys = JSON.parse(localStorage.getItem('categorys'));
     if (localCategorys == null) {
       const categorys = await API.get('/categoria/listarCategorias');
-      this.setState({ categorys: [...categorys.data] });
+      this.setState({ categorys: [...categorys.data] }); 
       localStorage.setItem('categorys', JSON.stringify([...categorys.data]));
     } else {
       this.setState({ categorys: localCategorys});
@@ -44,9 +44,7 @@ export default class NavBar extends Component {
                     })}
                   </div>
                 </Dropdown_menu>
-                <ItemMenu href='#/categoria' value='Vinhos' />
-                <ItemMenu href='#/categoria' value='Destilados' />
-                <ItemMenu href='#/categoria' value='Champagnes' />
+                <ItemMenu href='#/produto' value='Produto' />
                 <ItemMenu href='#/contato' value='Contato' />
               </ul>
               <form className="form-inline my-2 my-lg-0">

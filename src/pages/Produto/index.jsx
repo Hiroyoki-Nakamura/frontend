@@ -66,7 +66,7 @@ export default class Produto extends Component {
                   <p>{this.state.product.ds_produto}</p>
                   <hr />
                   <div className="col-6" id="comprar">
-                   <a href="#/carrinho"><button type="button" className="btn btn-success btn-lg btn-block" onClick={this.onCart} id="botao">Adicionar ao Carrinho</button></a>
+                    <a href="#/carrinho"><button type="button" className="btn btn-success btn-lg btn-block" onClick={this.onCart} id="botao">Adicionar ao Carrinho</button></a>
                   </div>
                   <div className="col-4" id="voltar">
                     <a href="#/"><button type="button" className="btn btn-secondary" id="botao">Voltar</button></a>
