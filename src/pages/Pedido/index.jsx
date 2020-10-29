@@ -3,7 +3,7 @@ import './styles.css'
 
 export default props => (
   <>
-    <div className="container" id="principal">
+    <div className="container mt-2" id="principal">
       <div className="row">
         <div className="col-12">
           <h1 className="center">Meus Pedidos</h1>
@@ -39,8 +39,7 @@ export default props => (
           </div>
           <div className="container">
             <div className="row">
-              <div className="col-3 overflow-hidden" id="menu_lat">
-                <br />
+              <div className="col-3 pl-5 overflow-hidden" id="menu_lat">
                 <li>Meu Cadastro</li>
                 <hr />
                 <li>Meus Pedidos</li>
