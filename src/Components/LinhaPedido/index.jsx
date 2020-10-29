@@ -16,10 +16,10 @@ export default class Linha extends Component {
   }
 
   inicialization = () => {
-    const product = this.props.render;
+    const product = this.props.render;  
     this.setState({
       priceTotal: product.desconto_produto,
-      priceUnique: product.desconto_produto,
+      priceUnique: product.desconto_produto,  
       product
     });
   }
@@ -77,7 +77,7 @@ export default class Linha extends Component {
           </div>
 
           <div className="col-2 center">
-            <label htmlFor="">{`${this.state.priceUnique}`.replace('.', ',')}</label>
+            <label htmlFor="">{`${this.state.priceUnique.toFixed(2)}`.replace('.', ',')}</label>
           </div>
 
           <div className="col-2">
@@ -91,7 +91,7 @@ export default class Linha extends Component {
 
           </div>
           <div className="col-2 center">
-            <label htmlFor="">{`${this.state.priceTotal}`.replace('.', ',')}</label>
+            <label htmlFor="">{`${this.state.priceTotal.toFixed(2)}`.replace('.', ',')}</label>
           </div>
 
           <div className="col-2 center">

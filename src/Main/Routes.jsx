@@ -29,7 +29,7 @@ export default class Routes extends Component {
       <Router history={hashHistory}>
         <Route path='/cadastro' component={Cadastro} />
         <Route path='/carrinho' component={Carrinho} />
-        <Route path='/categoria' component={Categoria} />
+        <Route path='/categoria' component={Categoria} render={this.select} />
         <Route path='/checkout' component={Checkout} />
         <Route path='/contato' component={Contato} />
         <Route path='/' component={Home} render={this.select} />

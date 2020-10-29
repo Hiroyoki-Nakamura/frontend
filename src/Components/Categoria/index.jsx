@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 
+import API from '../../Services/api';
 
-export default class Categoria extends Component{
-
-    render(){
-        return (
-            <Link className="dropdown-item" href="#">{this.props.value}</Link>
-        )
+export default class Categoria extends Component {
+  
+  setCategory = async () => {
+    const id = this.props.category;
+    const Products = await API.get(`/produto/bucarCategoria/${id}`);
+    localStorage.setItem('category', JSON.stringify([ ...Products.data ]));
+    const ref = window.location.href;
+    if (!ref.includes('#/categoria')) {
+      window.location.href = '#/categoria';
+    } else {
+      window.location.reload();
     }
+  }
+
+  render() {
+    return (
+      <a className="dropdown-item" onClick={this.setCategory}>{this.props.value}</a>
+    )
+  }
 }

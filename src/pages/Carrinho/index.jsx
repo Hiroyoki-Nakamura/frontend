@@ -31,12 +31,18 @@ export default class Carrinho extends Component {
     }
   }
 
+  hasLogged = () => {
+    const client = JSON.parse(localStorage.getItem('client'));
+    const response = client == null ? 'login' : 'checkout';
+    return response;
+  }
+
   render() {
     return (
       <>
         <div className="container" id="">
           <div className="row">
-            <div className="col-12 my-3 ">
+            <div className="col-12 my-4 ">
 
               <h2 className="center">Carrinho</h2>
 
@@ -87,7 +93,7 @@ export default class Carrinho extends Component {
                   <div className="col-12">
 
                     <label className="corvalor">Valor Total</label>
-                    <input className="valortotal" disabled value={'R$ ' + `${this.state.totalPrice}`.replace('.', ',')} />
+                    <input className="valortotal" disabled value={'R$ ' + `${this.state.totalPrice.toFixed(2)}`.replace('.', ',')} />
 
                     <div className="row">
                       <div className="col-1" id="voltar">
@@ -95,7 +101,7 @@ export default class Carrinho extends Component {
                       </div>
 
                       <div className="col-2">
-                        <a href="#/checkout"><button type="button" className="btn btn-success btn-md btn-block botao"
+                        <a href={'#/' + this.hasLogged()}><button type="button" className="btn btn-success btn-md btn-block botao"
                           id="botao">Confirmar</button></a>
                       </div>
                     </div>

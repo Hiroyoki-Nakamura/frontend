@@ -1,10 +1,32 @@
 import React, { Component } from 'react';
+import './styles.css'
+
+import API from '../../Services/api';
+
 import Categoria from '../../Components/Categoria';
 import Dropdown_menu from '../../Components/Dropdown_menu';
 import ItemMenu from '../../Components/Item_menu';
-import './styles.css'
 
 export default class NavBar extends Component {
+  state = {
+    categorys: []
+  }
+
+  componentDidMount() {
+    this.getCategorias();
+  }
+
+  getCategorias = async () => {
+    const localCategorys = JSON.parse(localStorage.getItem('categorys'));
+    if (localCategorys == null) {
+      const categorys = await API.get('/categoria/listarCategorias');
+      this.setState({ categorys: [...categorys.data] });
+      localStorage.setItem('categorys', JSON.stringify([...categorys.data]));
+    } else {
+      this.setState({ categorys: localCategorys});
+    }
+  }
+
   render() {
     return (
       <>
@@ -17,12 +39,9 @@ export default class NavBar extends Component {
                 <ItemMenu href='#/index' value='Home' />
                 <Dropdown_menu value='Todas as categorias'>
                   <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <Categoria value='Destilados' />
-                    <Categoria value='Vinhos' />
-                    <Categoria value='Champagnes' />
-                    <Categoria value='Vinhos Latinos' />
-                    <Categoria value='Espumante' />
-                    <Categoria value='Licor' />
+                    {this.state.categorys.map(category => {
+                      return (<Categoria key={category.id} category={category.id} value={category.ds_categoria} />);
+                    })}
                   </div>
                 </Dropdown_menu>
                 <ItemMenu href='#/produto' value='Vinhos' />
