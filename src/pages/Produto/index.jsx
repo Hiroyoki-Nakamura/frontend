@@ -12,7 +12,7 @@ export default class Produto extends Component {
 
   setProduto = async () => {
     const product = await this.props.route.render();
-    this.setState({product: { ...product }});
+    this.setState({ product: { ...product } });
     console.log(product);
   }
 
@@ -23,15 +23,15 @@ export default class Produto extends Component {
           <div className="container">
             <div className="row">
               <div className="col-3">
-                <div className="card style_card">
-                  <div className="card-body">
-                    <img className='w-100' src={this.state.product.ds_imagem} />
-                  </div>
+                <div className="style_card">
+
+                  <img className='w-100 ' src={this.state.product.ds_imagem} />
+
                 </div>
               </div>
               <article>
                 <div className="col-lg-3">
-    
+
                 </div>
                 <div className="col-12 ">
                   <h4>{this.state.product.nome_produto}</h4>
@@ -39,7 +39,7 @@ export default class Produto extends Component {
                   <h6>De: <strike>R$ {this.state.product.valor_produto}</strike> &nbsp; <h6 className='id_style'>Por: {this.state.product.desconto_produto}</h6>
                   </h6>
                   <br />
-    
+
                   <p>{this.state.product.ds_produto}</p>
                   <hr />
                   <div className="col-6" id="comprar">
@@ -52,7 +52,7 @@ export default class Produto extends Component {
               </article>
             </div>
           </div>
-    
+
         </section>
       </>
     )
