@@ -18,22 +18,35 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     $('.carousel').carousel()
-    this.getProdutos();
-  }
-
-  getProdutos = async () => {
-    const products = await API.get('/produto/listar');
-    const banners = await API.get('/imagens/Banner');
-
-    this.setState({
-      banners: [...banners.data],
-      products: [...products.data]
-    });
+    this.setProducts();
   }
 
   productSelected = product => {
     this.props.route.render(product);
-    console.log( this.props);
+  }
+
+  setProducts = async () => {
+    const localProducts = localStorage.getItem('products');
+    const localBanners = localStorage.getItem('banners');
+
+    if (localProducts == null || localBanners == null) {
+      const products = await API.get('/produto/listar');
+      const banners = await API.get('/imagens/Banner');
+
+      localStorage.setItem('products', JSON.stringify([...products.data]));
+      localStorage.setItem('banners', JSON.stringify([...banners.data]));
+
+      this.setState({
+        banners: [...banners.data],
+        products: [...products.data]
+      });
+    } else {
+      this.setState({
+        banners: JSON.parse(localBanners),
+        products: JSON.parse(localProducts)
+      });
+    }
+
   }
 
   render() {

@@ -8,17 +8,15 @@ import API from '../../Services/api';
 export default class Checkout extends Component {
   
 state = {
-  id: '',
   nome_titular: '',
   cpf_titular: '',
-  numero_cartao: '',
-  cd_cliente: ''
+  numero_cartao: ''
 }
 
   postCards = async () => {
       await API.post('/cartaoCredito/adicionarCartao',{
       nome_titular: this.nome_titular,
-      cpf_titular: this.cpf_titular,
+      validade_cartao: this.validade_cartao,
       numero_cartao: this.numero_cartao
     });
 
@@ -27,17 +25,20 @@ state = {
   onChange = (event) => {
     const a = (event.target.value);
     const b = (event.target.id);
+
+    console.log(a)
   
     switch (b) {
     case 'nome_titular':
     this.setState({nome_titular: a});
     break;
-    case 'cpf_titular':
-    this.setState({cpf_titular: a});
+    case 'validade_cartao':
+    this.setState({validade_cartao: a});
     break;
     case 'numero_cartao':
     this.setState({numero_cartao: a});
     break;
+    default:
 
   }
 
@@ -45,22 +46,24 @@ state = {
 
 
 
-
-
   render() {
     return (
-      <>
-        <div className="ede">
+      <div className="flex-container cima col-12">
+
+        <div className="ede col-4">
           <h3>Endereço de Entrega</h3>
           <label className="ed">Endereço cadastrado: </label>
           <select className=".select_endereco custom-select" id="inputGroupSelect02">
-            <option selected>Endereço cadastrado no sistema</option>
+            <option selected>Endereço cadastrado</option>
             <option value="1">R. numero um, nº1, cep: 00000-00</option>
           </select>
+          <div className='center'>
+
           <a href="#" className="btn btnl btn-primary btn-lg active" role="button" aria-pressed="true">Entregar em outro Endereço</a>
+          </div>
         </div>
 
-        <div className="modopg">
+        <div className="modopg col-4">
           <h3>Forma de Pagamento</h3>
           <input type="radio" name="radiof" value="boleto" className="radio" id="radio" aria-label="Radio button for following text input" />
           <label>Boleto</label>
@@ -70,11 +73,11 @@ state = {
           <br />
           <form id="formulariocartao">
             <label>Nº do cartão </label>
-            <input type="text-area" className="input_nCartao" id='cpf_titular' placeholder="0000-0000-0000-0000" onChange={this.onChange} value={this.cpf_titular}/>
+            <input type="text-area" className="input_nCartao" id='numero_cartao' placeholder="0000-0000-0000-0000" onChange={this.onChange} value={this.state.numero_cartao}/>
             <label>Nome no cartão</label>
-            <input type="text-area" className='.input_nomeCartao' id='nome_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.nome_titular}/>
+            <input type="text-area" className='.input_nomeCartao' id='nome_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.nome_titular}/>
             <br />
-            <label>Validade</label><br /><input type="text-area" className='input_valCartao' id='numero_cartao' placeholder="mês/ano" onChange={this.onChange} value={this.numero_cartao}/>
+            <label>Validade</label><br /><input type="text-area" className='input_valCartao' id='validade_cartao' placeholder="mês/ano" onChange={this.onChange} value={this.state.validade_cartao}/>
             <br />
             <label>CVV</label>
             <br />
@@ -98,13 +101,14 @@ state = {
           </form>
           <br />
 
-
+          <div className='center icon_payMethods'>
           <img className=" img " src="/img/visa.png " width="40px " height="40px" />
           <img className="img " src="/img/master.png " width="40px " height="40px " />
           <img className="img " src="/img/boleto.png " width="40px " height="40px " />
+          </div>
         </div>
 
-        <div className="confirmadados">
+        <div className="confirmadados col-4">
           <h3>Confirmar Dados</h3>
           <label>Entrega:</label>
 
@@ -137,8 +141,8 @@ state = {
             <a href="../html/sucesso_compra.html"><button type="button " className="btn btn-success btfc " onClick={this.postCards}>Finalizar Compra</button></a>
           </div>
         </div>
-      </>
-    );;
+      </div>
+    );
   }
 
 }

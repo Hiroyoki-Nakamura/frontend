@@ -1,6 +1,11 @@
 .product {
   flex-direction: column;
-  margin-bottom: 20px;
+  margin: 20px 10px;
+}
+
+.image-product {
+  background-color: #fff;
+  width: 150px;
 }
 
 .image-product *{
@@ -14,16 +19,18 @@
 }
 
 .buy-product {
-  padding: 2px 10px;
+  padding: 4px 10px;
   color: white;
   background-color: green;
-  border: none;
+  border: 1px solid white;
   border-radius: 20px;
+  text-align: center;
 }
 
 .buy-product:hover {
   color: green;
   background-color: #fff;
+  border: 1px solid green;
 }
 
 .price-line {
