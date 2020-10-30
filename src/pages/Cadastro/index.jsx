@@ -34,6 +34,7 @@ export default class Cadastro extends React.Component {
       },
       ufs: [],
     }
+    
   }
 
   componentDidMount() {

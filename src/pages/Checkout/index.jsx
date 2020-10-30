@@ -1,26 +1,45 @@
 import React, { Component } from 'react';
 import './styles.css';
 import API from '../../Services/api';
-
+import Endereco from '../Endereco'
 
 
 
 export default class Checkout extends Component {
-  
-state = {
-  nome_titular: '',
-  cpf_titular: '',
-  numero_cartao: ''
-}
+  constructor() {
+    super();
+    this.state = {
+      endereco: <Endereco />,
+      showHideForm: false,
+      cartoes_credito:{
+      nome_titular: '',
+      cpf_titular: '',
+      numero_cartao: '',
+      },
+      tipo_pagamentos:{
+      boleto: 'boleto',
+      cartao_credito:'cartao_credito'
+      }
+    };
+    this.hideComponent = this.hideComponent.bind(this);
+  }  
 
-  endereco = () => {
-    
+  hideComponent(endereco) {
+    console.log(endereco);
+    switch (endereco) {
+      case "showHideEndereco":
+        this.setState({ showHideEndereco: !this.state.showHideEndereco });
+        break;
+      default:
+        
+    }
   }
+
+
 
   postCards = async () => {
       await API.post('/cartaoCredito/adicionarCartao',{
       nome_titular: this.nome_titular,
-      validade_cartao: this.validade_cartao,
       numero_cartao: this.numero_cartao
     });
 
@@ -36,12 +55,12 @@ state = {
     case 'nome_titular':
     this.setState({nome_titular: a});
     break;
-    case 'validade_cartao':
-    this.setState({validade_cartao: a});
-    break;
     case 'numero_cartao':
     this.setState({numero_cartao: a});
     break;
+    case 'cpf_titular':
+    this.setState({cpf_titular: a});
+    break;  
     default:
 
   }
@@ -51,7 +70,11 @@ state = {
 
 
   render() {
+    const { showHideEndereco } = this.state;
     return (
+
+      <div>{showHideEndereco && <Endereco />}
+      
       <div className="flex-container cima col-12">
 
         <div className="ede col-4">
@@ -63,7 +86,7 @@ state = {
           </select>
           <div className='center'>
 
-          <a href="#" className="btn btnl btn-primary btn-lg active" role="button" aria-pressed="true">Entregar em outro Endereço</a>
+          <a  className="btn btnl btn-primary btn-lg active" role="button" aria-pressed="true" onClick={() => this.hideComponent("showHideEndereco")}>Entregar em outro Endereço</a>
           </div>
           
         </div>
@@ -146,7 +169,7 @@ state = {
             <a href="../html/sucesso_compra.html"><button type="button " className="btn btn-success btfc " onClick={this.postCards}>Finalizar Compra</button></a>
           </div>
         </div>
-      
+        </div>
 </div>
           
     );
