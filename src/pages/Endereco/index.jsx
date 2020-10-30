@@ -23,13 +23,14 @@ export default class Endereco extends Component {
   }
 
   postEnderecos = async () => {
-    await API.post('/endereco/adicionar', {
+    await API.post('/endereco/salvar', {
       rua: this.nome_titular,
       bairro: this.numero_cartao,
       complemento: this.complemento,
       refencia: this.referencia,
       numero: this.numero,
-      cep: this.cep
+      cep: this.cep,
+      cd_uf: this.state.ufselecionado
     });
 
   };
@@ -56,7 +57,11 @@ export default class Endereco extends Component {
       break;
       case 'cep':
       this.setState({cep: a});
-      break;      
+      case 'uf' :
+      this.setState({ufselecionado: a});
+      break;    
+      default:  
+      break;
     }
   }
 
@@ -141,8 +146,9 @@ export default class Endereco extends Component {
               </div>
 
             </div>
+            <a className="btn btnl btn-primary btn-lg active" role="button" aria-pressed="true" onClick={this.postEnderecos}>Entregar em outro Endereço</a>
+
           </div>
-          <a className="btn btnl btn-primary btn-lg active" role="button" aria-pressed="true" onClick={() => this.hideComponent("showHideCheckout")}>Entregar em outro Endereço</a>
           
         </form>
         
