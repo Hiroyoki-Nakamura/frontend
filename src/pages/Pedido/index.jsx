@@ -37,6 +37,7 @@ export default class Pedido extends Component {
 
   logout = () => {
     localStorage.removeItem('client');
+    localStorage.removeItem('cart');
     window.location.href = '/';
   }
 
@@ -137,7 +138,7 @@ export default class Pedido extends Component {
                     <div className="row">
                       <div className="col-3"></div>
                       <div className="col-9 pb-4 mb-4 d-flex justify-content-around" id="labels">
-                        {this.state.page == 'pedidos' ? <>
+                        {this.state.page == 'Pedidos' ? <>
                           <label>Numero Pedido</label>
                           <label>Vlr Pedido</label>
                           <label>Data Pedido</label>
