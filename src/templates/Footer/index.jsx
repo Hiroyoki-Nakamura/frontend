@@ -7,9 +7,9 @@ export default props => (
     <div className="center Footer row">
       <div className='col-12 col-md-2 list_footer'>
         <ul>
-          <li className='list_footer'><a href="#/home">Home</a></li>
-          <li className='list_footer'><a href="#/">About us</a></li>
-          <li className='list_footer'><a href="#/Contato">Fale conosco</a></li>
+          <a href="#/home"><li className='list_footer'>Home</li></a>
+          <a href="#"><li className='list_footer'>About us</li></a>
+          <a href="#/contato"><li className='list_footer'>Contato</li></a>
         </ul>
       </div>
       <div className='col-12 col-md-2'>
@@ -17,9 +17,9 @@ export default props => (
       </div>
       <div className='col-12 col-md-2 list_footer'>
         <ul>
-          <li className='list_footer'><a href="">Vinhos</a></li>
-          <li className='list_footer'><a href="">Champagnes</a></li>
-          <li className='list_footer'><a href="">Destilados</a></li>
+          <a href=""><li className='list_footer'>Vinhos</li></a>
+          <a href=""><li className='list_footer'>Champagnes</li></a>
+          <a href=""><li className='list_footer'>Destilados</li></a>
         </ul>
       </div>  
       <div className='col-12 col-md-2'>

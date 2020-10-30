@@ -45,8 +45,8 @@ export default class Produto extends Component {
           <div className="container">
             <div className="row">
               <div className="col-3">
-                <div className="card style_card">
-                  <div className="card-body center">
+                <div className="style_card">
+                  <div className="center">
                     <img className='imageProduct' src={this.state.product.ds_imagem} />
                   </div>
                 </div>
