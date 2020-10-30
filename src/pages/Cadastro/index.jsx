@@ -81,21 +81,22 @@ export default class Cadastro extends React.Component {
 
   }
 
+
+
+
   onChange = (event) => {
 
     const e = (event.target.value);
     const i = (event.target.id);
- 
+
+    
+    
+
+
    
     switch (i) {
-      case 'nome':
-        var regex = /^[a-zA-ZéúíóáÉÚÍÓÁèùìòàçÇÈÙÌÒÀõãñÕÃÑêûîôâÊÛÎÔÂëÿüïöäËYÜÏÖÄ\-\ \s]+$/;;
-        if(i != regex){
-            console.log("NOME INCORRETO");
-        }else{
-          return false;
-        }
-        this.setState({ nome: e })
+      case 'nome': 
+          this.setState({ nome: e })          
         break;  
       case 'cpf':
         this.setState({ cpf: e })
