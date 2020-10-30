@@ -51,7 +51,9 @@ export default class Categorias extends Component {
   render() {
     return (
       <>
-        <Banners images={this.state.banners} />
+        <div className='mt-2'>
+          <Banners images={this.state.banners} />
+        </div>
 
         <div className="products">
           <div className="header-products center">

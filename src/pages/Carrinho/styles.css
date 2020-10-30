@@ -2,7 +2,7 @@
     background-color: grey;
     margin-top: 10px;
     margin-bottom: 20px;
-    height: 540px;
+    /* height: 540px; */
     border-radius: 20px;
 }
 
@@ -50,16 +50,16 @@
 .botao{
     border-radius: 20px;
 }
+
 .quant_select{
     margin-top: 10px;
 }
+
 .valortotal{
     border-color: transparent;
     background-color: transparent;
     display: block;
-    color: white;
-
-    
+    color: white;   
 }
 
 .valor-unit{

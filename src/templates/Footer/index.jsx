@@ -3,8 +3,7 @@ import './styles.css';
 
 export default props => (
 <footer>
-
-    <div className="center Footer row">
+    <div className="center Footer">
       <div className='col-12 col-md-2 list_footer'>
         <ul>
           <a href="#/home"><li className='list_footer'>Home</li></a>
@@ -32,7 +31,6 @@ export default props => (
       </div>
     </div>
     <p className='center'>Site focado exclusivamente na venda de Bebidas Alcoólicas como, vinhos, champanhes e  destilados com os produtos de alta qualidade </p>
-
     <p className="copyright">Desvinho &copy; 2020</p>
   </footer> 
 )

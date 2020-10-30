@@ -1,106 +1,185 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './styles.css'
 
-export default props => (
-  <>
-    <div className="container mt-2" id="principal">
-      <div className="row">
-        <div className="col-12">
-          <h1 className="center">Meus Pedidos</h1>
-          <div className="container" id="topo">
-            <div className="row">
-              <div className="col-12">
-                <div className="row">
-                  <div className="col-3"></div>
+import API from '../../Services/api';
 
-                  <div className="col-9 pb-3 d-flex justify-content-around" id="labels">
-                    <label>Numero Pedido</label>
-                    <label>Vlr Pedido</label>
-                    <label>Data Pedido</label>
-                    <label>Status</label>
-                  </div>
-                  <div className="col-2 center ">
-                    <h5>Nr Pedido</h5>
-                  </div>
-                  <div className="col-2 center">
-                    <h5>Vlr Pedido</h5>
-                  </div>
-                  <div className="col-2 center">
-                    <h5>Data Pedido</h5>
-                  </div>
-                  <div className="col-2 center">
-                    <h5>Status</h5>
-                  </div>
+const BEFORE = {
+  client: '',
+  orders: [],
+  address: [],
+  page: 'Pedidos'
+}
 
-                </div>
+export default class Pedido extends Component {
+  state = { ...BEFORE }
 
-              </div>
+  componentDidMount() {
+    const client = JSON.parse(localStorage.getItem('client'));
+    if (client != null) {
+      this.setState({ client });
+    } else {
+      window.location.href = '/';
+    }
+    this.getAll();
+  }
+
+  getAll = async () => {
+    const client = JSON.parse(localStorage.getItem('client'));
+    const id = client.id;
+
+    const orders = (await API.get(`/pedido/listar/${id}`)).data || [];
+    const address = (await API.get(`/endereco/buscar/${id}`)).data || [];
+
+    console.log(client);
+
+    this.setState({ orders, address, client });
+  }
+
+  logout = () => {
+    localStorage.removeItem('client');
+    window.location.href = '/';
+  }
+
+  setPage = () => {
+    const page = this.state.page;
+
+    const orders = this.state.orders.map(order => {
+      return (
+        <>
+          <div className="row">
+            <div className="col-12 center" id="labels">
+              <label>{order.id}</label>
+              <label>R$ </label>
+              <label>{order.created_at}</label>
+              <label>{order.status}</label>
             </div>
           </div>
-          <div className="container">
-            <div className="row">
-              <div className="col-3 pl-5 overflow-hidden" id="menu_lat">
-                <li>Meu Cadastro</li>
-                <hr />
-                <li>Meus Pedidos</li>
-                <hr />
-                <li>Endereco</li>
-                <hr />
-                <li>Alterar senha</li>
-                <hr />
-                <li>Logout</li>
-                <hr />
-              </div>
+          <hr />
+        </>
+      );
+    });
 
-
-              <div className="col-9" id="pedido">
-                <br />
-                <div className="row">
-                  <div className="col-12 center" id="labels">
-                    <label>12345</label>
-                    <label>R$ 120,00</label>
-                    <label>28/7/2019</label>
-                    <label>Finalizado</label>
-                  </div>
-
-                </div>
-                <hr />
-
-                <div className="row">
-                  <div className="col-12 center" id="labels">
-                    <label>13401</label>
-                    <label>R$ 550,00</label>
-                    <label>10/3/2020</label>
-                    <label>Cancelado</label>
-                  </div>
-
-                </div>
-
-                <hr />
-                <div className="row">
-                  <div className="col-12 center" id="labels">
-                    <label>14599</label>
-                    <label>R$ 800,00</label>
-                    <label>05/9/2020</label>
-                    <label>Pendente</label>
-                  </div>
-
-                </div>
-
-              </div>
-
+    const profile = () => (
+      <div className='d-flex h-100 justify-content-center align-content-center'>
+        <div className='mt-5 pt-4'>
+          <div className="row">
+            <div className='form-group'>
+              <label className='col-sm-2 col-form-label'>Nome:</label>
+              <input className='form-control col-4 text-center' type="text" readOnly value={this.state.client.nome} />
             </div>
-          </div>
+            <div className='form-group'>
+              <label className='col-sm-2 col-form-label'>CPF:</label>
+              <input className='form-control col-4 text-center' type="text" readOnly value={this.state.client.cpf} />
+            </div>
+            <div className='form-group'>
 
-          <div className="container" id="base">
-            <div className="row">
-              <div className="col-12">
-
-              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </>
-)
+    );
+
+    const addresses = this.state.address.map(address => (
+      <>
+        <div className='d-flex h-100 justify-content-center align-content-center'>
+          <div className='mt-5 pt-4'>
+            <div className="row">
+              <div className="col-6 form-group d-flex">
+                <label className='col-sm-2 col-form-label'>CEP:</label>
+                <input className='form-control col-4 text-center' type="text" readOnly value={address.cep} />
+              </div>
+              <div className="col-6 form-group d-flex">
+                <label className='col-sm-3 col-form-label'>Bairro:</label>
+                <input className='form-control col-5 text-center' type="text" readOnly value={address.bairro} />
+              </div>
+              <div className="col-6 form-group d-flex">
+                <label className='col-sm-4 col-form-label'>Logradouro:</label>
+                <input className='form-control col-8 text-center' type="text" readOnly value={address.rua} />
+              </div>
+              <div className="col-6 form-group d-flex">
+                <label className='col-sm-3 col-form-label'>Número:</label>
+                <input className='form-control col-4 text-center' type="text" readOnly value={`${address.numero}`} />
+              </div>
+              <div className="col-6 form-group d-flex">
+                <label className='col-sm-3 col-form-label'>Estado:</label>
+                <input className='form-control col-4 text-center' type="text" readOnly value={address.cd_uf} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    ));
+
+    switch (page) {
+      case 'Pedidos':
+        return orders;
+      case 'Endereços':
+        return addresses;
+    }
+  }
+
+  changePage = event => {
+    this.setState({ page: event.target.id });
+  }
+
+  render() {
+    return (
+      <>
+        <div className="container mt-2" id="principal">
+          <div className="row">
+            <div className="col-12">
+              <h1 className="center py-2"> {this.state.page == 'Cadastro' ? 'Meu' : 'Meus'} {this.state.page}</h1>
+
+              <div className="container" id="topo">
+                <div className="row">
+                  <div className="col-12">
+
+                    <div className="row">
+                      <div className="col-3"></div>
+                      <div className="col-9 pb-4 mb-4 d-flex justify-content-around" id="labels">
+                        {this.state.page == 'pedidos' ? <>
+                          <label>Numero Pedido</label>
+                          <label>Vlr Pedido</label>
+                          <label>Data Pedido</label>
+                          <label>Status</label>
+                        </> : <label style={{ color: '#660033' }}>a</label>}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div className="container">
+                <div className="row">
+                  <div className="col-3 pl-5 overflow-hidden" id="menu_lat">
+                    <li id='Cadastro' onClick={this.changePage}>Meu Cadastro</li>
+                    <hr />
+                    <li id='Pedidos' onClick={this.changePage}>Meus Pedidos</li>
+                    <hr />
+                    <li id='Endereços' onClick={this.changePage}>Endereco</li>
+                    <hr />
+                    <li onClick={this.logout}>Logout</li>
+                    <hr />
+                  </div>
+
+                  <div className="col-9" id="pedido">
+                    {this.setPage()}
+                  </div>
+                </div>
+              </div>
+
+              <div className="container" id="base">
+                <div className="row">
+                  <div className="col-12">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+}
