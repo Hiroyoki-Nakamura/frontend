@@ -9,7 +9,7 @@ export default class Checkout extends Component {
   constructor() {
     super();
     this.state = {
-      endereco: <Endereco />,
+      endereco:[],
       showHideForm: false,
       cartoes_credito:{
       nome_titular: '',
@@ -34,6 +34,16 @@ export default class Checkout extends Component {
         
     }
   }
+
+  componentDidMount() {
+    this.getEndereco();
+  }
+
+  getEndereco = async () => {
+    const endereco = await API.get('/endereco/listar');
+    this.setState({ endereco: [...endereco.data] })
+  }
+
 
 
 
@@ -82,7 +92,9 @@ export default class Checkout extends Component {
           <label className="ed">Endereço cadastrado: </label>
           <select className=".select_endereco custom-select" id="inputGroupSelect02">
             <option selected>Endereço cadastrado</option>
-            <option value="1">R. numero um, nº1, cep: 00000-00</option>
+            {this.state.endereco.map(endereco => {
+                          return <option key={endereco.id} value={endereco.id} >{endereco.rua}</option>
+                        })}
           </select>
           <div className='center'>
 

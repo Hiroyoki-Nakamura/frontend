@@ -8,14 +8,19 @@ export default class Endereco extends Component {
   constructor() {
     super();
     this.state = {
+      
       showHideForm: false,
+      cliente: {
+         cd_cliente: "6"
+      },
       enderecos: {
         rua: "",
         bairro: "",
         complemento: "",
         refencia: "",
         numero: "",
-        cep: ""
+        cep: "",
+        ufselecionado: ""
       },
       ufs: [],
     };
@@ -23,13 +28,14 @@ export default class Endereco extends Component {
   }
 
   postEnderecos = async () => {
-    await API.post('/endereco/salvar', {
-      rua: this.nome_titular,
-      bairro: this.numero_cartao,
-      complemento: this.complemento,
-      refencia: this.referencia,
-      numero: this.numero,
-      cep: this.cep,
+    await API.post('/endereco/adicionar', {
+      cd_cliente: this.state.cd_cliente,
+      rua: this.state.rua,
+      bairro: this.state.bairro,
+      complemento: this.state.complemento,
+      refencia: this.state.referencia,
+      numero: this.state.numero,
+      cep: this.state.cep,
       cd_uf: this.state.ufselecionado
     });
 
@@ -130,8 +136,11 @@ export default class Endereco extends Component {
 
                     <div className="col-auto my-1">
                       <label className="mr-sm-2" >UF</label>
-                      <select className="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                        <option selected>UF</option>
+                      <select className="custom-select mr-sm-2" id="uf" onChange={this.onChange}>
+                        {this.state.ufs.map(uf => {
+                          return <option key={uf.id} value={uf.id} >{uf.ds_uf}</option>
+                        })}
+                        
                       </select>
 
                     </div>
@@ -146,8 +155,8 @@ export default class Endereco extends Component {
               </div>
 
             </div>
-            <a className="btn btnl btn-primary btn-lg active" role="button" aria-pressed="true" onClick={this.postEnderecos}>Entregar em outro Endereço</a>
-
+            <button  className="btn btnl btn-primary btn-lg active" role="button"  onClick={this.postEnderecos}>Entregar em outro Endereço</button>
+            
           </div>
           
         </form>
