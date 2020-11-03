@@ -30,8 +30,6 @@ export default class Pedido extends Component {
     const orders = (await API.get(`/pedido/listar/${id}`)).data || [];
     const address = (await API.get(`/endereco/buscar/${id}`)).data || [];
 
-    console.log(client);
-
     this.setState({ orders, address, client });
   }
 
@@ -50,7 +48,7 @@ export default class Pedido extends Component {
           <div className="row">
             <div className="col-12 center" id="labels">
               <label>{order.id}</label>
-              <label>R$ </label>
+              <label>R$ {console.log(order)}</label>
               <label>{order.created_at}</label>
               <label>{order.status}</label>
             </div>
@@ -116,6 +114,8 @@ export default class Pedido extends Component {
         return orders;
       case 'Endereços':
         return addresses;
+      default:
+        return profile;
     }
   }
 
@@ -165,7 +165,9 @@ export default class Pedido extends Component {
                   </div>
 
                   <div className="col-9" id="pedido">
+
                     {this.setPage()}
+
                   </div>
                 </div>
               </div>
