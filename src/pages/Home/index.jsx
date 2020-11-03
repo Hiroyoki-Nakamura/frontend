@@ -53,7 +53,7 @@ export default class Home extends React.Component {
     return (
       <>
 
-        <div className="mt-3">
+        <div className="mt-2">
 
 
           <Banners

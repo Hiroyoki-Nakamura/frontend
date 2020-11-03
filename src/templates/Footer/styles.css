@@ -12,13 +12,6 @@ footer {
     overflow: hidden;
 }
 
-.list_footer{
-    text-decoration: underline;
-    color: white;
-    font-size: 18px;
-    list-style-type: none;
-}
-
 .list_footer:hover{
     opacity: 80%;
 }
@@ -75,4 +68,12 @@ footer {
 .copyright {
     text-align: center;
     margin: 10px;
+}
+
+.list_footer{
+    text-decoration: underline;
+    color: white;
+    font-size: 18px;
+    list-style-type: none;
+    margin: 0;
 }
