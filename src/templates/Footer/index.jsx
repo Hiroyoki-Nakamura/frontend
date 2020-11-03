@@ -7,7 +7,7 @@ export default props => (
       <div className='col-12 col-md-2 list_footer'>
         <ul>
           <a href="#/home"><li className='list_footer'>Home</li></a>
-          <a href="#"><li className='list_footer'>Sobre nós</li></a>
+          <a href="#/sobre"><li className='list_footer'>Sobre nós</li></a>
           <a href="#/contato"><li className='list_footer'>Contato</li></a>
         </ul>
       </div>
