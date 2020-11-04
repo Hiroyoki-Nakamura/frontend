@@ -43,14 +43,20 @@ export default class Pedido extends Component {
     const page = this.state.page;
 
     const orders = this.state.orders.map(order => {
+      let date = order.created_at.slice(0, 10);
+      while (date.includes('-')) {
+        console.log(date);
+        date = date.replace('-', '/');
+      }
+
       return (
         <>
           <div className="row">
-            <div className="col-12 center" id="labels">
-              <label>{order.id}</label>
-              <label>R$ {console.log(order)}</label>
-              <label>{order.created_at}</label>
-              <label>{order.status}</label>
+            <div className="col-12 d-flex justify-content-around" id="labels">
+              <label className="ml-3">{order.id}</label>
+              <label>R$ {order.valor_total}</label>
+              <label>{date}</label>
+              <label>{order.cd_status_pedido}</label>
             </div>
           </div>
           <hr />
@@ -59,24 +65,25 @@ export default class Pedido extends Component {
     });
 
     const profile = () => (
-      <div className='d-flex h-100 justify-content-center align-content-center'>
-        <div className='mt-5 pt-4'>
-          <div className="row">
-            <div className='form-group'>
-              <label className='col-sm-2 col-form-label'>Nome:</label>
-              <input className='form-control col-4 text-center' type="text" readOnly value={this.state.client.nome} />
-            </div>
-            <div className='form-group'>
-              <label className='col-sm-2 col-form-label'>CPF:</label>
-              <input className='form-control col-4 text-center' type="text" readOnly value={this.state.client.cpf} />
-            </div>
-            <div className='form-group'>
+        <div className='d-flex h-100 justify-content-center align-content-center'>
+          <div className='mt-5 pt-4'>
+            <div className="row">
+              <div className='form-group'>
+                <label className='col-sm-2 col-form-label'>Nome:</label>
+                <input className='form-control col-4 text-center' type="text" readOnly value={this.state.client.nome} />
+              </div>
+              <div className='form-group'>
+                <label className='col-sm-2 col-form-label'>CPF:</label>
+                <input className='form-control col-4 text-center' type="text" readOnly value={this.state.client.cpf} />
+              </div>
+              <div className='form-group'>
 
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+
 
     const addresses = this.state.address.map(address => (
       <>
@@ -115,7 +122,7 @@ export default class Pedido extends Component {
       case 'Endereços':
         return addresses;
       default:
-        return profile;
+        return profile();
     }
   }
 
