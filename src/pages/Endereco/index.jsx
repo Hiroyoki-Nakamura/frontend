@@ -10,9 +10,7 @@ export default class Endereco extends Component {
     this.state = {
       
       showHideForm: false,
-      cliente: {
-         cd_cliente: "6"
-      },
+
       enderecos: {
         rua: "",
         bairro: "",
@@ -20,7 +18,8 @@ export default class Endereco extends Component {
         refencia: "",
         numero: "",
         cep: "",
-        ufselecionado: ""
+        ufselecionado: "",
+        cd_cliente: ""
       },
       ufs: [],
     };

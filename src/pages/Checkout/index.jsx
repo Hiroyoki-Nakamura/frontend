@@ -9,8 +9,8 @@ export default class Checkout extends Component {
   constructor() {
     super();
     this.state = {
-      endereco:[],
       showHideForm: false,
+      enderecos:[],
       cartoes_credito:{
       nome_titular: '',
       cpf_titular: '',
@@ -41,11 +41,12 @@ export default class Checkout extends Component {
 
   getEndereco = async () => {
     const endereco = await API.get('/endereco/listar');
-    this.setState({ endereco: [...endereco.data] })
+    // const cliente = await API.get('/cliente/listar');
+    // if(cd_cliente == id){
+    // this.setState({ enderecos: [...endereco.data] });
+    // }
+    this.setState({ enderecos: [...endereco.data] });
   }
-
-
-
 
   postCards = async () => {
       await API.post('/cartaoCredito/adicionarCartao',{
@@ -72,6 +73,7 @@ export default class Checkout extends Component {
     this.setState({cpf_titular: a});
     break;  
     default:
+    break;  
 
   }
 
@@ -89,12 +91,12 @@ export default class Checkout extends Component {
 
         <div className="ede col-4">
           <h3>Endereço de Entrega</h3>
-          <label className="ed">Endereço cadastrado: </label>
-          <select className=".select_endereco custom-select" id="inputGroupSelect02">
-            <option selected>Endereço cadastrado</option>
-            {this.state.endereco.map(endereco => {
-                          return <option key={endereco.id} value={endereco.id} >{endereco.rua}</option>
+          <label className="ed"> Endereço cadastrado: </label>
+          <select className=".select_endereco custom-select" id="enderecos" >
+          {this.state.enderecos.map( enderecos => {
+                          return <option key={enderecos.id} value={enderecos.id} >{enderecos.rua}</option>
                         })}
+            <option>Endereco Cliente</option>
           </select>
           <div className='center'>
 
