@@ -59,23 +59,42 @@ export default class Pedido extends Component {
     });
 
     const profile = () => (
-      <div className='d-flex h-100 justify-content-center align-content-center'>
-        <div className='mt-5 pt-4'>
-          <div className="row">
-            <div className='form-group'>
-              <label className='col-sm-2 col-form-label'>Nome:</label>
-              <input className='form-control col-4 text-center' type="text" readOnly value={this.state.client.nome} />
-            </div>
-            <div className='form-group'>
-              <label className='col-sm-2 col-form-label'>CPF:</label>
-              <input className='form-control col-4 text-center' type="text" readOnly value={this.state.client.cpf} />
-            </div>
-            <div className='form-group'>
-
+      <>
+        <div className='d-flex h-100 justify-content-center align-content-center'>
+          <div className=' pt-4'>
+            <div className="row">
+              <div className='form-group col-6'>
+                <label className='col-sm-6 col-form-label'>Nome:</label>
+                <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.nome} />
+              </div>
+              <div className='form-group col-6'>
+                <label className='col-sm-6 col-form-label'>CPF:</label>
+                <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.cpf} />
+              </div>
+              <div className='form-group col-6'>
+                <label className='col-sm-6 col-form-label'>RG:</label>
+                <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.rg} />
+              </div>
+              <div className='form-group col-6'>
+                <label className='col-sm-6 col-form-label'>E-mail:</label>
+                <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.email} />
+              </div>
+              <div className='form-group col-6'>
+                <label className='col-sm-6 col-form-label'>Genero:</label>
+                <input className='form-control col-6 text-center' type="text" readOnly value={this.state.client.genero} />
+              </div>
+              <div className='form-group col-6'>
+                <label className='col-sm-6 col-form-label'>Data de Nascimento:</label>
+                <input className='form-control col-6 text-center' type="date" readOnly value={this.state.client.data_de_nascimento} />
+              </div>
+              <div className='form-group col-6'>
+                <label className='col-sm-6 col-form-label'>Cliente desde:</label>
+                <input className='form-control col-6 text-center' type="date-time" readOnly value={this.state.client.created_at} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
 
     const addresses = this.state.address.map(address => (
@@ -84,7 +103,7 @@ export default class Pedido extends Component {
           <div className='mt-5 pt-4'>
             <div className="row">
               <div className="col-6 form-group d-flex">
-                <label className='col-sm-2 col-form-label'>CEP:</label>
+                <label className='col-sm-4 col-form-label'>CEP:</label>
                 <input className='form-control col-4 text-center' type="text" readOnly value={address.cep} />
               </div>
               <div className="col-6 form-group d-flex">
@@ -114,8 +133,10 @@ export default class Pedido extends Component {
         return orders;
       case 'Endereços':
         return addresses;
+      case 'Cadastro':
+        return profile();
       default:
-        return profile;
+        alert('Pagina não encontrada');
     }
   }
 
@@ -158,7 +179,7 @@ export default class Pedido extends Component {
                     <hr />
                     <li id='Pedidos' onClick={this.changePage}>Meus Pedidos</li>
                     <hr />
-                    <li id='Endereços' onClick={this.changePage}>Endereco</li>
+                    <li id='Endereços' onClick={this.changePage}>Meus endereços</li>
                     <hr />
                     <li onClick={this.logout}>Logout</li>
                     <hr />
