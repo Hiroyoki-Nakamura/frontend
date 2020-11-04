@@ -107,8 +107,8 @@ export default class Checkout extends Component {
           <label className="ed"> Endereço cadastrado: </label>
           <select className=".select_endereco custom-select" id="enderecos" >
           <option>Endereco Cliente</option>
-          {this.state.enderecos.map( cd_cliente => {
-                          return <option key={cd_cliente.id} value={cd_cliente.id} >{cd_cliente.rua}</option>
+          {this.state.enderecos.map( enderecos => {
+                          return <option key={enderecos.id} value={enderecos.id} >{enderecos.rua + ' , ' + enderecos.numero}</option>
                         })}
             
           </select>
