@@ -53,13 +53,13 @@ export default class Pedido extends Component {
         <>
           <div className="row">
             <div className="col-12 d-flex justify-content-around" id="labels">
-              <label className="ml-3">{order.id}</label>
-              <label>R$ {order.valor_total}</label>
-              <label>{date}</label>
-              <label>{order.cd_status_pedido}</label>
+              <label className="text-center" style={{width: '120px' }}>{order.id}</label>
+              <label className="text-center" style={{width: '120px' }}>R$ {order.valor_total.toFixed(2)}</label>
+              <label className="text-center" style={{width: '120px' }}>{date}</label>
+              <label className="text-center" style={{width: '120px' }}>{order.cd_status_pedido}</label>
             </div>
           </div>
-          <hr />
+          <hr  />
         </>
       );
     });
@@ -146,10 +146,10 @@ export default class Pedido extends Component {
                       <div className="col-3"></div>
                       <div className="col-9 pb-4 mb-4 d-flex justify-content-around" id="labels">
                         {this.state.page == 'Pedidos' ? <>
-                          <label>Numero Pedido</label>
-                          <label>Vlr Pedido</label>
-                          <label>Data Pedido</label>
-                          <label>Status</label>
+                          <label className="text-center" style={{ width: '120px' }}>Numero Pedido</label>
+                          <label className="text-center" style={{ width: '120px' }}>Vlr Pedido</label>
+                          <label className="text-center" style={{ width: '120px' }}>Data Pedido</label>
+                          <label className="text-center" style={{ width: '120px' }}>Status</label>
                         </> : <label style={{ color: '#660033' }}>a</label>}
                       </div>
                     </div>
