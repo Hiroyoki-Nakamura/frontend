@@ -1,0 +1,19 @@
+.container1{
+    background-color:  rgb(200, 207, 214);
+    width: 60%;
+    /* display: flex;
+    justify-content: space-around; */
+    margin-left: 20%;
+    border-radius: 30px;
+    
+}
+
+body{
+    background-color: #3d3c3c;
+}
+
+h2{
+    text-align: center;
+    color: #fff;
+}
+
