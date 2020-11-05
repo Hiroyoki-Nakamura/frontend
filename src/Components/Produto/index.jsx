@@ -14,8 +14,13 @@ export default class Product extends Component {
   }
 
   valores = () => {
-    const valor = `${this.props.value}`.replace('.', ',');
-    const desconto = `${this.props.valueOff}`.replace('.', ',');
+    const valorTratado = parseFloat(this.props.value).toFixed(2), 
+      descontoTratado = parseFloat(this.props.valueOff).toFixed(2);
+
+    console.log(valorTratado, descontoTratado);
+
+    const valor = `${valorTratado}`.replace('.', ','),
+      desconto = `${descontoTratado}`.replace('.', ',');
 
     this.setState({ valor, desconto });
   }
