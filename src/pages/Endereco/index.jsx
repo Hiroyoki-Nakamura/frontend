@@ -1,181 +1,112 @@
-import React, { Component } from 'react'
-import Checkout from '../Checkout';
-import './styles.css';
-import API from '../../Services/api'
+// import React, { Component } from 'react'
+// import Checkout from '../Checkout';
+// import './styles.css';
+// import API from '../../Services/api'
 
-export default class Endereco extends React.Component {
+// export default class Endereco extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
+//   constructor() {
+//     super();
+//     this.state = {
       
-      showHideForm: false,
-        enderecos:{
-        rua: "",
-        bairro: "",
-        complemento: "",
-        refencia: "",
-        numero: "",
-        cep: "",
-        uf: "",
-        },
-      ufs: [],
-    };
-    this.hideComponent = this.hideComponent.bind(this);
-  }
+//       showHideForm: false,
+//         enderecos:{
+//         rua: "",
+//         bairro: "",
+//         complemento: "",
+//         refencia: "",
+//         numero: "",
+//         cep: "",
+//         uf: "",
+//         },
+//       ufs: [],
+//     };
+//     this.hideComponent = this.hideComponent.bind(this);
+//   }
 
-  componentDidMount() {
-    this.getUfs();
-  }
+//   componentDidMount() {
+//     this.getUfs();
+//   }
 
-  getUfs = async () => {
-    const ufs = await API.get('/uf');
-    this.setState({ ufs: [...ufs.data] });
-  }
+//   getUfs = async () => {
+//     const ufs = await API.get('/uf');
+//     this.setState({ ufs: [...ufs.data] });
+//   }
 
-  postEnderecos = async () => {
-      API.post('/endereco/adicionarEnd', {
-      enderecos:{  
-      rua: this.state.rua,
-      bairro: this.state.bairro,
-      complemento: this.state.complemento,
-      refencia: this.state.referencia,
-      numero: this.state.numero,
-      cep: this.state.cep,
-      cd_uf: this.state.uf
-      }
-    }).then(response => {
-      console.log(response)
-    })
-      .catch(error => {
-        console.log(error.response)
-      });
+//   postEnderecos = async () => {
+//       API.post('/endereco/adicionarEnd', {
+//       enderecos:{  
+//       rua: this.state.rua,
+//       bairro: this.state.bairro,
+//       complemento: this.state.complemento,
+//       refencia: this.state.referencia,
+//       numero: this.state.numero,
+//       cep: this.state.cep,
+//       cd_uf: this.state.uf
+//       }
+//     }).then(response => {
+//       console.log(response)
+//     })
+//       .catch(error => {
+//         console.log(error.response)
+//       });
 
-  };
+//   };
 
-  onChange = (event) => {
-    const a = (event.target.value)
-    const b = (event.target.id)
+//   onChange = (event) => {
+//     const a = (event.target.value)
+//     const b = (event.target.id)
 
-    switch(b){
-      case 'rua':
-      this.setState({rua: a});
-      break;
-      case 'bairro':
-      this.setState({bairro: a});
-      break;
-      case 'complemento':
-      this.setState({complemento: a});  
-      break;
-      case 'referencia':
-      this.setState({referencia: a});
-      break;
-      case 'numero':
-      this.setState({numero: a});
-      break;
-      case 'cep':
-      this.setState({cep: a});
-      case 'uf' :
-      this.setState({uf: a});
-      break;    
-      default:  
-      break;
-    }
-  }
-
-
-
-  hideComponent(checkout) {
-    switch (checkout) {
-      case "showHideCheckout":
-        this.setState({ showHideCheckout: !this.state.showHideCheckout });
-        break;
-      default:
-
-    }
-  }
-
-  render() {
-    const { showHideCheckout } = this.state;
-    return (
-
-      <div {...showHideCheckout && <Checkout />}>
-        <br></br>
-        <h2>Endereço</h2>
-
-        <br></br>
-        <form className='container1 '>
-
-          <div className='col-12'>
-            <div className='row'>
-
-              <div className="container col-6">
-                <div className="form-group">
-
-                  <br></br>
-                  <label for="exampleInputEmail1">Rua</label>
-                  <input type="text" className="form-control" id="rua" placeholder="Rua" onChange={this.onChange} value={this.state.enderecos[this.state.rua]} />
-                </div>
-                <div className="form-group">
-                  <label for="exampleInputPassword1">Bairro</label>
-                  <input type="text" className="form-control" id="bairro" placeholder="Bairro" onChange={this.onChange} value={this.state.enderecos[this.state.bairro]}/></div>
-                <div className="form-group">
-                  <label for="exampleInputPassword1">Complemento</label>
-                  <input type="text" className="form-control" id="complemento" placeholder="Complemento" onChange={this.onChange} value={this.state.enderecos[this.state.complemento]}/></div>
-
-                <br></br>
-              </div>
-
-              <div className="container col-6">
-                <br></br>
-                <div className="form-group">
-                  <label for="exampleInputPassword1">Referência</label>
-                  <input type="text" className="form-control" id="referencia" placeholder="Referência" onChange={this.onChange} value={this.state.enderecos[this.state.referencia]}/></div>
-                <div className="row">
-                  <div className="col-4">
+//     switch(b){
+//       case 'rua':
+//       this.setState({rua: a});
+//       break;
+//       case 'bairro':
+//       this.setState({bairro: a});
+//       break;
+//       case 'complemento':
+//       this.setState({complemento: a});  
+//       break;
+//       case 'referencia':
+//       this.setState({referencia: a});
+//       break;
+//       case 'numero':
+//       this.setState({numero: a});
+//       break;
+//       case 'cep':
+//       this.setState({cep: a});
+//       case 'uf' :
+//       this.setState({uf: a});
+//       break;    
+//       default:  
+//       break;
+//     }
+//   }
 
 
-                    <label >Número</label>
-                    <input type="text" className="form-control" id="numero" placeholder="Nº" onChange={this.onChange} value={this.state.enderecos[this.state.numero]}/></div>
-                  <div className="form-row align-items-center mb-2">
 
-                    <div className="col-auto my-1">
-                      <label className="mr-sm-2" >UF</label>
-                      <select className="custom-select mr-sm-2" id="uf" onClick={this.onChange}>
-                        {this.state.ufs.map(uf => {
-                          return <option key={uf.id} value={uf.id} >{uf.ds_uf}</option>
-                        })}
-                        
-                      </select>
+//   hideComponent(checkout) {
+//     switch (checkout) {
+//       case "showHideCheckout":
+//         this.setState({ showHideCheckout: !this.state.showHideCheckout });
+//         break;
+//       default:
 
-                    </div>
-                  </div>
-                </div>
+//     }
+//   }
 
-                <div className="col-6">
-                  <div className="form-group">
-                    <label  >  CEP</label>
-                    <input type="CEP" className="form-control" id="cep" placeholder="00000-000" onChange={this.onChange} value={this.state.enderecos[this.state.cep]} /></div>
-                </div>
-              </div>
+//   render() {
+    
+//     return (
 
-            </div>
-            <button className="btn btn-primary btn-lg btn-block w-50" id="teste-botao1"
-              onClick={this.postEnderecos} >Entregar em outro Endereço</button>
-            
-          </div>
-          
-        </form>
+      
+        
+      
         
 
-        <br></br>
-        <br></br>
-      
-        </div>
 
 
+//     )
+//   }
 
-    )
-  }
-
-}
+// }

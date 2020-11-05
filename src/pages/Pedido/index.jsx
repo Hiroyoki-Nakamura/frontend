@@ -30,8 +30,6 @@ export default class Pedido extends Component {
     const orders = (await API.get(`/pedido/listar/${id}`)).data || [];
     const address = (await API.get(`/endereco/buscar/${id}`)).data || [];
 
-    console.log(client);
-
     this.setState({ orders, address, client });
   }
 
@@ -45,39 +43,64 @@ export default class Pedido extends Component {
     const page = this.state.page;
 
     const orders = this.state.orders.map(order => {
+      let date = order.created_at.slice(0, 10);
+      while (date.includes('-')) {
+        console.log(date);
+        date = date.replace('-', '/');
+      }
+
       return (
         <>
           <div className="row">
-            <div className="col-12 center" id="labels">
-              <label>{order.id}</label>
-              <label>R$ </label>
-              <label>{order.created_at}</label>
-              <label>{order.status}</label>
+            <div className="col-12 d-flex justify-content-around" id="labels">
+              <label className="text-center" style={{width: '120px' }}>{order.id}</label>
+              <label className="text-center" style={{width: '120px' }}>R$ {order.valor_total.toFixed(2)}</label>
+              <label className="text-center" style={{width: '120px' }}>{date}</label>
+              <label className="text-center" style={{width: '120px' }}>{order.cd_status_pedido}</label>
             </div>
           </div>
-          <hr />
+          <hr  />
         </>
       );
     });
 
     const profile = () => (
-      <div className='d-flex h-100 justify-content-center align-content-center'>
-        <div className='mt-5 pt-4'>
-          <div className="row">
-            <div className='form-group'>
-              <label className='col-sm-2 col-form-label'>Nome:</label>
-              <input className='form-control col-4 text-center' type="text" readOnly value={this.state.client.nome} />
-            </div>
-            <div className='form-group'>
-              <label className='col-sm-2 col-form-label'>CPF:</label>
-              <input className='form-control col-4 text-center' type="text" readOnly value={this.state.client.cpf} />
-            </div>
-            <div className='form-group'>
-
+      <>
+        <div className='d-flex h-100 justify-content-center align-content-center'>
+          <div className=' pt-4'>
+            <div className="row">
+              <div className='form-group col-6'>
+                <label className='col-sm-6 col-form-label'>Nome:</label>
+                <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.nome} />
+              </div>
+              <div className='form-group col-6'>
+                <label className='col-sm-6 col-form-label'>CPF:</label>
+                <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.cpf} />
+              </div>
+              <div className='form-group col-6'>
+                <label className='col-sm-6 col-form-label'>RG:</label>
+                <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.rg} />
+              </div>
+              <div className='form-group col-6'>
+                <label className='col-sm-6 col-form-label'>E-mail:</label>
+                <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.email} />
+              </div>
+              <div className='form-group col-6'>
+                <label className='col-sm-6 col-form-label'>Genero:</label>
+                <input className='form-control col-6 text-center' type="text" readOnly value={this.state.client.genero} />
+              </div>
+              <div className='form-group col-6'>
+                <label className='col-sm-6 col-form-label'>Data de Nascimento:</label>
+                <input className='form-control col-6 text-center' type="date" readOnly value={this.state.client.data_de_nascimento} />
+              </div>
+              <div className='form-group col-6'>
+                <label className='col-sm-6 col-form-label'>Cliente desde:</label>
+                <input className='form-control col-6 text-center' type="date-time" readOnly value={this.state.client.created_at} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
 
     const addresses = this.state.address.map(address => (
@@ -86,7 +109,7 @@ export default class Pedido extends Component {
           <div className='mt-5 pt-4'>
             <div className="row">
               <div className="col-6 form-group d-flex">
-                <label className='col-sm-2 col-form-label'>CEP:</label>
+                <label className='col-sm-4 col-form-label'>CEP:</label>
                 <input className='form-control col-4 text-center' type="text" readOnly value={address.cep} />
               </div>
               <div className="col-6 form-group d-flex">
@@ -116,6 +139,10 @@ export default class Pedido extends Component {
         return orders;
       case 'Endereços':
         return addresses;
+      case 'Cadastro':
+        return profile();
+      default:
+        alert('Pagina não encontrada');
     }
   }
 
@@ -139,10 +166,10 @@ export default class Pedido extends Component {
                       <div className="col-3"></div>
                       <div className="col-9 pb-4 mb-4 d-flex justify-content-around" id="labels">
                         {this.state.page == 'Pedidos' ? <>
-                          <label>Numero Pedido</label>
-                          <label>Vlr Pedido</label>
-                          <label>Data Pedido</label>
-                          <label>Status</label>
+                          <label className="text-center" style={{ width: '120px' }}>Numero Pedido</label>
+                          <label className="text-center" style={{ width: '120px' }}>Vlr Pedido</label>
+                          <label className="text-center" style={{ width: '120px' }}>Data Pedido</label>
+                          <label className="text-center" style={{ width: '120px' }}>Status</label>
                         </> : <label style={{ color: '#660033' }}>a</label>}
                       </div>
                     </div>
@@ -158,14 +185,14 @@ export default class Pedido extends Component {
                     <hr />
                     <li id='Pedidos' onClick={this.changePage}>Meus Pedidos</li>
                     <hr />
-                    <li id='Endereços' onClick={this.changePage}>Endereco</li>
+                    <li id='Endereços' onClick={this.changePage}>Meus endereços</li>
                     <hr />
                     <li onClick={this.logout}>Logout</li>
                     <hr />
                   </div>
 
                   <div className="col-9" id="pedido">
-                    {this.setPage()}
+                    { this.setPage() }
                   </div>
                 </div>
               </div>

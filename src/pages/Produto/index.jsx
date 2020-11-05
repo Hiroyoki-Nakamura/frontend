@@ -3,7 +3,9 @@ import './styles.css';
 
 export default class Produto extends Component {
   state = {
-    product: ''
+    product: '',
+    de: '',
+    por: ''
   }
 
   componentDidMount() {
@@ -13,9 +15,13 @@ export default class Produto extends Component {
   setProduto = async () => {
     const product = await this.props.route.render();
     if (product == '') {
-      window.location.href = '/';     
+      window.location.href = '/';
     }
-    this.setState({ product: { ...product } });
+    this.setState({
+      product: { ...product },
+      de: product.valor_produto.toFixed(2),
+      por: product.desconto_produto.toFixed(2)
+    });
   }
 
   onCart = () => {
@@ -48,8 +54,8 @@ export default class Produto extends Component {
           <div className="container">
             <div className="row">
               <div className="col-3">
-                <div className="card style_card">
-                  <div className="card-body center">
+                <div className="style_card">
+                  <div className="center">
                     <img className='imageProduct' src={this.state.product.ds_imagem} />
                   </div>
                 </div>
@@ -61,8 +67,8 @@ export default class Produto extends Component {
                 <div className="col-12 ">
                   <h4>{this.state.product.nome_produto}</h4>
                   <hr />
-                  <h6>De: <strike>R$ {`${this.state.product.valor_produto}`.replace('.', ',')}</strike> &nbsp;
-                  <h6 className='id_style'>Por: {`${this.state.product.desconto_produto}`.replace('.', ',')}</h6>
+                  <h6>De: <strike>R$ {`${this.state.de}`.replace('.', ',')}</strike> &nbsp;
+                  <h6 className='id_style'>Por: {`${this.state.por}`.replace('.', ',')}</h6>
                   </h6>
                   <br />
 

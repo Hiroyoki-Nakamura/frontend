@@ -10,6 +10,7 @@ export default class Checkout extends Component {
     super();
     this.state = {
       showHideForm: false,
+      page: 'endereco',
       enderecos: []
       ,
       cartoes_credito:{
@@ -20,46 +21,39 @@ export default class Checkout extends Component {
       tipo_pagamentos:{
       boleto: 'boleto',
       cartao_credito:'cartao_credito'
-      }
+      },
+      ufs: []
     };
-    this.hideComponent = this.hideComponent.bind(this);
+    // this.hideComponent = this.hideComponent.bind(this);
   }  
-
-  hideComponent(endereco) {
-    console.log(endereco);
-    switch (endereco) {
-      case "showHideEndereco":
-        this.setState({ showHideEndereco: !this.state.showHideEndereco });
-        break;
-      default:
-        
-    }
-  }
 
   componentDidMount() {
     this.getEndereco();
     
   }
 
+  showPage = () => {
+
+  }
+
   getEndereco = async () => {
    
 
     const client = JSON.parse(localStorage.getItem('client'))
- 
-
-    console.log(client.id)
-    
     const enderecos = await API.get('/endereco/buscar/' + client.id)
-
-    console.log(enderecos)
 
     this.setState({ enderecos: [...enderecos.data] });
 
-
-    
   }
 
+   componentDidMount() {
+     this.getUfs();
+   }
 
+  getUfs = async () => {
+     const ufs = await API.get('/uf');
+     this.setState({ ufs: [...ufs.data] });
+  }
 
   postCards = async () => {
       await API.post('/cartaoCredito/adicionarCartao',{
@@ -92,33 +86,124 @@ export default class Checkout extends Component {
 
 }
 
+renderPay = event => {
+  this.setState({ page: event.target.value });
+}
 
-
-  render() {
-    const { showHideEndereco } = this.state;
-    return (
-
-      <div>{showHideEndereco && <Endereco />}
-      
-      <div className="flex-container cima col-12">
-
-        <div className="ede col-4">
-          <h3>Endereço de Entrega</h3>
-          <label className="ed"> Endereço cadastrado: </label>
+showPay = () => {
+  const page = this.state.page;
+  const endereco =
+  <>
+    
+    <label className="ed"> Endereço cadastrado: </label>
           <select className=".select_endereco custom-select" id="enderecos" >
           <option>Endereco Cliente</option>
           {this.state.enderecos.map( enderecos => {
-                          return <option key={enderecos.id} value={enderecos.id} >{enderecos.rua + ' , ' + enderecos.numero}</option>
+                          return <option key={enderecos.id} value={enderecos.id} >{enderecos.rua + ' , ' + enderecos.numero + ' , '  + enderecos.bairro}</option>
                         })}
             
           </select>
-          <div className='center'>
+          
+        
+  </>
 
-          <a  className="btn btnl btn-primary btn-lg active" role="button" aria-pressed="true" onClick={() => this.hideComponent("showHideEndereco")}>Entregar em outro Endereço</a>
+  const novoEndereco =
+  <>
+    <br></br>
+        <h2>Endereço</h2>
+
+        <br></br>
+        <form className='container1 '>
+
+          <div className='col-12'>
+            <div className='row'>
+
+              <div className="container col-6">
+                <div className="form-group">
+
+                  <br></br>
+                  <label for="exampleInputEmail1">Rua</label>
+                  <input type="text" className="form-control" id="rua" placeholder="Rua" onChange={this.onChange} value={this.state.enderecos[this.state.rua]} />
+                </div>
+                <div className="form-group">
+                  <label for="exampleInputPassword1">Bairro</label>
+                  <input type="text" className="form-control" id="bairro" placeholder="Bairro" onChange={this.onChange} value={this.state.enderecos[this.state.bairro]}/></div>
+                <div className="form-group">
+                  <label for="exampleInputPassword1">Complemento</label>
+                  <input type="text" className="form-control" id="complemento" placeholder="Complemento" onChange={this.onChange} value={this.state.enderecos[this.state.complemento]}/></div>
+
+                <br></br>
+              </div>
+
+              <div className="container col-6">
+                <br></br>
+                <div className="form-group">
+                  <label for="exampleInputPassword1">Referência</label>
+                  <input type="text" className="form-control" id="referencia" placeholder="Referência" onChange={this.onChange} value={this.state.enderecos[this.state.referencia]}/></div>
+                <div className="row">
+                  <div className="col-4">
+
+
+                    <label >Número</label>
+                    <input type="text" className="form-control" id="numero" placeholder="Nº" onChange={this.onChange} value={this.state.enderecos[this.state.numero]}/></div>
+                  <div className="form-row align-items-center mb-2">
+
+                    <div className="col-auto my-1">
+                      <label className="mr-sm-2" >UF</label>
+                      <select className="custom-select mr-sm-2" id="uf" onClick={this.onChange}>
+                        {this.state.ufs.map(uf => {
+                          return <option key={uf.id} value={uf.id} >{uf.ds_uf}</option>
+                        })}
+                        
+                      </select>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-6">
+                  <div className="form-group">
+                    <label  >  CEP</label>
+                    <input type="CEP" className="form-control" id="cep" placeholder="00000-000" onChange={this.onChange} value={this.state.enderecos[this.state.cep]} /></div>
+                </div>
+              </div>
+
+            </div>
+            <a  className="btn btnl btn-primary btn-lg active" role="button" aria-pressed="true" onClick={this.renderPay} value="novoEndereco">Entregar em outro Endereço</a>
+            
           </div>
           
-        </div>
+        </form>
+        
 
+        <br></br>
+        <br></br>
+  </>
+
+  switch (page) {
+    case 'novoEndereco':
+    return endereco;
+    case 'endereco':
+    return novoEndereco;
+    default:  
+  }
+}
+
+render(){
+      return(
+      <div className="flex-container cima col-12">
+       <div className="ede col-4">
+          <h3>Endereço de Entrega</h3>
+        
+          { this.showPay ()}
+
+          <div className='center'>
+
+          <a  className="btn btnl btn-primary btn-lg active" role="button" aria-pressed="true" onClick={this.renderPay} value="endereco">Entregar em outro Endereço</a>
+          </div>
+           
+        </div>
+          
         <div className="modopg col-4">
           <h3>Forma de Pagamento</h3>
           <input type="radio" name="radiof" value="boleto" className="radio" id="radio" aria-label="Radio button for following text input" />
@@ -198,9 +283,10 @@ export default class Checkout extends Component {
           </div>
         </div>
         </div>
-</div>
+        
+    
           
-    );
+      )
   }
 
 }
