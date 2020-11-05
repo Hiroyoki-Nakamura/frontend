@@ -44,7 +44,7 @@ export default class Linha extends Component {
 
   total = event => {
     const amount = event.target.value;
-    if (amount >= 1) {
+    if (amount >= 1) { 
       this.setState({
         amount,
         priceTotal: (this.state.priceUnique * amount).toFixed(2)

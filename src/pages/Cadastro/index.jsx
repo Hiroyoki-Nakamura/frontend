@@ -91,6 +91,8 @@ export default class Cadastro extends React.Component {
 
     
     
+    
+    
 
 
    
@@ -150,6 +152,8 @@ export default class Cadastro extends React.Component {
         break;
     }
   }
+
+
 
   render() {
     return (
