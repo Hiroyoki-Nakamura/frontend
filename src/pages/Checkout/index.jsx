@@ -9,27 +9,36 @@ export default class Checkout extends Component {
   constructor() {
     super();
     this.state = {
-      showHideForm: false,
-      page: 'endereco',
-      enderecos: []
+      // showHideForm: false,
+      pageAdress: 'novoEndereco',
+      enderecos: [{
+        rua: '',
+        bairro: '',
+        complemento: '',
+        referencia: '',
+        numero: '',
+        cep: '',
+        uf: ''
+      }
+      ]
       ,
-      cartoes_credito:{
-      nome_titular: '',
-      cpf_titular: '',
-      numero_cartao: '',
+      cartoes_credito: {
+        nome_titular: '',
+        cpf_titular: '',
+        numero_cartao: '',
       },
-      tipo_pagamentos:{
-      boleto: 'boleto',
-      cartao_credito:'cartao_credito'
+      tipo_pagamentos: {
+        boleto: 'boleto',
+        cartao_credito: 'cartao_credito'
       },
       ufs: []
     };
     // this.hideComponent = this.hideComponent.bind(this);
-  }  
+  }
 
   componentDidMount() {
     this.getEndereco();
-    
+
   }
 
   showPage = () => {
@@ -37,7 +46,7 @@ export default class Checkout extends Component {
   }
 
   getEndereco = async () => {
-   
+
 
     const client = JSON.parse(localStorage.getItem('client'))
     const enderecos = await API.get('/endereco/buscar/' + client.id)
@@ -46,17 +55,17 @@ export default class Checkout extends Component {
 
   }
 
-   componentDidMount() {
-     this.getUfs();
-   }
+  componentDidMount() {
+    this.getUfs();
+  }
 
   getUfs = async () => {
-     const ufs = await API.get('/uf');
-     this.setState({ ufs: [...ufs.data] });
+    const ufs = await API.get('/uf');
+    this.setState({ ufs: [...ufs.data] });
   }
 
   postCards = async () => {
-      await API.post('/cartaoCredito/adicionarCartao',{
+    await API.post('/cartaoCredito/adicionarCartao', {
       nome_titular: this.nome_titular,
       numero_cartao: this.numero_cartao
     });
@@ -68,48 +77,70 @@ export default class Checkout extends Component {
     const b = (event.target.id);
 
     console.log(a)
-  
+
     switch (b) {
-    case 'nome_titular':
-    this.setState({nome_titular: a});
-    break;
-    case 'numero_cartao':
-    this.setState({numero_cartao: a});
-    break;
-    case 'cpf_titular':
-    this.setState({cpf_titular: a});
-    break;  
-    default:
-    break;  
+      case 'nome_titular':
+        this.setState({ nome_titular: a });
+        break;
+      case 'numero_cartao':
+        this.setState({ numero_cartao: a });
+        break;
+      case 'cpf_titular':
+        this.setState({ cpf_titular: a });
+        break;
+      case 'rua':
+        this.setState({ rua: a })
+        break;
+      case 'numero':
+        this.setState({ numero: a })
+        break;
+      case 'bairro':
+        this.setState({ bairro: a })
+        break;   
+      case 'complemento':
+        this.setState({ complemento: a })
+        break;
+      case 'referencia':
+        this.setState({ referencia: a})
+        break;
+      case 'cep':
+        this.setState({ cep: a })
+        break;
+      case 'uf':
+        this.setState({ uf: a })           
+      default:
+        break;
+
+    }
 
   }
 
-}
+  renderAdress = event => {
+    this.setState({ pageAdress: event.target.id });
+    console.log(event.target.id)
+  }
 
-renderPay = event => {
-  this.setState({ page: event.target.value });
-}
+  showAdress = () => {
+    const pageAdress = this.state.pageAdress;
+    const Adress =
+      <>
 
-showPay = () => {
-  const page = this.state.page;
-  const endereco =
-  <>
-    
-    <label className="ed"> Endereço cadastrado: </label>
-          <select className=".select_endereco custom-select" id="enderecos" >
+        <label className="ed"> Endereço cadastrado: </label>
+        <select className=".select_endereco custom-select" id="enderecos" >
           <option>Endereco Cliente</option>
-          {this.state.enderecos.map( enderecos => {
-                          return <option key={enderecos.id} value={enderecos.id} >{enderecos.rua + ' , ' + enderecos.numero + ' , '  + enderecos.bairro}</option>
-                        })}
-            
-          </select>
-          
-        
-  </>
+          {this.state.enderecos.map(enderecos => {
+            return <option key={enderecos.id} value={enderecos.id} >{enderecos.rua + ' , ' + enderecos.numero + ' , ' + enderecos.bairro}</option>
+          })}
 
-  const novoEndereco =
-  <>
-    <br></br>
+        </select>
+        
+        <div className="btn btnl btn-primary btn-lg active" id="endereco"  value ="endereco" aria-pressed="true" onClick={this.renderAdress} >Entregar em outro Endereço</div>
+
+      </>
+
+    const newAdress =
+      <>
+        <br></br>
         <h2>Endereço</h2>
 
         <br></br>
@@ -127,10 +158,10 @@ showPay = () => {
                 </div>
                 <div className="form-group">
                   <label for="exampleInputPassword1">Bairro</label>
-                  <input type="text" className="form-control" id="bairro" placeholder="Bairro" onChange={this.onChange} value={this.state.enderecos[this.state.bairro]}/></div>
+                  <input type="text" className="form-control" id="bairro" placeholder="Bairro" onChange={this.onChange} value={this.state.enderecos[this.state.bairro]} /></div>
                 <div className="form-group">
                   <label for="exampleInputPassword1">Complemento</label>
-                  <input type="text" className="form-control" id="complemento" placeholder="Complemento" onChange={this.onChange} value={this.state.enderecos[this.state.complemento]}/></div>
+                  <input type="text" className="form-control" id="complemento" placeholder="Complemento" onChange={this.onChange} value={this.state.enderecos[this.state.complemento]} /></div>
 
                 <br></br>
               </div>
@@ -139,13 +170,13 @@ showPay = () => {
                 <br></br>
                 <div className="form-group">
                   <label for="exampleInputPassword1">Referência</label>
-                  <input type="text" className="form-control" id="referencia" placeholder="Referência" onChange={this.onChange} value={this.state.enderecos[this.state.referencia]}/></div>
+                  <input type="text" className="form-control" id="referencia" placeholder="Referência" onChange={this.onChange} value={this.state.enderecos[this.state.referencia]} /></div>
                 <div className="row">
                   <div className="col-4">
 
 
                     <label >Número</label>
-                    <input type="text" className="form-control" id="numero" placeholder="Nº" onChange={this.onChange} value={this.state.enderecos[this.state.numero]}/></div>
+                    <input type="text" className="form-control" id="numero" placeholder="Nº" onChange={this.onChange} value={this.state.enderecos[this.state.numero]} /></div>
                   <div className="form-row align-items-center mb-2">
 
                     <div className="col-auto my-1">
@@ -154,7 +185,7 @@ showPay = () => {
                         {this.state.ufs.map(uf => {
                           return <option key={uf.id} value={uf.id} >{uf.ds_uf}</option>
                         })}
-                        
+
                       </select>
 
                     </div>
@@ -169,41 +200,43 @@ showPay = () => {
               </div>
 
             </div>
-            <a  className="btn btnl btn-primary btn-lg active" role="button" aria-pressed="true" onClick={this.renderPay} value="novoEndereco">Entregar em outro Endereço</a>
-            
+            <a className="btn btnl btn-primary btn-lg active" id="novoEndereco" aria-pressed="true" onClick={this.renderAdress} value="novoEndereco">Salvar</a>
+
           </div>
-          
+
         </form>
-        
+
 
         <br></br>
         <br></br>
-  </>
+      </>
 
-  switch (page) {
-    case 'novoEndereco':
-    return endereco;
-    case 'endereco':
-    return novoEndereco;
-    default:  
+    switch (pageAdress) {
+      case 'endereco':
+        return newAdress;
+      case 'novoEndereco':
+        return Adress;
+        default:
+
+      
+    }
   }
-}
 
-render(){
-      return(
+  render() {
+    return (
       <div className="flex-container cima col-12">
-       <div className="ede col-4">
+        <div className="ede col-4">
           <h3>Endereço de Entrega</h3>
-        
-          { this.showPay ()}
-
+          
+          {this.showAdress()}
+          
           <div className='center'>
 
-          <a  className="btn btnl btn-primary btn-lg active" role="button" aria-pressed="true" onClick={this.renderPay} value="endereco">Entregar em outro Endereço</a>
-          </div>
-           
-        </div>
+</div>
           
+
+        </div>
+
         <div className="modopg col-4">
           <h3>Forma de Pagamento</h3>
           <input type="radio" name="radiof" value="boleto" className="radio" id="radio" aria-label="Radio button for following text input" />
@@ -214,11 +247,11 @@ render(){
           <br />
           <form id="formulariocartao">
             <label>Nº do cartão </label>
-            <input type="text-area" className="input_nCartao" id='numero_cartao' placeholder="0000-0000-0000-0000" onChange={this.onChange} value={this.state.numero_cartao}/>
+            <input type="text-area" className="input_nCartao" id='numero_cartao' placeholder="0000-0000-0000-0000" onChange={this.onChange} value={this.state.numero_cartao} />
             <label>Nome no cartão</label>
-            <input type="text-area" className='.input_nomeCartao' id='nome_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.nome_titular}/>
+            <input type="text-area" className='.input_nomeCartao' id='nome_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.nome_titular} />
             <br />
-            <label>Validade</label><br /><input type="text-area" className='input_valCartao' id='validade_cartao' placeholder="mês/ano" onChange={this.onChange} value={this.state.validade_cartao}/>
+            <label>Validade</label><br /><input type="text-area" className='input_valCartao' id='validade_cartao' placeholder="mês/ano" onChange={this.onChange} value={this.state.validade_cartao} />
             <br />
             <label>CVV</label>
             <br />
@@ -243,9 +276,9 @@ render(){
           <br />
 
           <div className='center icon_payMethods'>
-          <img className=" img " src="/img/visa.png " width="40px " height="40px" />
-          <img className="img " src="/img/master.png " width="40px " height="40px " />
-          <img className="img " src="/img/boleto.png " width="40px " height="40px " />
+            <img className=" img " src="/img/visa.png " width="40px " height="40px" />
+            <img className="img " src="/img/master.png " width="40px " height="40px " />
+            <img className="img " src="/img/boleto.png " width="40px " height="40px " />
           </div>
         </div>
 
@@ -282,11 +315,11 @@ render(){
             <a href="../html/sucesso_compra.html"><button type="button " className="btn btn-success btfc " onClick={this.postCards}>Finalizar Compra</button></a>
           </div>
         </div>
-        </div>
-        
-    
-          
-      )
+      </div>
+
+
+
+    )
   }
 
 }
