@@ -150,7 +150,7 @@ export default class Cadastro extends React.Component {
         this.setState({ referencia: e })
         break;
       default:
-        break;
+        
     }
   }
 
