@@ -25,10 +25,16 @@ export default class Carrinho extends Component {
       product.quantidade = amount;
       minValue += product.desconto_produto;
       totalPrice += (product.desconto_produto * amount);
+      product.valor = (product.desconto_produto * amount);
     })
 
     minValue = minValue.toFixed(2);
     totalPrice = totalPrice.toFixed(2);
+
+    localStorage.setItem('cartSettings', JSON.stringify({
+      totalPrice: totalPrice
+    }));
+    localStorage.setItem('cart', JSON.stringify([...products]));
 
     await this.setState({
       totalPrice,
@@ -52,7 +58,11 @@ export default class Carrinho extends Component {
         }
       });
 
+      localStorage.setItem('cartSettings', JSON.stringify({
+        totalPrice: newTotalPrice
+      }));
       localStorage.setItem('cart', JSON.stringify([...products]));
+      
       this.setState({ products, totalPrice: newTotalPrice });
     }
   }
@@ -60,7 +70,13 @@ export default class Carrinho extends Component {
   hasLogged = () => {
     const client = JSON.parse(localStorage.getItem('client'));
     const response = client == null ? 'login' : 'checkout';
-    return response;
+    const redirect = this.state.totalPrice > 0 ? 'checkout' : '';
+
+    if (response == 'checkout') {
+      return redirect;
+    } else {
+      return response;
+    }
   }
 
   removeItem = async productId => {
@@ -128,7 +144,7 @@ export default class Carrinho extends Component {
               <div>
 
                 <div className="container" id="carrinho">
-                  { this.state.cart }
+                  {this.state.cart}
                 </div>
 
               </div>
