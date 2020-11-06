@@ -1,99 +1,96 @@
-#container{
-    background-color: grey;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    /* height: 540px; */
-    border-radius: 20px;
+#container {
+  background-color: grey;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 20px;
 }
 
-.text_top{
-    color: #ffffff;
+.text_top {
+  color: #ffffff;
 }
 
-#topo{
-    background-color: #660033;
-    color: #fff;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    margin-bottom: -50px;
-    
+#topo {
+  background-color: #660033;
+  color: #fff;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  margin-bottom: -50px;
 }
 
-#carrinho{
-    background-color: white;
-    overflow: auto;
-    height: 330px;
-
+#carrinho {
+  background-color: white;
+  overflow: auto;
+  height: 330px;
 }
 
-.base{
-    background-color: #660033;
-    height: 110px;
-    width: auto;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    flex-direction: row;
-    
+.base {
+  background-color: #660033;
+  height: 110px;
+  width: auto;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  flex-direction: row;
 }
 
-.card{
-    width: 80px;
-    height: 80px;
+.card {
+  width: 80px;
+  height: 80px;
 }
 
-#nomeProduto{
-    text-align: center;
-    margin-top: 40px;
-    color: black;
+#nomeProduto {
+  text-align: center;
+  margin-top: 40px;
+  color: black;
 }
 
-.botao{
-    border-radius: 20px;
+.botao {
+  border-radius: 20px;
 }
 
-.quant_select{
-    margin-top: 10px;
+.quant_select {
+  margin-top: 10px;
 }
 
-.valortotal{
-    border-color: transparent;
-    background-color: transparent;
-    display: block;
-    color: white;   
+.valortotal {
+  border-color: transparent;
+  background-color: transparent;
+  display: block;
+  color: white;
 }
 
-.valor-unit{
-    border: none;
-    border-color: white;
-    background-color: transparent;
-    margin-top: 15px;
+.valor-unit {
+  border: none;
+  border-color: white;
+  background-color: transparent;
+  margin-top: 15px;
 }
 
-.valortotal::placeholder{
-    color: white;
-    text-align: left;
-}
-::placeholder{
-    color: black;
-    text-align: center;
+.valortotal::placeholder {
+  color: white;
+  text-align: left;
 }
 
-.cinza{
-    background-color: #3d3c3c;
+::placeholder {
+  color: black;
+  text-align: center;
 }
 
-.subtotalproduto{
-    border: none;
-    border-color: white;
-    background-color: transparent; 
+.cinza {
+  background-color: #3d3c3c;
 }
 
-.corvalor{
-    color: #fff;
+.subtotalproduto {
+  border: none;
+  border-color: white;
+  background-color: transparent;
+}
+
+.corvalor {
+  color: #fff;
 }
 
 .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

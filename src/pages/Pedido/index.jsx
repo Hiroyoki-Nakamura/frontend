@@ -43,23 +43,27 @@ export default class Pedido extends Component {
     const page = this.state.page;
 
     const orders = this.state.orders.map(order => {
-      let date = order.created_at.slice(0, 10);
-      while (date.includes('-')) {
-        console.log(date);
-        date = date.replace('-', '/');
+      let date = ''
+      if (order.created_at != null) {
+        date = order.created_at.slice(0, 10);
+        while (date.includes('-')) {
+
+          date = date.replace('-', '/');
+        }
+
       }
 
       return (
         <>
           <div className="row">
             <div className="col-12 d-flex justify-content-around" id="labels">
-              <label className="text-center" style={{width: '120px' }}>{order.id}</label>
-              <label className="text-center" style={{width: '120px' }}>R$ {order.valor_total.toFixed(2)}</label>
-              <label className="text-center" style={{width: '120px' }}>{date}</label>
-              <label className="text-center" style={{width: '120px' }}>{order.cd_status_pedido}</label>
+              <label className="text-center" style={{ width: '120px' }}>{order.id}</label>
+              <label className="text-center" style={{ width: '120px' }}>R$ {order.valor_total}</label>
+              <label className="text-center" style={{ width: '120px' }}>{date}</label>
+              <label className="text-center" style={{ width: '120px' }}>{order.cd_status_pedido}</label>
             </div>
           </div>
-          <hr  />
+          <hr />
         </>
       );
     });
@@ -192,7 +196,7 @@ export default class Pedido extends Component {
                   </div>
 
                   <div className="col-9" id="pedido">
-                    { this.setPage() }
+                    {this.setPage()}
                   </div>
                 </div>
               </div>

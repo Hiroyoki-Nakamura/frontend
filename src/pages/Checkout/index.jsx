@@ -1,26 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './styles.css';
 import API from '../../Services/api';
-import Endereco from '../Endereco'
 
-
-
-export default class Checkout extends Component {
+export default class Checkout extends React.Component {
   constructor() {
     super();
     this.state = {
       // showHideForm: false,
       pageAdress: 'novoEndereco',
-      enderecos: [{
-        rua: '',
-        bairro: '',
-        complemento: '',
-        referencia: '',
-        numero: '',
-        cep: '',
-        uf: ''
-      }
+      enderecos: [
+        // rua: '',
+        // bairro: '',
+        // complemento: '',
+        // referencia: '',
+        // numero: '',
+        // cep: '',
+        // uf: ''
       ]
+      
       ,
       cartoes_credito: {
         nome_titular: '',
@@ -52,7 +49,7 @@ export default class Checkout extends Component {
     const enderecos = await API.get('/endereco/buscar/' + client.id)
 
     this.setState({ enderecos: [...enderecos.data] });
-
+    console.log(client.id)
   }
 
   componentDidMount() {
@@ -73,41 +70,40 @@ export default class Checkout extends Component {
   };
 
   onChange = (event) => {
-    const a = (event.target.value);
-    const b = (event.target.id);
+    const value = (event.target.value);
+    const id = (event.target.id);
 
-    console.log(a)
 
-    switch (b) {
+    switch (id) {
       case 'nome_titular':
-        this.setState({ nome_titular: a });
+        this.setState({ nome_titular: value });
         break;
       case 'numero_cartao':
-        this.setState({ numero_cartao: a });
+        this.setState({ numero_cartao: value });
         break;
       case 'cpf_titular':
-        this.setState({ cpf_titular: a });
+        this.setState({ cpf_titular: value });
         break;
       case 'rua':
-        this.setState({ rua: a })
+        this.setState({ rua: value })
         break;
       case 'numero':
-        this.setState({ numero: a })
+        this.setState({ numero: value })
         break;
       case 'bairro':
-        this.setState({ bairro: a })
+        this.setState({ bairro: value })
         break;   
       case 'complemento':
-        this.setState({ complemento: a })
+        this.setState({ complemento: value })
         break;
       case 'referencia':
-        this.setState({ referencia: a})
+        this.setState({ referencia: value})
         break;
       case 'cep':
-        this.setState({ cep: a })
+        this.setState({ cep: value })
         break;
       case 'uf':
-        this.setState({ uf: a })           
+        this.setState({ uf: value })           
       default:
         break;
 
@@ -126,10 +122,10 @@ export default class Checkout extends Component {
       <>
 
         <label className="ed"> Endereço cadastrado: </label>
-        <select className=".select_endereco custom-select" id="enderecos" >
+        <select className=".select_endereco custom-select" id="enderecos" onClick={this.onChange} >
           <option>Endereco Cliente</option>
           {this.state.enderecos.map(enderecos => {
-            return <option key={enderecos.id} value={enderecos.id} >{enderecos.rua + ' , ' + enderecos.numero + ' , ' + enderecos.bairro}</option>
+            return <option key={enderecos.id} value={enderecos.id} >{enderecos.bairro}</option>
           })}
 
         </select>
@@ -137,13 +133,12 @@ export default class Checkout extends Component {
         <div className="btn btnl btn-primary btn-lg active" id="endereco"  value ="endereco" aria-pressed="true" onClick={this.renderAdress} >Entregar em outro Endereço</div>
 
       </>
-
     const newAdress =
       <>
-        <br></br>
+        
         <h2>Endereço</h2>
 
-        <br></br>
+        
         <form className='container1 '>
 
           <div className='col-12'>
@@ -152,7 +147,7 @@ export default class Checkout extends Component {
               <div className="container col-6">
                 <div className="form-group">
 
-                  <br></br>
+                  
                   <label for="exampleInputEmail1">Rua</label>
                   <input type="text" className="form-control" id="rua" placeholder="Rua" onChange={this.onChange} value={this.state.enderecos[this.state.rua]} />
                 </div>
@@ -207,21 +202,18 @@ export default class Checkout extends Component {
         </form>
 
 
-        <br></br>
-        <br></br>
+        
+       
       </>
-
     switch (pageAdress) {
       case 'endereco':
         return newAdress;
       case 'novoEndereco':
         return Adress;
         default:
-
       
     }
   }
-
   render() {
     return (
       <div className="flex-container cima col-12">
@@ -231,12 +223,9 @@ export default class Checkout extends Component {
           {this.showAdress()}
           
           <div className='center'>
-
 </div>
           
-
         </div>
-
         <div className="modopg col-4">
           <h3>Forma de Pagamento</h3>
           <input type="radio" name="radiof" value="boleto" className="radio" id="radio" aria-label="Radio button for following text input" />
@@ -245,68 +234,19 @@ export default class Checkout extends Component {
           <input type="radio" name="radioc" value="cartao" id="radioc" aria-label="Radio button for following text input" />
           <label>Cartão de crédito</label>
           <br />
-          <form id="formulariocartao">
-            <label>Nº do cartão </label>
-            <input type="text-area" className="input_nCartao" id='numero_cartao' placeholder="0000-0000-0000-0000" onChange={this.onChange} value={this.state.numero_cartao} />
-            <label>Nome no cartão</label>
-            <input type="text-area" className='.input_nomeCartao' id='nome_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.nome_titular} />
-            <br />
-            <label>Validade</label><br /><input type="text-area" className='input_valCartao' id='validade_cartao' placeholder="mês/ano" onChange={this.onChange} value={this.state.validade_cartao} />
-            <br />
-            <label>CVV</label>
-            <br />
-            <input type="text-area" className='input_cvvCartao' placeholder="000" />
-            <br />
-            <label>Quantidade de Parcelas</label>
-            <br />
-            <select className="custom-select select_parcelamento" id="inputGroupSelect02">
-              <option>1x sem juros</option>
-              <option>2x sem juros</option>
-              <option>3x sem juros</option>
-              <option>4x sem juros</option>
-              <option>5x sem juros</option>
-              <option>6x sem juros</option>
-              <option>7x sem juros</option>
-              <option>8x sem juros</option>
-              <option>9x sem juros</option>
-              <option>10x sem juros</option>
-
-            </select>
-          </form>
-          <br />
-
+           
           <div className='center icon_payMethods'>
             <img className=" img " src="/img/visa.png " width="40px " height="40px" />
             <img className="img " src="/img/master.png " width="40px " height="40px " />
             <img className="img " src="/img/boleto.png " width="40px " height="40px " />
           </div>
         </div>
-
         <div className="confirmadados col-4">
           <h3>Confirmar Dados</h3>
-          <label>Entrega:</label>
-
-          <div className="input-group mb-3 ">
-            <select className="custom-select select_confirmaEndEntrega " id="inputGroupSelect01 ">
-              <option selected>Endereço cadastrado no sistema</option>
-              <option value="1 ">R. numero um, nº1, cep: 00000-00</option>
-            </select>
-          </div>
-          <label>Forma de Pagamento:</label>
-          <div className="input-group mb-3 ">
-            <select className="custom-select select_confirmaMetPagamento" id="inputGroupSelect01 ">
-              <option selected>Opção Selecionada</option>
-              <option value="1 ">Cartão de crédito</option>
-              <option value="1 ">Boleto</option>
-            </select>
-          </div>
+         
+         
 
           <div>
-            <label>Valor Frete:</label>
-            <br />
-            <input type="text-area " className='input_frete' /*style="border-radius: 10px; width: 200px; "*/ placeholder="R$ 000,00 " />
-            <br />
-            <br />
             <label>Valor Total:</label>
             <br />
             <input type="text-area " className='input_valorTotal'/*style="border-radius: 10px; width: 2 00px; "*/ placeholder="R$ 000,00 " />
@@ -316,10 +256,6 @@ export default class Checkout extends Component {
           </div>
         </div>
       </div>
-
-
-
     )
   }
-
 }
