@@ -8,29 +8,26 @@ export default class Checkout extends React.Component {
     this.state = {
       // showHideForm: false,
       pageAdress: 'novoEndereco',
-      enderecos: [
-        // rua: '',
-        // bairro: '',
-        // complemento: '',
-        // referencia: '',
-        // numero: '',
-        // cep: '',
-        // uf: ''
-      ]
-      
-      ,
-      cartoes_credito: {
+      page: 'cartao',
+      enderecos: [],
+        rua: '',
+        bairro: '',
+        complemento: '',
+        referencia: '',
+        numero: '',
+        cep: '',
+        uf: '',
+        cartoes_credito:{
         nome_titular: '',
         cpf_titular: '',
         numero_cartao: '',
-      },
-      tipo_pagamentos: {
-        boleto: 'boleto',
-        cartao_credito: 'cartao_credito'
-      },
+        address: 0,
+        cvv: '',
+        },
+        client: '',
+        price: '',
       ufs: []
     };
-    // this.hideComponent = this.hideComponent.bind(this);
   }
 
   componentDidMount() {
@@ -49,7 +46,7 @@ export default class Checkout extends React.Component {
     const enderecos = await API.get('/endereco/buscar/' + client.id)
 
     this.setState({ enderecos: [...enderecos.data] });
-    console.log(client.id)
+    
   }
 
   componentDidMount() {
@@ -64,10 +61,66 @@ export default class Checkout extends React.Component {
   postCards = async () => {
     await API.post('/cartaoCredito/adicionarCartao', {
       nome_titular: this.nome_titular,
-      numero_cartao: this.numero_cartao
+      numero_cartao: this.numero_cartao,
+      cpf_titular: this.cpf_titular
     });
 
-  };
+    const client = JSON.parse(localStorage.getItem('client'));
+    const cart = await JSON.parse(localStorage.getItem('cart'));
+
+    let dados_pagamento;
+    if (this.state.page == 'boleto') {
+      dados_pagamento = {
+        ds_boleto: parseInt(Math.random() * 1000000000000000)
+      }
+    } else {
+      dados_pagamento = {
+        id_cartão: client.id
+      }
+    }
+
+    const objSend = {
+      cliente: client.id,
+      endereco_entrega: this.state.address,
+      tipo_pagamento: (this.state.page == 'boleto' ? 1 : 2),
+      dados_pagamento,
+      produtos: [...cart],
+      valor_total: parseFloat(this.state.price.replace(',', '.'))
+    };
+    await API.post('/pedido/criar', objSend);
+
+    alert('pedido realizado com sucesso!');
+    
+    localStorage.removeItem('cart');
+    localStorage.removeItem('cartSettings');
+    window.location.href = '/';
+  }
+
+  postEnderecos = async () => {
+    const client = JSON.parse(localStorage.getItem('client'))
+    // const enderecos = await API.post('/endereco/salvar/' + client.id)
+    console.log(this.state.rua, this.state.bairro, this.state.complemento, this.state.numero, this.state.cep, this.state.uf, client.id)
+
+    // this.setState({ enderecos: [...enderecos.data] });
+          await API.post('/endereco/salvar', {
+          rua: this.state.rua,
+          bairro: this.state.bairro,
+          complemento: this.state.complemento,
+          refencia: this.state.referencia,
+          numero: this.state.numero,
+          cep: this.state.cep,
+          cd_uf: this.state.uf,
+          cd_cliente: client.id
+          
+        })
+          .then(response => {
+          console.log(response)
+        })
+          .catch(error => {
+            console.log(error.response)
+          });
+        }
+      
 
   onChange = (event) => {
     const value = (event.target.value);
@@ -103,7 +156,8 @@ export default class Checkout extends React.Component {
         this.setState({ cep: value })
         break;
       case 'uf':
-        this.setState({ uf: value })           
+        this.setState({ uf: value })
+        break;           
       default:
         break;
 
@@ -122,10 +176,10 @@ export default class Checkout extends React.Component {
       <>
 
         <label className="ed"> Endereço cadastrado: </label>
-        <select className=".select_endereco custom-select" id="enderecos" onClick={this.onChange} >
+        <select className=".select_endereco custom-select" id="enderecos"  onClick={() => this.getEndereco()}>
           <option>Endereco Cliente</option>
           {this.state.enderecos.map(enderecos => {
-            return <option key={enderecos.id} value={enderecos.id} >{enderecos.bairro}</option>
+            return <option value={enderecos.id} >{enderecos.rua + ' , ' + enderecos.numero}</option>
           })}
 
         </select>
@@ -139,39 +193,39 @@ export default class Checkout extends React.Component {
         <h2>Endereço</h2>
 
         
-        <form className='container1 '>
+        <form className='container1' >
 
-          <div className='col-12'>
+          <div className='col-12' >
             <div className='row'>
 
-              <div className="container col-6">
+              {/* <div className="container col-6"> */}
                 <div className="form-group">
 
                   
-                  <label for="exampleInputEmail1">Rua</label>
-                  <input type="text" className="form-control" id="rua" placeholder="Rua" onChange={this.onChange} value={this.state.enderecos[this.state.rua]} />
+                  <label >Rua</label>
+                  <input type="text" className="form-control" id="rua" placeholder="Rua" onChange={this.onChange} value={this.state.rua} />
                 </div>
                 <div className="form-group">
-                  <label for="exampleInputPassword1">Bairro</label>
-                  <input type="text" className="form-control" id="bairro" placeholder="Bairro" onChange={this.onChange} value={this.state.enderecos[this.state.bairro]} /></div>
+                  <label >Bairro</label>
+                  <input type="text" className="form-control" id="bairro" placeholder="Bairro" onChange={this.onChange} value={this.state.bairro} /></div>
                 <div className="form-group">
-                  <label for="exampleInputPassword1">Complemento</label>
-                  <input type="text" className="form-control" id="complemento" placeholder="Complemento" onChange={this.onChange} value={this.state.enderecos[this.state.complemento]} /></div>
+                  <label >Complemento</label>
+                  <input type="text" className="form-control" id="complemento" placeholder="Complemento" onChange={this.onChange} value={this.state.complemento} /></div>
 
                 <br></br>
-              </div>
+              {/* </div> */}
 
-              <div className="container col-6">
-                <br></br>
+              {/* <div className="container col-6"> */}
+               
                 <div className="form-group">
-                  <label for="exampleInputPassword1">Referência</label>
-                  <input type="text" className="form-control" id="referencia" placeholder="Referência" onChange={this.onChange} value={this.state.enderecos[this.state.referencia]} /></div>
+                  <label >Referência</label>
+                  <input type="text" className="form-control" id="referencia" placeholder="Referência" onChange={this.onChange} value={this.state.referencia} /></div>
                 <div className="row">
                   <div className="col-4">
 
 
                     <label >Número</label>
-                    <input type="text" className="form-control" id="numero" placeholder="Nº" onChange={this.onChange} value={this.state.enderecos[this.state.numero]} /></div>
+                    <input type="text" className="form-control" id="numero" placeholder="Nº" onChange={this.onChange} value={this.state.numero} /></div>
                   <div className="form-row align-items-center mb-2">
 
                     <div className="col-auto my-1">
@@ -185,17 +239,18 @@ export default class Checkout extends React.Component {
 
                     </div>
                   </div>
-                </div>
+                {/* </div> */}
 
-                <div className="col-6">
+                {/* <div className="col-6"> */}
                   <div className="form-group">
                     <label  >  CEP</label>
-                    <input type="CEP" className="form-control" id="cep" placeholder="00000-000" onChange={this.onChange} value={this.state.enderecos[this.state.cep]} /></div>
+                    <input type="CEP" className="form-control" id="cep" placeholder="00000-000" onChange={this.onChange} value={this.state.cep} /></div>
                 </div>
-              </div>
+              {/* </div> */}
 
             </div>
-            <a className="btn btnl btn-primary btn-lg active" id="novoEndereco" aria-pressed="true" onClick={this.renderAdress} value="novoEndereco">Salvar</a>
+            <a className="btn btnl btn-primary btn-lg active" id="novoEndereco" aria-pressed="true" onClick={this.renderAdress} value="novoEndereco">Voltar</a>
+            <a className="btn btnl btn-primary btn-lg active" id="salvar" aria-pressed="true" onClick={() => this.postEnderecos()} >Salvar</a>
 
           </div>
 
@@ -214,15 +269,79 @@ export default class Checkout extends React.Component {
       
     }
   }
+
+  renderPay = event => {
+    this.setState({ page: event.target.value });
+  }
+
+  showPay = () => {
+    const page = this.state.page;
+    const card =
+      <>
+        <form className='mt-2'>
+          <label className='w-100 text-center'>Nº do cartão </label>
+          <input type="text-area" className="form-control text-center" id='numero_cartao' placeholder="0000-0000-0000-0000" onChange={this.onChange} value={this.state.numero_cartao} />
+
+          <label className='w-100 text-center'>Nome no cartão</label>
+          <input type="text-area" className='form-control text-center' id='nome_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.nome_titular} />
+
+          <label className='w-100 text-center'>Validade</label> <input type="text-area" className='form-control text-center' id='validade_cartao' placeholder="mês/ano" onChange={this.onChange} value={this.state.validade_cartao} />
+
+          <label className='w-100 text-center'>CVV</label>
+          <input type="text-area"
+            id="cvv" className='form-control text-center'
+            onChange={this.onChange} maxLength='3' placeholder="000" />
+
+          <label className='w-100 text-center'>Quantidade de Parcelas</label>
+          <select className="custom-select form-control" id="inputGroupSelect02">
+            <option>1x sem juros</option>
+            <option>2x sem juros</option>
+            <option>3x sem juros</option>
+            <option>4x sem juros</option>
+            <option>5x sem juros</option>
+            <option>6x sem juros</option>
+            <option>7x sem juros</option>
+            <option>8x sem juros</option>
+            <option>9x sem juros</option>
+            <option>10x sem juros</option>
+          </select>
+
+          <div className='center'>
+            <img className="img " src="/img/visa.png " width="40px " height="40px" />
+            <img className="img " src="/img/master.png " width="40px " height="40px " />
+            <img className="img " src="/img/boleto.png " width="40px " height="40px " />
+          </div>
+        </form>
+      </>
+    const billet =
+      <>
+        <div className='w-100 h-auto'>
+          {/* <label className='w-100 text-center' htmlFor="boleto_nome">Nome:</label>
+          <input type="text" id='boleto_nome' className='form-control text-center' onChange={this.onChange} />
+          <label className='w-100 text-center' htmlFor="boleto_cpf">CPF:</label>
+          <input type="text" id='boleto_cpf' className='form-control text-center' onChange={this.onChange} /> */}
+        </div>
+      </>
+    switch (page) {
+      case 'cartao':
+        return card;
+      case 'boleto':
+        return billet;
+      default:
+    }
+  }
+
   render() {
     return (
-      <div className="flex-container cima col-12">
-        <div className="ede col-4">
+
+      <div className="flex-container cima col-12" >
+        <div className="ede col-4"  >
           <h3>Endereço de Entrega</h3>
           
           {this.showAdress()}
           
           <div className='center'>
+
 </div>
           
         </div>
@@ -234,12 +353,8 @@ export default class Checkout extends React.Component {
           <input type="radio" name="radioc" value="cartao" id="radioc" aria-label="Radio button for following text input" />
           <label>Cartão de crédito</label>
           <br />
-           
-          <div className='center icon_payMethods'>
-            <img className=" img " src="/img/visa.png " width="40px " height="40px" />
-            <img className="img " src="/img/master.png " width="40px " height="40px " />
-            <img className="img " src="/img/boleto.png " width="40px " height="40px " />
-          </div>
+          {this.showPay()}
+
         </div>
         <div className="confirmadados col-4">
           <h3>Confirmar Dados</h3>
