@@ -44,8 +44,13 @@ export default class Checkout extends React.Component {
 
     const client = JSON.parse(localStorage.getItem('client'))
     const enderecos = await API.get('/endereco/buscar/' + client.id)
+    const cartSettings = await JSON.parse(localStorage.getItem('cartSettings'));
+    const price = `${cartSettings.totalPrice}`.replace('.', ',');
 
-    this.setState({ enderecos: [...enderecos.data] });
+    this.setState({ enderecos: [...enderecos.data],
+      price: price,
+      address: enderecos.data[0].id
+    });
     
   }
 
@@ -347,10 +352,10 @@ export default class Checkout extends React.Component {
         </div>
         <div className="modopg col-4">
           <h3>Forma de Pagamento</h3>
-          <input type="radio" name="radiof" value="boleto" className="radio" id="radio" aria-label="Radio button for following text input" />
+          <input type="radio" name="radiof" value="boleto" onChange={this.renderPay} className="radio" id="radio" aria-label="Radio button for following text input" />
           <label>Boleto</label>
           <br />
-          <input type="radio" name="radioc" value="cartao" id="radioc" aria-label="Radio button for following text input" />
+          <input type="radio" name="radioc" value="cartao" onChange={this.renderPay} id="radioc" aria-label="Radio button for following text input" />
           <label>Cartão de crédito</label>
           <br />
           {this.showPay()}
