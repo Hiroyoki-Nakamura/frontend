@@ -2,33 +2,33 @@ import React from 'react';
 import './styles.css';
 import API from '../../Services/api';
 
+const BEFORE = {
+  pageAdress: 'novoEndereco',
+  page: 'cartao',
+  enderecos: [],
+    rua: '',
+    bairro: '',
+    complemento: '',
+    referencia: '',
+    numero: '',
+    cep: '',
+    uf: '',
+    cartoes_credito:{
+    nome_titular: '',
+    cpf_titular: '',
+    numero_cartao: '',
+    address: 0,
+    cvv: '',
+    },
+    client: '',
+    price: '',
+  ufs: []
+};
+
+
 export default class Checkout extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      // showHideForm: false,
-      pageAdress: 'novoEndereco',
-      page: 'cartao',
-      enderecos: [],
-        rua: '',
-        bairro: '',
-        complemento: '',
-        referencia: '',
-        numero: '',
-        cep: '',
-        uf: '',
-        cartoes_credito:{
-        nome_titular: '',
-        cpf_titular: '',
-        numero_cartao: '',
-        address: 0,
-        cvv: '',
-        },
-        client: '',
-        price: '',
-      ufs: []
-    };
-  }
+
+  state = { ...BEFORE };
 
   componentDidMount() {
     this.getEndereco();
@@ -290,6 +290,9 @@ export default class Checkout extends React.Component {
           <label className='w-100 text-center'>Nome no cartão</label>
           <input type="text-area" className='form-control text-center' id='nome_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.nome_titular} />
 
+          <label className='w-100 text-center'>CPF Titular</label>
+          <input type="text-area" className='form-control text-center' id='cpf_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.cpf_titular} />
+
           <label className='w-100 text-center'>Validade</label> <input type="text-area" className='form-control text-center' id='validade_cartao' placeholder="mês/ano" onChange={this.onChange} value={this.state.validade_cartao} />
 
           <label className='w-100 text-center'>CVV</label>
@@ -372,7 +375,7 @@ export default class Checkout extends React.Component {
             <input type="text-area " className='input_valorTotal'/*style="border-radius: 10px; width: 2 00px; "*/ placeholder="R$ 000,00 " />
             <br />
             <a href="../html/index.html"><button type="button" className="btn btn-success btcc ">Continuar Comprando</button></a>
-            <a href="../html/sucesso_compra.html"><button type="button " className="btn btn-success btfc " onClick={this.postCards}>Finalizar Compra</button></a>
+            <a ><button type="button " className="btn btn-success btfc " onClick={this.postCards}>Finalizar Compra</button></a>
           </div>
         </div>
       </div>
