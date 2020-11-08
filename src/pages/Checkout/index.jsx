@@ -204,11 +204,20 @@ export default class Checkout extends React.Component {
             <div className='row'>
 
               {/* <div className="container col-6"> */}
-                <div className="form-group">
-
-                  
+              
+                <div className="form-group"   >
+                <div className="row">
+                <div className="col-8">
+                
                   <label >Rua</label>
                   <input type="text" className="form-control" id="rua" placeholder="Rua" onChange={this.onChange} value={this.state.rua} />
+                
+                  </div>
+                  <div className="col-4">
+                
+                  <label >Número</label>
+                    <input type="text" className="form-control" id="numero" placeholder="Nº" onChange={this.onChange} value={this.state.numero} /></div>
+                </div>
                 </div>
                 <div className="form-group">
                   <label >Bairro</label>
@@ -228,12 +237,7 @@ export default class Checkout extends React.Component {
                 <div className="row">
                   <div className="col-4">
 
-
-                    <label >Número</label>
-                    <input type="text" className="form-control" id="numero" placeholder="Nº" onChange={this.onChange} value={this.state.numero} /></div>
-                  <div className="form-row align-items-center mb-2">
-
-                    <div className="col-auto my-1">
+                    <div className="col- my-1">
                       <label className="mr-sm-2" >UF</label>
                       <select className="custom-select mr-sm-2" id="uf" onClick={this.onChange}>
                         {this.state.ufs.map(uf => {
@@ -250,13 +254,22 @@ export default class Checkout extends React.Component {
                   <div className="form-group">
                     <label  >  CEP</label>
                     <input type="CEP" className="form-control" id="cep" placeholder="00000-000" onChange={this.onChange} value={this.state.cep} /></div>
+                    <div className="col-6">
+                    <div className="row">
+                  
+                    <a className="btn  btn-primary btn-md active" id="novoEndereco" aria-pressed="true" onClick={this.renderAdress} value="novoEndereco">Voltar</a>
+                    </div>
+                    </div>
+                    <div className="col-6">
+                    <div className="row">
+                    <a className="btn  btn-primary btn-md active" id="salvar" aria-pressed="true" onClick={() => this.postEnderecos()} >Salvar</a>
+                    </div>
+                    </div>  
                 </div>
               {/* </div> */}
 
             </div>
-            <a className="btn btnl btn-primary btn-lg active" id="novoEndereco" aria-pressed="true" onClick={this.renderAdress} value="novoEndereco">Voltar</a>
-            <a className="btn btnl btn-primary btn-lg active" id="salvar" aria-pressed="true" onClick={() => this.postEnderecos()} >Salvar</a>
-
+            
           </div>
 
         </form>
@@ -343,22 +356,22 @@ export default class Checkout extends React.Component {
     return (
 
       <div className="flex-container cima col-12" >
-        <div className="ede col-4"  >
-          <h3>Endereço de Entrega</h3>
+        <div className="ede col-4"  style={{overflowY: "scroll", overflowX: "hidden"}}>
           
-          {this.showAdress()}
+          
+          {this.showAdress() }
           
           <div className='center'>
-
+          
 </div>
           
         </div>
-        <div className="modopg col-4">
+        <div className="modopg col-4" style={{overflowY: "scroll", overflowX: "hidden"}}>
           <h3>Forma de Pagamento</h3>
           <input type="radio" name="radiof" value="boleto" onChange={this.renderPay} className="radio" id="radio" aria-label="Radio button for following text input" />
           <label>Boleto</label>
           <br />
-          <input type="radio" name="radioc" value="cartao" onChange={this.renderPay} id="radioc" aria-label="Radio button for following text input" />
+          <input type="radio" name="radiof" value="cartao" onChange={this.renderPay} id="radioc" aria-label="Radio button for following text input" />
           <label>Cartão de crédito</label>
           <br />
           {this.showPay()}
