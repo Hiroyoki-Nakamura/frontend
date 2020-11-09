@@ -102,6 +102,23 @@ export default class Checkout extends React.Component {
             </select>
           </div>
 
+          <div className=" col-12 col-md-4">
+
+            <div className='radius content-enter px-2 py-2'>
+              <h3 className='w-100 text-center'>Confirmar Dados</h3>
+              <div className='d-flex justify-content-center align-items-center h-75'>
+                <div>
+                  <label>Frete: </label>
+                  <input type="text" className='form-control text-center' readOnly value='R$ 35,00'/>
+                  <label>Valor Total:</label>
+                  <input type="text-area " className='form-control text-center' readOnly value={'R$ ' + this.state.price} />
+                  <div className="d-flex justify-content-center mt-5">
+                    <a href="../html/index.html" className="col btn btcc radius">Continuar</a>
+                    <a className="col btn btn-success align-items-center radius" onClick={this.postCards}><label>Comprar</label></a>
+                  </div>
+                </div>
+              </div>
+            </div>
 
           <label>Valor Frete:</label>
           <br />
@@ -118,6 +135,5 @@ export default class Checkout extends React.Component {
         </div>
       </div>
     );
-  }
-
-}
+  </div>
+    )}}

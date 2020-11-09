@@ -1,48 +1,39 @@
-import React from 'react';
-import './styles.css'; 
-// import { withFormik } from 'formik';
-import api from '../../Services/api';
+import React, { Component } from 'react';
+import './styles.css'
 
+import API from '../../Services/api';
 
-export default class Cadastro extends React.Component {
+const BEFORE = {
+  nome: "",
+  cpf: "",
+  rg: "",
+  data_nascimento: "",
+  contatos: [
+    {
+      ds_contato1: ""
+    },
+    {
+      ds_contato2: ""
+    },
+  ],
+  genero: "",
+  email: "",
+  senha: "",
+  endereco: {
+    cep: "",
+    ufselecionado: 1,
+    cidade: "",
+    bairro: "",
+    rua: "",
+    numero: "",
+    complemento: "",
+    referencia: ""
+  },
+  ufs: []
+}
 
-  
-
-
-
-  constructor() {
-    super()
-    this.state = {
-      nome: "",
-      cpf: "",
-      rg: "",
-      data_nascimento: "",
-      contatos: [
-        {
-          ds_contato1: ""
-        },
-        {
-          ds_contato2: ""
-        },
-      ],
-      genero: "",
-      email: "",
-      senha: "",
-      endereco: {
-        cep: "",
-        ufselecionado: "",
-        cidade: "",
-        bairro: "",
-        rua: "",
-        numero: "",
-        complemento: "",
-        referencia: ""
-      },
-      ufs: [],
-    }
-
-    
-  }
+export default class Cadastro extends Component {
+  state = { ...BEFORE };
 
   
 
@@ -51,14 +42,13 @@ export default class Cadastro extends React.Component {
   }
 
   getUfs = async () => {
-    const ufs = await api.get('/uf');
+    const ufs = await API.get('/uf');
     this.setState({ ufs: [...ufs.data] });
   }
 
-  
+  postCliente = async () => {
 
-  postCliente = () => {
-    api.post('/cliente/cadastro', {
+    const objClient = {
       nome: this.state.nome,
       cpf: this.state.cpf,
       rg: this.state.rg,
@@ -84,99 +74,77 @@ export default class Cadastro extends React.Component {
         complemento: this.state.complemento,
         referencia: this.state.referencia
       }
-    }).then(response => {
-      console.log(response)
-    })
-      .catch(error => {
-        console.log(error.response)
-    });
+    };
 
+    const sendClient = await API.post('/cliente/cadastro', objClient);
+
+    if (sendClient.data == 'email já cadastrado') {
+      alert(sendClient.data.replace('criado', ''));
+    } else {
+      alert(sendClient.data);
+    }
   }
 
 
 
   onChange = (event) => {
 
-    const e = (event.target.value);
-    const i = (event.target.id);
-    const regex = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/; // regex de nome
-    const respostaRegexNome = regex.test(e); // testando regex de nome
-    const regexCPF = /^[\d{3}\.\d{3}\.\d{3}\-\d{2}$]/ // REGEX DE CPF
-    const respostaregexcpf = regexCPF.test(e); // TESTANDO REGEX DE CPF
-    const regexRG = /^[(\d{1,2})(\d{3})(\d{3})({\dX})$]/ // REGEX DE RG
-    const respostaregexrg = regexRG.test(e); // TESTANDO REGEX DE RG 
-    const regexTel = /[^(\(?\d{2}\)?\s)?(\d{4,5}\-\d{4})$]/;
-    const respostaregexTel = regexTel.test(e);
-    
-    
-    
+    const value = (event.target.value);
+    const id = (event.target.id);
 
-    switch (i) {
+    switch (id) {
       case 'nome':
-        if(respostaRegexNome == false) {
-          alert("nome não existe!!");
-        }
-        this.setState({ nome: e })       
-        break;  
+        this.setState({ nome: value })
+        break;
       case 'cpf':
-          if(respostaregexcpf == false){
-            alert("CPF INVALIDO!!");
-          }
-        this.setState({ cpf: e })
+        this.setState({ cpf: value })
         break;
       case 'rg':
-          if(respostaregexrg == false){ 
-            alert("RG INVALIDO!");
-          }
-        this.setState({ rg: e })
+        this.setState({ rg: value })
         break;
       case 'datanascimento':
-        this.setState({ data_nascimento: e })
+        this.setState({ data_nascimento: value })
         break;
       case 'tele':
-          if(respostaregexTel){
-            alert("Telefone Invalido")
-          }
-        this.setState({ ds_contato1: e })
+        this.setState({ ds_contato1: value })
         break;
       case 'telef':
-        this.setState({ ds_contato2: e })
+        this.setState({ ds_contato2: value })
         break;
       case 'exampleFormControlSelect1':
-        this.setState({ genero: e })
+        this.setState({ genero: value })
         break;
       case 'exampleInputEmail1':
-        this.setState({ email: e })
+        this.setState({ email: value })
         break;
       case 'exampleInputPassword1':
-        this.setState({ senha: e })
+        this.setState({ senha: value })
         break;
       case 'cep':
-        this.setState({ cep: e })
+        this.setState({ cep: value })
         break;
       case 'cidade':
-        this.setState({ cidade: e })
+        this.setState({ cidade: value })
         break;
       case 'bairro':
-        this.setState({ bairro: e })
+        this.setState({ bairro: value })
         break;
       case 'uf':
-        this.setState({ ufselecionado: e })
+        this.setState({ ufselecionado: value })
         break;
       case 'rua':
-        this.setState({ rua: e })
+        this.setState({ rua: value })
         break;
       case 'numero':
-        this.setState({ numero: e })
+        this.setState({ numero: value })
         break;
       case 'complemento':
-        this.setState({ complemento: e })
+        this.setState({ complemento: value })
         break;
       case 'referencia':
-        this.setState({ referencia: e })
+        this.setState({ referencia: value })
         break;
       default:
-        
     }
   }
 
@@ -184,7 +152,7 @@ export default class Cadastro extends React.Component {
 
   render() {
     return (
-      <form className="col-12" id="formularioCadastro">
+      <div className="col-12" id="formularioCadastro">
         <h1><center>Cadastro</center></h1>
         <div className="row">
           <div className="col-12 center">
@@ -194,12 +162,12 @@ export default class Cadastro extends React.Component {
               <div className="col-12" id="container3">
 
                 <div className="col-12">
-                  <label for="exampleInputPassword1" >Nome Completo</label>
+                  <label htmlFor="exampleInputPassword1" >Nome Completo</label>
                   <input type="text" onChange={this.onChange} value={this.state.nome} id="nome" className="form-control" placeholder="Digite seu nome" />
                 </div>
 
                 <div className="col-12">
-                  <label for="exampleInputPassword1">CPF</label>
+                  <label htmlFor="exampleInputPassword1">CPF</label>
                   <input type="text" id="cpf" onChange={this.onChange} value={this.state.cpf} className="form-control valida-cpf-cnpj"
                     placeholder="000-000-000-00 / XX.XXX.XXX/XXXX-XX" />
                 </div>
@@ -208,28 +176,28 @@ export default class Cadastro extends React.Component {
                   <div className="row">
 
                     <div className="col-6">
-                      <label for="exampleInputPassword1">RG</label>
+                      <label htmlFor="exampleInputPassword1">RG</label>
                       <input type="text" id="rg" onChange={this.onChange} value={this.state.rg} className="form-control valida-rg"
                         placeholder="__.___.___-_" />
                     </div>
 
                     <div className="col-6">
-                      <label for="exampleInputPassword1">Nascimento</label>
-                      <input id="datanascimento" type="date" onChange={this.onChange} value={this.state.data_nascimento} className="form-control" placeholder="" />
+                      <label htmlFor="exampleInputPassword1">Nascimento</label>
+                      <input type="date" id="datanascimento" onChange={this.onChange} value={this.state.data_nascimento} className="form-control" placeholder="" />
                     </div>
 
                     <div className="col-6">
-                      <label for="exampleInputPassword1">Telefone 1</label>
+                      <label htmlFor="exampleInputPassword1">Telefone 1</label>
                       <input type="text" id="tele" onChange={this.onChange} value={this.state.contatos["ds_contato1"]} className="form-control" placeholder="(__)_____-____" />
                     </div>
 
                     <div className="col-6">
-                      <label for="exampleInputPassword1">Telefone 2</label>
+                      <label htmlFor="exampleInputPassword1">Telefone 2</label>
                       <input type="text" id="telef" onChange={this.onChange} value={this.state.contatos["ds_contato2"]} className="form-control" placeholder="(__)_____-____" />
                     </div>
 
                     <div className="col-4">
-                      <label for="exampleFormControlSelect1">Gênero</label>
+                      <label htmlFor="exampleFormControlSelect1">Gênero</label>
                       <select className="form-control" onChange={this.onChange} value={this.state.genero} id="exampleFormControlSelect1">
                         <option>Feminino</option>
                         <option>Masculino</option>
@@ -237,19 +205,19 @@ export default class Cadastro extends React.Component {
                     </div>
 
                     <div className="col-8">
-                      <label for="exampleInputEmail1">Email</label>
+                      <label htmlFor="exampleInputEmail1">Email</label>
                       <input type="email" onChange={this.onChange} value={this.state.email} className="form-control" id="exampleInputEmail1"
                         aria-describedby="emailHelp" placeholder="Joao@gmail.com" />
                     </div>
 
                     <div className="col-6">
-                      <label for="exampleInputPassword1">Senha</label>
+                      <label htmlFor="exampleInputPassword1">Senha</label>
                       <input type="password" onChange={this.onChange} value={this.state.senha} className="form-control" id="exampleInputPassword1"
                         placeholder="********" />
                     </div>
 
                     <div className="col-6">
-                      <label for="exampleInputPassword1">Confirme sua senha</label>
+                      <label htmlFor="exampleInputPassword1">Confirme sua senha</label>
                       <input type="password" className="form-control" id="exampleInputPassword11"
                         placeholder="********" />
                     </div>
@@ -262,27 +230,27 @@ export default class Cadastro extends React.Component {
 
             <div className="col-6 center">
 
-              <div className="col-12" id="container4">
+              <div className="col-12" id="container3">
                 <div className="container">
                   <div className="row">
                     <div className="col-6">
-                      <br />
-                      <label for="inputAddress">CEP</label>
+
+                      <label htmlFor="inputAddress">CEP</label>
                       <input onChange={this.onChange} value={this.state.endereco[this.state.cep]} type="text" id="cep" className="form-control" placeholder="00000-000" />
                     </div>
 
                     <div className="col-6">
-                      <br />
-                      <label for="inputAddress">Cidade</label>
+
+                      <label htmlFor="inputAddress">Cidade</label>
                       <input onChange={this.onChange} value={this.state.endereco[this.state.cidade]} type="text" id="cidade" className="form-control"
                         placeholder="Digite sua cidade aqui" />
                     </div>
                     <div className="col-6">
-                      <label for="inputAddress">Bairro</label>
+                      <label htmlFor="inputAddress">Bairro</label>
                       <input onChange={this.onChange} value={this.state.endereco[this.state.bairro]} id="bairro" type="text" className="form-control" placeholder="Bairro" />
                     </div>
                     <div className="col-3">
-                      <label for="inputAddress">UF</label>
+                      <label htmlFor="inputAddress">UF</label>
                       <select onClick={this.onChange} id="uf" className="form-control">
                         {this.state.ufs.map(uf => {
                           return <option key={uf.id} value={uf.id} >{uf.ds_uf}</option>
@@ -294,21 +262,21 @@ export default class Cadastro extends React.Component {
                 </div>
 
                 <div className="col-12">
-                  <label for="inputAddress">Rua</label>
+                  <label htmlFor="inputAddress">Rua</label>
                   <input onChange={this.onChange} value={this.state.endereco[this.state.rua]} type="text" id="rua" className="form-control" placeholder="Digite seu endereço" />
                 </div>
                 <div className="col-12">
-                  <label for="inputAddress">Número</label>
+                  <label htmlFor="inputAddress">Número</label>
                   <input onChange={this.onChange} value={this.state.endereco[this.state.rua]} type="text" id="numero" className="form-control" placeholder="00000" />
                 </div>
                 <div className="col-12">
-                  <label for="inputAddress">Complemento</label>
+                  <label htmlFor="inputAddress">Complemento</label>
                   <input onChange={this.onChange} type="text" value={this.state.endereco[this.state.rua]} id="complemento" className="form-control" placeholder="Torre, Bloco, Andar" />
                 </div>
                 <div className="col-12">
-                  <label for="inputAddress">Referência</label>
+                  <label htmlFor="inputAddress">Referência</label>
                   <input onChange={this.onChange} value={this.state.endereco[this.state.referencia]} type="text" id="referencia" className="form-control" placeholder="ponto de referencia" />
-                  <br />
+
                 </div>
               </div>
 
@@ -317,13 +285,13 @@ export default class Cadastro extends React.Component {
           </div>
 
           <div className="col-12 center">
-            <button className="btn btn-primary btn-lg btn-block w-50" id="teste-botao1"
-              onClick={this.postCliente} >Prosseguir</button>
-            <br />
+            <div className="btn btn-primary btn-lg btn-block w-50" id="teste-botao1"
+              onClick={this.postCliente} >Prosseguir</div>
+
           </div>
         </div>
 
-      </form>
+      </div>
     );
   }
 }

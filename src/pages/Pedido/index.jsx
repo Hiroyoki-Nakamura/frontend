@@ -50,7 +50,6 @@ export default class Pedido extends Component {
 
           date = date.replace('-', '/');
         }
-
       }
 
       return (
@@ -58,7 +57,7 @@ export default class Pedido extends Component {
           <div className="row">
             <div className="col-12 d-flex justify-content-around" id="labels">
               <label className="text-center" style={{ width: '120px' }}>{order.id}</label>
-              <label className="text-center" style={{ width: '120px' }}>R$ {order.valor_total}</label>
+              <label className="text-center" style={{ width: '120px' }}>R$ {`${parseFloat(order.valor_total).toFixed(2)}`.replace('.', ',')}</label>
               <label className="text-center" style={{ width: '120px' }}>{date}</label>
               <label className="text-center" style={{ width: '120px' }}>{order.cd_status_pedido}</label>
             </div>

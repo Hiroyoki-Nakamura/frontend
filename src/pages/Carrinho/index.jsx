@@ -3,13 +3,15 @@ import './styles.css';
 
 import Linha from '../../Components/LinhaPedido';
 
+const BEFORE = {
+  products: [],
+  totalPrice: 0,
+  minValue: 0,
+  cart: ''
+}
+
 export default class Carrinho extends Component {
-  state = {
-    products: [],
-    totalPrice: 0,
-    minValue: 0,
-    cart: ''
-  }
+  state = { ...BEFORE };
 
   componentDidMount() {
     this.getProducts();
@@ -62,7 +64,7 @@ export default class Carrinho extends Component {
         totalPrice: newTotalPrice
       }));
       localStorage.setItem('cart', JSON.stringify([...products]));
-      
+
       this.setState({ products, totalPrice: newTotalPrice });
     }
   }
@@ -154,19 +156,30 @@ export default class Carrinho extends Component {
 
                   <div className="col-12">
 
-                    <label className="corvalor">Valor Total</label>
-                    <input className="valortotal" disabled value={'R$ ' + `${this.state.totalPrice}`.replace('.', ',')} />
+                    <div className='float-right w-25'>
 
-                    <div className="row">
-                      <div className="col-2" id="voltar">
-                        <a href="#/"><button type="button" className="btn btn-secondary botao" id="botao">Voltar</button></a>
+                      <div className='row'>
+                        <div className="col-6"></div>
+                        <div className="col-6">
+                          <label className="corvalor">Valor Total</label>
+                          <input className="valortotal" disabled value={'R$ ' + `${this.state.totalPrice}`.replace('.', ',')} />
+
+                        </div>
                       </div>
-                      <a href={'#/' + this.hasLogged()}><button type="button" className="btn btn-success btn-md btn-block botao"
-                        id="botao">Confirmar</button></a>
 
-                      <div className="col-2">
+
+                      <div className="row">
+                        <div className="col-6" id="voltar">
+                          <a href="#/"><button type="button" className="btn btn-secondary botao" id="botao">Voltar</button></a>
+                        </div>
+                        <a href={'#/' + this.hasLogged()}><button type="button" className="btn btn-success btn-md btn-block botao"
+                          id="botao">Confirmar</button></a>
+
+                        <div className="col-2">
+                        </div>
                       </div>
                     </div>
+
 
                   </div>
 
