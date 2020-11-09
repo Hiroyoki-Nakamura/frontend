@@ -9,7 +9,8 @@ import ItemMenu from '../../Components/Item_menu';
 
 export default class NavBar extends Component {
   state = {
-    categorys: []
+    categorys: [],
+    name: ""
   }
 
   componentDidMount() {
@@ -26,6 +27,23 @@ export default class NavBar extends Component {
       this.setState({ categorys: localCategorys});
     }
   }
+
+
+  onChange = (event) => {
+    const resultado= (event.target.value)
+    this.setState ({name: resultado})
+
+    const retorno= (event.target.id)
+
+    switch (retorno) {
+      case 'search-conf':
+        this.setState ({name: resultado})
+      break;
+      default:
+    }
+    }
+
+ 
 
   render() {
     return (
@@ -48,8 +66,8 @@ export default class NavBar extends Component {
                 <ItemMenu href='#/contato' value='Contato' />
               </ul>
               <form className="form-inline my-2 my-lg-0">
-                <input className="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" />
-                <button className=" lupa_icon btn btn-outline-dark my-2 my-sm-0 btn_lupa" type="submit"></button>
+                <input className="form-control mr-sm-2" type="search" placeholder="Buscar" id= "search-conf" aria-label="Search" onChange={this.onChange} value= {this.state.name} />
+                <button className=" lupa_icon btn btn-outline-dark my-2 my-sm-0 btn_lupa" type="submit" onclick ></button>
               </form>
             </div>
           </nav>

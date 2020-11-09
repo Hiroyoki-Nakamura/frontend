@@ -71,15 +71,15 @@ export default class Linha extends Component {
             </div>
           </div>
 
-          <div className="col-3" id="nomeProduto">
+          <div className="col-3 center mt-2" id="nomeProduto">
             <h5>{this.state.product.nome_produto}</h5>
           </div>
 
-          <div className="col-2 center">
+          <div className="col-2 center mt-3">
             <label htmlFor="">{`${this.state.priceUnique}`.replace('.', ',')}</label>
           </div>
 
-          <div className="col-2">
+          <div className="col-lg-2 col-md-2 col-2 mt-2">
             <br />
             <div className="input-group">
               <button className='btn btn-danger' type="button" onClick={this.minus}>-</button>
@@ -89,18 +89,15 @@ export default class Linha extends Component {
             </div>
 
           </div>
-          <div className="col-2 center">
+          <div className="col-2 center mt-3">
             <label htmlFor="">{`${this.state.priceTotal}`.replace('.', ',')}</label>
           </div>
 
           <div className="col-2 center">
-            <div className="custom-control custom-checkbox">
-              <input type="checkbox" className="custom-control-input" id={this.props.chave} />
-              <label className="custom-control-label"
-                onClick={() => this.props.removeItem(this.props.chave)}
-                htmlFor={this.props.chave}>
-              </label>
+            <button className='btn btn-outline-danger btn_remove_cart icon_remove_cart' onClick={() => this.props.removeItem(this.props.chave)} id={this.props.chave}>
+            <div htmlFor={this.props.chave}>
             </div>
+            </button>
           </div>
 
         </div>

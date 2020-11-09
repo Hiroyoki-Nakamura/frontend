@@ -113,13 +113,13 @@ export default class Carrinho extends Component {
                     <input className="valortotal" disabled value={'R$ ' + `${this.state.totalPrice}`.replace('.', ',')} />
 
                     <div className="row">
-                      <div className="col-1" id="voltar">
+                      <div className="col-2" id="voltar">
                         <a href="#/"><button type="button" className="btn btn-secondary botao" id="botao">Voltar</button></a>
                       </div>
-
-                      <div className="col-2">
                         <a href={'#/' + this.hasLogged()}><button type="button" className="btn btn-success btn-md btn-block botao"
                           id="botao">Confirmar</button></a>
+
+                      <div className="col-2">
                       </div>
                     </div>
 
