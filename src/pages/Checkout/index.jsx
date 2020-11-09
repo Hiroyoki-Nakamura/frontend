@@ -239,7 +239,7 @@ export default class Checkout extends Component {
               <div className='d-flex justify-content-center align-items-center h-75'>
                 <div>
                   <label>Frete: </label>
-                  <input type="text" className='form-control text-center' readOnly value=''/>
+                  <input type="text" className='form-control text-center' readOnly value='R$ 35,00'/>
                   <label>Valor Total:</label>
                   <input type="text-area " className='form-control text-center' readOnly value={'R$ ' + this.state.price} />
                   <div className="d-flex justify-content-center mt-5">

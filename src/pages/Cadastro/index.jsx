@@ -77,7 +77,7 @@ export default class Cadastro extends Component {
     const sendClient = await API.post('/cliente/cadastro', objClient);
 
     if (sendClient.data == 'email já cadastrado') {
-      alert(sendClient.data);
+      alert(sendClient.data.replace('criado', ''));
     } else {
       alert(sendClient.data);
     }
