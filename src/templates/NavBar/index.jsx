@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './styles.css'
 
+
 import API from '../../Services/api';
 
 import Categoria from '../../Components/Categoria';
@@ -21,29 +22,33 @@ export default class NavBar extends Component {
     const localCategorys = JSON.parse(localStorage.getItem('categorys'));
     if (localCategorys == null) {
       const categorys = await API.get('/categoria/listarCategorias');
-      this.setState({ categorys: [...categorys.data] }); 
+      this.setState({ categorys: [...categorys.data] });
       localStorage.setItem('categorys', JSON.stringify([...categorys.data]));
     } else {
-      this.setState({ categorys: localCategorys});
+      this.setState({ categorys: localCategorys });
     }
   }
 
 
   onChange = (event) => {
-    const resultado= (event.target.value)
-    this.setState ({name: resultado})
+    const resultado = (event.target.value)
+    this.setState({ name: resultado })
 
-    const retorno= (event.target.id)
-
+    const retorno = (event.target.id)
+    console.log (`/buscar/${resultado}`)
     switch (retorno) {
       case 'search-conf':
-        this.setState ({name: resultado})
-      break;
+        this.setState({ name: resultado })
+        break;
       default:
     }
-    }
+  }
 
- 
+
+  getBuscar = () => {
+    API.get('/buscar/{this.state.name}', 
+    )
+  }
 
   render() {
     return (
@@ -66,7 +71,7 @@ export default class NavBar extends Component {
                 <ItemMenu href='#/contato' value='Contato' />
               </ul>
               <form className="form-inline my-2 my-lg-0">
-                <input className="form-control mr-sm-2" type="search" placeholder="Buscar" id= "search-conf" aria-label="Search" onChange={this.onChange} value= {this.state.name} />
+                <input className="form-control mr-sm-2" type="search" placeholder="Buscar" id="search-conf" aria-label="Search" onChange={this.onChange} value={this.state.name} />
                 <button className=" lupa_icon btn btn-outline-dark my-2 my-sm-0 btn_lupa" type="submit" onclick ></button>
               </form>
             </div>
