@@ -12,7 +12,6 @@ import Pedido from '../pages/Pedido';
 import Produto from '../pages/Produto';
 import Sucesso from '../pages/SucessoCompra';
 import Sobre from '../pages/SobreNos';
-import Endereco from '../pages/Endereco';
 
 export default class Routes extends Component {
   state = {
@@ -30,7 +29,6 @@ export default class Routes extends Component {
     return (
       <Router history={hashHistory}>
         <Route path='/cadastro' component={Cadastro} />
-        <Route path='/endereco' component={Endereco} />
         <Route path='/carrinho' component={Carrinho} />
         <Route path='/categoria' component={Categoria} render={this.select} />
         <Route path='/checkout' component={Checkout} />

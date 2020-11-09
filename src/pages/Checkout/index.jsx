@@ -5,24 +5,25 @@ import API from '../../Services/api';
 const BEFORE = {
   pageAdress: 'novoEndereco',
   page: 'cartao',
-  enderecos: [],
-    rua: '',
-    bairro: '',
-    complemento: '',
-    referencia: '',
-    numero: '',
-    cep: '',
-    uf: '',
-    cartoes_credito:{
+  endereco: [],
+  rua: '',
+  bairro: '',
+  complemento: '',
+  referencia: '',
+  numero: '',
+  cep: '',
+  uf: '',
+  cartoes_credito: {
     nome_titular: '',
     cpf_titular: '',
     numero_cartao: '',
     address: 0,
     cvv: '',
-    },
-    client: '',
-    price: '',
-  ufs: []
+  },
+  client: '',
+  price: '',
+  ufs: [],
+  campos: ''
 };
 
 
@@ -47,11 +48,12 @@ export default class Checkout extends React.Component {
     const cartSettings = await JSON.parse(localStorage.getItem('cartSettings'));
     const price = `${cartSettings.totalPrice}`.replace('.', ',');
 
-    this.setState({ enderecos: [...enderecos.data],
+    this.setState({
+      endereco: [...enderecos.data],
       price: price,
       address: enderecos.data[0].id
     });
-    
+
   }
 
   componentDidMount() {
@@ -95,7 +97,7 @@ export default class Checkout extends React.Component {
     await API.post('/pedido/criar', objSend);
 
     alert('pedido realizado com sucesso!');
-    
+
     localStorage.removeItem('cart');
     localStorage.removeItem('cartSettings');
     window.location.href = '/';
@@ -107,25 +109,30 @@ export default class Checkout extends React.Component {
     console.log(this.state.rua, this.state.bairro, this.state.complemento, this.state.numero, this.state.cep, this.state.uf, client.id)
 
     // this.setState({ enderecos: [...enderecos.data] });
-          await API.post('/endereco/salvar', {
-          rua: this.state.rua,
-          bairro: this.state.bairro,
-          complemento: this.state.complemento,
-          refencia: this.state.referencia,
-          numero: this.state.numero,
-          cep: this.state.cep,
-          cd_uf: this.state.uf,
-          cd_cliente: client.id
-          
-        })
-          .then(response => {
-          console.log(response)
-        })
-          .catch(error => {
-            console.log(error.response)
-          });
-        }
-      
+    await API.post('/endereco/salvar', {
+      rua: this.state.rua,
+      bairro: this.state.bairro,
+      complemento: this.state.complemento,
+      refencia: this.state.referencia,
+      numero: this.state.numero,
+      cep: this.state.cep,
+      cd_uf: this.state.uf,
+      cd_cliente: client.id
+
+    })
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error.response)
+      });
+  }
+
+  //  handleFormSubmit = (event) => {
+  //   event.pretendDefault();
+  //   console.log(campos);
+  // }
+
 
   onChange = (event) => {
     const value = (event.target.value);
@@ -150,19 +157,19 @@ export default class Checkout extends React.Component {
         break;
       case 'bairro':
         this.setState({ bairro: value })
-        break;   
+        break;
       case 'complemento':
         this.setState({ complemento: value })
         break;
       case 'referencia':
-        this.setState({ referencia: value})
+        this.setState({ referencia: value })
         break;
       case 'cep':
         this.setState({ cep: value })
         break;
       case 'uf':
         this.setState({ uf: value })
-        break;           
+        break;
       default:
         break;
 
@@ -181,110 +188,110 @@ export default class Checkout extends React.Component {
       <>
 
         <label className="ed"> Endereço cadastrado: </label>
-        <select className=".select_endereco custom-select" id="enderecos"  onClick={() => this.getEndereco()}>
+        <select className=".select_endereco custom-select" id="enderecos" onClick={() => this.getEndereco()}>
           <option>Endereco Cliente</option>
-          {this.state.enderecos.map(enderecos => {
-            return <option value={enderecos.id} >{enderecos.rua + ' , ' + enderecos.numero}</option>
+          {this.state.endereco.map(enderecos => {
+            return <option key={enderecos.id} >{enderecos.rua + ' , ' + enderecos.numero}</option>
           })}
 
         </select>
-        
-        <div className="btn btnl btn-primary btn-lg active" id="endereco"  value ="endereco" aria-pressed="true" onClick={this.renderAdress} >Entregar em outro Endereço</div>
+
+        <div className="btn btnl btn-primary btn-lg active" id="endereco" value="endereco" aria-pressed="true" onClick={this.renderAdress} >Entregar em outro Endereço</div>
 
       </>
     const newAdress =
       <>
-        
+
         <h2>Endereço</h2>
 
-        
+
         <form className='container1' >
 
           <div className='col-12' >
             <div className='row'>
 
               {/* <div className="container col-6"> */}
-              
-                <div className="form-group"   >
+
+              <div className="form-group"   >
                 <div className="row">
-                <div className="col-8">
-                
-                  <label >Rua</label>
-                  <input type="text" className="form-control" id="rua" placeholder="Rua" onChange={this.onChange} value={this.state.rua} />
-                
+                  <div className="col-8">
+
+                    <label >Rua</label>
+                    <input type="text" className="form-control" id="rua" placeholder="Rua" onChange={this.onChange} value={this.state.rua} />
+
                   </div>
                   <div className="col-4">
-                
-                  <label >Número</label>
+
+                    <label >Número</label>
                     <input type="text" className="form-control" id="numero" placeholder="Nº" onChange={this.onChange} value={this.state.numero} /></div>
                 </div>
-                </div>
-                <div className="form-group">
-                  <label >Bairro</label>
-                  <input type="text" className="form-control" id="bairro" placeholder="Bairro" onChange={this.onChange} value={this.state.bairro} /></div>
-                <div className="form-group">
-                  <label >Complemento</label>
-                  <input type="text" className="form-control" id="complemento" placeholder="Complemento" onChange={this.onChange} value={this.state.complemento} /></div>
+              </div>
+              <div className="form-group">
+                <label >Bairro</label>
+                <input type="text" className="form-control" id="bairro" placeholder="Bairro" onChange={this.onChange} value={this.state.bairro} /></div>
+              <div className="form-group">
+                <label >Complemento</label>
+                <input type="text" className="form-control" id="complemento" placeholder="Complemento" onChange={this.onChange} value={this.state.complemento} /></div>
 
-                <br></br>
+              <br></br>
               {/* </div> */}
 
               {/* <div className="container col-6"> */}
-               
-                <div className="form-group">
-                  <label >Referência</label>
-                  <input type="text" className="form-control" id="referencia" placeholder="Referência" onChange={this.onChange} value={this.state.referencia} /></div>
-                <div className="row">
-                  <div className="col-4">
 
-                    <div className="col- my-1">
-                      <label className="mr-sm-2" >UF</label>
-                      <select className="custom-select mr-sm-2" id="uf" onClick={this.onChange}>
-                        {this.state.ufs.map(uf => {
-                          return <option key={uf.id} value={uf.id} >{uf.ds_uf}</option>
-                        })}
+              <div className="form-group">
+                <label >Referência</label>
+                <input type="text" className="form-control" id="referencia" placeholder="Referência" onChange={this.onChange} value={this.state.referencia} /></div>
+              <div className="row">
+                <div className="col-4">
 
-                      </select>
+                  <div className="col- my-1">
+                    <label className="mr-sm-2" >UF</label>
+                    <select className="custom-select mr-sm-2" id="uf" onClick={this.onChange}>
+                      {this.state.ufs.map(uf => {
+                        return <option key={uf.id} >{uf.ds_uf}</option>
+                      })}
 
-                    </div>
+                    </select>
+
                   </div>
+                </div>
                 {/* </div> */}
 
                 {/* <div className="col-6"> */}
-                  <div className="form-group">
-                    <label  >  CEP</label>
-                    <input type="CEP" className="form-control" id="cep" placeholder="00000-000" onChange={this.onChange} value={this.state.cep} /></div>
-                    <div className="col-6">
-                    <div className="row">
-                  
+                <div className="form-group">
+                  <label  >  CEP</label>
+                  <input type="CEP" className="form-control" id="cep" placeholder="00000-000" onChange={this.onChange} value={this.state.cep} /></div>
+                <div className="col-6">
+                  <div className="row">
+
                     <a className="btn  btn-primary btn-md active" id="novoEndereco" aria-pressed="true" onClick={this.renderAdress} value="novoEndereco">Voltar</a>
-                    </div>
-                    </div>
-                    <div className="col-6">
-                    <div className="row">
-                    <a className="btn  btn-primary btn-md active" id="salvar" aria-pressed="true" onClick={() => this.postEnderecos()} >Salvar</a>
-                    </div>
-                    </div>  
+                  </div>
                 </div>
+                <div className="col-6">
+                  <div className="row">
+                    <a className="btn  btn-primary btn-md active" id="salvar" aria-pressed="true" onClick={() => this.postEnderecos()} >Salvar</a>
+                  </div>
+                </div>
+              </div>
               {/* </div> */}
 
             </div>
-            
+
           </div>
 
         </form>
 
 
-        
-       
+
+
       </>
     switch (pageAdress) {
       case 'endereco':
         return newAdress;
       case 'novoEndereco':
         return Adress;
-        default:
-      
+      default:
+
     }
   }
 
@@ -356,17 +363,18 @@ export default class Checkout extends React.Component {
     return (
 
       <div className="flex-container cima col-12" >
-        <div className="ede col-4"  style={{overflowY: "scroll", overflowX: "hidden"}}>
-          
-          
-          {this.showAdress() }
-          
+
+        <div className="ede col-4" style={{ overflowY: "scroll", overflowX: "hidden" }}>
+          <h3>Endereço de entrega</h3>
+
+          {this.showAdress()}
+
           <div className='center'>
-          
-</div>
-          
+
+          </div>
+
         </div>
-        <div className="modopg col-4" style={{overflowY: "scroll", overflowX: "hidden"}}>
+        <div className="modopg col-4" style={{ overflowY: "scroll", overflowX: "hidden" }}>
           <h3>Forma de Pagamento</h3>
           <input type="radio" name="radiof" value="boleto" onChange={this.renderPay} className="radio" id="radio" aria-label="Radio button for following text input" />
           <label>Boleto</label>
@@ -379,18 +387,31 @@ export default class Checkout extends React.Component {
         </div>
         <div className="confirmadados col-4">
           <h3>Confirmar Dados</h3>
-         
-         
+
+
 
           <div>
+            <label>Frete:</label>
+            <br />
+            <input type="text-area " className='input_valorTotal' placeholder="R$ 15,00 " />
+            <br />
             <label>Valor Total:</label>
             <br />
-            <input type="text-area " className='input_valorTotal'/*style="border-radius: 10px; width: 2 00px; "*/ placeholder="R$ 000,00 " />
+            <input type="text-area " className='input_valorTotal' readOnly value={'R$ ' + this.state.price} />
             <br />
-            <a href="../html/index.html"><button type="button" className="btn btn-success btcc ">Continuar Comprando</button></a>
-            <a ><button type="button " className="btn btn-success btfc " onClick={this.postCards}>Finalizar Compra</button></a>
+            <br />
+            <div className="row">
+              <div className="col-4">
+                <a href="../html/index.html"><button type="button" className="btn btn-success btcc ">Voltar</button></a>
+              </div>
+              <div className="col-8">
+                <a ><button type="button " className="btn btn-success btfc " onClick={this.postCards}>Finalizar Compra</button></a>
+              </div>
+            </div>
           </div>
+
         </div>
+
       </div>
     )
   }
