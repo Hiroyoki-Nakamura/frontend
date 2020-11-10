@@ -30,17 +30,13 @@ export default props => (
       </div>
     </div>
     <div className='row'>
-      <div className="col-8">
+      <div className="col-9">
           <p className='center ml-5'>Site focado exclusivamente na venda de Bebidas Alcoólicas como, vinhos, champanhes e  destilados com os produtos de alta qualidade </p>
           <p className="copyright">Desvinho &copy; 2020</p>
       </div>
-          <div className='col-1'>
+          <div className='social_icons center col-2'>
             <a href="#"><div className='phone_icon'/></a>    
-          </div>
-          <div className="col-1">
           <a href="https://www.instagram.com/pi_desvinhos/" target='blank'><div className='insta_icon'/></a>
-          </div>
-          <div className="col-1 m-0">
           <a href="#/contato"><div className='mail_icon'/></a>
           </div>
 
