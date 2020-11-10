@@ -8,8 +8,25 @@ body {
   align-items: center;
 }
 
-.right{
+.right {
   display: flex;
   justify-content: right;
   align-items: center;
 }
+
+.radius {
+  border-radius: 20px;
+}
+
+/* cont_compr */
+.btcc {
+  background-color: #660033;
+  border-color: #660033;
+  color: #fff;
+}
+
+/* final_comp */
+.btcc:hover {
+  background-color: #963465;
+  color: #fff;
+} 

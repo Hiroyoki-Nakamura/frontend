@@ -3,13 +3,15 @@ import './styles.css';
 
 import Linha from '../../Components/LinhaPedido';
 
+const BEFORE = {
+  products: [],
+  totalPrice: 0,
+  minValue: 0,
+  cart: ''
+}
+
 export default class Carrinho extends Component {
-  state = {
-    products: [],
-    totalPrice: 0,
-    minValue: 0,
-    cart: ''
-  }
+  state = { ...BEFORE };
 
   componentDidMount() {
     this.getProducts();
@@ -25,10 +27,16 @@ export default class Carrinho extends Component {
       product.quantidade = amount;
       minValue += product.desconto_produto;
       totalPrice += (product.desconto_produto * amount);
+      product.valor = (product.desconto_produto * amount);
     })
 
     minValue = minValue.toFixed(2);
     totalPrice = totalPrice.toFixed(2);
+
+    localStorage.setItem('cartSettings', JSON.stringify({
+      totalPrice: totalPrice
+    }));
+    localStorage.setItem('cart', JSON.stringify([...products]));
 
     await this.setState({
       totalPrice,
@@ -52,7 +60,11 @@ export default class Carrinho extends Component {
         }
       });
 
+      localStorage.setItem('cartSettings', JSON.stringify({
+        totalPrice: newTotalPrice
+      }));
       localStorage.setItem('cart', JSON.stringify([...products]));
+
       this.setState({ products, totalPrice: newTotalPrice });
     }
   }
@@ -60,7 +72,13 @@ export default class Carrinho extends Component {
   hasLogged = () => {
     const client = JSON.parse(localStorage.getItem('client'));
     const response = client == null ? 'login' : 'checkout';
-    return response;
+    const redirect = this.state.totalPrice > 0 ? 'checkout' : '';
+
+    if (response == 'checkout') {
+      return redirect;
+    } else {
+      return response;
+    }
   }
 
   removeItem = async productId => {
@@ -128,7 +146,7 @@ export default class Carrinho extends Component {
               <div>
 
                 <div className="container" id="carrinho">
-                  { this.state.cart }
+                  {this.state.cart}
                 </div>
 
               </div>
@@ -138,19 +156,30 @@ export default class Carrinho extends Component {
 
                   <div className="col-12">
 
-                    <label className="corvalor">Valor Total</label>
-                    <input className="valortotal" disabled value={'R$ ' + `${this.state.totalPrice}`.replace('.', ',')} />
+                    <div className='float-right w-25'>
 
-                    <div className="row">
-                      <div className="col-2" id="voltar">
-                        <a href="#/"><button type="button" className="btn btn-secondary botao" id="botao">Voltar</button></a>
+                      <div className='row'>
+                        <div className="col-6"></div>
+                        <div className="col-6">
+                          <label className="corvalor">Valor Total</label>
+                          <input className="valortotal" disabled value={'R$ ' + `${this.state.totalPrice}`.replace('.', ',')} />
+
+                        </div>
                       </div>
-                      <a href={'#/' + this.hasLogged()}><button type="button" className="btn btn-success btn-md btn-block botao"
-                        id="botao">Confirmar</button></a>
 
-                      <div className="col-2">
+
+                      <div className="row">
+                        <div className="col-6" id="voltar">
+                          <a href="#/"><button type="button" className="btn btn-secondary botao" id="botao">Voltar</button></a>
+                        </div>
+                        <a href={'#/' + this.hasLogged()}><button type="button" className="btn btn-success btn-md btn-block botao"
+                          id="botao">Confirmar</button></a>
+
+                        <div className="col-2">
+                        </div>
                       </div>
                     </div>
+
 
                   </div>
 

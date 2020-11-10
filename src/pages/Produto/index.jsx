@@ -38,10 +38,7 @@ export default class Produto extends Component {
 
       if (add) {
         localStorage.setItem('cart', JSON.stringify([...verify, product]));
-        console.log('adicionou')
-      } else {
-        console.log('não adicionou')
-      }
+      } 
     } else {
       localStorage.setItem('cart', JSON.stringify([product]));
     }
