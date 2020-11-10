@@ -31,7 +31,7 @@ export default props => (
     </div>
     <div className='row'>
       <div className="col-8">
-          <p className='center'>Site focado exclusivamente na venda de Bebidas Alcoólicas como, vinhos, champanhes e  destilados com os produtos de alta qualidade </p>
+          <p className='center ml-5'>Site focado exclusivamente na venda de Bebidas Alcoólicas como, vinhos, champanhes e  destilados com os produtos de alta qualidade </p>
           <p className="copyright">Desvinho &copy; 2020</p>
       </div>
           <div className='col-1'>
