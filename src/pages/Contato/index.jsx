@@ -1,57 +1,97 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './styles.css';
 
-export default props => (
-  <>
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-12">
+import API from '../../Services/api';
 
-          <form className="col-lg-8 col-md-8 col-sm-8 col-8" id="central">
+const BEFORE = {
+  name: '',
+  email: '',
+  subject: '',
+  message: ''
+};
 
-            <div className="titleContato">
-              <h1 className='center top_text'>Central de Atendimento</h1>
-              <h3 className='center second_text'>Fale conosco!</h3>
+export default class Contato extends Component {
+  state = { ...BEFORE };
+
+  changeState = event => {
+    const id = event.target.id;
+    const value = event.target.value;
+
+    switch (id) {
+      case 'name':
+        this.setState({ name: value });
+        break;
+      case 'email':
+        this.setState({ email: value });
+        break;
+      case 'subject':
+        this.setState({ subject: value });
+        break;
+      case 'message':
+        this.setState({ message: value });
+        break;
+      default:
+    }
+  }
+
+  sendEmail = async () => {
+
+    const sendObject = { ...this.state };
+    
+    const response = await API.post('/sac', sendObject);
+
+    console.log(response);
+  }
+
+  render() {
+    return (
+      <>
+        <div className="col-12">
+          <div className="col-md-12 col-sm-12 col-12 py-2 pb-4 my-5 bg-secondary radius">
+
+            <div className="col-12">
+              <div className="titleContato">
+                <h1 className='center top_text'>Central de Atendimento</h1>
+                <h3 className='center second_text'>Fale conosco!</h3>
+              </div>
             </div>
 
-            <div className="row" >
-              <div className="col-lg " id="container">
-                <div className="row">
-                  <div className="col-12">
-                    <br />
-                    <label for="exampleInputPassword1">Nome Completo</label>
-                    <input type="text" className="form-control" placeholder="Digite seu nome" />
-                  </div>
-                  <div className="col-12">
-                    <label for="exampleInputPassword1">Assunto</label>
-                    <input type="text" className="form-control" placeholder="Digite seu nome" />
-                  </div>
+            <div className="col-12">
+              <div className="row py-3 bg-light radius">
 
-                  <div className="col-12 form-group">
-                    <label for="exampleFormControlTextarea1">Descrição</label>
-                    <textarea className="form-control" id="exampleFormControlTe xtarea1" rows="3"></textarea>
+                <div className="col-12">
+                  <label htmlFor="exampleInputPassword1">Nome Completo</label>
+                  <input type="text" className="form-control text-center" placeholder="Digite seu nome" id='name' value={this.state.name} onChange={this.changeState} />
+                </div>
+
+                <div className="col-12">
+                  <label htmlFor="">Email</label>
+                  <input type="email" className="form-control text-center" placeholder='Digite seu nome' id='email' value={this.state.email} onChange={this.changeState} />
+                </div>
+
+                <div className="col-12">
+                  <label htmlFor="exampleInputPassword1">Assunto</label>
+                  <input type="text" className="form-control text-center" placeholder="Digite o assunto" id='subject' value={this.state.subject} onChange={this.changeState} />
+                </div>
+
+                <div className="col-12 form-group">
+                  <label htmlFor="exampleFormControlTextarea1">Comentário</label>
+                  <textarea className="form-control text-center" id="message" placeholder='Digite seu comentário' onChange={this.changeState} value={this.state.message} rows="3"></textarea>
+                </div>
+
+                <div className="col-12">
+                  <p> Iremos retornar sua resposta para o seu e-mail.</p>
+                  <div className="center">
+                    <div type="submit" className="btn btcc radius py-2 px-4" id="" onClick={this.sendEmail}>Enviar</div>
                   </div>
-
-                  <div className="col-12">
-                    <p> Iremos retornar sua resposta para o seu e-mail.</p>
-                    <div className="center col-8">
-                      <label for="inputAddress"></label>
-                      <button type="submit" className="btn btn-primary btn-lg btn-block" id="teste-botao" onclick="validar()">Enviar</button>
-                      <br />
-                    </div>
-
-                  </div>
-
                 </div>
 
               </div>
             </div>
-          </form>
 
+          </div>
         </div>
-
-      </div>
-
-    </div>
-  </>
-)
+      </>
+    );
+  }
+}
