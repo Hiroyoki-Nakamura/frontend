@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.css'; 
-import { withFormik } from 'formik';
+import { useForm } from "react-hook-form";
 import api from '../../Services/api';
 
 
@@ -94,52 +94,48 @@ export default class Cadastro extends React.Component {
   }
 
 
-
   onChange = (event) => {
 
     const e = (event.target.value);
     const i = (event.target.id);
-    const regex = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/; // regex de nome
-    const respostaRegexNome = regex.test(e); // testando regex de nome
-    const regexCPF = /^[\d{3}\.\d{3}\.\d{3}\-\d{2}$]/ // REGEX DE CPF
-    const respostaregexcpf = regexCPF.test(e); // TESTANDO REGEX DE CPF
-    const regexRG = /^[(\d{1,2})(\d{3})(\d{3})({\dX})$]/ // REGEX DE RG
-    const respostaregexrg = regexRG.test(e); // TESTANDO REGEX DE RG 
-    const regexTel = /[^(\(?\d{2}\)?\s)?(\d{4,5}\-\d{4})$]/;
-    const respostaregexTel = regexTel.test(e);
-    
-    
-    
+    const regexCpf = /[^\d{3}\.\d{3}\.\d{3}\-\d{2}$]/;
+    const respregexcpf = regexCpf.test(e);
+    const regextel = /[^\d{4,5}\-\d{4}$]/;
+    const respregextel = regextel.test(e);
+    const data = new Date(e);
 
     switch (i) {
       case 'nome':
-        if(respostaRegexNome == false) {
-          alert("nome não existe!!");
-        }
         this.setState({ nome: e })       
         break;  
       case 'cpf':
-          if(respostaregexcpf == false){
-            alert("CPF INVALIDO!!");
-          }
+        if(respregexcpf == true){
+          alert("CPF INVALIDO!!");
+          return false;
+        }
         this.setState({ cpf: e })
         break;
       case 'rg':
-          if(respostaregexrg == false){ 
-            alert("RG INVALIDO!");
-          }
-        this.setState({ rg: e })
+         this.setState({ rg: e })
         break;
       case 'datanascimento':
         this.setState({ data_nascimento: e })
+        if(data.getFullYear() >= 2002 || data.getMonth() < 10) {
+          alert("Menor de 18 proibido!!");
+        }
         break;
       case 'tele':
-          if(respostaregexTel){
-            alert("Telefone Invalido")
-          }
+        if(respregextel == true){
+          alert("telfone invalido");
+          return false;
+        }
         this.setState({ ds_contato1: e })
         break;
       case 'telef':
+        if(respregextel == true){
+          alert("telfone invalido");
+          return false;
+        }
         this.setState({ ds_contato2: e })
         break;
       case 'exampleFormControlSelect1':
@@ -175,11 +171,15 @@ export default class Cadastro extends React.Component {
       case 'referencia':
         this.setState({ referencia: e })
         break;
-      default:
+      default:  
         
     }
-  }
 
+    
+
+  }
+ 
+  
 
 
   render() {
@@ -196,6 +196,7 @@ export default class Cadastro extends React.Component {
                 <div className="col-12">
                   <label for="exampleInputPassword1" >Nome Completo</label>
                   <input type="text" onChange={this.onChange} value={this.state.nome} id="nome" className="form-control" placeholder="Digite seu nome" />
+                  <div className="error"> Eroor </div> 
                 </div>
 
                 <div className="col-12">
@@ -238,7 +239,7 @@ export default class Cadastro extends React.Component {
 
                     <div className="col-8">
                       <label for="exampleInputEmail1">Email</label>
-                      <input type="email" onChange={this.onChange} value={this.state.email} className="form-control" id="exampleInputEmail1"
+                      <input type="email" onBlur={this.validation} onChange={this.onChange} value={this.state.email} className="form-control" id="exampleInputEmail1"
                         aria-describedby="emailHelp" placeholder="Joao@gmail.com" />
                     </div>
 

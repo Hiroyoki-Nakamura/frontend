@@ -41,3 +41,7 @@ h1 {
 .cinza{
     background-color: #3d3c3c;
 }
+
+.error{
+    display: none;
+}
