@@ -64,7 +64,7 @@ export default class Produto extends Component {
                 <div className="col-12 ">
                   <h4>{this.state.product.nome_produto}</h4>
                   <hr />
-                  <h6>De: <strike>R$ {`${this.state.de}`.replace('.', ',')}</strike> &nbsp;
+                  <h6>De: <strike className='price-line'>R$ {`${this.state.de}`.replace('.', ',')}</strike> &nbsp;
                   <h6 className='id_style'>Por: {`${this.state.por}`.replace('.', ',')}</h6>
                   </h6>
                   <br />
