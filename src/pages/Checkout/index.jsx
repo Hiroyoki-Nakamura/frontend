@@ -73,14 +73,15 @@ export default class Checkout extends Component {
       valor_total: parseFloat(this.state.price.replace(',', '.'))
     };
 
-    await API.post('/pedido/criar', objSend);
+    const sendOrder = await API.post('/pedido/criar', objSend);
 
-    alert('pedido realizado com sucesso!');
+    console.log(sendOrder);
+
+    // alert(sendOrder );
     
-    localStorage.removeItem('cart');
-    localStorage.removeItem('cartSettings');
-    window.location.href = '/';
-
+    // localStorage.removeItem('cart');
+    // localStorage.removeItem('cartSettings');
+    // window.location.href = '/';
   };
 
   onChange = (event) => {
@@ -114,11 +115,11 @@ export default class Checkout extends Component {
       default:
         break;
     }
-  }
+  };
 
   renderPay = event => {
     this.setState({ page: event.target.value });
-  }
+  };
 
   showPay = () => {
     const page = this.state.page;
