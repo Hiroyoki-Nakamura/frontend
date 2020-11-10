@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import './styles.css'
 
 import API from '../../Services/api';
@@ -38,6 +39,8 @@ export default class Pedido extends Component {
     localStorage.removeItem('cart');
     window.location.href = '/';
   }
+
+
 
   setPage = () => {
     const page = this.state.page;
