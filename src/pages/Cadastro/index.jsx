@@ -33,6 +33,8 @@ const BEFORE = {
 }
 
 export default class Cadastro extends Component {
+  
+  
   state = { ...BEFORE };
 
   
@@ -85,20 +87,37 @@ export default class Cadastro extends Component {
     }
   }
 
+  validation = (event) => {
+   const value = (event.target.value)
+   const id = (event.target.id)
+   
+   switch(id){
+     case 'nome': 
+       if(value.length < 3){
+         alert("Nome invalido!!");
+       } if(new RegExp(/^[A-ZÀ-Ÿ][A-zÀ-ÿ']+\s([A-zÀ-ÿ']\s?)*[A-ZÀ-Ÿ][A-zÀ-ÿ']+$/).test(value) == true){
+         alert("Nome invalido!!")
+       }
+    break;
+    default:
+   }
+   
+
+  } 
 
   onChange = (event) => {
 
     const value = (event.target.value);
     const id = (event.target.id);
-    const regexCpf = /[^\d{3}\.\d{3}\.\d{3}\-\d{2}$]/;
-    const respregexcpf = regexCpf.test(e);
-    const regextel = /[^\d{4,5}\-\d{4}$]/;
-    const respregextel = regextel.test(e);
+    const regexCpf = new RegExp(/[^\d{3}\.\d{3}\.\d{3}\-\d{2}$]/);
+    const respregexcpf = regexCpf.test(value);
+    const regextel = new RegExp(/[^\d{4,5}\-\d{4}$]/);
+    const respregextel = regextel.test(value);
     const data = new Date(value);
 
     switch (id) {
       case 'nome':
-        this.setState({ nome: value })       
+        this.setState({ nome: value })      
         break;  
       case 'cpf':
         if(respregexcpf == true){
@@ -112,8 +131,8 @@ export default class Cadastro extends Component {
         break;
       case 'datanascimento':
         this.setState({ data_nascimento: value })
-        if(data.getFullYear() >= 2002 || data.getMonth() < 10) {
-          alert("Menor de 18 proibido!!");
+        if(data.getFullYear() > 2002) {
+          alert("Menor de 18 anos proibido!!"); 
         }
         break;
       case 'tele':
@@ -186,13 +205,12 @@ export default class Cadastro extends Component {
 
                 <div className="col-12">
                   <label htmlFor="exampleInputPassword1" >Nome Completo</label>
-                  <input type="text" onChange={this.onChange} value={this.state.nome} id="nome" className="form-control" placeholder="Digite seu nome" />
-                  <div className="error"> Eroor </div> 
+                  <input type="text" onBlur={this.validation  } onChange={this.onChange} value={this.state.nome} id="nome" required className="form-control" placeholder="Digite seu nome" />
                 </div>
 
                 <div className="col-12">
                   <label htmlFor="exampleInputPassword1">CPF</label>
-                  <input type="text" id="cpf" onChange={this.onChange} value={this.state.cpf} className="form-control valida-cpf-cnpj"
+                  <input type="text" id="cpf" onChange={this.onChange} value={this.state.cpf} className="form-control valida-cpf-cnpj" required
                     placeholder="000-000-000-00 / XX.XXX.XXX/XXXX-XX" />
                 </div>
 
@@ -201,28 +219,28 @@ export default class Cadastro extends Component {
 
                     <div className="col-6">
                       <label htmlFor="exampleInputPassword1">RG</label>
-                      <input type="text" id="rg" onChange={this.onChange} value={this.state.rg} className="form-control valida-rg"
+                      <input type="text" id="rg" onChange={this.onChange} value={this.state.rg} className="form-control valida-rg" required
                         placeholder="__.___.___-_" />
                     </div>
 
                     <div className="col-6">
                       <label htmlFor="exampleInputPassword1">Nascimento</label>
-                      <input type="date" id="datanascimento" onChange={this.onChange} value={this.state.data_nascimento} className="form-control" placeholder="" />
+                      <input type="date" id="datanascimento" onChange={this.onChange} required value={this.state.data_nascimento} className="form-control" placeholder="" />
                     </div>
 
                     <div className="col-6">
                       <label htmlFor="exampleInputPassword1">Telefone 1</label>
-                      <input type="text" id="tele" onChange={this.onChange} value={this.state.contatos["ds_contato1"]} className="form-control" placeholder="(__)_____-____" />
+                      <input type="text" id="tele" required onChange={this.onChange} value={this.state.contatos["ds_contato1"]} className="form-control" placeholder="(__)_____-____" />
                     </div>
 
                     <div className="col-6">
                       <label htmlFor="exampleInputPassword1">Telefone 2</label>
-                      <input type="text" id="telef" onChange={this.onChange} value={this.state.contatos["ds_contato2"]} className="form-control" placeholder="(__)_____-____" />
+                      <input type="text" id="telef" onChange={this.onChange} value={this.state.contatos["ds_contato2"]} className="form-control" placeholder="(__)_____-____" required />
                     </div>
 
                     <div className="col-4">
                       <label htmlFor="exampleFormControlSelect1">Gênero</label>
-                      <select className="form-control" onChange={this.onChange} value={this.state.genero} id="exampleFormControlSelect1">
+                      <select required className="form-control" onChange={this.onChange} value={this.state.genero} id="exampleFormControlSelect1">
                         <option>Feminino</option>
                         <option>Masculino</option>
                       </select>
@@ -230,19 +248,19 @@ export default class Cadastro extends Component {
 
                     <div className="col-8">
                       <label htmlFor="exampleInputEmail1">Email</label>
-                      <input type="email" onChange={this.onChange} value={this.state.email} className="form-control" id="exampleInputEmail1"
+                      <input required type="email" onChange={this.onChange} value={this.state.email} className="form-control" id="exampleInputEmail1"
                         aria-describedby="emailHelp" placeholder="Joao@gmail.com" />
                     </div>
 
                     <div className="col-6">
                       <label htmlFor="exampleInputPassword1">Senha</label>
-                      <input type="password" onChange={this.onChange} value={this.state.senha} className="form-control" id="exampleInputPassword1"
+                      <input required type="password" onChange={this.onChange} value={this.state.senha} className="form-control" id="exampleInputPassword1"
                         placeholder="********" />
                     </div>
 
                     <div className="col-6">
                       <label htmlFor="exampleInputPassword1">Confirme sua senha</label>
-                      <input type="password" className="form-control" id="exampleInputPassword11"
+                      <input required type="password" className="form-control" id="exampleInputPassword11"
                         placeholder="********" />
                     </div>
                   </div>
@@ -260,22 +278,22 @@ export default class Cadastro extends Component {
                     <div className="col-6">
 
                       <label htmlFor="inputAddress">CEP</label>
-                      <input onChange={this.onChange} value={this.state.endereco[this.state.cep]} type="text" id="cep" className="form-control" placeholder="00000-000" />
+                      <input required onChange={this.onChange} value={this.state.endereco[this.state.cep]} type="text" id="cep" className="form-control" placeholder="00000-000" />
                     </div>
 
                     <div className="col-6">
 
                       <label htmlFor="inputAddress">Cidade</label>
-                      <input onChange={this.onChange} value={this.state.endereco[this.state.cidade]} type="text" id="cidade" className="form-control"
+                      <input required onChange={this.onChange} value={this.state.endereco[this.state.cidade]} type="text" id="cidade" className="form-control"
                         placeholder="Digite sua cidade aqui" />
                     </div>
                     <div className="col-6">
                       <label htmlFor="inputAddress">Bairro</label>
-                      <input onChange={this.onChange} value={this.state.endereco[this.state.bairro]} id="bairro" type="text" className="form-control" placeholder="Bairro" />
+                      <input required onChange={this.onChange} value={this.state.endereco[this.state.bairro]} id="bairro" type="text" className="form-control" placeholder="Bairro" />
                     </div>
                     <div className="col-3">
                       <label htmlFor="inputAddress">UF</label>
-                      <select onClick={this.onChange} id="uf" className="form-control">
+                      <select required onClick={this.onChange} id="uf" className="form-control">
                         {this.state.ufs.map(uf => {
                           return <option key={uf.id} value={uf.id} >{uf.ds_uf}</option>
                         })}
@@ -287,19 +305,19 @@ export default class Cadastro extends Component {
 
                 <div className="col-12">
                   <label htmlFor="inputAddress">Rua</label>
-                  <input onChange={this.onChange} value={this.state.endereco[this.state.rua]} type="text" id="rua" className="form-control" placeholder="Digite seu endereço" />
+                  <input required onChange={this.onChange} value={this.state.endereco[this.state.rua]} type="text" id="rua" className="form-control" placeholder="Digite seu endereço" />
                 </div>
                 <div className="col-12">
                   <label htmlFor="inputAddress">Número</label>
-                  <input onChange={this.onChange} value={this.state.endereco[this.state.rua]} type="text" id="numero" className="form-control" placeholder="00000" />
+                  <input required onChange={this.onChange} value={this.state.endereco[this.state.rua]} type="text" id="numero" className="form-control" placeholder="00000" />
                 </div>
                 <div className="col-12">
                   <label htmlFor="inputAddress">Complemento</label>
-                  <input onChange={this.onChange} type="text" value={this.state.endereco[this.state.rua]} id="complemento" className="form-control" placeholder="Torre, Bloco, Andar" />
+                  <input required onChange={this.onChange} type="text" value={this.state.endereco[this.state.rua]} id="complemento" className="form-control" placeholder="Torre, Bloco, Andar" />
                 </div>
                 <div className="col-12">
                   <label htmlFor="inputAddress">Referência</label>
-                  <input onChange={this.onChange} value={this.state.endereco[this.state.referencia]} type="text" id="referencia" className="form-control" placeholder="ponto de referencia" />
+                  <input required onChange={this.onChange} value={this.state.endereco[this.state.referencia]} type="text" id="referencia" className="form-control" placeholder="ponto de referencia" />
 
                 </div>
               </div>
