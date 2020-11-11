@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles.css';
 import API from '../../Services/api';
+import { post } from 'jquery';
 
 const BEFORE = {
   pageAdress: 'novoEndereco',
@@ -12,15 +13,14 @@ const BEFORE = {
   referencia: '',
   numero: '',
   cep: '',
-  uf: '',
-  cartoes_credito: {
+  uf: 1 ,
+  cartao_creditos: {
     nome_titular: '',
     cpf_titular: '',
     numero_cartao: '',
-    address: 0,
-    cvv: '',
+    address: 0
   },
-  client: '',
+  cd_client: '',
   price: '',
   ufs: [],
   campos: ''
@@ -66,14 +66,21 @@ export default class Checkout extends React.Component {
   }
 
   postCards = async () => {
-    await API.post('/cartaoCredito/adicionarCartao', {
+    const client = JSON.parse(localStorage.getItem('client'));
+    const cart = JSON.parse(localStorage.getItem('cart'));
+
+     API.post('/cartaoCredito/adicionarCartao', {
+      cartao_creditos:{
       nome_titular: this.nome_titular,
       numero_cartao: this.numero_cartao,
       cpf_titular: this.cpf_titular
+      
+      },
+      cd_cliente: client.id
     });
 
-    const client = JSON.parse(localStorage.getItem('client'));
-    const cart = await JSON.parse(localStorage.getItem('cart'));
+    // const client = JSON.parse(localStorage.getItem('client'));
+    // const cart = await JSON.parse(localStorage.getItem('cart'));
 
     let dados_pagamento;
     if (this.state.page == 'boleto') {
@@ -105,28 +112,42 @@ export default class Checkout extends React.Component {
 
   postEnderecos = async () => {
     const client = JSON.parse(localStorage.getItem('client'))
+    // const uf = JSON.parse(localStorage.getItem(''))
     // const enderecos = await API.post('/endereco/salvar/' + client.id)
-    console.log(this.state.rua, this.state.bairro, this.state.complemento, this.state.numero, this.state.cep, this.state.uf, client.id)
+    
 
     // this.setState({ enderecos: [...enderecos.data] });
-    await API.post('/endereco/salvar', {
+     API.post('/endereco/salvar', {
+      // const objEndereco = {
       rua: this.state.rua,
       bairro: this.state.bairro,
       complemento: this.state.complemento,
-      refencia: this.state.referencia,
+      referencia: this.state.referencia,
       numero: this.state.numero,
       cep: this.state.cep,
       cd_uf: this.state.uf,
       cd_cliente: client.id
+      })
 
-    })
+      // const sendEndereco = await API.post('/endereco/salvar', objEndereco)
+    // })
+
+    // if (sendEndereco.data == 'endereco já cadastrado') {
+    //   alert(sendEndereco.data.replace('criado', ''));
+    // } else {
+    //   alert(sendEndereco.data);
+    // }
+    
       .then(response => {
         console.log(response)
       })
       .catch(error => {
         console.log(error.response)
+
       });
-  }
+      
+    }
+  
 
   //  handleFormSubmit = (event) => {
   //   event.pretendDefault();
@@ -168,7 +189,7 @@ export default class Checkout extends React.Component {
         this.setState({ cep: value })
         break;
       case 'uf':
-        this.setState({ uf: value })
+        this.setState({ cd_uf: value })
         break;
       default:
         break;
@@ -190,8 +211,8 @@ export default class Checkout extends React.Component {
         <label className="ed"> Endereço cadastrado: </label>
         <select className=".select_endereco custom-select" id="enderecos" onClick={() => this.getEndereco()}>
           <option>Endereco Cliente</option>
-          {this.state.endereco.map(enderecos => {
-            return <option key={enderecos.id} >{enderecos.rua + ' , ' + enderecos.numero}</option>
+          {this.state.endereco.map(endereco => {
+            return <option key={endereco.id} >{endereco.rua + ' , ' + endereco.numero}</option>
           })}
 
         </select>
@@ -205,7 +226,7 @@ export default class Checkout extends React.Component {
         <h2>Endereço</h2>
 
 
-        <form className='container1' >
+        <form className='container1' method="post" >
 
           <div className='col-12' >
             <div className='row'>
@@ -246,9 +267,9 @@ export default class Checkout extends React.Component {
 
                   <div className="col- my-1">
                     <label className="mr-sm-2" >UF</label>
-                    <select className="custom-select mr-sm-2" id="uf" onClick={this.onChange}>
-                      {this.state.ufs.map(uf => {
-                        return <option key={uf.id} >{uf.ds_uf}</option>
+                    <select className="custom-select mr-sm-2" id="uf" onClick={this.onChange} value={this.state.cd_uf}>
+                      {this.state.ufs.map(cd_uf => {
+                        return <option key={cd_uf.id} >{cd_uf.ds_uf}</option>
                       })}
 
                     </select>
@@ -269,7 +290,7 @@ export default class Checkout extends React.Component {
                 </div>
                 <div className="col-6">
                   <div className="row">
-                    <a className="btn  btn-primary btn-md active" id="salvar" aria-pressed="true" onClick={() => this.postEnderecos()} >Salvar</a>
+                    <div className="btn  btn-primary btn-md active" id="salvar" aria-pressed="true" onClick={this.postEnderecos} >Salvar</div>
                   </div>
                 </div>
               </div>
@@ -305,15 +326,15 @@ export default class Checkout extends React.Component {
       <>
         <form className='mt-2'>
           <label className='w-100 text-center'>Nº do cartão </label>
-          <input type="text-area" className="form-control text-center" id='numero_cartao' placeholder="0000-0000-0000-0000" onChange={this.onChange} value={this.state.numero_cartao} />
+          <input type="text" className="form-control text-center" id='numero_cartao' placeholder="0000-0000-0000-0000" onChange={this.onChange} value={this.state.cartao_creditos[this.state.numero_cartao]} />
 
           <label className='w-100 text-center'>Nome no cartão</label>
-          <input type="text-area" className='form-control text-center' id='nome_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.nome_titular} />
+          <input type="text" className='form-control text-center' id='nome_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.cartao_creditos[this.state.nome_titular]} />
 
           <label className='w-100 text-center'>CPF Titular</label>
-          <input type="text-area" className='form-control text-center' id='cpf_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.cpf_titular} />
+          <input type="text" className='form-control text-center' id='cpf_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.cartao_creditos[this.state.cpf_titular]} />
 
-          <label className='w-100 text-center'>Validade</label> <input type="text-area" className='form-control text-center' id='validade_cartao' placeholder="mês/ano" onChange={this.onChange} value={this.state.validade_cartao} />
+          <label className='w-100 text-center'>Validade</label> <input type="text" className='form-control text-center' id='validade_cartao' placeholder="mês/ano"  />
 
           <label className='w-100 text-center'>CVV</label>
           <input type="text-area"

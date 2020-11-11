@@ -3,13 +3,15 @@ import './styles.css';
 
 import Linha from '../../Components/LinhaPedido';
 
+const BEFORE = {
+  products: [],
+  totalPrice: 0,
+  minValue: 0,
+  cart: ''
+}
+
 export default class Carrinho extends Component {
-  state = {
-    products: [],
-    totalPrice: 0,
-    minValue: 0,
-    cart: ''
-  }
+  state = { ...BEFORE };
 
   componentDidMount() {
     this.getProducts();
