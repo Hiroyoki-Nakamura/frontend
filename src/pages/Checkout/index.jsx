@@ -3,13 +3,16 @@ import './styles.css';
 
 import Address from '../../Components/Endereco';
 import Payment from '../../Components/Pagamento';
+import Alert from '../../Components/Alert';
 
 import API from '../../Services/api';
+
+import $ from 'jquery';
 
 const BEFORE = {
   price: '',
   client: '',
-  page: 'cartao',
+  payment: 'cartao',
   address: 0,
 }
 
@@ -32,7 +35,12 @@ export default class Checkout extends Component {
       price: price,
       address: enderecos.data[0].id
     });
-  }
+  };
+
+  // myAlert = () => {
+  //   const teste = <Alert title='teste' content='teste of content' type='success' />
+  //   return teste;
+  // };
 
   postCards = async () => {
     // await API.post('/cartaoCredito/adicionarCartao', {
@@ -61,7 +69,7 @@ export default class Checkout extends Component {
     const cart = await JSON.parse(localStorage.getItem('cart'));
 
     let dados_pagamento;
-    if (this.state.page == 'boleto') {
+    if (this.state.payment == 'boleto') {
       dados_pagamento = {
         ds_boleto: parseInt(Math.random() * 1000000000000000)
       }
@@ -74,33 +82,36 @@ export default class Checkout extends Component {
     const objSend = {
       cliente: client.id,
       endereco_entrega: this.state.address,
-      tipo_pagamento: (this.state.page == 'boleto' ? 1 : 2),
+      tipo_pagamento: (this.state.payment == 'boleto' ? 1 : 2),
       dados_pagamento,
       produtos: [...cart],
       frete: '35',
       valor_total: parseFloat(this.state.price.replace(',', '.'))
     };
 
-    const sendOrder = await API.post('/pedido/criar', objSend);
+    console.log(objSend);
 
-    if (sendOrder.status == 201) {
-      alert('pedido criado com sucesso!');
+    // const sendOrder = await API.post('/pedido/criar', objSend);
 
-      // localStorage.removeItem('cart');
-      // localStorage.removeItem('cartSettings');
-      // window.location.href = '#/pedido';
-    } else {
-      alert(sendOrder.data);
-    }
-  }
+    // if (sendOrder.status == 201) {
+    //   alert('pedido criado com sucesso!');
 
-  renderPay = page => {
-    this.setState({ page });
+    //   // localStorage.removeItem('cart');
+    //   // localStorage.removeItem('cartSettings');
+    //   // window.location.href = '#/pedido';
+    // } else {
+    //   alert(sendOrder.data);
+    // }
+  };
+
+  Payment = payment => {
+    this.setState({ payment });
   };
 
   render() {
     return (
       <>
+      
         <div className="row my-5 py-3 center flex-container radius">
 
           <div className="col-12 col-md-4">
@@ -111,7 +122,7 @@ export default class Checkout extends Component {
 
           <div className="col-12 col-md-4 my-2">
             <div className='radius content-enter px-2 py-2'>
-              <Payment Pay={this.renderPay} onChange={this.onChange} />
+              <Payment Pay={this.Payment} onChange={this.onChange} />
             </div>
           </div>
 
