@@ -40,7 +40,13 @@ export default class Contato extends Component {
     
     const response = await API.post('/sac', sendObject);
 
-    console.log(response);
+    this.setState({name: ''});
+    this.setState({email: ''});
+    this.setState({subject: ''});
+    this.setState({message: ''});
+
+
+    // console.log(response);
   }
 
   render() {

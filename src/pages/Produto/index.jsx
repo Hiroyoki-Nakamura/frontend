@@ -14,7 +14,7 @@ export default class Produto extends Component {
 
   setProduto = async () => {
     const product = await this.props.route.render();
-    if (product == '') {
+      if (product == '') {
       window.location.href = '/';
     }
     this.setState({
@@ -75,7 +75,7 @@ export default class Produto extends Component {
                     <a href="#/carrinho"><button type="button" className="btn btn-success btn-lg btn-block" onClick={this.onCart} id="botao">Adicionar ao Carrinho</button></a>
                   </div>
                   <div className="col-4" id="voltar">
-                    <a href="#/"><button type="button" className="btn btn-secondary" id="botao">Voltar</button></a>
+                    <a href="#/"><button type="button" className="btn btn-secondary botao" id="botao">Voltar</button></a>
                   </div>
                 </div>
               </article>
