@@ -45,7 +45,6 @@ export default class Contato extends Component {
     this.setState({subject: ''});
     this.setState({message: ''});
 
-
     // console.log(response);
   }
 
