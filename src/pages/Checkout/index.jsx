@@ -104,28 +104,28 @@ export default class Checkout extends Component {
       }
     }
 
-    const objSend = {
-      cliente: client.id,
-      endereco_entrega: this.state.address,
-      tipo_pagamento: (this.state.page == 'boleto' ? 1 : 2),
-      dados_pagamento,
-      produtos: [...cart],
-      frete: '35',
-      valor_total: parseFloat(this.state.price.replace(',', '.'))
-    };
+    // const objSend = {
+    //   cliente: client.id,
+    //   endereco_entrega: this.state.address,
+    //   tipo_pagamento: (this.state.page == 'boleto' ? 1 : 2),
+    //   dados_pagamento,
+    //   produtos: [...cart],
+    //   frete: '35',
+    //   valor_total: parseFloat(this.state.price.replace(',', '.'))
+    // };
 
-    const sendOrder = await API.post('/pedido/criar', objSend);
+    // const sendOrder = await API.post('/pedido/criar', objSend);
 
-    if (sendOrder.status == 201) {
-      alert('pedido criado com sucesso!');
+    // if (sendOrder.status == 201) {
+    //   alert('pedido criado com sucesso!');
 
-      // localStorage.removeItem('cart');
-      // localStorage.removeItem('cartSettings');
-      // window.location.href = '#/pedido';
-    } else {
-      alert(sendOrder.data);
-    }
-
+    //   // localStorage.removeItem('cart');
+    //   // localStorage.removeItem('cartSettings');
+    //   // window.location.href = '#/pedido';
+    // } else {
+    //   alert(sendOrder.data);
+    // }
+    window.location.href = '#/pedido';
   };
 
   onChange = (event) => {
