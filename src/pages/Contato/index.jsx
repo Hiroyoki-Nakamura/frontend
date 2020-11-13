@@ -3,11 +3,18 @@ import './styles.css';
 
 import API from '../../Services/api';
 
+import Alert from '../../Components/Alert';
+
 const BEFORE = {
   name: '',
   email: '',
   subject: '',
-  message: ''
+  message: '',
+  alert: {
+    title: '',
+    content: '',
+    style: ''
+  }
 };
 
 export default class Contato extends Component {
@@ -34,22 +41,62 @@ export default class Contato extends Component {
     }
   }
 
+  myAlert = (title, content, style) => {
+    let showAlert;
+    if (title != undefined && content != undefined && style != undefined) {
+      showAlert = true;
+    } else {
+      showAlert = false;
+    }
+
+    if (showAlert) {
+      this.setState({ alert: { title, content, style } });
+    }
+  };
+
+  resetForAlert = () => {
+    this.setState({ alert: { title: '', content: '', style: '' } });
+  }
+
   sendEmail = async () => {
+    const over = document.querySelector('.overlay');
+    const spin = document.querySelector('.load-cadastro');
 
-    const sendObject = { ...this.state };    
+    spin.classList.remove('none');
+    over.classList.remove('none');
+
+    const sendObject = {
+      name: this.state.name,
+      email: this.state.email,
+      subject: this.state.subject,
+      message: this.state.message
+    };
+
     const response = await API.post('/sac', sendObject);
-    alert('Mensagem enviada!')
-    this.setState({name: ''});
-    this.setState({email: ''});
-    this.setState({subject: ''});
-    this.setState({message: ''});
 
-    // console.log(response);
+    if (response.status == 202) {
+      this.myAlert('SAC!', response.data, 'a');
+      this.setState({ name: '', email: '', subject: '', message: '' });
+    } else {
+      this.myAlert('Opps!', response.data, 'a');
+    }
+
+    spin.classList.add('none');
+    over.classList.add('none');
+
+    if (response.status == 202) {
+      window.location.href = '#/';
+    }
   }
 
   render() {
     return (
       <>
+        <div className="load-cadastro center none">
+          <div className="spin"></div>
+          <div className="loader">Carregando</div>
+        </div>
+        {this.state.alert.title != '' && this.state.alert.content != '' && this.state.alert.style != '' ? <Alert title={`${this.state.alert.title}`} content={`${this.state.alert.content}`} style={`${this.state.alert.style}`} reset={this.resetForAlert} /> : ''}
         <div className="col-12">
           <div className="col-md-12 col-sm-12 col-12 py-2 pb-4 my-5 bg-secondary radius">
 
@@ -95,6 +142,7 @@ export default class Contato extends Component {
 
           </div>
         </div>
+        <div className="overlay none"></div>
       </>
     );
   }

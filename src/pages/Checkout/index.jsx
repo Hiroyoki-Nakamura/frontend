@@ -71,6 +71,12 @@ export default class Checkout extends Component {
   };
 
   postOrder = async () => {
+    const over = document.querySelector('.overlay');
+    const spin = document.querySelector('.load-cadastro');
+
+    spin.classList.remove('none');
+    over.classList.remove('none');
+
     const client = JSON.parse(localStorage.getItem('client'));
     const cart = await JSON.parse(localStorage.getItem('cart'));
 
@@ -81,7 +87,7 @@ export default class Checkout extends Component {
       }
     } else {
       dados_pagamento = {
-        id_cartão: client.id
+        id_cartao: client.id
       }
     }
 
@@ -89,24 +95,27 @@ export default class Checkout extends Component {
       cliente: client.id,
       endereco_entrega: this.state.address,
       tipo_pagamento: (this.state.payment == 'boleto' ? 1 : 2),
-      dados_pagamento,
+      dados_pagamento: { ...dados_pagamento },
       produtos: [...cart],
       frete: '35',
       valor_total: parseFloat(this.state.price.replace(',', '.'))
     };
 
-    console.log(objSend);
-
     const sendOrder = await API.post('/pedido/criar', objSend);
 
     if (sendOrder.status == 201) {
       this.myAlert('novo Pedido', sendOrder.data, 'a');
+    } else {
+      this.myAlert('Opps!', sendOrder.data, 'a');
+    }
 
+    spin.classList.add('none');
+    over.classList.add('none');
+
+    if (sendOrder.status == 201) {
       localStorage.removeItem('cart');
       localStorage.removeItem('cartSettings');
       window.location.href = '#/pedido';
-    } else {
-      this.myAlert('novo Pedido', sendOrder.data, 'a');
     }
   };
 
@@ -117,6 +126,10 @@ export default class Checkout extends Component {
   render() {
     return (
       <>
+        <div className="load-cadastro center none">
+          <div className="spin"></div>
+          <div className="loader">Carregando</div>
+        </div>
         {this.state.alert.title != '' && this.state.alert.content != '' && this.state.alert.style != '' ? <Alert title={`${this.state.alert.title}`} content={`${this.state.alert.content}`} style={`${this.state.alert.style}`} reset={this.resetForAlert} /> : ''}
         <div className="row my-5 py-3 center flex-container radius">
           <div className="col-12 col-md-4">
@@ -141,7 +154,7 @@ export default class Checkout extends Component {
                   <input type="text-area " className='form-control text-center' readOnly value={'R$ ' + this.state.price} />
                   <div className="d-flex justify-content-center mt-5">
                     <a href="../html/index.html" className="col btn btcc radius mx-1">Continuar</a>
-                    <a className="col btn btn-success align-items-center radius mx-1" onClick={this.postOrder}><label>Comprar</label></a>
+                    <a className="col btn btn-success align-items-center radius mx-1" onClick={this.postOrder}>Comprar</a>
                   </div>
                 </div>
               </div>
@@ -149,6 +162,7 @@ export default class Checkout extends Component {
           </div>
 
         </div>
+        <div className="overlay none"></div>
       </>
     );
   };
