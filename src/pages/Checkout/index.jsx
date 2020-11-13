@@ -119,19 +119,16 @@ export default class Checkout extends Component {
       <>
         {this.state.alert.title != '' && this.state.alert.content != '' && this.state.alert.style != '' ? <Alert title={`${this.state.alert.title}`} content={`${this.state.alert.content}`} style={`${this.state.alert.style}`} reset={this.resetForAlert} /> : ''}
         <div className="row my-5 py-3 center flex-container radius">
-
           <div className="col-12 col-md-4">
             <div className='radius content-enter px-2 py-2 w-100'>
               <Address onChange={this.onChange} alertas={this.myAlert} />
             </div>
           </div>
-
           <div className="col-12 col-md-4 my-2">
             <div className='radius content-enter px-2 py-2'>
               <Payment Pay={this.Payment} onChange={this.onChange} alertas={this.myAlert} />
             </div>
           </div>
-
           <div className=" col-12 col-md-4">
             <div className='radius content-enter px-2 py-2'>
 
@@ -148,7 +145,6 @@ export default class Checkout extends Component {
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
 
