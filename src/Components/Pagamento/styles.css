@@ -14,8 +14,7 @@
 }
 
 .load, .loader, .spin {
-  z-index: 9;
-
+  z-index: 3;
 }
 
 .loader {

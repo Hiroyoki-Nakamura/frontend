@@ -72,9 +72,8 @@ export default class Pagamento extends Component {
   };
 
   renderPay = event => {
-    console.log(event.target.value);
     this.setState({ page: event.target.value });
-    // this.props.Pay(event.target.value);
+    this.props.Pay(event.target.value);
   };
 
   showCards = () => {

@@ -57,7 +57,7 @@ export default class Produto extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-9 md-12">
+              <div className="col-9 md-12 white">
 
                 <div className="col-12">
                   <h4>{this.state.product.nome_produto}</h4>
