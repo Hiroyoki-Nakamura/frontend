@@ -294,9 +294,6 @@ export default class Cadastro extends Component {
     }
   }
 
-
-
-
   render() {
     return (
       <div className="col-12" id="formularioCadastro">
