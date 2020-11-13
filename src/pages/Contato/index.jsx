@@ -36,11 +36,15 @@ export default class Contato extends Component {
 
   sendEmail = async () => {
 
-    const sendObject = { ...this.state };
-    
+    const sendObject = { ...this.state };    
     const response = await API.post('/sac', sendObject);
+    alert('Mensagem enviada!')
+    this.setState({name: ''});
+    this.setState({email: ''});
+    this.setState({subject: ''});
+    this.setState({message: ''});
 
-    console.log(response);
+    // console.log(response);
   }
 
   render() {
@@ -66,7 +70,7 @@ export default class Contato extends Component {
 
                 <div className="col-12">
                   <label htmlFor="">Email</label>
-                  <input type="email" className="form-control text-center" placeholder='Digite seu nome' id='email' value={this.state.email} onChange={this.changeState} />
+                  <input type="email" className="form-control text-center" placeholder='Digite seu email' id='email' value={this.state.email} onChange={this.changeState} />
                 </div>
 
                 <div className="col-12">
@@ -76,7 +80,7 @@ export default class Contato extends Component {
 
                 <div className="col-12 form-group">
                   <label htmlFor="exampleFormControlTextarea1">Comentário</label>
-                  <textarea className="form-control text-center" id="message" placeholder='Digite seu comentário' onChange={this.changeState} value={this.state.message} rows="3"></textarea>
+                  <textarea className="form-control text-center" id="message" placeholder='Digite sua mensagem' onChange={this.changeState} value={this.state.message} rows="3"></textarea>
                 </div>
 
                 <div className="col-12">

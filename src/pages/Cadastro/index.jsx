@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './styles.css'
 
 import API from '../../Services/api';
-import { findAllByDisplayValue } from '@testing-library/react';
 
 const BEFORE = {
   nome: "",
@@ -34,11 +33,7 @@ const BEFORE = {
 }
 
 export default class Cadastro extends Component {
-
-
   state = { ...BEFORE };
-
-
 
   componentDidMount() {
     this.getUfs();
@@ -298,9 +293,6 @@ export default class Cadastro extends Component {
       default:
     }
   }
-
-
-
 
   render() {
     return (

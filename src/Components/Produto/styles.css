@@ -35,7 +35,8 @@
 
 .price-line {
   text-decoration: line-through;
-  color: #787878;
+  text-decoration-color: #ffd900ad;
+  color: #b3b5c4;
 }
 
 .price-product{

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import './styles.css'
 
 import API from '../../Services/api';
@@ -39,6 +40,8 @@ export default class Pedido extends Component {
     window.location.href = '/';
   }
 
+
+
   setPage = () => {
     const page = this.state.page;
 
@@ -55,7 +58,7 @@ export default class Pedido extends Component {
       return (
         <>
           <div className="row">
-            <div className="col-12 d-flex justify-content-around" id="labels">
+            <div className="col-12 d-flex justify-content-around" id="labels" >
               <label className="text-center" style={{ width: '120px' }}>{order.id}</label>
               <label className="text-center" style={{ width: '120px' }}>R$ {`${parseFloat(order.valor_total).toFixed(2)}`.replace('.', ',')}</label>
               <label className="text-center" style={{ width: '120px' }}>{date}</label>
@@ -90,7 +93,7 @@ export default class Pedido extends Component {
               </div>
               <div className='form-group col-6'>
                 <label className='col-sm-6 col-form-label'>Genero:</label>
-                <input className='form-control col-6 text-center' type="text" readOnly value={this.state.client.genero} />
+                <input className='form-control col-6 text-center' type="text" readOnly  value={this.state.client.genero} />
               </div>
               <div className='form-group col-6'>
                 <label className='col-sm-6 col-form-label'>Data de Nascimento:</label>
@@ -194,7 +197,7 @@ export default class Pedido extends Component {
                     <hr />
                   </div>
 
-                  <div className="col-9" id="pedido">
+                  <div className="col-9" id="pedido" style={{ overflowY: "scroll", overflowX: "hidden" }}>
                     {this.setPage()}
                   </div>
                 </div>
