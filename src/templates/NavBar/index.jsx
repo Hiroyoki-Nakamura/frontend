@@ -48,10 +48,7 @@ export default class NavBar extends Component {
 
   getBuscar = async () => {
     const nome = (this.state.search);
-    const busca = await API.get(`/buscar/${nome}`);
-
-    console.log(busca);
-
+    await API.get(`/buscar/${nome}`);
   }
 
   render() {
