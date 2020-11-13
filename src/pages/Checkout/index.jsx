@@ -1,101 +1,81 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './styles.css';
+
+import Address from '../../Components/Endereco';
+import Payment from '../../Components/Pagamento';
+import Alert from '../../Components/Alert';
+
 import API from '../../Services/api';
-import { post } from 'jquery';
 
 const BEFORE = {
-  pageAdress: 'novoEndereco',
-  page: 'cartao',
-  endereco: [],
-  rua: '',
-  bairro: '',
-  complemento: '',
-  referencia: '',
-  numero: '',
-  cep: '',
-  uf: '' ,
-  // cartao_creditos:{
-    nome_titular: '',
-    cpf_titular: '',
-    numero_cartao: '',
-    
-  // },
-  cd_cliente: '',
-  address: 0,
   price: '',
-  ufs: [],
-  campos: ''
-};
+  client: '',
+  payment: 'cartao',
+  address: 0,
+  alert: {
+    title: '',
+    content: '',
+    style: ''
+  }
+}
 
-
-export default class Checkout extends React.Component {
-
+export default class Checkout extends Component {
   state = { ...BEFORE };
 
   componentDidMount() {
-    this.getEndereco();
-
+    this.initialization();
   }
 
-  showPage = () => {
-
-  }
-
-  getEndereco = async () => {
-
-
-    const client = JSON.parse(localStorage.getItem('client'))
-    const enderecos = await API.get('/endereco/buscar/' + client.id)
+  initialization = async () => {
+    const client = await JSON.parse(localStorage.getItem('client'));
+    const enderecos = await API.get(`/endereco/buscar/${client.id}`);
     const cartSettings = await JSON.parse(localStorage.getItem('cartSettings'));
+
     const price = `${cartSettings.totalPrice}`.replace('.', ',');
 
     this.setState({
-      endereco: [...enderecos.data],
+      enderecos: [...enderecos.data],
       price: price,
       address: enderecos.data[0].id
     });
+  };
 
+  myAlert = (title, content, style) => {
+    let showAlert;
+    if (title != undefined && content != undefined && style != undefined) {
+      showAlert = true;
+    } else {
+      showAlert = false;
+    }
+
+    if (showAlert) {
+      this.setState({ alert: { title, content, style } });
+    }
   }
 
-  componentDidMount() {
-    this.getUfs();
+  resetForAlert = () => {
+    this.setState({ alert: { title: '', content: '', style: '' } });
   }
 
-  getUfs = async () => {
-    const ufs = await API.get('/uf');
-    this.setState({ ufs: [...ufs.data] });
-  }
+  onChange = (event) => {
+    const value = (event.target.value);
+    const id = (event.target.id);
 
-  postCards = async () => {
+    switch (id) {
+      case 'endereco_entrega':
+        this.setState({ address: value });
+        break;
+      default:
+        break;
+    }
+  };
+
+  postOrder = async () => {
     const client = JSON.parse(localStorage.getItem('client'));
-    const cart = JSON.parse(localStorage.getItem('cart'));
-
-     await API.post('/cartaoCredito/adicionarCartao', {
-    // cartao_creditos:{
-      nome_titular: this.state.nome_titular,
-      numero_cartao: this.state.numero_cartao,
-      cpf_titular: this.state.cpf_titular,
-      
-    // },
-      
-    cd_cliente: client.id,
-    })
-
-    .then(response => {
-      console.log(response)
-    })
-    .catch(error => {
-      console.log(error.response)
-
-    });
-
-
-
-    // const client = JSON.parse(localStorage.getItem('client'));
-    // const cart = await JSON.parse(localStorage.getItem('cart'));
+    const cart = await JSON.parse(localStorage.getItem('cart'));
 
     let dados_pagamento;
-    if (this.state.page == 'boleto') {
+    if (this.state.payment == 'boleto') {
       dados_pagamento = {
         ds_boleto: parseInt(Math.random() * 1000000000000000)
       }
@@ -108,355 +88,68 @@ export default class Checkout extends React.Component {
     const objSend = {
       cliente: client.id,
       endereco_entrega: this.state.address,
-      tipo_pagamento: (this.state.page == 'boleto' ? 1 : 2),
+      tipo_pagamento: (this.state.payment == 'boleto' ? 1 : 2),
       dados_pagamento,
       produtos: [...cart],
+      frete: '35',
       valor_total: parseFloat(this.state.price.replace(',', '.'))
     };
-    await API.post('/pedido/criar', objSend)
 
-    .then(response => {
-      console.log(response)
-    })
-    .catch(error => {
-      console.log(error.response)
+    console.log(objSend);
 
-    });
+    const sendOrder = await API.post('/pedido/criar', objSend);
 
-    alert('pedido realizado com sucesso!');
+    if (sendOrder.status == 201) {
+      this.myAlert('novo Pedido', sendOrder.data, 'a');
 
-    localStorage.removeItem('cart');
-    localStorage.removeItem('cartSettings');
-    window.location.href = '/';
-
-
-
-  }
-
-  postEnderecos = async () => {
-    const client = JSON.parse(localStorage.getItem('client'))
-    // const uf = JSON.parse(localStorage.getItem(''))
-    // const enderecos = await API.post('/endereco/salvar/' + client.id)
-    
-
-    // this.setState({ enderecos: [...enderecos.data] });
-     API.post('/endereco/salvar', {
-      // const objEndereco = {
-      rua: this.state.rua,
-      bairro: this.state.bairro,
-      complemento: this.state.complemento,
-      referencia: this.state.referencia,
-      numero: this.state.numero,
-      cep: this.state.cep,
-      cd_uf: this.state.uf,
-      cd_cliente: client.id
-      })
-
-      // const sendEndereco = await API.post('/endereco/salvar', objEndereco)
-    // })
-
-    // if (sendEndereco.data == 'endereco já cadastrado') {
-    //   alert(sendEndereco.data.replace('criado', ''));
-    // } else {
-    //   alert(sendEndereco.data);
-    // }
-    
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error.response)
-
-      });
-      
+      localStorage.removeItem('cart');
+      localStorage.removeItem('cartSettings');
+      window.location.href = '#/pedido';
+    } else {
+      this.myAlert('novo Pedido', sendOrder.data, 'a');
     }
-  
+  };
 
-  //  handleFormSubmit = (event) => {
-  //   event.pretendDefault();
-  //   console.log(campos);
-  // }
-
-
-  onChange = (event) => {
-    const value = (event.target.value);
-    const id = (event.target.id);
-
-
-    switch (id) {
-      case 'nome_titular':
-        this.setState({ nome_titular: value });
-        break;
-      case 'numero_cartao':
-        this.setState({ numero_cartao: value });
-        break;
-      case 'cpf_titular':
-        this.setState({ cpf_titular: value });
-        break;
-      case 'rua':
-        this.setState({ rua: value })
-        break;
-      case 'numero':
-        this.setState({ numero: value })
-        break;
-      case 'bairro':
-        this.setState({ bairro: value })
-        break;
-      case 'complemento':
-        this.setState({ complemento: value })
-        break;
-      case 'referencia':
-        this.setState({ referencia: value })
-        break;
-      case 'cep':
-        this.setState({ cep: value })
-        break;
-      case 'uf':
-        this.setState({ cd_uf: value })
-        break;
-      default:
-        break;
-
-    }
-
-  }
-
-  renderAdress = event => {
-    this.setState({ pageAdress: event.target.id });
-    console.log(event.target.id)
-  }
-
-  showAdress = () => {
-    const pageAdress = this.state.pageAdress;
-    const Adress =
-      <>
-
-        <label className="ed"> Endereço cadastrado: </label>
-        <select className=".select_endereco custom-select" id="enderecos" onClick={() => this.getEndereco()}>
-          <option>Endereco Cliente</option>
-          {this.state.endereco.map(endereco => {
-            return <option key={endereco.id} >{endereco.rua + ' , ' + endereco.numero}</option>
-          })}
-
-        </select>
-
-        <div className="btn btnl btn-primary btn-lg active" id="endereco" value="endereco" aria-pressed="true" onClick={this.renderAdress} >Entregar em outro Endereço</div>
-
-      </>
-    const newAdress =
-      <>
-
-        <h2>Endereço</h2>
-
-
-        <form className='container1' method="post" >
-
-          <div className='col-12' >
-            <div className='row'>
-
-              {/* <div className="container col-6"> */}
-
-              <div className="form-group"   >
-                <div className="row">
-                  <div className="col-8">
-
-                    <label >Rua</label>
-                    <input type="text" className="form-control" id="rua" placeholder="Rua" onChange={this.onChange} value={this.state.rua} />
-
-                  </div>
-                  <div className="col-4">
-
-                    <label >Número</label>
-                    <input type="text" className="form-control" id="numero" placeholder="Nº" onChange={this.onChange} value={this.state.numero} /></div>
-                </div>
-              </div>
-              <div className="form-group">
-                <label >Bairro</label>
-                <input type="text" className="form-control" id="bairro" placeholder="Bairro" onChange={this.onChange} value={this.state.bairro} /></div>
-              <div className="form-group">
-                <label >Complemento</label>
-                <input type="text" className="form-control" id="complemento" placeholder="Complemento" onChange={this.onChange} value={this.state.complemento} /></div>
-
-              <br></br>
-              {/* </div> */}
-
-              {/* <div className="container col-6"> */}
-
-              <div className="form-group">
-                <label >Referência</label>
-                <input type="text" className="form-control" id="referencia" placeholder="Referência" onChange={this.onChange} value={this.state.referencia} /></div>
-              <div className="row">
-                <div className="col-4">
-
-                  <div className="col- my-1">
-                    <label className="mr-sm-2" >UF</label>
-                    <select className="custom-select mr-sm-2" id="uf" onClick={this.onChange} value={this.state.cd_uf}>
-                      {this.state.ufs.map(cd_uf => {
-                        return <option key={cd_uf.id} >{cd_uf.ds_uf}</option>
-                      })}
-
-                    </select>
-
-                  </div>
-                </div>
-                {/* </div> */}
-
-                {/* <div className="col-6"> */}
-                <div className="form-group">
-                  <label  >  CEP</label>
-                  <input type="CEP" className="form-control" id="cep" placeholder="00000-000" onChange={this.onChange} value={this.state.cep} /></div>
-                <div className="col-6">
-                  <div className="row">
-
-                    <a className="btn  btn-primary btn-md active" id="novoEndereco" aria-pressed="true" onClick={this.renderAdress} value="novoEndereco">Voltar</a>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="row">
-                    <div className="btn  btn-primary btn-md active" id="salvar" aria-pressed="true" onClick={this.postEnderecos} >Salvar</div>
-                  </div>
-                </div>
-              </div>
-              {/* </div> */}
-
-            </div>
-
-          </div>
-
-        </form>
-
-
-
-
-      </>
-    switch (pageAdress) {
-      case 'endereco':
-        return newAdress;
-      case 'novoEndereco':
-        return Adress;
-      default:
-
-    }
-  }
-
-  renderPay = event => {
-    this.setState({ page: event.target.value });
-  }
-
-  showPay = () => {
-    const page = this.state.page;
-    const card =
-      <>
-        <form className='mt-2'>
-          <label className='w-100 text-center'>Nº do cartão </label>
-          <input type="text" className="form-control text-center" id='numero_cartao' placeholder="0000-0000-0000-0000" onChange={this.onChange} value={this.state.numero_cartao} />
-
-          <label className='w-100 text-center'>Nome no cartão</label>
-          <input type="text" className='form-control text-center' id='nome_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.nome_titular} />
-
-          <label className='w-100 text-center'>CPF Titular</label>
-          <input type="text" className='form-control text-center' id='cpf_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.cpf_titular} />
-
-          <label className='w-100 text-center'>Validade</label> <input type="text" className='form-control text-center' id='validade_cartao' placeholder="mês/ano"  />
-
-          <label className='w-100 text-center'>CVV</label>
-          <input type="text-area"
-            id="cvv" className='form-control text-center'
-             maxLength='3' placeholder="000" /> 
-
-          <label className='w-100 text-center'>Quantidade de Parcelas</label>
-          <select className="custom-select form-control" id="inputGroupSelect02">
-            <option>1x sem juros</option>
-            <option>2x sem juros</option>
-            <option>3x sem juros</option>
-            <option>4x sem juros</option>
-            <option>5x sem juros</option>
-            <option>6x sem juros</option>
-            <option>7x sem juros</option>
-            <option>8x sem juros</option>
-            <option>9x sem juros</option>
-            <option>10x sem juros</option>
-          </select>
-
-          <div className='center'>
-            <img className="img " src="/img/visa.png " width="40px " height="40px" />
-            <img className="img " src="/img/master.png " width="40px " height="40px " />
-            <img className="img " src="/img/boleto.png " width="40px " height="40px " />
-          </div>
-        </form>
-      </>
-    const billet =
-      <>
-        <div className='w-100 h-auto'>
-          <label className='w-100 text-center' htmlFor="boleto_nome">Nome:</label>
-          <input type="text" id='boleto_nome' className='form-control text-center' onChange={this.onChange} />
-          <label className='w-100 text-center' htmlFor="boleto_cpf">CPF:</label>
-          <input type="text" id='boleto_cpf' className='form-control text-center' onChange={this.onChange} /> 
-        </div>
-      </>
-    switch (page) {
-      case 'cartao':
-        return card;
-      case 'boleto':
-        return billet;
-      default:
-    }
-  }
+  Payment = payment => {
+    this.setState({ payment });
+  };
 
   render() {
     return (
-
-      <div className="flex-container cima col-12" >
-
-        <div className="ede col-4" style={{ overflowY: "scroll", overflowX: "hidden" }}>
-          <h3>Endereço de entrega</h3>
-
-          {this.showAdress()}
-
-          <div className='center'>
-
+      <>
+        {this.state.alert.title != '' && this.state.alert.content != '' && this.state.alert.style != '' ? <Alert title={`${this.state.alert.title}`} content={`${this.state.alert.content}`} style={`${this.state.alert.style}`} reset={this.resetForAlert} /> : ''}
+        <div className="row my-5 py-3 center flex-container radius">
+          <div className="col-12 col-md-4">
+            <div className='radius content-enter px-2 py-2 w-100'>
+              <Address onChange={this.onChange} alertas={this.myAlert} />
+            </div>
           </div>
+          <div className="col-12 col-md-4 my-2">
+            <div className='radius content-enter px-2 py-2'>
+              <Payment Pay={this.Payment} onChange={this.onChange} alertas={this.myAlert} />
+            </div>
+          </div>
+          <div className=" col-12 col-md-4">
+            <div className='radius content-enter px-2 py-2'>
 
-        </div>
-        <div className="modopg col-4" style={{ overflowY: "scroll", overflowX: "hidden" }}>
-          <h3>Forma de Pagamento</h3>
-          <input type="radio" name="radiof" value="boleto" onChange={this.renderPay} className="radio" id="radio" aria-label="Radio button for following text input" />
-          <label>Boleto</label>
-          <br />
-          <input type="radio" name="radiof" value="cartao" onChange={this.renderPay} id="radioc" aria-label="Radio button for following text input" />
-          <label>Cartão de crédito</label>
-          <br />
-          {this.showPay()}
-
-        </div>
-        <div className="confirmadados col-4">
-          <h3>Confirmar Dados</h3>
-
-
-
-          <div>
-            <label>Frete:</label>
-            <br />
-            <input type="text-area " className='input_valorTotal' placeholder="R$ 15,00 " />
-            <br />
-            <label>Valor Total:</label>
-            <br />
-            <input type="text-area " className='input_valorTotal' readOnly value={'R$ ' + this.state.price} />
-            <br />
-            <br />
-            <div className="row">
-              <div className="col-4">
-                <a href="../html/index.html"><button type="button" className="btn btn-success btcc ">Voltar</button></a>
-              </div>
-              <div className="col-8">
-                <a ><button type="button " className="btn btn-success btfc " onClick={this.postCards}>Finalizar Compra</button></a>
+              <h3 className='w-100 text-center'>Confirmar Dados</h3>
+              <div className='d-flex justify-content-center align-items-center h-75'>
+                <div>
+                  <label>Frete: </label>
+                  <input type="text" className='form-control text-center' readOnly value='R$ 35,00' />
+                  <label>Valor Total:</label>
+                  <input type="text-area " className='form-control text-center' readOnly value={'R$ ' + this.state.price} />
+                  <div className="d-flex justify-content-center mt-5">
+                    <a href="../html/index.html" className="col btn btcc radius mx-1">Continuar</a>
+                    <a className="col btn btn-success align-items-center radius mx-1" onClick={this.postOrder}><label>Comprar</label></a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
         </div>
-
-      </div>
-    )
-  }
+      </>
+    );
+  };
 }

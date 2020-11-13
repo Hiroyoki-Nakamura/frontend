@@ -26,35 +26,40 @@ export default class Home extends React.Component {
   }
 
   setProducts = async () => {
-    const localProducts = localStorage.getItem('products');
-    const localBanners = localStorage.getItem('banners');
+    const localProducts = JSON.parse(localStorage.getItem('products'));
+    const localBanners = JSON.parse(localStorage.getItem('banners'));
 
-    if (localProducts == null || localBanners == null) {
-      const products = await API.get('/produto/listar');
-      const banners = await API.get('/imagens/Banner');
+    const products = await API.get('/produto/listar');
+
+    if (localProducts == null || localBanners == null
+      || products.data.length != localProducts.length) {
+
+      if (localBanners == null) {
+        const banners = await API.get('/imagens/Banner');
+
+        localStorage.setItem('banners', JSON.stringify([...banners.data]));
+
+        this.setState({ banners: [...banners.data] });
+      }
 
       localStorage.setItem('products', JSON.stringify([...products.data]));
-      localStorage.setItem('banners', JSON.stringify([...banners.data]));
 
       this.setState({
-        banners: [...banners.data],
         products: [...products.data]
       });
+
     } else {
       this.setState({
-        banners: JSON.parse(localBanners),
-        products: JSON.parse(localProducts)
+        banners: localBanners,
+        products: localProducts
       });
     }
-
   }
 
   render() {
     return (
       <>
-
         <div className="mt-2">
-
 
           <Banners
             images={this.state.banners}
@@ -80,7 +85,7 @@ export default class Home extends React.Component {
               </div>
             </div>
 
-          </div>
+           </div>
 
         </div>
       </>

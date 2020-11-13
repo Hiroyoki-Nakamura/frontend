@@ -11,7 +11,7 @@ h1 {
 
 #formularioCadastro {
     border-radius: 30px;
-    background-color: rgba(219, 212, 212, 0.589);
+    background-color: rgba(112, 107, 107, 0.589);
     justify-content: space-between;
     margin: 20px 0;
 }
@@ -34,4 +34,8 @@ h1 {
 
 .cinza{
     background-color: #3d3c3c;
+}
+
+.error{
+    display: none;
 }

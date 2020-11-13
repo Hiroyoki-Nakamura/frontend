@@ -17,6 +17,7 @@ export default class Routes extends Component {
   state = {
     product: '',
   }
+
   select = product => {
     this.setState({ product: { ...product} });
   }
@@ -42,6 +43,5 @@ export default class Routes extends Component {
         <Redirect from='*' to='/' />
       </Router>
     );
-
   }
 } 

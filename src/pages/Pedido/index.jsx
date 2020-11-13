@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import './styles.css'
 
 import API from '../../Services/api';
@@ -38,6 +39,8 @@ export default class Pedido extends Component {
     localStorage.removeItem('cart');
     window.location.href = '/';
   }
+
+
 
   setPage = () => {
     const page = this.state.page;
@@ -90,7 +93,7 @@ export default class Pedido extends Component {
               </div>
               <div className='form-group col-6'>
                 <label className='col-sm-6 col-form-label'>Genero:</label>
-                <input className='form-control col-6 text-center' type="text" readOnly value={this.state.client.genero} />
+                <input className='form-control col-6 text-center' type="text" readOnly  value={this.state.client.genero} />
               </div>
               <div className='form-group col-6'>
                 <label className='col-sm-6 col-form-label'>Data de Nascimento:</label>
