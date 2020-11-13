@@ -31,12 +31,13 @@ export default class Pagamento extends Component {
     const client = JSON.parse(localStorage.getItem('client'));
     const cards = await API.get(`/cartao/listar/${client.id}`);
 
-    if (cards.data == 'não encontramos cartões para esse usuario' && this.state.client == '') {
+    if (cards.data == 'não encontramos cartões para esse usuario') {
       this.props.alertas('opss!', cards.data, 'a');
       this.setState({ client });
     } else {
       this.setState({ cards: [...cards.data] });
     }
+    
     const spin = document.querySelector('.load');
     spin.classList.add('none');
     over.classList.add('none');
