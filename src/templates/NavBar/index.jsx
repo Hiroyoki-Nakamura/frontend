@@ -7,7 +7,6 @@ import API from '../../Services/api';
 import Categoria from '../../Components/Categoria';
 import Dropdown_menu from '../../Components/Dropdown_menu';
 import ItemMenu from '../../Components/Item_menu';
-import Product from '../../Components/Produto';
 
 export default class NavBar extends Component {
   state = {
@@ -22,9 +21,6 @@ export default class NavBar extends Component {
 
   }
 
-
-
-
   getCategorias = async () => {
     const localCategorys = JSON.parse(localStorage.getItem('categorys'));
     if (localCategorys == null) {
@@ -35,9 +31,6 @@ export default class NavBar extends Component {
       this.setState({ categorys: localCategorys });
     }
   }
-
-
-
 
   onChange = (event) => {
     const resultado = (event.target.value)
@@ -50,11 +43,8 @@ export default class NavBar extends Component {
         break;
       default:
     }
-    this.getBuscar()
+    this.getBuscar();
   }
-
-
-
 
   getBuscar = async () => {
     const nome = (this.state.search);
@@ -65,13 +55,8 @@ export default class NavBar extends Component {
   }
 
   render() {
-
-
     return (
       <>
-
-
-
         <section id="barraNav">
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <a className="navbar-brand" href="#"></a>
