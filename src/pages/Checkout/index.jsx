@@ -13,14 +13,15 @@ const BEFORE = {
   referencia: '',
   numero: '',
   cep: '',
-  uf: 1 ,
-  cartao_creditos: {
+  uf: '' ,
+  // cartao_creditos:{
     nome_titular: '',
     cpf_titular: '',
     numero_cartao: '',
-    address: 0
-  },
-  cd_client: '',
+    
+  // },
+  cd_cliente: '',
+  address: 0,
   price: '',
   ufs: [],
   campos: ''
@@ -69,15 +70,26 @@ export default class Checkout extends React.Component {
     const client = JSON.parse(localStorage.getItem('client'));
     const cart = JSON.parse(localStorage.getItem('cart'));
 
-     API.post('/cartaoCredito/adicionarCartao', {
-      cartao_creditos:{
-      nome_titular: this.nome_titular,
-      numero_cartao: this.numero_cartao,
-      cpf_titular: this.cpf_titular
+     await API.post('/cartaoCredito/adicionarCartao', {
+    // cartao_creditos:{
+      nome_titular: this.state.nome_titular,
+      numero_cartao: this.state.numero_cartao,
+      cpf_titular: this.state.cpf_titular,
       
-      },
-      cd_cliente: client.id
+    // },
+      
+    cd_cliente: client.id,
+    })
+
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.log(error.response)
+
     });
+
+
 
     // const client = JSON.parse(localStorage.getItem('client'));
     // const cart = await JSON.parse(localStorage.getItem('cart'));
@@ -101,13 +113,24 @@ export default class Checkout extends React.Component {
       produtos: [...cart],
       valor_total: parseFloat(this.state.price.replace(',', '.'))
     };
-    await API.post('/pedido/criar', objSend);
+    await API.post('/pedido/criar', objSend)
+
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.log(error.response)
+
+    });
 
     alert('pedido realizado com sucesso!');
 
     localStorage.removeItem('cart');
     localStorage.removeItem('cartSettings');
     window.location.href = '/';
+
+
+
   }
 
   postEnderecos = async () => {
@@ -326,20 +349,20 @@ export default class Checkout extends React.Component {
       <>
         <form className='mt-2'>
           <label className='w-100 text-center'>Nº do cartão </label>
-          <input type="text" className="form-control text-center" id='numero_cartao' placeholder="0000-0000-0000-0000" onChange={this.onChange} value={this.state.cartao_creditos[this.state.numero_cartao]} />
+          <input type="text" className="form-control text-center" id='numero_cartao' placeholder="0000-0000-0000-0000" onChange={this.onChange} value={this.state.numero_cartao} />
 
           <label className='w-100 text-center'>Nome no cartão</label>
-          <input type="text" className='form-control text-center' id='nome_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.cartao_creditos[this.state.nome_titular]} />
+          <input type="text" className='form-control text-center' id='nome_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.nome_titular} />
 
           <label className='w-100 text-center'>CPF Titular</label>
-          <input type="text" className='form-control text-center' id='cpf_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.cartao_creditos[this.state.cpf_titular]} />
+          <input type="text" className='form-control text-center' id='cpf_titular' placeholder="NOME ESCRITO NO CARTÃO" onChange={this.onChange} value={this.state.cpf_titular} />
 
           <label className='w-100 text-center'>Validade</label> <input type="text" className='form-control text-center' id='validade_cartao' placeholder="mês/ano"  />
 
           <label className='w-100 text-center'>CVV</label>
           <input type="text-area"
             id="cvv" className='form-control text-center'
-            onChange={this.onChange} maxLength='3' placeholder="000" />
+             maxLength='3' placeholder="000" /> 
 
           <label className='w-100 text-center'>Quantidade de Parcelas</label>
           <select className="custom-select form-control" id="inputGroupSelect02">
@@ -365,10 +388,10 @@ export default class Checkout extends React.Component {
     const billet =
       <>
         <div className='w-100 h-auto'>
-          {/* <label className='w-100 text-center' htmlFor="boleto_nome">Nome:</label>
+          <label className='w-100 text-center' htmlFor="boleto_nome">Nome:</label>
           <input type="text" id='boleto_nome' className='form-control text-center' onChange={this.onChange} />
           <label className='w-100 text-center' htmlFor="boleto_cpf">CPF:</label>
-          <input type="text" id='boleto_cpf' className='form-control text-center' onChange={this.onChange} /> */}
+          <input type="text" id='boleto_cpf' className='form-control text-center' onChange={this.onChange} /> 
         </div>
       </>
     switch (page) {
