@@ -54,12 +54,12 @@ export default class Login extends Component {
             <div className="col-5">
               <div id="container1">
                 <div className="form-group">Login</div>
-                <div className="form-group">
-                  <input type="text" className="text-center" placeholder="email" id="login" onChange={this.onChange} value={this.state.login} />
+                <div className="form-group center">
+                  <input type="text" className="text-center form-control w-75" placeholder="email" id="login" onChange={this.onChange} value={this.state.login} />
                 </div>
                 <div className="form-group">Senha</div>
-                <div className="form-group">
-                  <input type="password" className="text-center" placeholder="digite sua senha" id="senha-conf" onChange={this.onChange} value={this.state.senha} />
+                <div className="form-group center">
+                  <input type="password" className="text-center form-control w-75" placeholder="digite sua senha" id="senha-conf" onChange={this.onChange} value={this.state.senha} />
                 </div>
                 <div className="form-group">
                   <div className="btn btn-success" onClick={() => this.postLogin()} >Login</div>
