@@ -1,0 +1,41 @@
+h1 {
+    color: #ffffff;
+}
+
+#teste-botao1 {
+    background-color: #660033;
+    color: #ffffff;
+    border-radius: 20px;
+    margin: 20px 0;
+}
+
+#formularioCadastro {
+    border-radius: 30px;
+    background-color: rgba(112, 107, 107, 0.589);
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+#container3 {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 25px 0;
+}
+
+.form-control {
+    border-radius: 20px;
+}
+
+.main {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.cinza{
+    background-color: #3d3c3c;
+}
+
+.error{
+    display: none;
+}

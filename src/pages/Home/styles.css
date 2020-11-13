@@ -1,0 +1,12 @@
+.products {
+  margin: 20px 0;
+}
+
+.header-products {
+    color: #fff;
+    background-color: #000;
+    text-align: center;
+    border-radius: 15px;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
