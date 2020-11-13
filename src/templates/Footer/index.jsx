@@ -12,7 +12,7 @@ export default props => (
         </ul>
       </div>
       <div className='col-12 col-md-2'>
-        <img className='bottle_icon' src="./img/bottle_icon.png" alt=""/>
+        <div className='bottle_icon'/>
       </div>
       <div className='col-12 col-md-2 list_footer'>
         <ul>
@@ -25,12 +25,21 @@ export default props => (
         <h4>Contatos</h4>
         <p>(11)91234-5678</p>
         <p>(11)91234-5678</p>
-        <img className='phone_icon' src="./img/phone_icon.svg" alt=""/>
-        <a href="https://www.instagram.com/pi_desvinhos/" target='blank'><img className='insta_icon' src="./img/instagram_icon.svg" alt=""/></a>
-        <a href="#/contato"><img className='mail_icon' src="./img/email_icon.png" alt=""/></a>
+
+        
       </div>
     </div>
-    <p className='center'>Site focado exclusivamente na venda de Bebidas Alcoólicas como, vinhos, champanhes e  destilados com os produtos de alta qualidade </p>
-    <p className="copyright">Desvinho &copy; 2020</p>
+    <div className='row'>
+      <div className="col-9">
+          <p className='center ml-5'>Site focado exclusivamente na venda de Bebidas Alcoólicas como, vinhos, champanhes e  destilados com os produtos de alta qualidade </p>
+          <p className="copyright">Desvinho &copy; 2020</p>
+      </div>
+          <div className='social_icons center col-2'>
+            <a href="#"><div className='phone_icon'/></a>    
+          <a href="https://www.instagram.com/pi_desvinhos/" target='blank'><div className='insta_icon'/></a>
+          <a href="#/contato"><div className='mail_icon'/></a>
+          </div>
+
+    </div>
   </footer> 
 )
