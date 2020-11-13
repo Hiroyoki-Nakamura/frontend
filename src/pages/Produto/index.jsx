@@ -13,15 +13,16 @@ export default class Produto extends Component {
   }
 
   setProduto = async () => {
-    const product = await this.props.route.render();
-      if (product == '') {
-      window.location.href = '/';
-    }
-    this.setState({
-      product: { ...product },
-      de: product.valor_produto.toFixed(2),
-      por: product.desconto_produto.toFixed(2)
-    });
+    // const product = await this.props.route.render();
+      // if (product == '') {
+      // window.location.href = '/';
+    // }
+    // this.setState({
+      // product: { ...product },
+      // de: product.valor_produto.toFixed(2),
+      // por: product.desconto_produto.toFixed(2)
+    // });
+    console.log(this.props)
   }
 
   onCart = () => {
