@@ -19,11 +19,7 @@ export default class NavBar extends Component {
 
   componentDidMount() {
     this.getCategorias();
-
   }
-
-
-
 
   getCategorias = async () => {
     const localCategorys = JSON.parse(localStorage.getItem('categorys'));
@@ -36,14 +32,10 @@ export default class NavBar extends Component {
     }
   }
 
-
-
-
   onChange = (event) => {
     const resultado = (event.target.value)
     const id = (event.target.id)
 
-    console.log(`/buscar/${resultado}`)
     switch (id) {
       case 'search':
         this.setState({ search: resultado })
@@ -53,15 +45,12 @@ export default class NavBar extends Component {
     this.getBuscar()
   }
 
-
-
-
   getBuscar = async () => {
     const nome = (this.state.search);
-    const busca = await API.get(`/buscar/${nome}`);
-
-    console.log(busca);
-
+    if (nome != '') {
+      const busca = await API.get(`/buscar/${nome}`);
+      console.log(busca.data);
+    }
   }
 
   render() {
@@ -69,9 +58,6 @@ export default class NavBar extends Component {
 
     return (
       <>
-
-
-
         <section id="barraNav">
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <a className="navbar-brand" href="#"></a>
@@ -89,13 +75,14 @@ export default class NavBar extends Component {
                 <ItemMenu href='#/produto' value='Produto' />
                 <ItemMenu href='#/contato' value='Contato' />
               </ul>
-              <form className="form-inline my-2 my-lg-0">
+              <div className="form-inline my-2 my-lg-0">
 
                 <input className="form-control mr-sm-2" type="search" placeholder="Buscar" id="search" aria-label="Search" value={this.state.search} onChange={this.onChange} />
-
-
                 <button className=" lupa_icon btn btn-outline-dark my-2 my-sm-0 btn_lupa" type="submit" ></button>
-              </form>
+              </div>
+              <div className="">
+
+              </div>
             </div>
           </nav>
         </section>
