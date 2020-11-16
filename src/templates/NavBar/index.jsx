@@ -71,7 +71,7 @@ export default class NavBar extends Component {
                 <ItemMenu href='#/produto' value='Produto' />
                 <ItemMenu href='#/contato' value='Contato' />
               </ul>
-              <form className="form-inline my-2 my-lg-0">
+              <form className="form-inline my-2 my-lg-0" method="GET" action="#/Home">
 
                 <input className="form-control mr-sm-2" type="search" placeholder="Buscar" id="search" aria-label="Search" value={this.state.search} onChange={this.onChange} />
 
