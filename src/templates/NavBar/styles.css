@@ -1,55 +1,71 @@
 .dropdown:hover>.dropdown-menu {
-    display: block;
-    position: absolute;
-    z-index: 9000;
-    cursor: pointer;
+  display: block;
+  position: absolute;
+  z-index: 9000;
+  cursor: pointer;
 }
 
 .dropdown-item {
-    background-color: #3a4147;
-    color: white;
+  background-color: #3a4147;
+  color: white;
 }
 
 .dropdown-menu {
-    background-color: #3a4147;
-    position: relative;
+  background-color: #3a4147;
+  position: relative;
 }
 
-/* só pra tirar o margin do #barranav */
-
-/* #barraNav {
-    position: fixed;
-    width: 100%;
-    z-index: 1;
-    margin: 0;
-} */
-
 #botao_tela_menor {
-    width: 20%;
-    display: none;
+  width: 20%;
+  display: none;
 }
 
 .lupa_icon {
-    background-image: url(/img/lupa_icon.png);
-    background-size: 400%;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 50px;
-    height: 50px;
+  background-image: url(/img/lupa_icon.png);
+  background-size: 400%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 50px;
+  height: 50px;
 }
 
-.btn_lupa:hover{
-    opacity: 80%;
+.btn_lupa:hover {
+  opacity: 80%;
+}
+
+.loader, .spin {
+  z-index: 3;
+  opacity: 1;
+}
+
+.overlay-pesquisa, .resultado-pesquisa, .load-pesquisa {
+  width: 250px;
+  height: 100px;
+  position: absolute;
+  right: 5%;
+  top: 80%;
+  border-radius: 20px;
+}
+
+.overlay-pesquisa {
+  z-index: 2;
+  background-color: black;
+  opacity: 0.5;
+}
+
+.resultado-pesquisa {
+  z-index: 1;
+  background-color: #fff;
+  height: auto;
 }
 
 @media (max-width:991px) {
-    #barraNav {
-        display: none;
-    }
-    #botao_tela_menor {
-        background-color: #3a4147;
-        color: white;
-        display: inline-block;
-        /* position: fixed; */
-    }
+  #barraNav {
+    display: none;
+  }
+  #botao_tela_menor {
+    background-color: #3a4147;
+    color: white;
+    display: inline-block;
+  }
 }

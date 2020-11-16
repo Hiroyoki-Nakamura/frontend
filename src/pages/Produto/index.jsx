@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './styles.css';
 
+import API from '../../Services/api';
+
 export default class Produto extends Component {
   state = {
     product: '',
@@ -13,15 +15,40 @@ export default class Produto extends Component {
   }
 
   setProduto = async () => {
-    const product = await this.props.route.render();
+    const idProduct = localStorage.getItem('getProductId');
+
+    if (idProduct == null) {
+
+      const product = await this.props.route.render();
       if (product == '') {
-      window.location.href = '/';
+        window.location.href = '/';
+      }
+      this.setState({
+        product: { ...product },
+        de: product.valor_produto.toFixed(2),
+        por: product.desconto_produto.toFixed(2)
+      });
+
+    } else {
+      const over = document.querySelector('.overlay');
+      const spin = document.querySelector('.load-cadastro');
+
+      spin.classList.remove('none');
+      over.classList.remove('none');
+
+      const request = await API.get(`/produto/buscar/${idProduct}`);
+      console.log(request)
+      if (request.status == 202) {
+        const product = request.data;
+        this.setState({
+          product: { ...product },
+          de: product.valor_produto.toFixed(2),
+          por: product.desconto_produto.toFixed(2)
+        });
+      }
+      spin.classList.add('none');
+      over.classList.add('none');
     }
-    this.setState({
-      product: { ...product },
-      de: product.valor_produto.toFixed(2),
-      por: product.desconto_produto.toFixed(2)
-    });
   }
 
   onCart = () => {
@@ -38,7 +65,7 @@ export default class Produto extends Component {
 
       if (add) {
         localStorage.setItem('cart', JSON.stringify([...verify, product]));
-      } 
+      }
     } else {
       localStorage.setItem('cart', JSON.stringify([product]));
     }
@@ -47,6 +74,10 @@ export default class Produto extends Component {
   render() {
     return (
       <>
+        <div className="load-cadastro center none">
+          <div className="spin"></div>
+          <div className="loader">carregando</div>
+        </div>
         <section id="sectionproduto" className="center">
           <div className="container">
             <div className="row">
@@ -80,6 +111,7 @@ export default class Produto extends Component {
             </div>
           </div>
         </section>
+        <div className="overlay none"></div>
       </>
     )
   }
