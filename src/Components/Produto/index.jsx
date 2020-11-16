@@ -23,6 +23,11 @@ export default class Product extends Component {
     this.setState({ valor, desconto });
   }
 
+  click = () => {
+    localStorage.removeItem('getProductId');
+    this.props.click();
+  }
+
   render() {
     return (
       <div className="col-12 col-sm-6 col-md-3">
@@ -36,7 +41,7 @@ export default class Product extends Component {
           </div>
           <div className="price-product"><label className="price-line">R$ {this.state.valor}</label> <label>R$ {this.state.desconto}</label></div>
           <div>
-            <Link to='/produto' onClick={this.props.click} className="buy-product">comprar</Link>
+            <Link to='/produto' onClick={this.click} className="buy-product">comprar</Link>
           </div>
         </div>
       </div>
