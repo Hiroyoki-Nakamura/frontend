@@ -70,7 +70,7 @@ export default class NavBar extends Component {
     spin.classList.remove('none');
 
     let stop = false;
-    if (nome != '' && nome != ' ') {
+    if (nome != '' && nome != ' ' && nome.length > 1) {
       const busca = await API.get(`/buscar/${nome}`);
       if (busca.status == 202) {
         this.setState({ products: [...busca.data] });
@@ -114,7 +114,7 @@ export default class NavBar extends Component {
               <div className="form-inline my-2 my-lg-0">
 
                 <input className="form-control mr-sm-2" type="search" placeholder="Buscar" id="search" aria-label="Search" value={this.state.search} onChange={this.onChange} />
-                <button className=" lupa_icon btn btn-outline-dark my-2 my-sm-0 btn_lupa" type="submit" ></button>
+                <button className="lupa_icon btn btn-outline-dark my-2 my-sm-0 btn_lupa"></button>
               </div>
               <div className="resultado-pesquisa none">
                 {this.state.products.map(product => {
