@@ -19,20 +19,26 @@ body {
 }
 
 /* cont_compr */
+
 .btcc {
   background-color: #660033;
-  border-color: #660033;  
+  border-color: #660033;
   color: #fff;
 }
 
 /* final_comp */
+
 .btcc:hover {
   background-color: #963465;
   color: #fff;
-} 
+}
 
 .none {
   display: none;
+}
+
+.noPrevs {
+  z-index: 0;
 }
 
 .overlay {
