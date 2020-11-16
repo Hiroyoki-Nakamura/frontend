@@ -45,13 +45,24 @@ export default class NavBar extends Component {
     }
   }
 
+  hideSearch = () => {
+    const result = document.querySelector('.resultado-pesquisa');
+    const prev = document.querySelector('.carousel-control-next');
+
+    result.classList.add('none');
+    if (prev != null) {
+      prev.classList.remove('none');
+    }
+    this.setState({ products: [] });
+  }
+
   getBuscar = async (nome) => {
     const result = document.querySelector('.resultado-pesquisa');
     const overlay = document.querySelector('.overlay-pesquisa');
     const spin = document.querySelector('.load-pesquisa');
     const prev = document.querySelector('.carousel-control-next');
 
-    if( prev != null) {
+    if (prev != null) {
       prev.classList.add('noPrevs');
     }
     result.classList.add('none');
@@ -71,7 +82,7 @@ export default class NavBar extends Component {
       result.classList.remove('none');
     } else {
       result.classList.add('none');
-      if(prev != null) {
+      if (prev != null) {
         prev.classList.remove('noPrevs');
       }
       this.setState({ products: [] });
@@ -108,7 +119,7 @@ export default class NavBar extends Component {
               <div className="resultado-pesquisa none">
                 {this.state.products.map(product => {
                   return (
-                    <Produto product={product} />
+                    <Produto product={product} hide={this.hideSearch} />
                   );
                 })}
               </div>

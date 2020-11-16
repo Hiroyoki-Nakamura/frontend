@@ -16,6 +16,7 @@ export default class Produto extends Component {
 
   setProduto = async () => {
     const idProduct = localStorage.getItem('getProductId');
+
     if (idProduct == null) {
 
       const product = await this.props.route.render();
@@ -47,7 +48,6 @@ export default class Produto extends Component {
       }
       spin.classList.add('none');
       over.classList.add('none');
-      localStorage.removeItem('getProductId');
     }
   }
 

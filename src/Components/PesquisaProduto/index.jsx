@@ -1,12 +1,22 @@
-import { Form } from "formik";
 import React, { Component } from 'react';
 import './styles.css';
 
 export default class extends Component {
   click = () => {
-    // alert('clicou')
+
     localStorage.setItem('getProductId', this.props.product.id);
-    window.location.href = '#/produto'
+
+    const verify = window.location.href;
+
+    if (verify.includes('produto')) {
+
+      window.location.reload();
+
+    } else {
+      window.location.href = '#/produto';
+
+      this.props.hide();
+    }
   }
 
   render() {
