@@ -37,7 +37,7 @@ export default class Produto extends Component {
       over.classList.remove('none');
 
       const request = await API.get(`/produto/buscar/${idProduct}`);
-
+      console.log(request)
       if (request.status == 202) {
         const product = request.data;
         this.setState({

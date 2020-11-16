@@ -39,7 +39,7 @@
 }
 
 .overlay-pesquisa, .resultado-pesquisa, .load-pesquisa {
-  width: 225px;
+  width: 250px;
   height: 100px;
   position: absolute;
   right: 5%;
