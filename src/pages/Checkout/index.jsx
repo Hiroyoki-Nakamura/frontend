@@ -121,6 +121,7 @@ export default class Checkout extends Component {
 
   Payment = payment => {
     this.setState({ payment });
+    console.log(this.state.payment)
   };
 
   render() {
