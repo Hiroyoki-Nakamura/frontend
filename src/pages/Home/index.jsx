@@ -42,6 +42,7 @@ export default class Home extends React.Component {
         this.setState({ banners: [...banners.data] });
       }
 
+      // console.log(products)
       localStorage.setItem('products', JSON.stringify([...products.data]));
 
       this.setState({
@@ -85,7 +86,7 @@ export default class Home extends React.Component {
               </div>
             </div>
 
-           </div>
+          </div>
 
         </div>
       </>

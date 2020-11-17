@@ -50,10 +50,10 @@ export default class Pagamento extends Component {
 
     switch (id) {
       case 'nome_titular':
-        this.setState({ nome_titular: value });
+        this.setState({ nome_titular: event.target.value });
         break;
       case 'numero_cartao':
-        this.setState({ numero_cartao: value });
+        this.setState({ numero_cartao: event.target.value });
         break;
       case 'cpf_titular':
         this.setState({ cpf_titular: value });
