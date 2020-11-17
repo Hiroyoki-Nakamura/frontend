@@ -65,7 +65,7 @@
   position: absolute;
   right: 5%;
   top: 80%;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 .overlay-pesquisa {
@@ -78,6 +78,7 @@
   z-index: 1;
   background-color: #fff;
   height: auto;
+  border: 1px solid;
 }
 #navbarSupportedContent {
   border-bottom: 1px solid;
