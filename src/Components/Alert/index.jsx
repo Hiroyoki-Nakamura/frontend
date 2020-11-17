@@ -18,7 +18,7 @@ export default class MyAlert extends Component {
 
   render() {
     return (
-      <div className={"modal fade alert alert-" + this.props.style} id='alert' role="alert">
+      <div className="modal fade alert alert-a" id='alert' role="alert">
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -31,7 +31,7 @@ export default class MyAlert extends Component {
               <p>{this.props.content}</p>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-outline-danger" data-dismiss="modal">Fechar</button>
+              <button type="button" className={"btn btn-outline-" + this.props.style} data-dismiss="modal">Fechar</button>
             </div>
           </div>
         </div>

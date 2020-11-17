@@ -57,7 +57,7 @@ export default class Login extends Component {
 
   postLogin = async () => {
     const over = document.querySelector('.overlay');
-    const spin = document.querySelector('.load-cadastro');
+    const spin = document.querySelector('.load');
     spin.classList.remove('none');
     over.classList.remove('none');
 
@@ -67,9 +67,9 @@ export default class Login extends Component {
     });
 
     if (logged.status != 202) {
-      this.myAlert('Opps!', logged.data, 'a');
+      this.myAlert('Opps!', logged.data, 'danger');
     } else {
-      this.myAlert('Login', 'Logado com sucesso', 'a');
+      this.myAlert('Login', 'Logado com sucesso', 'success');
     }
 
     spin.classList.add('none');
@@ -85,30 +85,31 @@ export default class Login extends Component {
   render() {
     return (
       <>
-        <div className="load-cadastro center none">
+        <div className="load center none">
           <div className="spin"></div>
           <div className="loader">Carregando</div>
         </div>
         {this.state.alert.title != '' && this.state.alert.content != '' && this.state.alert.style != '' ? <Alert title={`${this.state.alert.title}`} content={`${this.state.alert.content}`} style={`${this.state.alert.style}`} reset={this.resetForAlert} /> : ''}
         <div className="col-12">
-          <div className="col-12 mt-5 mb-5" id="formulario">
+          <div className="col-12 mt-5 mb-5">
             <h1 className="center">Login</h1>
             <div className="row">
               <div className="col-5">
+
                 <div id="container1">
-                  <div className="form-group">Login</div>
+                  <div className="form-group text-login">Email</div>
                   <div className="form-group center">
                     <input type="text" className="text-center form-control w-75" placeholder="email" id="login" onChange={this.onChange} value={this.state.login} />
                   </div>
-                  <div className="form-group">Senha</div>
+                  <div className="form-group text-login">Senha</div>
                   <div className="form-group center">
                     <input type="password" className="text-center form-control w-75" placeholder="digite sua senha" id="senha-conf" onChange={this.onChange} value={this.state.senha} />
                   </div>
                   <div className="form-group">
-                    <div className="btn btn-success" onClick={() => this.postLogin()} >Login</div>
+                    <div className="btn btn-success text-uppercase w-75 py-3" onClick={() => this.postLogin()}>fazer Login</div>
                   </div>
                   <div className="form-group">
-                    <a href="forgotPassword.html">Esqueci minha senha</a>
+                    <a >Esqueci minha senha</a>
                   </div>
                 </div>
 
@@ -117,14 +118,14 @@ export default class Login extends Component {
                 <img className="w-100 h-50" src='img/taca.png' />
               </div>
 
-              <div className="col-5"  >
+              <div className="col-12 col-md-5"  >
                 <div className='center' id='container2'>
                   <div>
                     <div className="form-group">
-                      <label htmlFor="">Ou então cadastre-se</label>
+                      <label htmlFor="" className="text-login">Ou então cadastre-se</label>
                     </div>
                     <div className="form-group">
-                      <div className="btn btn-success"><a href="#/cadastro">Ir para cadastro</a></div>
+                      <div className="btn btn-success text-uppercase w-100 py-3"><a href="#/cadastro">Ir para cadastro</a></div>
                     </div>
                   </div>
                 </div>

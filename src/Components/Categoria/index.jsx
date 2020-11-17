@@ -18,7 +18,10 @@ export default class Categoria extends Component {
 
   render() {
     return (
-      <a className="dropdown-item" onClick={this.setCategory}>{this.props.value}</a>
+      <li>
+        <a className="dropdown-item" onClick={this.setCategory}>{this.props.value}</a>
+      </li>
+      
     )
   }
 }

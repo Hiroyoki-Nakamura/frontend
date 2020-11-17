@@ -10,26 +10,22 @@
 }
 
 #topo {
-  background-color: #660033;
-  color: #fff;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  margin-bottom: -50px;
+  color: black;
 }
 
-#carrinho {
-  background-color: white;
+#topo * {
+  font-size: 16px;
+}
+
+.carrinho {
   overflow: auto;
-  height: 330px;
+  height: 300px;
 }
 
 .base {
-  background-color: #660033;
-  height: 110px;
-  width: auto;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  flex-direction: row;
+
+  height: 150px;
+
 }
 
 .card {
@@ -40,12 +36,6 @@
 #nomeProduto {
   text-align: center;
   margin-top: 40px;
-  color: black;
-}
-
-.botao {
-  border-radius: 20px;
-  width: 130px;
 }
 
 .quant_select {
@@ -53,10 +43,7 @@
 }
 
 .valortotal {
-  border-color: transparent;
-  background-color: transparent;
-  display: block;
-  color: white;
+  font-size: 20px;
 }
 
 .valor-unit {
@@ -86,12 +73,13 @@
   background-color: transparent;
 }
 
-.corvalor {
-  color: #fff;
-}
-
 .center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: bold;
 }

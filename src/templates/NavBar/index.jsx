@@ -95,7 +95,7 @@ export default class NavBar extends Component {
     return (
       <>
         <section id="barraNav">
-          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+          <nav className="navbar navbar-expand-lg">
             <a className="navbar-brand" href="#"></a>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav mr-auto">

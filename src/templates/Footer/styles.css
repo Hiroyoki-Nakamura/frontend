@@ -1,9 +1,10 @@
 footer {
-    color: white;
-    background-color: #660033;
+    color: black;
+    background-color: #fff;
     box-sizing: border-box;
     overflow: hidden;
     width: 100%;
+    border-top: 2px solid;
 }
 
 .Footer {
@@ -76,9 +77,20 @@ footer {
 }
 
 .list_footer{
-    text-decoration: underline;
-    color: white;
+    color: black;
     font-size: 18px;
     list-style-type: none;
     margin: 0;
+    text-align: left;
+}
+
+.list_footer a {
+    color: black;
+    text-align: left;
+    display: block;
+}
+
+.footer-bootom {
+    font-size: 14px;
+    line-height: 0.5;
 }

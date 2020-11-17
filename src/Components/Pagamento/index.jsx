@@ -3,13 +3,16 @@ import './styles.css';
 
 import API from '../../Services/api';
 
+import $ from 'jquery';
+import mask from 'jquery-mask-plugin';
+
 const BEFORE = {
   page: 'cartao',
   nome_titular: '',
-  cpf_titular: '',
   numero_cartao: '',
   cvv: '',
-  pageCard: 'new',
+  validade_cartao: '',
+  pageCard: 'old',
   cartao: 0,
   cards: [],
   client: ''
@@ -18,35 +21,80 @@ const BEFORE = {
 export default class Pagamento extends Component {
   state = { ...BEFORE };
 
+  componentDidMount() {
+    if (this.state.pageCard == "old") {
+      this.listCards();
+    }
+  }
+
   postCards = async () => {
-    // await API.post('/cartaoCredito/adicionarCartao', {
-    //   nome_titular: this.nome_titular,
-    //   numero_cartao: this.numero_cartao
-    // });
+    this.props.startLoading();
+
+    const client = JSON.parse(localStorage.getItem('client'));
+
+    const objSend = {
+      nome_titular: this.state.nome_titular,
+      numero_cartao: this.state.numero_cartao,
+      cd_cliente: client.id
+    }
+
+    const response = await API.post('/cartao/adicionar', objSend);
+
+    let switchPageCard = false;
+    if (response.status == 201) {
+      switchPageCard = true;
+      this.props.alertas('Cartão', response.data, 'success');
+    } else {
+      this.props.alertas('Opps!', response.data, 'danger');
+    }
+
+    if (switchPageCard == true) {
+      this.setState({ pageCard: 'new' })
+    }
+
+    this.props.stopLoading();
   };
 
   listCards = async () => {
-    const over = document.querySelector('.overlay');
-    over.classList.remove('none');
+    this.props.startLoading();
+
     const client = JSON.parse(localStorage.getItem('client'));
     const cards = await API.get(`/cartao/listar/${client.id}`);
 
+    let alter = false;
     if (cards.data == 'não encontramos cartões para esse usuario') {
-      this.props.alertas('opss!', cards.data, 'a');
+
+      this.props.alertas('opss!', cards.data, 'danger');
       this.setState({ client });
+      alter = true;
+
     } else {
       this.setState({ cards: [...cards.data] });
+      this.props.card(cards.data[0].id);
     }
-    
-    const spin = document.querySelector('.load');
-    spin.classList.add('none');
-    over.classList.add('none');
-    this.setState({ pageCard: 'new' });
+
+    this.props.stopLoading();
+
+    if (alter == true) {
+      this.setState({ pageCard: 'new' });
+    }
   };
 
+  clearCardForm = () => {
+    this.setState({
+      nome_titular: '',
+      numero_cartao: '',
+      cvv: '',
+      validade_cartao: ''
+    });
+  }
+
   onChange = event => {
-    const value = event.target.getAttribute('value');
-    const id = event.target.getAttribute('id');
+    const id = event.target.id;
+    const value = event.target.value;
+
+    $('#numero_cartao').mask('0000-0000-0000-0000');
+    $('#validade_cartao').mask('00/00')
 
     switch (id) {
       case 'nome_titular':
@@ -55,21 +103,30 @@ export default class Pagamento extends Component {
       case 'numero_cartao':
         this.setState({ numero_cartao: value });
         break;
-      case 'cpf_titular':
-        this.setState({ cpf_titular: value });
-        break;
       case 'cvv':
         this.setState({ cvv: value });
         break;
+      case 'validade_cartao':
+        this.setState({ validade_cartao: value })
+        break;
       case 'pageCard':
-        if (value == 'old') {
+        const alter = event.target.getAttribute('value');
+        if (alter == 'old') {
           this.listCards();
         }
-        this.setState({ pageCard: value });
+        this.setState({ pageCard: alter });
+        break;
       default:
         break;
     }
   };
+
+  alertCard = event => {
+    const value = event.target.value;
+    if (value != '') {
+      this.props.card(value);
+    }
+  }
 
   renderPay = event => {
     this.setState({ page: event.target.value });
@@ -95,12 +152,12 @@ export default class Pagamento extends Component {
             </div>
             <div className="col-6">
               <label className='w-100 text-center'>CVV</label>
-              <input id="cvv" className='form-control text-center' onChange={this.onChange} maxLength='3' placeholder="000" />
+              <input id="cvv" className='form-control text-center' value={this.state.cvv} onChange={this.onChange} maxLength='3' placeholder="000" />
             </div>
           </div>
         </div>
 
-        <label className='w-100 text-center'>Quantidade de Parcelas</label>
+        {/* <label className='w-100 text-center'>Quantidade de Parcelas</label>
         <select className="custom-select form-control" id="inputGroupSelect02">
           <option>1x sem juros</option>
           <option>2x sem juros</option>
@@ -112,53 +169,52 @@ export default class Pagamento extends Component {
           <option>8x sem juros</option>
           <option>9x sem juros</option>
           <option>10x sem juros</option>
-        </select>
+        </select> */}
 
         <div className='container row col-12 my-1'>
           <div className='col-6 my-1 center'>
-            <div className='btn btn-primary radius' id='pageCard' value='old' onClick={this.onChange}>
-              voltar
+            <div className='btn btn-primary ' id='pageCard' value='old' onClick={this.onChange}>
+              Escolher Cartão
             </div>
           </div>
           <div className='col-6 my-1'>
-            <div className='btn btn-secondary radius' > limpar</div>
+            <div className='btn btn-secondary btcc' onClick={this.clearCardForm}>limpar</div>
           </div>
           <div className='col-12 center my-1'>
-            <div className='btn btn-success radius'>
+            <div className='btn btn-success radius' onClick={this.postCards}>
               salvar cartão
             </div>
           </div>
         </div>
 
-        <div className='center'>
+        {/* <div className='center'>
           <img className="img " src="/img/visa.png " width="40px " height="40px" />
           <img className="img " src="/img/master.png " width="40px " height="40px " />
           <img className="img " src="/img/boleto.png " width="40px " height="40px " />
-        </div>
+        </div> */}
       </>
 
     const cards =
       <>
-        <div className="load center">
-          <div className="spin"></div>
-          <div className="loader">Carregando</div>
+        <div className='listCard marginTopListCard'>
+          <label className='w-100 text-center'>Cartões cadastrados: </label>
+
+          <select className="custom-select radius" onChange={this.alertCard} id="cartao_credito">
+            {this.state.cards.map(card => {
+              const numberCard = card.numero_cartao.substr(0, 4);
+              const text = `${card.nome_titular} - ${numberCard}`;
+              return (
+                <option value={card.id}>
+                  {text}
+                </option>
+              );
+            })}
+          </select>
+
+          <div className="w-100 center mt-2">
+            <div className='btn btn-primary' id='pageCard' value='new' onClick={this.onChange}>usar outro cartão</div>
+          </div>
         </div>
-
-        <label className='w-100 text-center'>Cartões cadastrados: </label>
-
-        <select className="custom-select radius" id="">
-          {this.state.cards.map(card => {
-            return (
-              <div>
-
-              </div>
-            );
-          })}
-        </select>
-        <div className="w-100 center mt-2">
-          <div className='btn btn-primary radius' id='pageCard' value='new' onClick={this.onChange}>usar outro cartão</div>
-        </div>
-
       </>
 
     switch (page) {
@@ -175,9 +231,7 @@ export default class Pagamento extends Component {
     const page = this.state.page;
     const card =
       <div>
-        {/* <div className={this.state.pageCard == 'new' ? 'mt-5' : ''}> */}
-          {this.showCards()}
-        {/* </div> */}
+        {this.showCards()}
       </div>
 
     const billet =
@@ -197,7 +251,6 @@ export default class Pagamento extends Component {
   render() {
     return (
       <>
-
         <h3 className='w-100 text-center'>Forma de Pagamento</h3>
 
         <div className="d-flex justify-content-center align-items-center">
@@ -209,8 +262,6 @@ export default class Pagamento extends Component {
           <label htmlFor='tipo_pagamento_cartao' className="form-check-label">Cartão de crédito</label>
         </div>
         {this.showPay()}
-      
-        <div className='overlay none'></div>
       </>
     );
   }
