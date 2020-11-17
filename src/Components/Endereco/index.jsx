@@ -110,7 +110,7 @@ export default class Endereco extends Component {
               })}
             </select>
             <div className='center'>
-              <a className="btn btn-primary btn-lg active mt-5 radius" aria-pressed="true" id="endereco" value="endereco" onClick={this.renderAdress} >Entregar em outro Endereço</a>
+              <a className="btn btn-primary btn-lg active mt-5" aria-pressed="true" id="endereco" value="endereco" onClick={this.renderAdress} >Entregar em outro Endereço</a>
             </div>
 
           </div>
@@ -170,8 +170,8 @@ export default class Endereco extends Component {
           </div>
 
           <div className="center">
-            <a className="btn btn-primary radius mx-2" id="novoEndereco" aria-pressed="true" onClick={this.renderAdress} value="novoEndereco">Voltar</a>
-            <a className="btn  btn-success mx-2 radius " id="salvar" aria-pressed="true" onClick={this.postEndereco} >Salvar</a>
+            <a className="btn btn-light btcc mx-2" id="novoEndereco" aria-pressed="true" onClick={this.renderAdress} value="novoEndereco">Voltar</a>
+            <a className="btn  btn-dark mx-2 " id="salvar" aria-pressed="true" onClick={this.postEndereco} >Salvar</a>
           </div>
 
         </div>

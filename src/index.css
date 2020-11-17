@@ -1,5 +1,5 @@
 body {
-  background-color: #3b3c3c;
+  background-color: #fff;
 }
 
 .center {
@@ -15,22 +15,34 @@ body {
 }
 
 .radius {
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 /* cont_compr */
 
 .btcc {
-  background-color: #660033;
-  border-color: #660033;
-  color: #fff;
+  background-color: #fff;
+  border-color: #000;
+  color: #000;
 }
 
 /* final_comp */
 
 .btcc:hover {
-  background-color: #963465;
-  color: #fff;
+  background-color: #eee;
+  color: #000;
+  border-color: #000;
+}
+
+.btn-review {
+  flex-direction: column;
+}
+
+.btn-finalizar {
+  background-color: #0db861;
+  padding: 10px 0;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .none {

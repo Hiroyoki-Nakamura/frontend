@@ -173,12 +173,12 @@ export default class Pagamento extends Component {
 
         <div className='container row col-12 my-1'>
           <div className='col-6 my-1 center'>
-            <div className='btn btn-primary radius' id='pageCard' value='old' onClick={this.onChange}>
-              voltar
+            <div className='btn btn-primary ' id='pageCard' value='old' onClick={this.onChange}>
+              Escolher Cartão
             </div>
           </div>
           <div className='col-6 my-1'>
-            <div className='btn btn-secondary radius' onClick={this.clearCardForm}>limpar</div>
+            <div className='btn btn-secondary btcc' onClick={this.clearCardForm}>limpar</div>
           </div>
           <div className='col-12 center my-1'>
             <div className='btn btn-success radius' onClick={this.postCards}>
@@ -187,11 +187,11 @@ export default class Pagamento extends Component {
           </div>
         </div>
 
-        <div className='center'>
+        {/* <div className='center'>
           <img className="img " src="/img/visa.png " width="40px " height="40px" />
           <img className="img " src="/img/master.png " width="40px " height="40px " />
           <img className="img " src="/img/boleto.png " width="40px " height="40px " />
-        </div>
+        </div> */}
       </>
 
     const cards =
@@ -212,7 +212,7 @@ export default class Pagamento extends Component {
           </select>
 
           <div className="w-100 center mt-2">
-            <div className='btn btn-primary radius' id='pageCard' value='new' onClick={this.onChange}>usar outro cartão</div>
+            <div className='btn btn-primary' id='pageCard' value='new' onClick={this.onChange}>usar outro cartão</div>
           </div>
         </div>
       </>
