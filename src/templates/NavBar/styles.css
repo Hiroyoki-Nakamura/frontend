@@ -4,15 +4,35 @@
   z-index: 9000;
   cursor: pointer;
 }
+.dropdown-menu li {
+  padding-top: 10px;
+  color: #000;
+  border-bottom:1px solid ;
+}
 
 .dropdown-item {
-  background-color: #3a4147;
-  color: white;
+  background-color: #fff;
+  color: #000;
+  transition: all 0.5s;
+}
+
+.dropdown-item:hover {
+  margin-left: 20px;
+}
+
+.dropdown-menu li:last-child {
+  border-bottom:none ;
+  padding-bottom: 10px;
 }
 
 .dropdown-menu {
-  background-color: #3a4147;
+  background-color: #fff;
   position: relative;
+  border: 1px solid;
+  color: #000;
+  min-width: 250px;
+  padding: 0px 30px;
+  top: 40px;
 }
 
 #botao_tela_menor {
@@ -22,15 +42,16 @@
 
 .lupa_icon {
   background-image: url(/img/lupa_icon.png);
-  background-size: 400%;
+  background-size: 24px;
   background-repeat: no-repeat;
   background-position: center;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 40px;
+  background-color: #000;
 }
 
 .btn_lupa:hover {
-  opacity: 80%;
+  opacity: 0,7%;
 }
 
 .loader, .spin {
@@ -57,6 +78,19 @@
   z-index: 1;
   background-color: #fff;
   height: auto;
+}
+#navbarSupportedContent {
+  border-bottom: 1px solid;
+  padding: 0.5rem 1rem;
+  margin: 0 14px 0 0px;
+}
+
+.navbar {
+  padding: 0;
+}
+
+.navbar-nav .nav-link {
+  color: black;
 }
 
 @media (max-width:991px) {
