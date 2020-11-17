@@ -50,7 +50,6 @@ export default class Pedido extends Component {
       if (order.created_at != null) {
         date = order.created_at.slice(0, 10);
         while (date.includes('-')) {
-
           date = date.replace('-', '/');
         }
       }
@@ -69,6 +68,14 @@ export default class Pedido extends Component {
         </>
       );
     });
+
+    let date = this.state.client.created_at;
+    if (this.state.client.created_at != null) {
+      date = date.slice(0, 10);
+      while (date.includes('-')) {
+        date = date.replace('-', '/');
+      }
+    }
 
     const profile = () => (
       <>
@@ -93,7 +100,7 @@ export default class Pedido extends Component {
               </div>
               <div className='form-group col-6'>
                 <label className='col-sm-6 col-form-label'>Genero:</label>
-                <input className='form-control col-6 text-center' type="text" readOnly  value={this.state.client.genero} />
+                <input className='form-control col-6 text-center' type="text" readOnly value={this.state.client.genero} />
               </div>
               <div className='form-group col-6'>
                 <label className='col-sm-6 col-form-label'>Data de Nascimento:</label>
@@ -101,7 +108,7 @@ export default class Pedido extends Component {
               </div>
               <div className='form-group col-6'>
                 <label className='col-sm-6 col-form-label'>Cliente desde:</label>
-                <input className='form-control col-6 text-center' type="date-time" readOnly value={this.state.client.created_at} />
+                <input className='form-control col-6 text-center' type="date-time" readOnly value={date} />
               </div>
             </div>
           </div>

@@ -56,7 +56,7 @@ export default class Cadastro extends Component {
 
   postCliente = async () => {
     const over = document.querySelector('.overlay');
-    const spin = document.querySelector('.load-cadastro');
+    const spin = document.querySelector('.load');
     spin.classList.remove('none');
     over.classList.remove('none');
     const objClient = {
@@ -334,7 +334,7 @@ export default class Cadastro extends Component {
   render() {
     return (
       <>
-        <div className="load-cadastro center none">
+        <div className="load center none">
           <div className="spin"></div>
           <div className="loader">Carregando</div>
         </div>

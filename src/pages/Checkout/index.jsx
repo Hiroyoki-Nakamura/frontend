@@ -16,7 +16,8 @@ const BEFORE = {
     title: '',
     content: '',
     style: ''
-  }
+  },
+  card: ''
 }
 
 export default class Checkout extends Component {
@@ -57,6 +58,22 @@ export default class Checkout extends Component {
     this.setState({ alert: { title: '', content: '', style: '' } });
   }
 
+  startLoading = () => {
+    const over = document.querySelector('.overlay');
+    const spin = document.querySelector('.load');
+
+    spin.classList.remove('none');
+    over.classList.remove('none');
+  }
+
+  stopLoading = () => {
+    const over = document.querySelector('.overlay');
+    const spin = document.querySelector('.load');
+
+    spin.classList.add('none');
+    over.classList.add('none');
+  }
+
   onChange = (event) => {
     const value = (event.target.value);
     const id = (event.target.id);
@@ -71,11 +88,7 @@ export default class Checkout extends Component {
   };
 
   postOrder = async () => {
-    const over = document.querySelector('.overlay');
-    const spin = document.querySelector('.load-cadastro');
-
-    spin.classList.remove('none');
-    over.classList.remove('none');
+    this.startLoading();
 
     const client = JSON.parse(localStorage.getItem('client'));
     const cart = await JSON.parse(localStorage.getItem('cart'));
@@ -87,14 +100,16 @@ export default class Checkout extends Component {
       }
     } else {
       dados_pagamento = {
-        id_cartao: client.id
+        id_cartao: this.state.card
       }
     }
+
+    const typePayment = (this.state.payment == 'boleto' ? 1 : 2);
 
     const objSend = {
       cliente: client.id,
       endereco_entrega: this.state.address,
-      tipo_pagamento: (this.state.payment == 'boleto' ? 1 : 2),
+      tipo_pagamento: typePayment,
       dados_pagamento: { ...dados_pagamento },
       produtos: [...cart],
       frete: '35',
@@ -109,8 +124,7 @@ export default class Checkout extends Component {
       this.myAlert('Opps!', sendOrder.data, 'a');
     }
 
-    spin.classList.add('none');
-    over.classList.add('none');
+    this.stopLoading();
 
     if (sendOrder.status == 201) {
       localStorage.removeItem('cart');
@@ -124,10 +138,14 @@ export default class Checkout extends Component {
     console.log(this.state.payment)
   };
 
+  switchCard = card => {
+    this.setState({ card });
+  }
+
   render() {
     return (
       <>
-        <div className="load-cadastro center none">
+        <div className="load center none">
           <div className="spin"></div>
           <div className="loader">Carregando</div>
         </div>
@@ -135,12 +153,12 @@ export default class Checkout extends Component {
         <div className="row my-5 py-3 center flex-container radius">
           <div className="col-12 col-md-4">
             <div className='radius content-enter px-2 py-2 w-100'>
-              <Address onChange={this.onChange} alertas={this.myAlert} />
+              <Address onChange={this.onChange} alertas={this.myAlert} startLoading={this.startLoading} stopLoading={this.stopLoading} />
             </div>
           </div>
           <div className="col-12 col-md-4 my-2">
             <div className='radius content-enter px-2 py-2'>
-              <Payment Pay={this.Payment} onChange={this.onChange} alertas={this.myAlert} />
+              <Payment Pay={this.Payment} startLoading={this.startLoading} stopLoading={this.stopLoading} card={this.switchCard} onChange={this.onChange} alertas={this.myAlert} />
             </div>
           </div>
           <div className=" col-12 col-md-4">

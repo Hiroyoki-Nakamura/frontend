@@ -57,7 +57,7 @@ export default class Login extends Component {
 
   postLogin = async () => {
     const over = document.querySelector('.overlay');
-    const spin = document.querySelector('.load-cadastro');
+    const spin = document.querySelector('.load');
     spin.classList.remove('none');
     over.classList.remove('none');
 
@@ -67,9 +67,9 @@ export default class Login extends Component {
     });
 
     if (logged.status != 202) {
-      this.myAlert('Opps!', logged.data, 'a');
+      this.myAlert('Opps!', logged.data, 'danger');
     } else {
-      this.myAlert('Login', 'Logado com sucesso', 'a');
+      this.myAlert('Login', 'Logado com sucesso', 'success');
     }
 
     spin.classList.add('none');
@@ -85,7 +85,7 @@ export default class Login extends Component {
   render() {
     return (
       <>
-        <div className="load-cadastro center none">
+        <div className="load center none">
           <div className="spin"></div>
           <div className="loader">Carregando</div>
         </div>

@@ -52,7 +52,7 @@ body {
   z-index: 2;
 }
 
-.load-cadastro {
+.load {
   position: fixed;
   top: 0;
   left: 0;
@@ -60,7 +60,7 @@ body {
   height: 100vh;
 }
 
-.load-cadastro, .loader, .spin {
+.load, .loader, .spin {
   z-index: 3;
 }
 
@@ -76,10 +76,6 @@ body {
   border-radius: 50vh;
   border-top: 5px solid white;
   animation: loading 2s linear infinite;
-}
-
-.white {
-  color: #fff !important;
 }
 
 @keyframes loading {

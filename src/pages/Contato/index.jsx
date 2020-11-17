@@ -60,7 +60,7 @@ export default class Contato extends Component {
 
   sendEmail = async () => {
     const over = document.querySelector('.overlay');
-    const spin = document.querySelector('.load-cadastro');
+    const spin = document.querySelector('.load');
 
     spin.classList.remove('none');
     over.classList.remove('none');
@@ -75,10 +75,10 @@ export default class Contato extends Component {
     const response = await API.post('/sac', sendObject);
 
     if (response.status == 202) {
-      this.myAlert('SAC!', response.data, 'a');
+      this.myAlert('SAC!', response.data, 'success');
       this.setState({ name: '', email: '', subject: '', message: '' });
     } else {
-      this.myAlert('Opps!', response.data, 'a');
+      this.myAlert('Opps!', response.data, 'danger');
     }
 
     spin.classList.add('none');
@@ -92,7 +92,7 @@ export default class Contato extends Component {
   render() {
     return (
       <>
-        <div className="load-cadastro center none">
+        <div className="load center none">
           <div className="spin"></div>
           <div className="loader">Carregando</div>
         </div>

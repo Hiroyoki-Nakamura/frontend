@@ -23,14 +23,19 @@ export default class Endereco extends Component {
   }
 
   initialization = async () => {
+    this.props.startLoading();
+
     const client = JSON.parse(localStorage.getItem('client'));
     const ufs = await API.get('/uf');
     const enderecos = await API.get(`/endereco/buscar/${client.id}`);
+
     this.setState({
       enderecos: [...enderecos.data],
       address: enderecos.data[0].id,
       ufs: [...ufs.data]
     });
+
+    this.props.stopLoading();
   };
 
   postEndereco = async () => {
@@ -48,9 +53,10 @@ export default class Endereco extends Component {
 
     if (sendObject.status == 201) {
       this.setState({ ...BEFORE, ufs: this.state.ufs, enderecos: this.state.enderecos });
+      this.props.alertas('novo Endereço', sendObject.data, 'success');
     }
     this.initialization();
-    this.props.alertas('novo Endereço', sendObject.data, 'a');
+
   };
 
   onChange = (event) => {

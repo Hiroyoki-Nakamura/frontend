@@ -31,7 +31,7 @@ export default class Produto extends Component {
 
     } else {
       const over = document.querySelector('.overlay');
-      const spin = document.querySelector('.load-cadastro');
+      const spin = document.querySelector('.load');
 
       spin.classList.remove('none');
       over.classList.remove('none');
@@ -74,7 +74,7 @@ export default class Produto extends Component {
   render() {
     return (
       <>
-        <div className="load-cadastro center none">
+        <div className="load center none">
           <div className="spin"></div>
           <div className="loader">carregando</div>
         </div>
