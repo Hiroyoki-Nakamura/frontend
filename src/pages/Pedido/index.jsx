@@ -103,6 +103,10 @@ export default class Pedido extends Component {
                 <label className='col-sm-6 col-form-label'>Cliente desde:</label>
                 <input className='form-control col-6 text-center' type="date-time" readOnly value={this.state.client.created_at} />
               </div>
+              <div className='form-group col-6'>
+                <div className='col-sm-6 col-form-label'>Alterar minha senha</div>
+                <div className="col-sm-6 btn btn-dark">Alterar</div>
+              </div>
             </div>
           </div>
         </div>

@@ -55,6 +55,15 @@ export default class Login extends Component {
     }
   }
 
+  Showpassword(){
+    let pass = document.getElementById("senha-conf")
+    if(pass.type === "password"){
+      pass.type = "text";
+    } else {
+      pass.type = "password";
+    }
+  }
+
   postLogin = async () => {
     const over = document.querySelector('.overlay');
     const spin = document.querySelector('.load-cadastro');
@@ -97,12 +106,13 @@ export default class Login extends Component {
               <div className="col-5">
                 <div id="container1">
                   <div className="form-group">Login</div>
-                  <div className="form-group center">
+                  <div className="form-group center col-12">
                     <input type="text" className="text-center form-control w-75" placeholder="email" id="login" onChange={this.onChange} value={this.state.login} />
                   </div>
                   <div className="form-group">Senha</div>
-                  <div className="form-group center">
-                    <input type="password" className="text-center form-control w-75" placeholder="digite sua senha" id="senha-conf" onChange={this.onChange} value={this.state.senha} />
+                  <div className="form-group center col-12">
+                    <input className="text-center form-control w-75" type="password" placeholder="digite sua senha" id="senha-conf" onChange={this.onChange} value={this.state.senha} />
+                    <div className='eye_icon' type='button' onClick={() => this.Showpassword()}></div>
                   </div>
                   <div className="form-group">
                     <div className="btn btn-success" onClick={() => this.postLogin()} >Login</div>
@@ -111,7 +121,6 @@ export default class Login extends Component {
                     <a href="forgotPassword.html">Esqueci minha senha</a>
                   </div>
                 </div>
-
               </div>
               <div className='col-2 center'>
                 <img className="w-100 h-50" src='img/taca.png' />
