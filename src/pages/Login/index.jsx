@@ -105,15 +105,18 @@ export default class Login extends Component {
             <div className="row">
               <div className="col-5">
                 <div id="container1">
+                  
                   <div className="form-group">Login</div>
                   <div className="form-group center col-12">
                     <input type="text" className="text-center form-control w-75" placeholder="email" id="login" onChange={this.onChange} value={this.state.login} />
                   </div>
+
                   <div className="form-group">Senha</div>
                   <div className="form-group center col-12">
                     <input className="text-center form-control w-75" type="password" placeholder="digite sua senha" id="senha-conf" onChange={this.onChange} value={this.state.senha} />
                     <div className='eye_icon' type='button' onClick={() => this.Showpassword()}></div>
                   </div>
+
                   <div className="form-group">
                     <div className="btn btn-success" onClick={() => this.postLogin()} >Login</div>
                   </div>
