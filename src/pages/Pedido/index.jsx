@@ -3,12 +3,15 @@ import React, { Component } from 'react';
 import './styles.css'
 
 import API from '../../Services/api';
+import { wait } from '@testing-library/react';
 
 const BEFORE = {
   client: '',
   orders: [],
   address: [],
+  endereco: '',
   page: 'Pedidos'
+
 }
 
 export default class Pedido extends Component {
@@ -23,6 +26,7 @@ export default class Pedido extends Component {
     }
     this.getAll();
   }
+
 
   getAll = async () => {
     const client = JSON.parse(localStorage.getItem('client'));
@@ -40,7 +44,13 @@ export default class Pedido extends Component {
     window.location.href = '/';
   }
 
+  deletarEndereco = async () => {
+    const endereco = localStorage.setItem (JSON.stringify(address));
+    const id = endereco.id
 
+
+    await API.post(`endereco/deletar/${id}`)
+  }
 
   setPage = () => {
     const page = this.state.page;
@@ -134,7 +144,9 @@ export default class Pedido extends Component {
                 <label className='col-sm-3 col-form-label'>Estado:</label>
                 <input className='form-control col-4 text-center' type="text" readOnly value={address.cd_uf} />
               </div>
+              <button onClick={this.deletarEndereco}>removeItem</button>
             </div>
+            
           </div>
         </div>
       </>

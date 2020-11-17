@@ -97,7 +97,7 @@ export default class Carrinho extends Component {
     const cart = this.state.products.map((product, key) => (
       <Linha
         key={key}
-        chave={key}
+        chave={key} 
         amount={product.quantidade}
         cart={this.setTotalPriceCart}
         removeItem={this.removeItem}
