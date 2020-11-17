@@ -133,17 +133,17 @@ export default class Checkout extends Component {
         {this.state.alert.title != '' && this.state.alert.content != '' && this.state.alert.style != '' ? <Alert title={`${this.state.alert.title}`} content={`${this.state.alert.content}`} style={`${this.state.alert.style}`} reset={this.resetForAlert} /> : ''}
         <div className="row my-5 py-3 center flex-container radius">
           <div className="col-12 col-md-4">
-            <div className='radius content-enter px-2 py-2 w-100'>
+            <div className='radius step-checkout content-enter px-2 py-2 w-100'>
               <Address onChange={this.onChange} alertas={this.myAlert} />
             </div>
           </div>
           <div className="col-12 col-md-4 my-2">
-            <div className='radius content-enter px-2 py-2'>
+            <div className='radius step-checkout content-enter px-2 py-2'>
               <Payment Pay={this.Payment} onChange={this.onChange} alertas={this.myAlert} />
             </div>
           </div>
           <div className=" col-12 col-md-4">
-            <div className='radius content-enter px-2 py-2'>
+            <div className='radius step-checkout content-enter px-2 py-2'>
 
               <h3 className='w-100 text-center'>Confirmar Dados</h3>
               <div className='d-flex justify-content-center align-items-center h-75'>
@@ -152,9 +152,9 @@ export default class Checkout extends Component {
                   <input type="text" className='form-control text-center' readOnly value='R$ 35,00' />
                   <label>Valor Total:</label>
                   <input type="text-area " className='form-control text-center' readOnly value={'R$ ' + this.state.price} />
-                  <div className="d-flex justify-content-center mt-5">
-                    <a href="../html/index.html" className="col btn btcc radius mx-1">Continuar</a>
-                    <a className="col btn btn-success align-items-center radius mx-1" onClick={this.postOrder}>Comprar</a>
+                  <div className="d-flex justify-content-center mt-3 btn-review">
+                    <a href="../html/index.html" className="col-12 btn btcc">Continuar</a>
+                    <a className="col-12 btn btn-success btn-finalizar align-items-center mt-3" onClick={this.postOrder}>Comprar</a>
                   </div>
                 </div>
               </div>

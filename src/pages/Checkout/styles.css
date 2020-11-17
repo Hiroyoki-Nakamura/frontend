@@ -3,10 +3,6 @@
   background-color: #3d3c3c;
 }
 
-.flex-container {
-  background-color: rgb(200, 207, 214);
-}
-
 .content-enter {
   background-color: #fff;
   height: 516px;
@@ -14,4 +10,20 @@
 
 .height-new-address {
   max-height: 440px;
+}
+
+.step-checkout {
+  border: 1px solid;
+}
+
+#endereco {
+  background-color: #000;
+  border: 1px solid #000;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+#endereco:hover {
+  opacity: 0.7;
+
 }

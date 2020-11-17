@@ -116,25 +116,25 @@ export default class Pagamento extends Component {
 
         <div className='container row col-12 my-1'>
           <div className='col-6 my-1 center'>
-            <div className='btn btn-primary radius' id='pageCard' value='old' onClick={this.onChange}>
+            <div className='btn btn-primary btcc' id='pageCard' value='old' onClick={this.onChange}>
               voltar
             </div>
           </div>
           <div className='col-6 my-1'>
-            <div className='btn btn-secondary radius' > limpar</div>
+            <div className='btn btn-secondary btcc' > limpar</div>
           </div>
-          <div className='col-12 center my-1'>
-            <div className='btn btn-success radius'>
+          <div className='col-12 center my-4'>
+            <div className='btn btn-dark btn-save-card'>
               salvar cartão
             </div>
           </div>
         </div>
 
-        <div className='center'>
+        {/* <div className='center'>
           <img className="img " src="/img/visa.png " width="40px " height="40px" />
           <img className="img " src="/img/master.png " width="40px " height="40px " />
           <img className="img " src="/img/boleto.png " width="40px " height="40px " />
-        </div>
+        </div> */}
       </>
 
     const cards =
@@ -146,7 +146,7 @@ export default class Pagamento extends Component {
 
         <label className='w-100 text-center'>Cartões cadastrados: </label>
 
-        <select className="custom-select radius" id="">
+        <select className="custom-select " id="">
           {this.state.cards.map(card => {
             return (
               <div>
@@ -156,7 +156,7 @@ export default class Pagamento extends Component {
           })}
         </select>
         <div className="w-100 center mt-2">
-          <div className='btn btn-primary radius' id='pageCard' value='new' onClick={this.onChange}>usar outro cartão</div>
+          <div className='btn btn-primary ' id='pageCard' value='new' onClick={this.onChange}>usar outro cartão</div>
         </div>
 
       </>
