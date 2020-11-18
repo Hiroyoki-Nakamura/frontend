@@ -31,7 +31,7 @@ export default class Produto extends Component {
 
     } else {
       const over = document.querySelector('.overlay');
-      const spin = document.querySelector('.load-cadastro');
+      const spin = document.querySelector('.load');
 
       spin.classList.remove('none');
       over.classList.remove('none');
@@ -74,7 +74,7 @@ export default class Produto extends Component {
   render() {
     return (
       <>
-        <div className="load-cadastro center none">
+        <div className="load center none">
           <div className="spin"></div>
           <div className="loader">carregando</div>
         </div>
@@ -101,10 +101,10 @@ export default class Produto extends Component {
                   <p>{this.state.product.ds_produto}</p>
                   <hr />
                   <div className="col-lg-6" id="comprar">
-                    <a href="#/carrinho"><button type="button" className="btn btn-success btn-lg " onClick={this.onCart} id="botao">Comprar</button></a>
+                    <a href="#/carrinho"><button type="button" className="btn btn-success btn-lg text-uppercase w-50" onClick={this.onCart} >Comprar</button></a>
                   </div>
                   <div className="col-6" id="voltar">
-                    <a href="#/"><button type="button" className="btn btn-secondary btn-lg" id="botao">Voltar</button></a>
+                    <a href="#/"><button type="button" className="btn btn-secondary btn-lg">Voltar</button></a>
                   </div>
                 </div>
               </div>

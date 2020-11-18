@@ -1,6 +1,6 @@
 header {
     color: white;
-    background-color: #660033;
+    background-color: #000;
     box-sizing: border-box;
     overflow: auto;
     width: 100%;
@@ -14,7 +14,6 @@ header {
     width: auto;
     height: 100%;
     margin: 0;
-    background-color: #660033;
     padding: 10px;
     border-bottom: 1px solid #fff;
 }
