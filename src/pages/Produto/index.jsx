@@ -9,6 +9,7 @@ export default class Produto extends Component {
   }
 
   componentDidMount() {
+
     this.setProduto();
   }
 
@@ -23,7 +24,6 @@ export default class Produto extends Component {
       por: product.desconto_produto.toFixed(2)
     });
   }
-
   onCart = () => {
     const product = this.state.product;
     const verify = JSON.parse(localStorage.getItem('cart'));

@@ -118,16 +118,18 @@ export default class Cadastro extends Component {
     this.setState({ alert: { title: '', content: '', style: '' } });
   }
 
+  //135835000
+
   validation = (event) => {
     const value = (event.target.value)
     const id = (event.target.id)
 
     const REGEXNOME = (/\b[A-Za-zÀ-ú][A-Za-zÀ-ú]+,?\s[A-Za-zÀ-ú][A-Za-zÀ-ú]{2,19}\b/);
-    const REGEXCEP = (/^([\d]{2})\.?([\d]{3})\-?([\d]{3})/);
+    const REGEXCEP = (/^([\d]{2})\.*([\d]{3})-*([\d]{3})/);
     const REGEXCPF = (/(^\d{3}\.\d{3}\.\d{3}\-\d{2}$)|(^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$)/);
     const REGEXRG = (/(\d{1,2})(\d{3})(\d{3})(\[\dX])$/);
     const REGEXTEL = (/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/);
-    const REGEXEMAIL = (/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/);
+    const REGEXEMAIL = (/.+@.+\.[A-Za-z]+$/);
     const DATE = new Date(value);
 
     switch (id) {
@@ -210,9 +212,42 @@ export default class Cadastro extends Component {
         }
         break;
       case 'cep':
+        
+                          //<------ CONSUMINDO API VIACEP--------//
+
+
         var cep = document.querySelector("#cep");
+        //let search = cep.value.replace("-", "") // tratando o traço do cep, trocando por valor vazio
         var erro = document.querySelector("#erroCep");
-        if (value.length > 9 || REGEXCEP.test(value) == false) {
+        
+
+         limpa_formulário_cep = () => {
+          //Limpa valores do formulário de cep.
+          document.getElementById('logradouro').value=("");
+          document.getElementById('bairro').value=("");
+          document.getElementById('localidade').value=("");
+          document.getElementById('complemento').value=("");
+        }
+
+         meu_callback(value) {
+          if (!("erro" in value)) {
+              //Atualiza os campos com os valores.
+              document.getElementById('rua').value=(conteudo.logradouro);
+              document.getElementById('bairro').value=(conteudo.bairro);
+              document.getElementById('cidade').value=(conteudo.localidade);
+              document.getElementById('uf').value=(conteudo.uf);
+              document.getElementById('ibge').value=(conteudo.ibge);
+          } //end if.
+          else {
+              //CEP não Encontrado.
+              limpa_formulário_cep();
+              alert("CEP não encontrado.");
+          }
+      }
+
+        
+
+        if (value.length > 10 || REGEXCEP.test(value) == false) {
           erro.style.display = "block";
           erro.style.backgroundColor = "rgba(255, 0, 0, 0.288)";
           erro.style.borderRadius = "10px";
@@ -222,6 +257,7 @@ export default class Cadastro extends Component {
           cep.style.borderColor = "green";
         }
         break;
+
       case 'exampleInputEmail1':
         var email = document.querySelector("#exampleInputEmail1");
         var erro = document.querySelector("#erroEmail");
@@ -305,17 +341,14 @@ export default class Cadastro extends Component {
         break;
       case 'cep':
         this.setState({ endereco: { ...this.state.endereco, cep: value } })
-        break;
-      case 'cidade':
-        this.setState({ endereco: { ...this.state.endereco, cidade: value } })
-        break;
+        break;      
       case 'bairro':
         this.setState({ endereco: { ...this.state.endereco, bairro: value } })
         break;
-      case 'uf':
+      case 'ufs':
         this.setState({ endereco: { ...this.state.endereco, ufselecionado: value } })
         break;
-      case 'rua':
+      case 'logradouro  ':
         this.setState({ endereco: { ...this.state.endereco, rua: value } })
         break;
       case 'numero':
@@ -441,7 +474,7 @@ export default class Cadastro extends Component {
                       <div className="col-6">
 
                         <label htmlFor="inputAddress"><i>Cidade</i></label>
-                        <input onChange={this.onChange} value={this.state.endereco.cidade} type="text" id="cidade" className="form-control text-center"
+                        <input onChange={this.onChange} value={this.state.endereco.cidade} type="text" id="localidade" className="form-control text-center"
                           placeholder="Digite sua cidade aqui" />
                       </div>
                       <div className="col-6">
@@ -450,7 +483,7 @@ export default class Cadastro extends Component {
                       </div>
                       <div className="col-3">
                         <label htmlFor="inputAddress"><i>UF</i></label>
-                        <select onClick={this.onChange} id="uf" className="form-control text-center">
+                        <select onClick={this.onChange} id="ufs" className="form-control text-center">
                           {this.state.ufs.map(uf => {
                             return <option key={uf.id} value={uf.id} >{uf.ds_uf}</option>
                           })}
@@ -462,7 +495,7 @@ export default class Cadastro extends Component {
 
                   <div className="col-12">
                     <label htmlFor="inputAddress"><i>Rua</i></label>
-                    <input onChange={this.onChange} value={this.state.endereco.rua} type="text" id="rua" className="form-control text-center" placeholder="Digite seu endereço" />
+                    <input onChange={this.onChange} value={this.state.endereco.rua} type="text" id="logradouro" className="form-control text-center" placeholder="Digite seu endereço" />
                   </div>
                   <div className="col-12">
                     <label htmlFor="inputAddress"><i>Numero</i></label>
