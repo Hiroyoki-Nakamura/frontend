@@ -44,13 +44,13 @@ export default class Pedido extends Component {
     window.location.href = '/';
   }
 
-  deletarEndereco = async () => {
-    const endereco = localStorage.setItem (JSON.stringify(address));
-    const id = endereco.id
+  // deletarEndereco = async () => {
+  //   const endereco = localStorage.setItem (JSON.stringify(address));
+  //   const id = endereco.id
 
 
-    await API.post(`endereco/deletar/${id}`)
-  }
+  //   await API.post(`endereco/deletar/${id}`)
+  // }
 
   setPage = () => {
     const page = this.state.page;
