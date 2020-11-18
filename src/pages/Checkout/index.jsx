@@ -16,7 +16,8 @@ const BEFORE = {
     title: '',
     content: '',
     style: ''
-  }
+  },
+  card: ''
 }
 
 export default class Checkout extends Component {
@@ -57,6 +58,22 @@ export default class Checkout extends Component {
     this.setState({ alert: { title: '', content: '', style: '' } });
   }
 
+  startLoading = () => {
+    const over = document.querySelector('.overlay');
+    const spin = document.querySelector('.load');
+
+    spin.classList.remove('none');
+    over.classList.remove('none');
+  }
+
+  stopLoading = () => {
+    const over = document.querySelector('.overlay');
+    const spin = document.querySelector('.load');
+
+    spin.classList.add('none');
+    over.classList.add('none');
+  }
+
   onChange = (event) => {
     const value = (event.target.value);
     const id = (event.target.id);
@@ -71,11 +88,7 @@ export default class Checkout extends Component {
   };
 
   postOrder = async () => {
-    const over = document.querySelector('.overlay');
-    const spin = document.querySelector('.load-cadastro');
-
-    spin.classList.remove('none');
-    over.classList.remove('none');
+    this.startLoading();
 
     const client = JSON.parse(localStorage.getItem('client'));
     const cart = await JSON.parse(localStorage.getItem('cart'));
@@ -87,14 +100,16 @@ export default class Checkout extends Component {
       }
     } else {
       dados_pagamento = {
-        id_cartao: client.id
+        id_cartao: this.state.card
       }
     }
+
+    const typePayment = (this.state.payment == 'boleto' ? 1 : 2);
 
     const objSend = {
       cliente: client.id,
       endereco_entrega: this.state.address,
-      tipo_pagamento: (this.state.payment == 'boleto' ? 1 : 2),
+      tipo_pagamento: typePayment,
       dados_pagamento: { ...dados_pagamento },
       produtos: [...cart],
       frete: '35',
@@ -104,13 +119,12 @@ export default class Checkout extends Component {
     const sendOrder = await API.post('/pedido/criar', objSend);
 
     if (sendOrder.status == 201) {
-      this.myAlert('novo Pedido', sendOrder.data, 'a');
+      this.myAlert('novo Pedido', sendOrder.data, 'success');
     } else {
-      this.myAlert('Opps!', sendOrder.data, 'a');
+      this.myAlert('Opps!', sendOrder.data, 'danger');
     }
 
-    spin.classList.add('none');
-    over.classList.add('none');
+    this.stopLoading();
 
     if (sendOrder.status == 201) {
       localStorage.removeItem('cart');
@@ -121,40 +135,50 @@ export default class Checkout extends Component {
 
   Payment = payment => {
     this.setState({ payment });
+    console.log(this.state.payment)
   };
+
+  switchCard = card => {
+    this.setState({ card });
+  }
 
   render() {
     return (
       <>
-        <div className="load-cadastro center none">
+        <div className="load center none">
           <div className="spin"></div>
           <div className="loader">Carregando</div>
         </div>
         {this.state.alert.title != '' && this.state.alert.content != '' && this.state.alert.style != '' ? <Alert title={`${this.state.alert.title}`} content={`${this.state.alert.content}`} style={`${this.state.alert.style}`} reset={this.resetForAlert} /> : ''}
         <div className="row my-5 py-3 center flex-container radius">
           <div className="col-12 col-md-4">
-            <div className='radius content-enter px-2 py-2 w-100'>
-              <Address onChange={this.onChange} alertas={this.myAlert} />
+            <div className='radius step-checkout content-enter px-2 py-2 w-100'>
+              <Address onChange={this.onChange} alertas={this.myAlert} startLoading={this.startLoading} stopLoading={this.stopLoading} />
             </div>
           </div>
           <div className="col-12 col-md-4 my-2">
-            <div className='radius content-enter px-2 py-2'>
-              <Payment Pay={this.Payment} onChange={this.onChange} alertas={this.myAlert} />
+            <div className='radius step-checkout content-enter px-2 py-2'>
+              <Payment Pay={this.Payment} startLoading={this.startLoading} stopLoading={this.stopLoading} card={this.switchCard} onChange={this.onChange} alertas={this.myAlert} />
             </div>
           </div>
           <div className=" col-12 col-md-4">
-            <div className='radius content-enter px-2 py-2'>
+            <div className='radius step-checkout content-enter px-2 py-2'>
 
               <h3 className='w-100 text-center'>Confirmar Dados</h3>
               <div className='d-flex justify-content-center align-items-center h-75'>
                 <div>
-                  <label>Frete: </label>
-                  <input type="text" className='form-control text-center' readOnly value='R$ 35,00' />
-                  <label>Valor Total:</label>
-                  <input type="text-area " className='form-control text-center' readOnly value={'R$ ' + this.state.price} />
-                  <div className="d-flex justify-content-center mt-5">
-                    <a href="../html/index.html" className="col btn btcc radius mx-1">Continuar</a>
-                    <a className="col btn btn-success align-items-center radius mx-1" onClick={this.postOrder}>Comprar</a>
+                  <div className="d-flex flex-column">
+                    <label>Frete: </label>
+                    <label type="text" className='text-center'> R$ 35,00</label>
+                  </div>
+                  <div className="d-flex flex-column">
+                    <label>Valor Total: </label>
+                    <label type="text-area " className='text-center'> R$ {this.state.price} </label>
+                  </div>
+
+                  <div className="d-flex justify-content-center mt-3 btn-review">
+                    <a href="../html/index.html" className="col-12 btn btcc">Voltar para produtos </a>
+                    <a className="col-12 btn btn-success btn-finalizar align-items-center mt-3" onClick={this.postOrder}>Finalizar compra</a>
                   </div>
                 </div>
               </div>

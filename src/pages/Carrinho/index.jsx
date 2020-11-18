@@ -109,86 +109,85 @@ export default class Carrinho extends Component {
   render() {
     return (
       <>
-        <div className="container" id="">
+        <div className="container my-3">
           <div className="row">
-            <div className="col-12 mt-1 mb-4">
+            <div className="col-12 my-1">
+              <h2 className="center">Carrinho</h2>
+            </div>
 
-              <h2 className="center corvalor">Carrinho</h2>
 
-              <div className="container" id="topo">
-                <div className="row">
+            <div className="col-12 container" id="topo">
+              <div className="row">
 
-                  <div className="col-12 pb-5">
-
-                    <div className="row">
-                      <div className="col-4">
-                        <h4 className="center">Produto</h4>
-                      </div>
-                      <div className="col-2">
-                        <h4 className="center">Vlr Unidade</h4>
-                      </div>
-                      <div className="col-2">
-                        <h4 className="center">Quantidade</h4>
-                      </div>
-                      <div className="col-2">
-                        <h4 className="center">Subtotal</h4>
-                      </div>
-                      <div className="col-2">
-                        <h4 className="center">Remover</h4>
-                      </div>
-                    </div>
-
-                  </div>
-
+                <div className="col-4">
+                  <h4 className="center">Produto</h4>
                 </div>
-              </div>
 
-              <div>
+                <div className="col-2">
+                  <h4 className="center">Vlr Unidade</h4>
+                </div>
 
-                <div className="container" id="carrinho">
-                  {this.state.cart}
+                <div className="col-2">
+                  <h4 className="center">Quantidade</h4>
+                </div>
+
+                <div className="col-2">
+                  <h4 className="center">Subtotal</h4>
+                </div>
+
+                <div className="col-2">
+                  <h4 className="center">Remover</h4>
                 </div>
 
               </div>
-
-              <div className="container col-12 base">
-                <div className="row">
-
-                  <div className="col-12">
-
-                    <div className='float-right w-25'>
-
-                      <div className='row'>
-                        <div className="col-6"></div>
-                        <div className="col-6">
-                          <label className="corvalor">Valor Total</label>
-                          <input className="valortotal" disabled value={'R$ ' + `${this.state.totalPrice}`.replace('.', ',')} />
-
-                        </div>
-                      </div>
+            </div>
 
 
-                      <div className="row">
-                        <div className="col-6" id="voltar">
-                          <a href="#/"><button type="button" className="btn btn-secondary botao" id="botao">Voltar</button></a>
-                        </div>
-                        <a href={'#/' + this.hasLogged()}><button type="button" className="btn btn-success btn-md btn-block botao"
-                          id="botao">Confirmar</button></a>
-
-                        <div className="col-2">
-                        </div>
-                      </div>
-                    </div>
 
 
-                  </div>
+            <div className="col-12 carrinho">
 
-                </div>
-              </div>
+              {this.state.cart}
 
             </div>
+
+
+
+            <div className="container col-12 base">
+              <div className="row">
+
+                <div className="col-12">
+
+                  <div className='float-right w-25'>
+
+                    <div className='row'>
+                      <div className="col-12 d-flex justify-content-between">
+                        <label className="valortotal">Valor Total</label>
+                        <label className="price"> R$ {`${this.state.totalPrice}`.replace('.', ',')}</label>
+                      </div>
+                    </div>
+
+
+                    <div className="d-flex flex-column-reverse">
+
+                      <a href="#/"><button type="button" className="btn btn-dark btcc radius mt-3 w-100">Continuar comprando</button></a>
+
+                      <a href={'#/' + this.hasLogged()}><button type="button" className="btn btn-success btn-md btn-block radius text-uppercase py-3">Finalizar Compra</button></a>
+
+                      <div className="col-2">
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
+
       </>
     );
   }

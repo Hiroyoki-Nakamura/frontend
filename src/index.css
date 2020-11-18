@@ -1,5 +1,5 @@
 body {
-  background-color: #3b3c3c;
+  background-color: #fff;
 }
 
 .center {
@@ -15,24 +15,42 @@ body {
 }
 
 .radius {
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 /* cont_compr */
+
 .btcc {
-  background-color: #660033;
-  border-color: #660033;  
-  color: #fff;
+  background-color: #fff;
+  border-color: #000;
+  color: #000;
 }
 
 /* final_comp */
+
 .btcc:hover {
-  background-color: #963465;
-  color: #fff;
-} 
+  background-color: #eee;
+  color: #000;
+  border-color: #000;
+}
+
+.btn-review {
+  flex-direction: column;
+}
+
+.btn-finalizar {
+  background-color: #0db861;
+  padding: 10px 0;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 
 .none {
   display: none;
+}
+
+.noPrevs {
+  z-index: 0;
 }
 
 .overlay {
@@ -46,7 +64,7 @@ body {
   z-index: 2;
 }
 
-.load-cadastro {
+.load {
   position: fixed;
   top: 0;
   left: 0;
@@ -54,7 +72,7 @@ body {
   height: 100vh;
 }
 
-.load-cadastro, .loader, .spin {
+.load, .loader, .spin {
   z-index: 3;
 }
 
@@ -70,10 +88,6 @@ body {
   border-radius: 50vh;
   border-top: 5px solid white;
   animation: loading 2s linear infinite;
-}
-
-.white {
-  color: #fff !important;
 }
 
 @keyframes loading {

@@ -13,34 +13,38 @@
 }
 
 .header-product {
-  color: white;
+  color: black;
   font-size: 20px;
   font-weight: bold;
-}
-
-.buy-product {
-  padding: 4px 10px;
-  color: white;
-  background-color: green;
-  border: 1px solid white;
-  border-radius: 20px;
   text-align: center;
 }
 
+.buy-product {
+  padding: 12px 30px;
+  color: white;
+  background-color: #0db861;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.price-line ~ label {
+  color: #000;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 .buy-product:hover {
-  color: green;
-  background-color: #fff;
-  border: 1px solid green;
+  background-color: #0f9d55;
 }
 
 .price-line {
   text-decoration: line-through;
-  text-decoration-color: #ffd900ad;
   color: #b3b5c4;
 }
 
 .price-product{
   color: white;
+  margin-bottom: 20px;
 }
 
 .filter {

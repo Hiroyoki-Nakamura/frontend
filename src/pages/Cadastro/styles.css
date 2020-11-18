@@ -1,11 +1,11 @@
-h1 {
+/* h1 {
   color: #ffffff;
-}
+} */
 
 #teste-botao1 {
-  background-color: #660033;
+  background-color: #0f9d55;;
   color: #ffffff;
-  border-radius: 20px;
+  border-radius: 5px;
   margin: 20px 0;
 }
 
@@ -21,10 +21,6 @@ h1 {
   border-radius: 15px;
   box-sizing: border-box;
   padding: 25px 0;
-}
-
-.form-control {
-  border-radius: 20px;
 }
 
 .main {

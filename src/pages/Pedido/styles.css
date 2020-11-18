@@ -1,17 +1,5 @@
-#principal {
-    background-color: grey;
-    margin-top: -10px;
-    margin-bottom: 20px;
-    /* height: 460px; */
-    border-radius: 20px;
-    padding-bottom: 10px;
-}
-
-#topo {
-    background-color: #660033;
-    color: #fff;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+#topo1 {
+    border-bottom: 1px solid;
 }
 
 #pedido {
@@ -21,23 +9,23 @@
 }
 
 #base {
-    background-color: #660033;
     height: 30px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
 
 #menu_lat {
-    background-color: #660033;
     overflow: auto;
     height: 330px;
-    color: white;
+    color: black;
     font-size: 20px;
     overflow: hidden;
+    
 }
 
 #menu_lat * {
     cursor: pointer;
+    list-style: none;
 }
 
 .menu_lat_li:hover {
@@ -46,8 +34,27 @@
 
 #labels {
     justify-content: space-around;
+    border-bottom: 2px solid #eee;
+    padding: 15px 0;
+}
+
+label {
+    margin: 0;
 }
 
 h5 {
     justify-content: space-around;
+}
+
+#menu_lat li:hover span {
+    margin-left: 20px;
+}
+
+#menu_lat li span {
+    transition: all 0.5s;
+}
+
+#menu_lat li{
+    padding: 10px 0;
+    border-bottom: 1px solid;
 }

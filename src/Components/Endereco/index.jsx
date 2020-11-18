@@ -23,14 +23,19 @@ export default class Endereco extends Component {
   }
 
   initialization = async () => {
+    this.props.startLoading();
+
     const client = JSON.parse(localStorage.getItem('client'));
     const ufs = await API.get('/uf');
     const enderecos = await API.get(`/endereco/buscar/${client.id}`);
+
     this.setState({
       enderecos: [...enderecos.data],
       address: enderecos.data[0].id,
       ufs: [...ufs.data]
     });
+
+    this.props.stopLoading();
   };
 
   postEndereco = async () => {
@@ -48,9 +53,10 @@ export default class Endereco extends Component {
 
     if (sendObject.status == 201) {
       this.setState({ ...BEFORE, ufs: this.state.ufs, enderecos: this.state.enderecos });
+      this.props.alertas('novo Endereço', sendObject.data, 'success');
     }
     this.initialization();
-    this.props.alertas('novo Endereço', sendObject.data, 'a');
+
   };
 
   onChange = (event) => {
@@ -104,7 +110,7 @@ export default class Endereco extends Component {
               })}
             </select>
             <div className='center'>
-              <a className="btn btn-primary btn-lg active mt-5 radius" aria-pressed="true" id="endereco" value="endereco" onClick={this.renderAdress} >Entregar em outro Endereço</a>
+              <a className="btn btn-primary btn-lg active mt-5" aria-pressed="true" id="endereco" value="endereco" onClick={this.renderAdress} >Entregar em outro Endereço</a>
             </div>
 
           </div>
@@ -164,8 +170,8 @@ export default class Endereco extends Component {
           </div>
 
           <div className="center">
-            <a className="btn btn-primary radius mx-2" id="novoEndereco" aria-pressed="true" onClick={this.renderAdress} value="novoEndereco">Voltar</a>
-            <a className="btn  btn-success mx-2 radius " id="salvar" aria-pressed="true" onClick={this.postEndereco} >Salvar</a>
+            <a className="btn btn-light btcc mx-2" id="novoEndereco" aria-pressed="true" onClick={this.renderAdress} value="novoEndereco">Voltar</a>
+            <a className="btn  btn-dark mx-2 " id="salvar" aria-pressed="true" onClick={this.postEndereco} >Salvar</a>
           </div>
 
         </div>

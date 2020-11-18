@@ -50,7 +50,6 @@ export default class Pedido extends Component {
       if (order.created_at != null) {
         date = order.created_at.slice(0, 10);
         while (date.includes('-')) {
-
           date = date.replace('-', '/');
         }
       }
@@ -65,10 +64,17 @@ export default class Pedido extends Component {
               <label className="text-center" style={{ width: '120px' }}>{order.cd_status_pedido}</label>
             </div>
           </div>
-          <hr />
         </>
       );
     });
+
+    let date = this.state.client.created_at;
+    if (this.state.client.created_at != null) {
+      date = date.slice(0, 10);
+      while (date.includes('-')) {
+        date = date.replace('-', '/');
+      }
+    }
 
     const profile = () => (
       <>
@@ -93,7 +99,7 @@ export default class Pedido extends Component {
               </div>
               <div className='form-group col-6'>
                 <label className='col-sm-6 col-form-label'>Genero:</label>
-                <input className='form-control col-6 text-center' type="text" readOnly  value={this.state.client.genero} />
+                <input className='form-control col-6 text-center' type="text" readOnly value={this.state.client.genero} />
               </div>
               <div className='form-group col-6'>
                 <label className='col-sm-6 col-form-label'>Data de Nascimento:</label>
@@ -101,7 +107,7 @@ export default class Pedido extends Component {
               </div>
               <div className='form-group col-6'>
                 <label className='col-sm-6 col-form-label'>Cliente desde:</label>
-                <input className='form-control col-6 text-center' type="date-time" readOnly value={this.state.client.created_at} />
+                <input className='form-control col-6 text-center' type="date-time" readOnly value={date} />
               </div>
             </div>
           </div>
@@ -159,24 +165,24 @@ export default class Pedido extends Component {
   render() {
     return (
       <>
-        <div className="container mt-2" id="principal">
+        <div className="container mt-2" >
           <div className="row">
             <div className="col-12">
-              <h1 className="center py-2"> {this.state.page == 'Cadastro' ? 'Meu' : 'Meus'} {this.state.page}</h1>
+              <h1 className="center py-2 "> {this.state.page == 'Cadastro' ? 'Meu' : 'Meus'} {this.state.page}</h1>
 
-              <div className="container" id="topo">
+              <div className="container mb-2" id="topo1">
                 <div className="row">
                   <div className="col-12">
 
                     <div className="row">
                       <div className="col-3"></div>
-                      <div className="col-9 pb-4 mb-4 d-flex justify-content-around" id="labels">
+                      <div className="col-9 d-flex justify-content-around">
                         {this.state.page == 'Pedidos' ? <>
-                          <label className="text-center" style={{ width: '120px' }}>Numero Pedido</label>
-                          <label className="text-center" style={{ width: '120px' }}>Vlr Pedido</label>
-                          <label className="text-center" style={{ width: '120px' }}>Data Pedido</label>
+                          <label className="text-center" style={{ width: '120px' }}>Número</label>
+                          <label className="text-center" style={{ width: '120px' }}>Valor</label>
+                          <label className="text-center" style={{ width: '120px' }}>Data</label>
                           <label className="text-center" style={{ width: '120px' }}>Status</label>
-                        </> : <label style={{ color: '#660033' }}>a</label>}
+                        </> : <label style={{ color: '#fff' }}>a</label>}
                       </div>
                     </div>
 
@@ -186,15 +192,23 @@ export default class Pedido extends Component {
 
               <div className="container">
                 <div className="row">
-                  <div className="col-3 pl-5 overflow-hidden" id="menu_lat">
-                    <li id='Cadastro' onClick={this.changePage}>Meu Cadastro</li>
-                    <hr />
-                    <li id='Pedidos' onClick={this.changePage}>Meus Pedidos</li>
-                    <hr />
-                    <li id='Endereços' onClick={this.changePage}>Meus endereços</li>
-                    <hr />
-                    <li onClick={this.logout}>Logout</li>
-                    <hr />
+                  <div className="col-3 pl-5 overflow-hidden text-decoration-none" id="menu_lat">
+                    <li id='Cadastro' onClick={this.changePage}>
+                      <span className="li-dash" id='Cadastro' onClick={this.changePage}>Meu Cadastro</span>
+                    </li>
+
+                    <li id='Pedidos' onClick={this.changePage}>
+                      <span id='Pedidos' onClick={this.changePage} className="li-dash">Meus Pedidos</span>
+                    </li>
+
+                    <li id='Endereços' onClick={this.changePage}>
+                      <span id='Endereços' onClick={this.changePage} className="li-dash">Meus endereços</span>
+                    </li>
+
+                    <li onClick={this.logout}>
+                      <span onClick={this.logout} className="li-dash">Logout</span>
+                    </li>
+
                   </div>
 
                   <div className="col-9" id="pedido" style={{ overflowY: "scroll", overflowX: "hidden" }}>

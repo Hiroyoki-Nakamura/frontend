@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './styles.css';
 
+import API from '../../Services/api';
+
 export default class Produto extends Component {
   state = {
     product: '',
@@ -14,15 +16,40 @@ export default class Produto extends Component {
   }
 
   setProduto = async () => {
-    const product = await this.props.route.render();
+    const idProduct = localStorage.getItem('getProductId');
+
+    if (idProduct == null) {
+
+      const product = await this.props.route.render();
       if (product == '') {
-      window.location.href = '/';
+        window.location.href = '/';
+      }
+      this.setState({
+        product: { ...product },
+        de: product.valor_produto.toFixed(2),
+        por: product.desconto_produto.toFixed(2)
+      });
+
+    } else {
+      const over = document.querySelector('.overlay');
+      const spin = document.querySelector('.load');
+
+      spin.classList.remove('none');
+      over.classList.remove('none');
+
+      const request = await API.get(`/produto/buscar/${idProduct}`);
+      console.log(request)
+      if (request.status == 202) {
+        const product = request.data;
+        this.setState({
+          product: { ...product },
+          de: product.valor_produto.toFixed(2),
+          por: product.desconto_produto.toFixed(2)
+        });
+      }
+      spin.classList.add('none');
+      over.classList.add('none');
     }
-    this.setState({
-      product: { ...product },
-      de: product.valor_produto.toFixed(2),
-      por: product.desconto_produto.toFixed(2)
-    });
   }
   onCart = () => {
     const product = this.state.product;
@@ -38,7 +65,7 @@ export default class Produto extends Component {
 
       if (add) {
         localStorage.setItem('cart', JSON.stringify([...verify, product]));
-      } 
+      }
     } else {
       localStorage.setItem('cart', JSON.stringify([product]));
     }
@@ -47,6 +74,10 @@ export default class Produto extends Component {
   render() {
     return (
       <>
+        <div className="load center none">
+          <div className="spin"></div>
+          <div className="loader">carregando</div>
+        </div>
         <section id="sectionproduto" className="center">
           <div className="container">
             <div className="row">
@@ -70,16 +101,17 @@ export default class Produto extends Component {
                   <p>{this.state.product.ds_produto}</p>
                   <hr />
                   <div className="col-lg-6" id="comprar">
-                    <a href="#/carrinho"><button type="button" className="btn btn-success btn-lg " onClick={this.onCart} id="botao">Comprar</button></a>
+                    <a href="#/carrinho"><button type="button" className="btn btn-success btn-lg text-uppercase w-50" onClick={this.onCart} >Comprar</button></a>
                   </div>
                   <div className="col-6" id="voltar">
-                    <a href="#/"><button type="button" className="btn btn-secondary btn-lg" id="botao">Voltar</button></a>
+                    <a href="#/"><button type="button" className="btn btn-secondary btn-lg">Voltar</button></a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
+        <div className="overlay none"></div>
       </>
     )
   }
