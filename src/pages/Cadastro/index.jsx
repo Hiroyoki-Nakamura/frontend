@@ -118,7 +118,35 @@ export default class Cadastro extends Component {
     this.setState({ alert: { title: '', content: '', style: '' } });
   }
 
-  //135835000
+                                // <!--- CONSUMINDO API DO VIACEP --->
+  viaCep = () => {
+    const cep = document.querySelector("#cep");
+    
+    const showData = (result) =>{
+
+      for(const campo in result){
+          if(document.querySelector("#"+campo)){
+              document.querySelector("#"+campo).value = result[campo]
+          }
+      }
+  }
+  
+  cep.addEventListener("blur", (e) => {
+      let search = cep.value.replace("-", "") // tratando o traço do cep, trocando por valor vazio
+      const options = {
+          method: 'GET',
+          mode: 'cors',
+          cache: 'default'
+      }
+  
+      fetch(`https://viacep.com.br/ws/${search}/json/`, options)
+      .then((response)=>{ response.json().then(data => showData(data))})
+      .catch(e => console.log('Deu erro' + e))
+  })
+
+  }
+
+  //CEP JONAS TESTAR 135835000
 
   validation = (event) => {
     const value = (event.target.value)
@@ -211,41 +239,9 @@ export default class Cadastro extends Component {
           telefone1.style.borderColor = "green";
         }
         break;
-      case 'cep':
-        
-                          //<------ CONSUMINDO API VIACEP--------//
-
-
-        var cep = document.querySelector("#cep");
-        //let search = cep.value.replace("-", "") // tratando o traço do cep, trocando por valor vazio
-        var erro = document.querySelector("#erroCep");
-        
-
-         limpa_formulário_cep = () => {
-          //Limpa valores do formulário de cep.
-          document.getElementById('logradouro').value=("");
-          document.getElementById('bairro').value=("");
-          document.getElementById('localidade').value=("");
-          document.getElementById('complemento').value=("");
-        }
-
-         meu_callback(value) {
-          if (!("erro" in value)) {
-              //Atualiza os campos com os valores.
-              document.getElementById('rua').value=(conteudo.logradouro);
-              document.getElementById('bairro').value=(conteudo.bairro);
-              document.getElementById('cidade').value=(conteudo.localidade);
-              document.getElementById('uf').value=(conteudo.uf);
-              document.getElementById('ibge').value=(conteudo.ibge);
-          } //end if.
-          else {
-              //CEP não Encontrado.
-              limpa_formulário_cep();
-              alert("CEP não encontrado.");
-          }
-      }
-
-        
+        case 'cep': 
+         var cep = document.querySelector("#cep");
+         var erro = document.querySelector("#erroCep");
 
         if (value.length > 10 || REGEXCEP.test(value) == false) {
           erro.style.display = "block";
@@ -255,6 +251,7 @@ export default class Cadastro extends Component {
         } else {
           erro.style.display = "none";
           cep.style.borderColor = "green";
+          this.viaCep()
         }
         break;
 
@@ -474,7 +471,7 @@ export default class Cadastro extends Component {
                       <div className="col-6">
 
                         <label htmlFor="inputAddress"> Cidade </label>
-                        <input onChange={this.onChange} value={this.state.endereco.cidade} type="text" id="cidade" className="form-control text-center"
+                        <input onChange={this.onChange} value={this.state.endereco.cidade} type="text" id="localidade" className="form-control text-center"
                           placeholder="Digite sua cidade aqui" />
                       </div>
                       <div className="col-8">
@@ -483,16 +480,17 @@ export default class Cadastro extends Component {
                       </div>
                       <div className="col-4">
                         <label htmlFor="inputAddress"> UF </label>
-                        <select onClick={this.onChange} id="uf" className="form-control text-center">
+                          <input id="uf" type="texrt" className="form-control text-center" />
+                        {/* <select onClick={this.onChange} id="uf" className="form-control text-center">
                           {this.state.ufs.map(uf => {
                             return <option key={uf.id} value={uf.id} >{uf.ds_uf}</option>
                           })}
-                        </select>
+                        </select> */}
                       </div>
 
                       <div className="col-8">
                         <label htmlFor="inputAddress"> Rua </label>
-                        <input onChange={this.onChange} value={this.state.endereco.rua} type="text" id="rua" className="form-control text-center" placeholder="Digite seu endereço" />
+                        <input onChange={this.onChange} value={this.state.endereco.rua} type="text" id="logradouro" className="form-control text-center" placeholder="Digite seu endereço" />
                       </div>
 
                       <div className="col-4">
