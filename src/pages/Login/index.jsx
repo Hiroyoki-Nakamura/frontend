@@ -82,6 +82,10 @@ export default class Login extends Component {
     }
   }
 
+  forgotPassword = () => {
+
+  }
+
   render() {
     return (
       <>
@@ -109,7 +113,7 @@ export default class Login extends Component {
                     <div className="btn btn-success text-uppercase w-75 py-3" onClick={() => this.postLogin()}>fazer Login</div>
                   </div>
                   <div className="form-group">
-                    <a >Esqueci minha senha</a>
+                    <div className="link" onClick={this.forgotPassword}>Esqueci minha senha</div>
                   </div>
                 </div>
 
