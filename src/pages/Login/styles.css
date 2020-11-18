@@ -37,3 +37,11 @@ a:hover {
     height: 40px;
 }
 
+
+@media (max-width:768px) {
+    #imgtaca{
+        display: none;
+    }
+}
+
+

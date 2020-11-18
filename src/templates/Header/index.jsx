@@ -19,20 +19,18 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header className="Header">
-        <div className="center logo row">
-          <a href="#/"><div className="center logotipo col-6 sm-6"></div></a>
-          <div className="icons acoes center">
-            <div className="center">
+      <header className="Header central">
+        <div className="center row logo">
+          <a href="#/"> <div id='logolink' className="center logotipo col-12 col-sm-6 col-md-6 col-lg-6" ></div> </a>
+          <div className="icons acoes center pull-right col-12 col-sm-6 col-md-6 col-lg-6">
               <If test={this.state.client === ''}>
-                <a href="#/login">Login<div className="logoUser btn btn_login"></div></a>
+                <a href="#/login"><div className="logoUser btn btn_login"></div></a>
+                <div className='text_user'>Login</div>
               </If>
-              <If test={!(this.state.client === '')}>
+              <If test={!(this.state.client === '')}>        
                 <a href="#/pedido">{this.state.client.nome}<div className="logoUser btn btn_login"></div></a>
               </If>
-
               <a href="#/carrinho"><div className="logoCar btn btn_cart"></div></a>
-            </div>
           </div>
         </div>
       </header>

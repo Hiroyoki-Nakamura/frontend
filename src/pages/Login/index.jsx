@@ -124,11 +124,11 @@ export default class Login extends Component {
                   </div>
                 </div>
               </div>
-              <div className='col-2 center'>
+              <div id='imgtaca' className='col-2 center imgtaca'>
                 <img className="w-100 h-50" src='img/taca.png' />
               </div>
 
-              <div className="col-12 col-md-5"  >
+              <div className="col-12 col-md-5">
                 <div className='center' id='container2'>
                   <div>
                     <div className="form-group">
