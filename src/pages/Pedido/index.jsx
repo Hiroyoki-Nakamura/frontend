@@ -9,7 +9,7 @@ const BEFORE = {
   client: '',
   orders: [],
   address: [],
-  endereco: '',
+  enderecos:'',
   page: 'Pedidos'
 
 }
@@ -51,6 +51,15 @@ export default class Pedido extends Component {
 
   //   await API.post(`endereco/deletar/${id}`)
   // }
+
+  handleRemove = async () => {
+  const endereco = JSON.parse(localStorage.getItem('enderecos'),{
+    method: "DELETE",
+  });
+
+    await API.delete(`endereco/deletar/${endereco.id}`); 
+    
+  }
 
   setPage = () => {
     const page = this.state.page;
@@ -150,7 +159,7 @@ export default class Pedido extends Component {
                 <label className='col-sm-3 col-form-label'>Estado:</label>
                 <input className='form-control col-4 text-center' type="text" readOnly value={address.cd_uf} />
               </div>
-              <button onClick={this.deletarEndereco}>removeItem</button>
+              <button onClick={this.handleRemove}>removeItem</button>
             </div>
             
           </div>

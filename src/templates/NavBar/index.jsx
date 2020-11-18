@@ -11,7 +11,8 @@ import Produto from '../../Components/PesquisaProduto';
 const BEFORE = {
   categorys: [],
   search: '',
-  products: []
+  products: [],
+  endereco: ''
 };
 
 export default class NavBar extends Component {
