@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import './styles.css'
 
 import API from '../../Services/api';
-import { wait } from '@testing-library/react';
 
 const BEFORE = {
   client: '',
@@ -25,6 +24,7 @@ export default class Pedido extends Component {
       window.location.href = '/';
     }
     this.getAll();
+    
   }
 
 
@@ -34,6 +34,7 @@ export default class Pedido extends Component {
 
     const orders = (await API.get(`/pedido/listar/${id}`)).data || [];
     const address = (await API.get(`/endereco/buscar/${id}`)).data || [];
+
 
     this.setState({ orders, address, client });
   }
@@ -53,11 +54,41 @@ export default class Pedido extends Component {
   // }
 
   handleRemove = async () => {
-  const endereco = JSON.parse(localStorage.getItem('enderecos'),{
-    method: "DELETE",
-  });
+  // const endereco = localStorage.getItem('address');
+  // const enderecoId = JSON.parse('endereco.id')
+  const client = JSON.parse(localStorage.getItem('client'))
+  console.log(client)
+  const id = client.id
+  console.log(id)
+  const addresses = (await API.get(`/endereco/buscar/${id}`)).data;
+  console.log(addresses)
+    // addresses.forEach(function(a){
+    //   let address = []
+      // console.log(address)
+    
+      // if(id != null){
+          
+      // }
 
-    await API.delete(`endereco/deletar/${endereco.id}`); 
+
+  // })
+  // const filteredAddress = addresses.map((address) => ({
+  //   ...address,
+    
+  // }))
+  const addressId = addresses.map(address => address.id);
+  console.log(addressId)
+
+  // const deleteAddress = (await API.delete(`/endereco/deletar/${addressId}`))
+
+
+  
+  // const addressId = address.[0].id
+  // console.log(addressId)
+
+    // return await API.delete(`endereco/deletar/${endereco}`); 
+
+    
     
   }
 
