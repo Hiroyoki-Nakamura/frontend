@@ -45,52 +45,26 @@ export default class Pedido extends Component {
     window.location.href = '/';
   }
 
-  // deletarEndereco = async () => {
-  //   const endereco = localStorage.setItem (JSON.stringify(address));
-  //   const id = endereco.id
+  deletarEndereco = async () => {
+    const client =  JSON.parse(localStorage.getItem('client'));
+    const id = client.id
+    const addresses = (await API.get(`endereco/buscar/${id}`)).data || [];
+    console.log(addresses);
+    addresses.forEach(addressId => {
+      console.log(addressId)
 
+      if(addressId == addresses.[1]){
+        return console.log('ok')
+       
+      }else{
+        console.log('é diferente')
+      }
+      
+    });
+    const addressId = this.state.enderecos  
+    console.log(addressId)
+   }
 
-  //   await API.post(`endereco/deletar/${id}`)
-  // }
-
-  handleRemove = async () => {
-  // const endereco = localStorage.getItem('address');
-  // const enderecoId = JSON.parse('endereco.id')
-  const client = JSON.parse(localStorage.getItem('client'))
-  console.log(client)
-  const id = client.id
-  console.log(id)
-  const addresses = (await API.get(`/endereco/buscar/${id}`)).data;
-  console.log(addresses)
-    // addresses.forEach(function(a){
-    //   let address = []
-      // console.log(address)
-    
-      // if(id != null){
-          
-      // }
-
-
-  // })
-  // const filteredAddress = addresses.map((address) => ({
-  //   ...address,
-    
-  // }))
-  const addressId = addresses.map(address => address.id);
-  console.log(addressId)
-
-  // const deleteAddress = (await API.delete(`/endereco/deletar/${addressId}`))
-
-
-  
-  // const addressId = address.[0].id
-  // console.log(addressId)
-
-    // return await API.delete(`endereco/deletar/${endereco}`); 
-
-    
-    
-  }
 
   setPage = () => {
     const page = this.state.page;
@@ -190,7 +164,7 @@ export default class Pedido extends Component {
                 <label className='col-sm-3 col-form-label'>Estado:</label>
                 <input className='form-control col-4 text-center' type="text" readOnly value={address.cd_uf} />
               </div>
-              <button onClick={this.handleRemove}>removeItem</button>
+              <button onClick={this.deletarEndereco}>removeItem</button>
             </div>
             
           </div>
