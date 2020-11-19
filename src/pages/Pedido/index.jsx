@@ -8,7 +8,7 @@ const BEFORE = {
   client: '',
   orders: [],
   address: [],
-  enderecos:'',
+  enderecos: '',
   page: 'Pedidos'
 
 }
@@ -24,7 +24,7 @@ export default class Pedido extends Component {
       window.location.href = '/';
     }
     this.getAll();
-    
+
   }
 
 
@@ -46,24 +46,30 @@ export default class Pedido extends Component {
   }
 
   deletarEndereco = async () => {
-    const client =  JSON.parse(localStorage.getItem('client'));
+    const client = JSON.parse(localStorage.getItem('client'));
     const id = client.id
-    const addresses = (await API.get(`endereco/buscar/${id}`)).data || [];
+    const addresses = (await API.get(`/endereco/buscar/${id}`)).data || [];
     console.log(addresses);
     addresses.forEach(addressId => {
       console.log(addressId)
 
-      if(addressId == addresses.[1]){
-        return console.log('ok')
-       
-      }else{
+      if (addressId == addresses[1]) {
+        API.delete(`/endereco/deletar/${addresses[1].id}`)
+        console.log(addresses[1].id)
+
+      } else {
         console.log('é diferente')
       }
-      
+
     });
-    const addressId = this.state.enderecos  
-    console.log(addressId)
-   }
+
+  }
+
+  atualizarEndereco = async () => {
+    const client = JSON.parse(localStorage.getItem('client'));
+    const id = client.id
+    const addresses = (await API.put(`/endereco/buscar/${id}`)).data || [];
+  }
 
 
   setPage = () => {
@@ -166,7 +172,7 @@ export default class Pedido extends Component {
               </div>
               <button onClick={this.deletarEndereco}>removeItem</button>
             </div>
-            
+
           </div>
         </div>
       </>
