@@ -27,3 +27,10 @@ a:hover {
     cursor: pointer;
     user-select: none;
 }
+
+.resetPasswordBackground {
+    background-color: #fff;
+    width: 400px;
+    padding: 10px 40px;
+    border-radius: 5px;
+}
