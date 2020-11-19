@@ -36,6 +36,7 @@
     justify-content: space-around;
     border-bottom: 2px solid #eee;
     padding: 15px 0;
+    font-size: 1rem;
 }
 
 label {
@@ -57,4 +58,24 @@ h5 {
 #menu_lat li{
     padding: 10px 0;
     border-bottom: 1px solid;
+}
+
+@media(max-width:555px){
+    #labels{
+        font-size: 0.8rem;
+    }
+
+    #menu_lat{
+        font-size: 0.8rem;
+    }
+}
+
+@media(max-width:450px){
+    #labels{
+        font-size: 0.7rem;
+    }
+
+    #menu_lat{
+        font-size: 0.6rem;
+    }
 }
