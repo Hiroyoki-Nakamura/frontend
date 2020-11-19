@@ -18,7 +18,7 @@ export default props => (
           <li className='list_footer'><a href="">Destilados</a></li>
         </ul>
       </div>  
-      <div className='col-12 col-md-3'>
+      <div className='col-12 col-md-3 list_footer'>
         <h4>Contatos</h4>
         <p>(11)91234-5678</p>
         <p>(11)91234-5678</p>
