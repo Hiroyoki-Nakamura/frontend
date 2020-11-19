@@ -3,7 +3,7 @@ import './styles.css'
 
 import API from '../../Services/api';
 
-import $ from 'jquery';
+import $, { get } from 'jquery';
 import mask from 'jquery-mask-plugin';
 
 import Alert from '../../Components/Alert';
@@ -26,7 +26,7 @@ const BEFORE = {
   senha: "",
   endereco: {
     cep: "",
-    ufselecionado: 1,
+    ufselecionado: "",
     cidade: "",
     bairro: "",
     rua: "",
@@ -80,12 +80,14 @@ export default class Cadastro extends Component {
         cidade: this.state.endereco.cidade,
         bairro: this.state.endereco.bairro,
         rua: this.state.endereco.rua,
-        cd_uf: this.state.endereco.ufselecionado,
+        cd_uf: this.state.endereco.ufs,
         numero: this.state.endereco.numero,
         complemento: this.state.endereco.complemento,
         referencia: this.state.endereco.referencia
-      }
-    };
+      }     
+    }
+
+    console.log(objClient)
 
     const sendClient = await API.post('/cliente/cadastro', objClient);
 
@@ -118,31 +120,48 @@ export default class Cadastro extends Component {
     this.setState({ alert: { title: '', content: '', style: '' } });
   }
 
-                                // <!--- CONSUMINDO API DO VIACEP --->
+                                     // <!--- CONSUMINDO API DO VIACEP --->
+
   viaCep = () => {
     const cep = document.querySelector("#cep");
-    
-    const showData = (result) =>{
 
-      for(const campo in result){
-          if(document.querySelector("#"+campo)){
-              document.querySelector("#"+campo).value = result[campo]
-          }
-      }
-  }
-  
-  cep.addEventListener("blur", (e) => {
+    const showData = (result) => {
+
+      const uf = this.state.ufs
+      const ufviacep = result.uf
+      let ufdaselecao  
+      uf.map( ufi => {
+        if(ufviacep == ufi.ds_uf){
+          ufdaselecao = ufi.id
+        }})
+
+      this.setState({ endereco: { cep: result.cep, rua: result.logradouro, cidade: result.localidade, bairro: result.bairro, complemento: result.complemento, cd_uf: ufdaselecao }})
+
+    
+      
+      console.log(ufdaselecao)
+
+      
+      
+
+
+
+    }
+
+    
+
+    cep.addEventListener("blur", (e) => {
       let search = cep.value.replace("-", "") // tratando o traço do cep, trocando por valor vazio
       const options = {
-          method: 'GET',
-          mode: 'cors',
-          cache: 'default'
+        method: 'GET',
+        mode: 'cors',
+        cache: 'default'
       }
-  
+
       fetch(`https://viacep.com.br/ws/${search}/json/`, options)
-      .then((response)=>{ response.json().then(data => showData(data))})
-      .catch(e => console.log('Deu erro' + e))
-  })
+        .then((response) => { response.json().then(data => showData(data)) })
+        .catch(e => console.log('Deu erro na API' + e))
+    })
 
   }
 
@@ -239,9 +258,9 @@ export default class Cadastro extends Component {
           telefone1.style.borderColor = "green";
         }
         break;
-        case 'cep': 
-         var cep = document.querySelector("#cep");
-         var erro = document.querySelector("#erroCep");
+      case 'cep':
+        var cep = document.querySelector("#cep");
+        var erro = document.querySelector("#erroCep");
 
         if (value.length > 10 || REGEXCEP.test(value) == false) {
           erro.style.display = "block";
@@ -298,6 +317,18 @@ export default class Cadastro extends Component {
     }
   }
 
+  Showpasswords() {
+    let pass1 = document.getElementById("exampleInputPassword1")
+    let pass2 = document.getElementById("exampleInputPassword11")
+    if ((pass1.type && pass2.type) === "password") {
+      pass1.type = "text";
+      pass2.type = "text";
+    } else {
+      pass1.type = "password";
+      pass2.type = "password";
+    }
+  }
+
   onChange = (event) => {
     const value = (event.target.value);
     const id = (event.target.id);
@@ -338,11 +369,11 @@ export default class Cadastro extends Component {
         break;
       case 'cep':
         this.setState({ endereco: { ...this.state.endereco, cep: value } })
-        break;      
+        break;
       case 'bairro':
         this.setState({ endereco: { ...this.state.endereco, bairro: value } })
         break;
-      case 'ufs':
+      case 'uf':
         this.setState({ endereco: { ...this.state.endereco, ufselecionado: value } })
         break;
       case 'logradouro  ':
@@ -449,6 +480,12 @@ export default class Cadastro extends Component {
                           placeholder="********" />
                         <div className="error alert-danger" id="erroConfirmaSenha"><p> Assegure-se de que os campos Senha e Confirmar senha coincidem exatamente. </p></div>
                       </div>
+
+                      <div className='col-2'>
+                        <label htmlFor=""></label>
+                        <div className='eye_icon' type='button' onClick={() => this.Showpasswords()}></div>
+                      </div>
+
                     </div>
                   </div>
 
@@ -480,12 +517,11 @@ export default class Cadastro extends Component {
                       </div>
                       <div className="col-4">
                         <label htmlFor="inputAddress"> UF </label>
-                          <input id="uf" type="texrt" className="form-control text-center" />
-                        {/* <select onClick={this.onChange} id="uf" className="form-control text-center">
+                        <select id="uf" className="form-control text-center">
                           {this.state.ufs.map(uf => {
-                            return <option key={uf.id} value={uf.id} >{uf.ds_uf}</option>
+                            return <option key={uf.id} onClick={this.onChange} value={uf.id} >{uf.ds_uf}</option>
                           })}
-                        </select> */}
+                        </select>
                       </div>
 
                       <div className="col-8">

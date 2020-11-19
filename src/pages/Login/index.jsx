@@ -55,6 +55,15 @@ export default class Login extends Component {
     }
   }
 
+  Showpassword(){
+    let pass = document.getElementById("senha-conf")
+    if(pass.type === "password"){
+      pass.type = "text";
+    } else {
+      pass.type = "password";
+    }
+  }
+
   postLogin = async () => {
     const over = document.querySelector('.overlay');
     const spin = document.querySelector('.load');
@@ -108,7 +117,9 @@ export default class Login extends Component {
                   <div className="form-group text-login">Senha</div>
                   <div className="form-group center">
                     <input type="password" className="text-center form-control w-75" placeholder="digite sua senha" id="senha-conf" onChange={this.onChange} value={this.state.senha} />
+                    <div className='eye_icon' type='button' onClick={() => this.Showpassword()}></div>
                   </div>
+
                   <div className="form-group">
                     <div className="btn btn-success text-uppercase w-75 py-3" onClick={() => this.postLogin()}>fazer Login</div>
                   </div>
@@ -116,7 +127,6 @@ export default class Login extends Component {
                     <div className="link" onClick={this.forgotPassword}>Esqueci minha senha</div>
                   </div>
                 </div>
-
               </div>
               <div className='col-2 center'>
                 <img className="w-100 h-50" src='img/taca.png' />

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './styles.css'
 
 import API from '../../Services/api';
+import Moment from 'moment';
 
 const BEFORE = {
   client: '',
@@ -60,7 +61,7 @@ export default class Pedido extends Component {
             <div className="col-12 d-flex justify-content-around" id="labels" >
               <label className="text-center" style={{ width: '120px' }}>{order.id}</label>
               <label className="text-center" style={{ width: '120px' }}>R$ {`${parseFloat(order.valor_total).toFixed(2)}`.replace('.', ',')}</label>
-              <label className="text-center" style={{ width: '120px' }}>{date}</label>
+              <label className="text-center" style={{ width: '120px' }}>{Moment(date).format('DD-MM-YYYY')}</label>
               <label className="text-center" style={{ width: '120px' }}>{order.cd_status_pedido}</label>
             </div>
           </div>
@@ -107,7 +108,11 @@ export default class Pedido extends Component {
               </div>
               <div className='form-group col-6'>
                 <label className='col-sm-6 col-form-label'>Cliente desde:</label>
-                <input className='form-control col-6 text-center' type="date-time" readOnly value={date} />
+                <input className='form-control col-6 text-center' type="date-time" readOnly value={Moment(this.state.client.created_at).format('DD-MM-YYYY')} />
+              </div>
+              <div className='form-group col-6'>
+                <div className='col-sm-6 col-form-label'>Alterar minha senha</div>
+                <div className="col-sm-6 btn btn-dark">Alterar</div>
               </div>
             </div>
           </div>
