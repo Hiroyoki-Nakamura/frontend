@@ -36,6 +36,7 @@
     justify-content: space-around;
     border-bottom: 2px solid #eee;
     padding: 15px 0;
+    font-size: 1rem;
 }
 
 label {
@@ -57,4 +58,42 @@ h5 {
 #menu_lat li{
     padding: 10px 0;
     border-bottom: 1px solid;
+}
+
+
+
+
+
+@media(max-width:555px){
+    #labels,#menu_lat{
+        font-size: 0.8rem;
+        transition: 1s;
+    }
+
+    .table_legends,.cliente_info{
+        font-size: 1rem;
+        transition: 1s;
+    }
+
+    .titulos{
+        font-size: 2rem;
+        transition: 1s;
+    }
+}
+
+@media(max-width:450px){
+    #labels,.table_legends{
+        font-size: 0.7rem;
+        transition: 1s;
+    }
+
+    #menu_lat{
+        font-size: 0.6rem;
+        transition: 1s;
+    }
+
+    .titulos{
+        font-size: 1rem;
+        transition: 1s;
+    }
 }

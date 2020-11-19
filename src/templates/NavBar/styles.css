@@ -60,7 +60,7 @@
 }
 
 .overlay-pesquisa, .resultado-pesquisa, .load-pesquisa {
-  width: 250px;
+  width: 225px;
   height: 100px;
   position: absolute;
   right: 5%;
@@ -96,7 +96,7 @@
 
 @media (max-width:991px) {
   #barraNav {
-    display: none;
+    display: initial;
   }
   #botao_tela_menor {
     background-color: #3a4147;

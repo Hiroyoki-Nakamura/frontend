@@ -60,7 +60,7 @@ export default class Cadastro extends Component {
     spin.classList.remove('none');
     over.classList.remove('none');
     const objClient = {
-      nome: this.state.nome,
+      nome: this.state  .nome,
       cpf: this.state.cpf,
       rg: this.state.rg,
       data_nascimento: this.state.data_nascimento,
@@ -265,6 +265,18 @@ export default class Cadastro extends Component {
     }
   }
 
+  Showpasswords(){
+    let pass1 = document.getElementById("exampleInputPassword1")
+    let pass2 = document.getElementById("exampleInputPassword11")
+    if((pass1.type && pass2.type) === "password"){
+      pass1.type = "text";
+      pass2.type = "text";
+    } else {
+      pass1.type = "password";
+      pass2.type = "password";
+    }
+  }
+
   onChange = (event) => {
     const value = (event.target.value);
     const id = (event.target.id);
@@ -419,6 +431,12 @@ export default class Cadastro extends Component {
                           placeholder="********" />
                         <div className="error alert-danger" id="erroConfirmaSenha"><p> Assegure-se de que os campos Senha e Confirmar senha coincidem exatamente. </p></div>
                       </div>
+
+                      <div className='col-2'>
+                        <label htmlFor=""></label>
+                      <div className='eye_icon' type='button' onClick={() => this.Showpasswords()}></div>
+                      </div>
+
                     </div>
                   </div>
 

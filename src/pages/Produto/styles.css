@@ -15,11 +15,20 @@ article {
     max-height: 308px;
 }
 
+.btn_lg{
+    height: 50px;
+    width: 200px;
+}
+
 .id_style{
     font-size: 20px;
 }
 .valor{
     font-size:20px;
+}
+
+#sectionproduto{
+    color: black;
 }
 
 hr {
@@ -32,6 +41,7 @@ strike {
 
 #comprar {
     float: right;
+    font-size: 1rem;
 }
 
 #botao {
@@ -40,5 +50,11 @@ strike {
 
 #sectionproduto {
     margin: 100px 0;
+}
+
+@media (max-width: 425px){
+    #comprar{
+        flex-direction: column;
+    }
 }
 

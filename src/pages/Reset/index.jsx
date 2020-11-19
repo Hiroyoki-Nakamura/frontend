@@ -50,8 +50,8 @@ export default class extends Component {
       const token = url_search[0].replace("token=", "");
       const type = url_search[1].replace("type=", "");
       this.setState({ token, type });
-      // } else {
-      // window.location.href = '#/';
+      } else {
+      window.location.href = '#/';
     }
   }
 
@@ -103,6 +103,7 @@ export default class extends Component {
     const response = await API.post('/alterPassword', objSendAlterPassword);
 
     if (response.status == 202) {
+      window.location.href = '#/';
       this.myAlert(
         'Nova Senha',
         response.data,
@@ -118,6 +119,31 @@ export default class extends Component {
 
     over.classList.add('none');
     spin.classList.add('none');
+  }
+
+  showPassword = event => {
+    const id = event.target.id;
+
+    let objectAlter = '';
+    switch(id) {
+      case 'old':
+        objectAlter = 'oldPassword';
+        break;
+      case 'new':
+        objectAlter = 'newPassword';
+        break;
+      case 'confirm':
+        objectAlter = 'confirmPassword';
+        break;
+    }
+
+    let pass = document.getElementById(objectAlter);
+
+    if (pass.type == "password") {
+      pass.type = "text";
+    } else {
+      pass.type = "password";
+    }
   }
 
   onChange = event => {
@@ -153,16 +179,28 @@ export default class extends Component {
 
             {this.state.type == 'alter' ? <div className="form-group center d-flex flex-column">
               <label htmlFor="" className="col-form-label">Senha Atual:</label>
-              <input type="password" id="oldPassword" value={this.state.oldPassword} onChange={this.onChange} />
+              <div className="d-flex flex-row">
+                <input type="password" id="oldPassword" value={this.state.oldPassword} onChange={this.onChange} />
+                <div className='eye_icon' type='button' id="old" onClick={this.showPassword}></div>
+              </div>
+
             </div> : ''}
 
             <div className="form-group center d-flex flex-column">
               <label>Nova Senha: </label>
-              <input type="password" id="newPassword" value={this.state.password} onChange={this.onChange} />
+              <div className="d-flex flex-row">
+                <input type="password" id="newPassword" value={this.state.password} onChange={this.onChange} />
+                <div className='eye_icon' type='button' id="new" onClick={this.showPassword}></div>
+              </div>
+
             </div>
             <div className="form-group center d-flex flex-column">
               <label htmlFor="">Confirmar Nova Senha: </label>
-              <input type="password" id="confirmPassword" value={this.state.confirmPassword} onChange={this.onChange} />
+              <div className="d-flex flex-row">
+                <input type="password" id="confirmPassword" value={this.state.confirmPassword} onChange={this.onChange} />
+                <div className='eye_icon' type='button' id="confirm" onClick={this.showPassword}></div>
+              </div>
+
             </div>
             <div className="center">
               <div className="btn btn-success" onClick={this.validatePassword}>Alterar senha</div>
