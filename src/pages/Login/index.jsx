@@ -103,8 +103,7 @@ export default class Login extends Component {
           <div className="col-12 mt-5 mb-5">
             <h1 className="center">Login</h1>
             <div className="row">
-              <div className="col-5">
-
+              <div className="col-12 col-md-5">
                 <div id="container1">
                   <div className="form-group text-login">Email</div>
                   <div className="form-group center">
