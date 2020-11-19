@@ -82,35 +82,35 @@ export default class Pedido extends Component {
         <div className='d-flex h-100 justify-content-center align-content-center'>
           <div className=' pt-4'>
             <div className="row">
-              <div className='form-group col-6'>
-                <label className='col-sm-6 col-form-label'>Nome:</label>
+              <div className='form-group col-12 col-lg-6'>
+                <label className='col-12 col-lg-6 col-form-label'>Nome:</label>
                 <input className='form-control col-12 text-center cliente_info' type="text" readOnly value={this.state.client.nome} />
               </div>
-              <div className='form-group col-6'>
-                <label className='col-sm-6 col-form-label'>CPF:</label>
+              <div className='form-group col-6 col-lg-6'>
+                <label className='col-12 col-lg-6 col-form-label'>CPF:</label>
                 <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.cpf} />
               </div>
-              <div className='form-group col-6'>
+              <div className='form-group col-6 col-lg-6'>
                 <label className='col-sm-6 col-form-label'>RG:</label>
                 <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.rg} />
               </div>
-              <div className='form-group col-6'>
+              <div className='form-group col-12 col-lg-6'>
                 <label className='col-sm-6 col-form-label'>E-mail:</label>
                 <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.email} />
               </div>
-              <div className='form-group col-6'>
-                <label className='col-sm-6 col-form-label'>Genero:</label>
-                <input className='form-control col-6 text-center' type="text" readOnly value={this.state.client.genero} />
+              <div className='form-group col-6 col-lg-6'>
+                <label className='col-6 col-form-label'>Genero:</label>
+                <input className='form-control col-10 text-center' type="text" readOnly value={this.state.client.genero} />
               </div>
-              <div className='form-group col-6'>
-                <label className='col-sm-6 col-form-label'>Data de Nascimento:</label>
-                <input className='form-control col-6 text-center' type="date" readOnly value={this.state.client.data_de_nascimento} />
+              <div className='form-group col-6 col-lg-6'>
+                <label className='col-12 col-form-label'>Data de Nascimento:</label>
+                <input className='form-control col-12 col-lg-6 text-center' type="date" readOnly value={this.state.client.data_de_nascimento} />
               </div>
-              <div className='form-group col-6'>
+              <div className='form-group col-12 col-lg-6'>
                 <label className='col-sm-6 col-form-label'>Cliente desde:</label>
                 <input className='form-control col-6 text-center' type="date-time" readOnly value={Moment(this.state.client.created_at).format('DD-MM-YYYY')} />
               </div>
-              <div className='form-group col-6'>
+              <div className='form-group col-12 col-lg-6'>
                 <div className='col-sm-6 col-form-label'>Alterar minha senha</div>
                 <div className="col-sm-6 btn btn-dark">Alterar</div>
               </div>
@@ -122,27 +122,31 @@ export default class Pedido extends Component {
 
     const addresses = this.state.address.map(address => (
       <>
-        <div className='d-flex h-100 justify-content-center align-content-center'>
+        <div className='d-flex h-100 justify-content-center align-content-center tester'>
           <div className='mt-5 pt-4'>
             <div className="row">
-              <div className="col-6 form-group d-flex">
+              <div className="col-12 col-md-6 form-group d-flex">
                 <label className='col-sm-4 col-form-label'>CEP:</label>
-                <input className='form-control col-4 text-center' type="text" readOnly value={address.cep} />
+                <input className='form-control col-6 text-center' type="text" readOnly value={address.cep} />
               </div>
-              <div className="col-6 form-group d-flex">
-                <label className='col-sm-3 col-form-label'>Bairro:</label>
-                <input className='form-control col-5 text-center' type="text" readOnly value={address.bairro} />
+              <div className="col-12 col-md-6 form-group d-flex">
+                <label className='col-sm-4 col-form-label'>Bairro:</label>
+                <input className='form-control col-6 text-center' type="text" readOnly value={address.bairro} />
               </div>
-              <div className="col-6 form-group d-flex">
-                <label className='col-sm-4 col-form-label'>Logradouro:</label>
-                <input className='form-control col-8 text-center' type="text" readOnly value={address.rua} />
+              <div className="col-12 col-md-6 form-group d-flex">
+                <label className='col-sm-4 col-form-label'>Rua:</label>
+                <input className='form-control col-6 text-center' type="text" readOnly value={address.rua} />
               </div>
-              <div className="col-6 form-group d-flex">
-                <label className='col-sm-3 col-form-label'>Número:</label>
-                <input className='form-control col-4 text-center' type="text" readOnly value={`${address.numero}`} />
+              <div className="col-12 col-md-6 form-group d-flex">
+                <label className='col-sm-4 col-form-label'>Complemento:</label>
+                <input className='form-control col-6 text-center' type="text" readOnly value={address.complemento} />
               </div>
-              <div className="col-6 form-group d-flex">
-                <label className='col-sm-3 col-form-label'>Estado:</label>
+              <div className="col-12 col-md-6 form-group d-flex">
+                <label className='col-sm-4 col-form-label'>Número:</label>
+                <input className='form-control col-6 text-center' type="text" readOnly value={`${address.numero}`} />
+              </div>
+              <div className="col-12 col-md-6 form-group d-flex">
+                <label className='col-sm-4 col-form-label'>Estado:</label>
                 <input className='form-control col-4 text-center' type="text" readOnly value={address.cd_uf} />
               </div>
             </div>
