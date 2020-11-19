@@ -84,7 +84,7 @@ export default class Pedido extends Component {
             <div className="row">
               <div className='form-group col-6'>
                 <label className='col-sm-6 col-form-label'>Nome:</label>
-                <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.nome} />
+                <input className='form-control col-12 text-center cliente_info' type="text" readOnly value={this.state.client.nome} />
               </div>
               <div className='form-group col-6'>
                 <label className='col-sm-6 col-form-label'>CPF:</label>
@@ -173,7 +173,7 @@ export default class Pedido extends Component {
         <div className="container mt-2" >
           <div className="row">
             <div className="col-12">
-              <h1 className="center py-2 "> {this.state.page == 'Cadastro' ? 'Meu' : 'Meus'} {this.state.page}</h1>
+              <h1 className="center py-2 titulos"> {this.state.page == 'Cadastro' ? 'Meu' : 'Meus'} {this.state.page}</h1>
 
               <div className="container mb-2" id="topo1">
                 <div className="row">
@@ -181,7 +181,7 @@ export default class Pedido extends Component {
 
                     <div className="row">
                       <div className="col-3"></div>
-                      <div className="col-9 d-flex justify-content-around">
+                      <div className="col-9 d-flex justify-content-around table_legends">
                         {this.state.page == 'Pedidos' ? <>
                           <label className="text-center" style={{ width: '120px' }}>Número</label>
                           <label className="text-center" style={{ width: '120px' }}>Valor</label>
