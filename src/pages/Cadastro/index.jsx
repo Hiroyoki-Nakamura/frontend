@@ -26,7 +26,7 @@ const BEFORE = {
   senha: "",
   endereco: {
     cep: "",
-    ufselecionado: "",
+    cd_uf: "",
     cidade: "",
     bairro: "",
     rua: "",
@@ -80,11 +80,11 @@ export default class Cadastro extends Component {
         cidade: this.state.endereco.cidade,
         bairro: this.state.endereco.bairro,
         rua: this.state.endereco.rua,
-        cd_uf: this.state.endereco.ufs,
+        cd_uf: this.state.endereco.cd_uf,
         numero: this.state.endereco.numero,
         complemento: this.state.endereco.complemento,
         referencia: this.state.endereco.referencia
-      }     
+      }
     }
 
     console.log(objClient)
@@ -120,7 +120,7 @@ export default class Cadastro extends Component {
     this.setState({ alert: { title: '', content: '', style: '' } });
   }
 
-                                     // <!--- CONSUMINDO API DO VIACEP --->
+  // <!--- CONSUMINDO API DO VIACEP --->
 
   viaCep = () => {
     const cep = document.querySelector("#cep");
@@ -129,26 +129,19 @@ export default class Cadastro extends Component {
 
       const uf = this.state.ufs
       const ufviacep = result.uf
-      let ufdaselecao  
-      uf.map( ufi => {
-        if(ufviacep == ufi.ds_uf){
+      let ufdaselecao
+      uf.map(ufi => {
+        if (ufviacep == ufi.ds_uf) {
           ufdaselecao = ufi.id
-        }})
+        }
+      })
 
-      this.setState({ endereco: { cep: result.cep, rua: result.logradouro, cidade: result.localidade, bairro: result.bairro, complemento: result.complemento, cd_uf: ufdaselecao }})
-
-    
-      
-      console.log(ufdaselecao)
-
-      
-      
+      this.setState({ endereco: { cep: result.cep, rua: result.logradouro, cidade: result.localidade, bairro: result.bairro, complemento: result.complemento, cd_uf: ufdaselecao } })
 
 
 
     }
 
-    
 
     cep.addEventListener("blur", (e) => {
       let search = cep.value.replace("-", "") // tratando o traço do cep, trocando por valor vazio
@@ -374,7 +367,7 @@ export default class Cadastro extends Component {
         this.setState({ endereco: { ...this.state.endereco, bairro: value } })
         break;
       case 'uf':
-        this.setState({ endereco: { ...this.state.endereco, ufselecionado: value } })
+        this.setState({ endereco: { ...this.state.endereco, cd_uf: value } })
         break;
       case 'logradouro  ':
         this.setState({ endereco: { ...this.state.endereco, rua: value } })
@@ -517,9 +510,9 @@ export default class Cadastro extends Component {
                       </div>
                       <div className="col-4">
                         <label htmlFor="inputAddress"> UF </label>
-                        <select id="uf" className="form-control text-center">
+                        <select value={this.state.endereco.cd_uf}  className="form-control text-center">
                           {this.state.ufs.map(uf => {
-                            return <option key={uf.id} onClick={this.onChange} value={uf.id} >{uf.ds_uf}</option>
+                            return <option id="uf" key={uf.id} value={uf.id} >{uf.ds_uf}</option>
                           })}
                         </select>
                       </div>
