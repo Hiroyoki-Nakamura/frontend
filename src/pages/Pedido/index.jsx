@@ -4,13 +4,21 @@ import './styles.css'
 
 import API from '../../Services/api';
 
+import Moment from 'moment';
+
+import Alert from '../../Components/Alert';
+
 const BEFORE = {
   client: '',
   orders: [],
   address: [],
   enderecos: '',
-  page: 'Pedidos'
-
+  page: 'Pedidos',
+  alert: {
+    title: '',
+    content: '',
+    style: ''
+  },
 }
 
 export default class Pedido extends Component {
@@ -49,13 +57,14 @@ export default class Pedido extends Component {
     const client = JSON.parse(localStorage.getItem('client'));
     const id = client.id
     const addresses = (await API.get(`/endereco/buscar/${id}`)).data || [];
-    console.log(addresses);
-    addresses.forEach(addressId => {
-      console.log(addressId)
 
-      if (addressId == addresses[1]) {
-        API.delete(`/endereco/deletar/${addresses[1].id}`)
-        console.log(addresses[1].id)
+    addresses.forEach(addressId => {
+
+
+      if (addressId != addresses[0]) {
+        let addressArray = addressId
+        API.delete(`/endereco/deletar/${addresses[0].id}`)
+        console.log(addressId.id)
 
       } else {
         console.log('é diferente')
@@ -71,6 +80,47 @@ export default class Pedido extends Component {
     const addresses = (await API.put(`/endereco/buscar/${id}`)).data || [];
   }
 
+  myAlert = (title, content, style) => {
+    let showAlert;
+    if (title != undefined && content != undefined && style != undefined) {
+      showAlert = true;
+    } else {
+      showAlert = false;
+    }
+
+    if (showAlert) {
+      this.setState({ alert: { title, content, style } });
+    }
+  };
+
+  resetForAlert = () => {
+    this.setState({ alert: { title: '', content: '', style: '' } });
+  }
+
+
+  forgotPassword = async () => {
+    const over = document.querySelector('.overlay');
+    const spin = document.querySelector('.load');
+
+    over.classList.remove('none');
+    spin.classList.remove('none');
+
+    const objSendResetPassword = {
+      email: this.state.client.email,
+      typeReset: 'alter'
+    }
+
+    const response = await API.post('/password', objSendResetPassword);
+
+    over.classList.add('none');
+    spin.classList.add('none');
+
+    if (response.status == 202) {
+      this.myAlert('Alteração de senha', response.data, 'success');
+    } else {
+      this.myAlert('Opps!', response.data, 'danger');
+    }
+  }
 
   setPage = () => {
     const page = this.state.page;
@@ -90,7 +140,7 @@ export default class Pedido extends Component {
             <div className="col-12 d-flex justify-content-around" id="labels" >
               <label className="text-center" style={{ width: '120px' }}>{order.id}</label>
               <label className="text-center" style={{ width: '120px' }}>R$ {`${parseFloat(order.valor_total).toFixed(2)}`.replace('.', ',')}</label>
-              <label className="text-center" style={{ width: '120px' }}>{date}</label>
+              <label className="text-center" style={{ width: '120px' }}>{Moment(date).format('DD-MM-YYYY')}</label>
               <label className="text-center" style={{ width: '120px' }}>{order.cd_status_pedido}</label>
             </div>
           </div>
@@ -111,33 +161,37 @@ export default class Pedido extends Component {
         <div className='d-flex h-100 justify-content-center align-content-center'>
           <div className=' pt-4'>
             <div className="row">
-              <div className='form-group col-6'>
-                <label className='col-sm-6 col-form-label'>Nome:</label>
-                <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.nome} />
+              <div className='form-group col-12 col-lg-6'>
+                <label className='col-12 col-lg-6 col-form-label'>Nome:</label>
+                <input className='form-control col-12 text-center cliente_info' type="text" readOnly value={this.state.client.nome} />
               </div>
-              <div className='form-group col-6'>
-                <label className='col-sm-6 col-form-label'>CPF:</label>
+              <div className='form-group col-6 col-lg-6'>
+                <label className='col-12 col-lg-6 col-form-label'>CPF:</label>
                 <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.cpf} />
               </div>
-              <div className='form-group col-6'>
+              <div className='form-group col-6 col-lg-6'>
                 <label className='col-sm-6 col-form-label'>RG:</label>
                 <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.rg} />
               </div>
-              <div className='form-group col-6'>
+              <div className='form-group col-12 col-lg-6'>
                 <label className='col-sm-6 col-form-label'>E-mail:</label>
                 <input className='form-control col-12 text-center' type="text" readOnly value={this.state.client.email} />
               </div>
-              <div className='form-group col-6'>
-                <label className='col-sm-6 col-form-label'>Genero:</label>
-                <input className='form-control col-6 text-center' type="text" readOnly value={this.state.client.genero} />
+              <div className='form-group col-6 col-lg-6'>
+                <label className='col-6 col-form-label'>Genero:</label>
+                <input className='form-control col-10 text-center' type="text" readOnly value={this.state.client.genero} />
               </div>
-              <div className='form-group col-6'>
-                <label className='col-sm-6 col-form-label'>Data de Nascimento:</label>
-                <input className='form-control col-6 text-center' type="date" readOnly value={this.state.client.data_de_nascimento} />
+              <div className='form-group col-6 col-lg-6'>
+                <label className='col-12 col-form-label'>Data de Nascimento:</label>
+                <input className='form-control col-12 col-lg-6 text-center' type="date" readOnly value={this.state.client.data_de_nascimento} />
               </div>
-              <div className='form-group col-6'>
+              <div className='form-group col-12 col-lg-6'>
                 <label className='col-sm-6 col-form-label'>Cliente desde:</label>
-                <input className='form-control col-6 text-center' type="date-time" readOnly value={date} />
+                <input className='form-control col-6 text-center' type="date-time" readOnly value={Moment(this.state.client.created_at).format('DD-MM-YYYY')} />
+              </div>
+              <div className='form-group col-12 col-lg-6'>
+                <div className='col-sm-6 col-form-label'>Alterar minha senha</div>
+                <div className="col-sm-6 btn btn-dark" onClick={this.forgotPassword} >Alterar</div>
               </div>
             </div>
           </div>
@@ -147,27 +201,31 @@ export default class Pedido extends Component {
 
     const addresses = this.state.address.map(address => (
       <>
-        <div className='d-flex h-100 justify-content-center align-content-center'>
+        <div className='d-flex h-100 justify-content-center align-content-center tester'>
           <div className='mt-5 pt-4'>
             <div className="row">
-              <div className="col-6 form-group d-flex">
+              <div className="col-12 col-md-6 form-group d-flex">
                 <label className='col-sm-4 col-form-label'>CEP:</label>
-                <input className='form-control col-4 text-center' type="text" readOnly value={address.cep} />
+                <input className='form-control col-6 text-center' type="text" readOnly value={address.cep} />
               </div>
-              <div className="col-6 form-group d-flex">
-                <label className='col-sm-3 col-form-label'>Bairro:</label>
-                <input className='form-control col-5 text-center' type="text" readOnly value={address.bairro} />
+              <div className="col-12 col-md-6 form-group d-flex">
+                <label className='col-sm-4 col-form-label'>Bairro:</label>
+                <input className='form-control col-6 text-center' type="text" readOnly value={address.bairro} />
               </div>
-              <div className="col-6 form-group d-flex">
-                <label className='col-sm-4 col-form-label'>Logradouro:</label>
-                <input className='form-control col-8 text-center' type="text" readOnly value={address.rua} />
+              <div className="col-12 col-md-6 form-group d-flex">
+                <label className='col-sm-4 col-form-label'>Rua:</label>
+                <input className='form-control col-6 text-center' type="text" readOnly value={address.rua} />
               </div>
-              <div className="col-6 form-group d-flex">
-                <label className='col-sm-3 col-form-label'>Número:</label>
-                <input className='form-control col-4 text-center' type="text" readOnly value={`${address.numero}`} />
+              <div className="col-12 col-md-6 form-group d-flex">
+                <label className='col-sm-4 col-form-label'>Complemento:</label>
+                <input className='form-control col-6 text-center' type="text" readOnly value={address.complemento} />
               </div>
-              <div className="col-6 form-group d-flex">
-                <label className='col-sm-3 col-form-label'>Estado:</label>
+              <div className="col-12 col-md-6 form-group d-flex">
+                <label className='col-sm-4 col-form-label'>Número:</label>
+                <input className='form-control col-6 text-center' type="text" readOnly value={`${address.numero}`} />
+              </div>
+              <div className="col-12 col-md-6 form-group d-flex">
+                <label className='col-sm-4 col-form-label'>Estado:</label>
                 <input className='form-control col-4 text-center' type="text" readOnly value={address.cd_uf} />
               </div>
               <button onClick={this.deletarEndereco}>removeItem</button>
@@ -197,10 +255,15 @@ export default class Pedido extends Component {
   render() {
     return (
       <>
+        <div className="load center none">
+          <div className="spin"></div>
+          <div className="loader">Carregando</div>
+        </div>
+        {this.state.alert.title != '' && this.state.alert.content != '' && this.state.alert.style != '' ? <Alert title={`${this.state.alert.title}`} content={`${this.state.alert.content}`} style={`${this.state.alert.style}`} reset={this.resetForAlert} /> : ''}
         <div className="container mt-2" >
           <div className="row">
             <div className="col-12">
-              <h1 className="center py-2 "> {this.state.page == 'Cadastro' ? 'Meu' : 'Meus'} {this.state.page}</h1>
+              <h1 className="center py-2 titulos"> {this.state.page == 'Cadastro' ? 'Meu' : 'Meus'} {this.state.page}</h1>
 
               <div className="container mb-2" id="topo1">
                 <div className="row">
@@ -208,7 +271,7 @@ export default class Pedido extends Component {
 
                     <div className="row">
                       <div className="col-3"></div>
-                      <div className="col-9 d-flex justify-content-around">
+                      <div className="col-9 d-flex justify-content-around table_legends">
                         {this.state.page == 'Pedidos' ? <>
                           <label className="text-center" style={{ width: '120px' }}>Número</label>
                           <label className="text-center" style={{ width: '120px' }}>Valor</label>
@@ -259,6 +322,7 @@ export default class Pedido extends Component {
             </div>
           </div>
         </div>
+        <div className='overlay none'></div>
       </>
     );
   }

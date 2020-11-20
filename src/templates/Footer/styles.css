@@ -94,3 +94,20 @@ footer {
     font-size: 14px;
     line-height: 0.5;
 }
+
+@media (max-width:768px){
+    .Footer{
+      flex-direction: column;
+    }
+
+    .list_footer{
+        text-align: center;
+    }
+    .list_footer>a{
+        text-align: center;
+    }
+
+    .footer-bootom{
+        line-height: 20px;
+    }
+}

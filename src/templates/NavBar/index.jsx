@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './styles.css'
 
 import API from '../../Services/api';
+import $ from 'jquery';
 
 import Categoria from '../../Components/Categoria';
 import Dropdown_menu from '../../Components/Dropdown_menu';
@@ -20,6 +21,7 @@ export default class NavBar extends Component {
 
   componentDidMount() {
     this.getCategorias();
+    $('.collapse').collapse();
   }
 
   getCategorias = async () => {
@@ -95,48 +97,48 @@ export default class NavBar extends Component {
   render() {
     return (
       <>
-        <section id="barraNav">
-          <nav className="navbar navbar-expand-lg">
-            <a className="navbar-brand" href="#"></a>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul className="navbar-nav mr-auto">
 
-                <ItemMenu href='#/' value='Home' />
-                <Dropdown_menu value='Todas as categorias'>
-                  <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    {this.state.categorys.map(category => {
-                      return (<Categoria key={category.id} category={category.id} value={category.ds_categoria} />);
-                    })}
-                  </div>
-                </Dropdown_menu>
-                <ItemMenu href='#/produto' value='Produto' />
-                <ItemMenu href='#/contato' value='Contato' />
-              </ul>
-              <div className="form-inline my-2 my-lg-0">
+        <nav className="navbar navbar-expand-lg" id="barraNav">
+          <a className="navbar-brand" href="#"></a>
 
-                <input className="form-control mr-sm-2" type="search" placeholder="Buscar" id="search" aria-label="Search" value={this.state.search} onChange={this.onChange} />
-                <button className="lupa_icon btn btn-outline-dark my-2 my-sm-0 btn_lupa"></button>
-              </div>
-              <div className="resultado-pesquisa none">
-                {this.state.products.map(product => {
-                  return (
-                    <Produto product={product} hide={this.hideSearch} />
-                  );
-                })}
-              </div>
-              <div className="load-pesquisa center none">
-                <div className="spin"></div>
-                <div className="loader">carregando</div>
-              </div>
-              <div className="overlay-pesquisa none"></div>
+          <button class="navbar-toggler pull-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false">
+            <span class="navbar-toggler-icon center">MENU</span>
+          </button>
+
+          <div className="navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+
+              <ItemMenu href='#/' value='Home' />
+              <Dropdown_menu value='Todas as categorias'>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  {this.state.categorys.map(category => {
+                    return (<Categoria key={category.id} category={category.id} value={category.ds_categoria} />);
+                  })}
+                </div>
+              </Dropdown_menu>
+              <ItemMenu href='#/produto' value='Produto' />
+              <ItemMenu href='#/contato' value='Contato' />
+            </ul>
+            <div className="form-inline my-2 my-lg-0">
+
+              <input className="form-control mr-sm-2" type="search" placeholder="Buscar" id="search" aria-label="Search" value={this.state.search} onChange={this.onChange} />
+              <button className="lupa_icon btn btn-outline-dark my-2 my-sm-0 btn_lupa"></button>
             </div>
-          </nav>
-        </section>
-        <button id="botao_tela_menor" className="navbar-toggler" type="button" data-toggle="collapse"
-          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon">Menu</span>
-        </button>
+            <div className="resultado-pesquisa none">
+              {this.state.products.map(product => {
+                return (
+                  <Produto product={product} hide={this.hideSearch} />
+                );
+              })}
+            </div>
+            <div className="load-pesquisa center none">
+              <div className="spin"></div>
+              <div className="loader">carregando</div>
+            </div>
+            <div className="overlay-pesquisa none"></div>
+          </div>
+        </nav>
       </>
     )
   }

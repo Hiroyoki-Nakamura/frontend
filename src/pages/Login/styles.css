@@ -8,7 +8,7 @@
     text-align: center;
     align-self: center;
     margin: 20px 0;
-    height: 270px;
+    height: 300px;
     font-weight: 400;
     line-height: 1.5;
 }
@@ -22,4 +22,43 @@ a:hover {
     color: white;
     text-decoration: none;
 }
+
+.link {
+    cursor: pointer;
+    user-select: none;
+}
+
+.resetPasswordBackground {
+    background-color: #fff;
+    width: 400px;
+    padding: 10px 40px;
+    border-radius: 5px;
+}
+
+#login{
+    margin-right: 10%;
+}
+
+.eye_icon{
+    background-image: url(/img/eye_show.png);
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 40px;
+    height: 40px;
+}
+
+
+@media (max-width:768px) {
+    #imgtaca{
+        display: none;
+    }
+}
+
+@media (max-width:991px) {
+    #imgtaca{
+        size: 25%;
+    }
+}
+
 

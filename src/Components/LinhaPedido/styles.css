@@ -13,6 +13,7 @@
 
 .btn {
   font-weight: bold;
+  text-align: unset;
 }
 
 .icon_remove_cart{

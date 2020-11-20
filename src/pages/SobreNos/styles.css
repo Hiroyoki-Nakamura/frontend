@@ -5,11 +5,14 @@
 
 .list_members{
     list-style-type: none;
-    color: #000000;}
+    color: white;
+}
 
 #sobre_container {
-    background-color:rgba(219, 212, 212, 0.589);
-    border-radius: 30px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color:black;
+    border-radius: 10px;
     border-style: solid;
-    border-color: rgb(87, 86, 86);
+    border-color: black
 }
