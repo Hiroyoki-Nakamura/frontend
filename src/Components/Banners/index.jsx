@@ -5,7 +5,7 @@ export default class Banner extends Component {
 
   render() {
     return (
-      <div className="center carousel">
+      <div className="center carousel col-12 col-sm-12 col-md-12 col-lg-12">
         
         <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
           <div className="carousel-inner">

@@ -23,9 +23,7 @@
 }
 
 .base {
-
   height: 150px;
-
 }
 
 .card {
@@ -80,6 +78,22 @@
 }
 
 .price {
-  font-size: 24px;
+  font-size: 1.4rem;
   font-weight: bold;
+}
+
+
+.btns_final_compra{
+  flex-direction: column-reverse;
+  justify-content: end;
+}
+
+.btns_final_compra>a{
+  text-align: center; 
+}
+
+@media(max-width:992px){
+  .btns_final_compra{
+    flex-direction: row;
+  }
 }

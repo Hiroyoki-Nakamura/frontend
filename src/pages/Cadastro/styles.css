@@ -16,11 +16,12 @@
   margin: 20px 0;
 }
 
-#container3 {
+#container3,#container4{
   background-color: #ffffff;
   border-radius: 15px;
   box-sizing: border-box;
   padding: 25px 0;
+  width: 100%;
 }
 
 .main {
@@ -34,5 +35,21 @@
 
 .error {
   display: none;
+}
+
+
+@media(max-width: 780px){
+
+.cadastro_caixas{
+    flex-direction: column;
+  }
+  #teste-botao1{
+    font-size: 1rem;
+    transition: 1s;
+  }
+  .topo_texto_cad{
+    font-size: 2rem;
+    transition: 1s;
+  }
 }
 

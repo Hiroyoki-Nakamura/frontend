@@ -168,14 +168,11 @@ export default class Carrinho extends Component {
                     </div>
 
 
-                    <div className="d-flex flex-column-reverse">
+                    <div className="d-flex btns_final_compra">
 
-                      <a href="#/"><button type="button" className="btn btn-dark btcc radius mt-3 w-100">Continuar comprando</button></a>
+                      <a href="#/"><button type="button" className="btn btn-dark btcc w-100 py-2">Continuar comprando</button></a>
 
-                      <a href={'#/' + this.hasLogged()}><button type="button" className="btn btn-success btn-md btn-block radius text-uppercase py-3">Finalizar Compra</button></a>
-
-                      <div className="col-2">
-                      </div>
+                      <a href={'#/' + this.hasLogged()}><button type="button" className="btn btn-success btn-md btn-block   py-2">FINALIZAR COMPRA</button></a>
                     </div>
                   </div>
 

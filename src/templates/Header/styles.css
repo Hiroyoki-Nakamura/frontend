@@ -40,10 +40,15 @@ header {
 .acoes {
     position: absolute;
     right: 0;
+    justify-content: center;
 }
 
 .acoes * {
     margin: 5px;
+}
+
+.login_text{
+    margin-top: 10px;
 }
 
 .logoUser {
@@ -119,6 +124,9 @@ header {
     .text_user{
         padding: 0;
         margin-top: 50px;
+    }
+    .login_text{
+        margin-top: 55px;
     }
 
 }

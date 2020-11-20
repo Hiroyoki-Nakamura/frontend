@@ -39,6 +39,14 @@ a:hover {
     margin-right: 10%;
 }
 
+.imgtaca{
+    background-image: url(/img/taca.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* height: 50%; */
+}
+
 .eye_icon{
     background-image: url(/img/eye_show.png);
     background-size: 50%;
@@ -48,16 +56,11 @@ a:hover {
     height: 40px;
 }
 
-
-@media (max-width:768px) {
-    #imgtaca{
-        display: none;
-    }
-}
-
 @media (max-width:991px) {
-    #imgtaca{
-        size: 25%;
+    .imgtaca{
+        width: 50%;
+        height: 50%;
+        align-self: center;
     }
 }
 

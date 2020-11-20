@@ -66,12 +66,13 @@ export default class Linha extends Component {
             <label htmlFor="">R$ {`${this.state.priceUnique}`.replace('.', ',')}</label>
           </div>
 
-          <div className="col-lg-2 col-md-2 col-2 mt-2">
-            <br />
+          <div className="center col-2 col-sm-2 col-md-2 col-lg-2">
             <div className="input-group center">
               <button className='btn btn-light' type="button" onClick={this.minus}>-</button>
+
               <input type="text" id="quantity" name="quantity" readOnly
                 className="text-center quantity" value={this.state.amount} />
+                
               <button className='btn btn-light' type="button" onClick={this.plus}>+</button>
             </div>
 
