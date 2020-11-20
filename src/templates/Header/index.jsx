@@ -31,7 +31,7 @@ export default class Header extends Component {
                 </a>
               </If>
               <If test={!(this.state.client === '')}>        
-                <a className='center' href="#/pedido"><div className="logoUser btn btn_login"></div><div className='testando'>{this.state.client.nome}</div></a>
+                <a className='center' href="#/pedido"><div className="logoUser btn btn_login"></div><div className='login_text'>{this.state.client.nome}</div></a>
               </If>
               <a href="#/carrinho"><div className="logoCar btn btn_cart"></div></a>
           </div>
