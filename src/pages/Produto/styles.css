@@ -44,6 +44,15 @@ strike {
     font-size: 1rem;
 }
 
+#comprar>a{
+    text-align: center;
+    font-size: 1rem;
+}
+
+#voltar>a{
+    text-align: center;
+}
+
 #botao {
     border-radius: 20px;
 }
@@ -52,9 +61,9 @@ strike {
     margin: 100px 0;
 }
 
-@media (max-width: 425px){
-    #comprar{
-        flex-direction: column;
+@media(max-width:768px){
+    .btn_desc_prod{
+        flex-direction: column-reverse;
     }
 }
 
