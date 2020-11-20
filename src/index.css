@@ -64,7 +64,7 @@ body {
   z-index: 2;
 }
 
-.load {
+.load, .resetPassword {
   position: fixed;
   top: 0;
   left: 0;
@@ -72,7 +72,7 @@ body {
   height: 100vh;
 }
 
-.load, .loader, .spin {
+.load, .loader, .spin, .resetPassword {
   z-index: 3;
 }
 
@@ -80,6 +80,18 @@ body {
   user-select: none;
   position: absolute;
   color: white;
+}
+
+.btn-success {
+  padding: 12px 30px;
+  color: white;
+  background-color: #0db861;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.btn-success:hover {
+  background-color: #0f9d55;
 }
 
 .spin {

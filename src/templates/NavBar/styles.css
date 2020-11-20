@@ -96,7 +96,7 @@
 
 @media (max-width:991px) {
   #barraNav {
-    display: none;
+    display: initial;
   }
   #botao_tela_menor {
     background-color: #3a4147;

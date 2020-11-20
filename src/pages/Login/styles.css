@@ -23,6 +23,17 @@ a:hover {
     text-decoration: none;
 }
 
+.link {
+    cursor: pointer;
+    user-select: none;
+}
+
+.resetPasswordBackground {
+    background-color: #fff;
+    width: 400px;
+    padding: 10px 40px;
+    border-radius: 5px;
+}
 
 #login{
     margin-right: 10%;
@@ -36,4 +47,18 @@ a:hover {
     width: 40px;
     height: 40px;
 }
+
+
+@media (max-width:768px) {
+    #imgtaca{
+        display: none;
+    }
+}
+
+@media (max-width:991px) {
+    #imgtaca{
+        size: 25%;
+    }
+}
+
 

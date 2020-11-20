@@ -11,6 +11,7 @@ import Login from '../pages/Login';
 import Pedido from '../pages/Pedido';
 import Produto from '../pages/Produto';
 import Sobre from '../pages/SobreNos';
+import Reset from '../pages/Reset';
 
 export default class Routes extends Component {
   state = {
@@ -38,6 +39,7 @@ export default class Routes extends Component {
         <Route path='/pedido' component={Pedido} />
         <Route path='/produto' component={Produto} render={this.getProduct} />
         <Route path='/sobre' component={Sobre} />
+        <Route path='/reset' component={Reset} />
         <Redirect from='*' to='/' />
       </Router>
     );

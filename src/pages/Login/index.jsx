@@ -12,7 +12,8 @@ const BEFORE = {
     title: '',
     content: '',
     style: ''
-  }
+  },
+  resetEmail: ''
 }
 
 export default class Login extends Component {
@@ -50,6 +51,9 @@ export default class Login extends Component {
       case 'login':
         this.setState({ login: valor })
         break;
+      case 'resetPasswordEmail':
+        this.setState({ resetEmail: valor });
+        break;
       default:
         this.setState({ senha: valor })
     }
@@ -84,15 +88,43 @@ export default class Login extends Component {
     spin.classList.add('none');
     over.classList.add('none');
 
-    
     if (logged.status == 202) {
       localStorage.setItem('client', JSON.stringify(...logged.data));
       window.location.href = '#/pedido';
     }
   }
 
-  forgotPassword = () => {
+  showFormForgotPassword = () => {
+    const over = document.querySelector('.overlay');
+    const form = document.querySelector('.resetPassword');
+    over.classList.remove('none');
+    form.classList.remove('none');
+  }
 
+  forgotPassword = async () => {
+    const over = document.querySelector('.overlay');
+    const spin = document.querySelector('.load');
+    const form = document.querySelector('.resetPassword');
+
+    form.classList.add('none');
+    spin.classList.remove('none');
+
+    const objSendResetPassword = {
+      email: this.state.resetEmail,
+      typeReset: 'forgot'
+    }
+
+    const response = await API.post('/password', objSendResetPassword);
+
+    over.classList.add('none');
+    spin.classList.add('none');
+
+    if (response.status == 202) {
+      this.myAlert('Alteração de senha', response.data, 'success');
+    } else {
+      this.myAlert('Opps!', response.data, 'danger');
+    }
+    form.classList.add('none');
   }
 
   render() {
@@ -102,13 +134,21 @@ export default class Login extends Component {
           <div className="spin"></div>
           <div className="loader">Carregando</div>
         </div>
+        <div className="resetPassword center none">
+          <div className="resetPasswordBackground">
+            <div className="form-group d-flex flex-column">
+              <h3 className="center">Digite seu E-mail: </h3>
+              <input className="mt-3 text-center" type="email" id="resetPasswordEmail" placeholder="Ex: Exemplo@Exemplo.com" onChange={this.onChange} value={this.state.resetEmail} />
+              <div className="btn btn-success mt-3" onClick={this.forgotPassword}>Enviar Email</div>
+            </div>
+          </div>
+        </div>
         {this.state.alert.title != '' && this.state.alert.content != '' && this.state.alert.style != '' ? <Alert title={`${this.state.alert.title}`} content={`${this.state.alert.content}`} style={`${this.state.alert.style}`} reset={this.resetForAlert} /> : ''}
         <div className="col-12">
           <div className="col-12 mt-5 mb-5">
             <h1 className="center">Login</h1>
             <div className="row">
-              <div className="col-5">
-
+              <div className="col-12 col-md-5">
                 <div id="container1">
                   <div className="form-group text-login">Email</div>
                   <div className="form-group center">
@@ -124,15 +164,15 @@ export default class Login extends Component {
                     <div className="btn btn-success text-uppercase w-75 py-3" onClick={() => this.postLogin()}>fazer Login</div>
                   </div>
                   <div className="form-group">
-                    <div className="link" onClick={this.forgotPassword}>Esqueci minha senha</div>
+                    <div className="link" onClick={this.showFormForgotPassword}>Esqueci minha senha</div>
                   </div>
                 </div>
               </div>
-              <div className='col-2 center'>
+              <div id='imgtaca' className='col-2 center imgtaca'>
                 <img className="w-100 h-50" src='img/taca.png' />
               </div>
 
-              <div className="col-12 col-md-5"  >
+              <div className="col-12 col-md-5">
                 <div className='center' id='container2'>
                   <div>
                     <div className="form-group">
