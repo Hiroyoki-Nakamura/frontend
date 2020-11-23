@@ -7,6 +7,7 @@ import API from '../../Services/api';
 import Moment from 'moment';
 
 import Alert from '../../Components/Alert';
+import Address from '../../Components/Endereco'
 
 const BEFORE = {
   client: '',
@@ -19,6 +20,7 @@ const BEFORE = {
     content: '',
     style: ''
   },
+  active: false
 }
 
 export default class Pedido extends Component {
@@ -53,31 +55,27 @@ export default class Pedido extends Component {
     window.location.href = '/';
   }
 
-  deletarEndereco = async () => {
-    const client = JSON.parse(localStorage.getItem('client'));
-    const id = client.id
-    const addresses = (await API.get(`/endereco/buscar/${id}`)).data || [];
+  deletarEndereco = async id => {
+    const requestInfo = {
+      method: 'DELETE',
+    }
+    fetch(
+     await API.delete(`endereco/deletar/${id}`))
+     .then(response =>{
+       if(response.ok) {
+         console.log('Endereco, removido com sucesso')
+       }
+     })
+     .then(response=>{
+        console.log('Endereco não encontrado')
+     })
+     this.setState({active: !this.state.active})
 
-    addresses.forEach(addressId => {
-
-
-      if (addressId != addresses[0]) {
-        let addressArray = addressId
-        API.delete(`/endereco/deletar/${addresses[0].id}`)
-        console.log(addressId.id)
-
-      } else {
-        console.log('é diferente')
-      }
-
-    });
 
   }
 
-  atualizarEndereco = async () => {
-    const client = JSON.parse(localStorage.getItem('client'));
-    const id = client.id
-    const addresses = (await API.put(`/endereco/buscar/${id}`)).data || [];
+  atualizarEndereco = async id => {
+   await API.put(`/endereco/atualizar/${id}`)
   }
 
   myAlert = (title, content, style) => {
@@ -228,7 +226,8 @@ export default class Pedido extends Component {
                 <label className='col-sm-4 col-form-label'>Estado:</label>
                 <input className='form-control col-4 text-center' type="text" readOnly value={address.cd_uf} />
               </div>
-              <button onClick={this.deletarEndereco}>removeItem</button>
+              <button onClick={() => this.deletarEndereco(address.id)}>remove</button>
+              <button onClick={() => this.atualizarEndereco(address.id)}>atualizar</button>
             </div>
 
           </div>
