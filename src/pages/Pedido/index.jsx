@@ -3,13 +3,21 @@ import React, { Component } from 'react';
 import './styles.css'
 
 import API from '../../Services/api';
+
 import Moment from 'moment';
+
+import Alert from '../../Components/Alert';
 
 const BEFORE = {
   client: '',
   orders: [],
   address: [],
-  page: 'Pedidos'
+  page: 'Pedidos',
+  alert: {
+    title: '',
+    content: '',
+    style: ''
+  },
 }
 
 export default class Pedido extends Component {
@@ -41,7 +49,47 @@ export default class Pedido extends Component {
     window.location.href = '/';
   }
 
+  myAlert = (title, content, style) => {
+    let showAlert;
+    if (title != undefined && content != undefined && style != undefined) {
+      showAlert = true;
+    } else {
+      showAlert = false;
+    }
 
+    if (showAlert) {
+      this.setState({ alert: { title, content, style } });
+    }
+  };
+
+  resetForAlert = () => {
+    this.setState({ alert: { title: '', content: '', style: '' } });
+  }
+
+
+  forgotPassword = async () => {
+    const over = document.querySelector('.overlay');
+    const spin = document.querySelector('.load');
+
+    over.classList.remove('none');
+    spin.classList.remove('none');
+
+    const objSendResetPassword = {
+      email: this.state.client.email,
+      typeReset: 'alter'
+    }
+
+    const response = await API.post('/password', objSendResetPassword);
+
+    over.classList.add('none');
+    spin.classList.add('none');
+
+    if (response.status == 202) {
+      this.myAlert('Alteração de senha', response.data, 'success');
+    } else {
+      this.myAlert('Opps!', response.data, 'danger');
+    }
+  }
 
   setPage = () => {
     const page = this.state.page;
@@ -112,7 +160,7 @@ export default class Pedido extends Component {
               </div>
               <div className='form-group col-12 col-lg-6'>
                 <div className='col-sm-6 col-form-label'>Alterar minha senha</div>
-                <div className="col-sm-6 btn btn-dark">Alterar</div>
+                <div className="col-sm-6 btn btn-dark" onClick={this.forgotPassword} >Alterar</div>
               </div>
             </div>
           </div>
@@ -174,6 +222,11 @@ export default class Pedido extends Component {
   render() {
     return (
       <>
+        <div className="load center none">
+          <div className="spin"></div>
+          <div className="loader">Carregando</div>
+        </div>
+        {this.state.alert.title != '' && this.state.alert.content != '' && this.state.alert.style != '' ? <Alert title={`${this.state.alert.title}`} content={`${this.state.alert.content}`} style={`${this.state.alert.style}`} reset={this.resetForAlert} /> : ''}
         <div className="container mt-2" >
           <div className="row">
             <div className="col-12">
@@ -236,6 +289,7 @@ export default class Pedido extends Component {
             </div>
           </div>
         </div>
+        <div className='overlay none'></div>
       </>
     );
   }
