@@ -59,7 +59,7 @@ export default class Linha extends Component {
           </div>
 
           <div className="col-3 center mt-2" id="nomeProduto">
-            <h5>{this.state.product.nome_produto}</h5>
+            <h5 className='all'>{this.state.product.nome_produto}</h5>
           </div>
 
           <div className="col-2 center mt-3">
@@ -72,7 +72,7 @@ export default class Linha extends Component {
 
               <input type="text" id="quantity" name="quantity" readOnly
                 className="text-center quantity" value={this.state.amount} />
-                
+
               <button className='btn btn-light' type="button" onClick={this.plus}>+</button>
             </div>
 
