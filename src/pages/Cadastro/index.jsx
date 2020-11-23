@@ -158,7 +158,6 @@ export default class Cadastro extends Component {
 
   }
 
-  //CEP JONAS TESTAR 135835000
 
   validation = (event) => {
     const value = (event.target.value)
@@ -510,7 +509,7 @@ export default class Cadastro extends Component {
                       </div>
                       <div className="col-4">
                         <label htmlFor="inputAddress"> UF </label>
-                        <select value={this.state.endereco.cd_uf}  className="form-control text-center">
+                        <select value={this.state.endereco.cd_uf} className="form-control text-center">
                           {this.state.ufs.map(uf => {
                             return <option id="uf" key={uf.id} value={uf.id} >{uf.ds_uf}</option>
                           })}
