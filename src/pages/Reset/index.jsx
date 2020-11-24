@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import Alert from '../../Components/Alert';
 import API from "../../Services/api";
+import {FaEyeSlash} from 'react-icons/fa';
 
 const BEFORE = {
   token: "",
@@ -182,6 +183,7 @@ export default class extends Component {
               <div className="d-flex flex-row">
                 <input type="password" id="oldPassword" value={this.state.oldPassword} onChange={this.onChange} />
                 <div className='eye_icon' type='button' id="old" onClick={this.showPassword}></div>
+                {/* <div type='button' id="old" onClick={this.showPassword}><FaEyeSlash className='eye_icon mt-1' size='1.5em'/></div> */}
               </div>
 
             </div> : ''}
@@ -191,6 +193,7 @@ export default class extends Component {
               <div className="d-flex flex-row">
                 <input type="password" id="newPassword" value={this.state.password} onChange={this.onChange} />
                 <div className='eye_icon' type='button' id="new" onClick={this.showPassword}></div>
+                {/* <FaEyeSlash className='eye_icon mt-1' size='1.5em' onClick={this.showPassword}/> */}
               </div>
 
             </div>
@@ -198,6 +201,7 @@ export default class extends Component {
               <label htmlFor="">Confirmar Nova Senha: </label>
               <div className="d-flex flex-row">
                 <input type="password" id="confirmPassword" value={this.state.confirmPassword} onChange={this.onChange} />
+                {/* <FaEyeSlash className='eye_icon mt-1' size='1.5em' onClick={this.showPassword}/> */}
                 <div className='eye_icon' type='button' id="confirm" onClick={this.showPassword}></div>
               </div>
 

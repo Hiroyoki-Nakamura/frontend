@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {FaEyeSlash} from 'react-icons/fa';
 import './styles.css'
 
 import API from '../../Services/api';
@@ -433,8 +434,7 @@ export default class Cadastro extends Component {
                       </div>
 
                       <div className='col-2 col-sm-2 col-md-2 col-lg-2'>
-                        <label htmlFor=""></label>
-                      <div className='eye_icon' type='button' onClick={() => this.Showpasswords()}></div>
+                        <FaEyeSlash className='eye_icon' size='1.5em' onClick={() => this.Showpasswords()}/>
                       </div>
 
                     </div>

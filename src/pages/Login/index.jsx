@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {FaEyeSlash} from 'react-icons/fa';
 import './styles.css';
 
 import API from '../../Services/api'
@@ -157,7 +158,7 @@ export default class Login extends Component {
                   <div className="form-group text-login">Senha</div>
                   <div className="form-group center">
                     <input type="password" className="text-center form-control w-75" placeholder="digite sua senha" id="senha-conf" onChange={this.onChange} value={this.state.senha} />
-                    <div className='eye_icon' type='button' onClick={() => this.Showpassword()}></div>
+                    <FaEyeSlash size='1.5em' onClick={() => this.Showpassword()}/>
                   </div>
 
                   <div className="form-group">
