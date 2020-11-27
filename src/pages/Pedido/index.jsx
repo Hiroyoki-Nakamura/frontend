@@ -20,7 +20,8 @@ const BEFORE = {
     content: '',
     style: ''
   },
-  active: false
+  deletar: '',
+  description: ''
 }
 
 export default class Pedido extends Component {
@@ -36,6 +37,13 @@ export default class Pedido extends Component {
     this.getAll();
 
   }
+
+  refresh = (address = []) => {
+    const client = JSON.parse(localStorage.getItem('client'));
+    const id = client.id;
+    API.get(`/endereco/buscar/${id}`)
+    .then(resp => this.setState({address}))
+}
 
 
   getAll = async () => {
@@ -56,23 +64,14 @@ export default class Pedido extends Component {
   }
 
   deletarEndereco = async id => {
-    const requestInfo = {
-      method: 'DELETE',
-    }
-    fetch(
-     await API.delete(`endereco/deletar/${id}`))
-     .then(response =>{
-       if(response.ok) {
-         console.log('Endereco, removido com sucesso')
-       }
-     })
-     .then(response=>{
-        console.log('Endereco não encontrado')
-     })
-     this.setState({active: !this.state.active})
-
-
+     await API.delete(`/endereco/deletar/${id}`)
+    .then(response => {
+      console.log(response)
+      this.getAll();
+    })
+  
   }
+  
 
   atualizarEndereco = async id => {
    await API.put(`/endereco/atualizar/${id}`)
@@ -226,8 +225,8 @@ export default class Pedido extends Component {
                 <label className='col-sm-4 col-form-label'>Estado:</label>
                 <input className='form-control col-4 text-center' type="text" readOnly value={address.cd_uf} />
               </div>
-              <button onClick={() => this.deletarEndereco(address.id)}>remove</button>
-              <button onClick={() => this.atualizarEndereco(address.id)}>atualizar</button>
+              <div className="btn  btn-danger lg-2 center" onClick={() => this.deletarEndereco(address.id)}>REMOVER</div>
+              <div className="btn  btn-success lg-2" onClick={() => this.atualizarEndereco(address.id)}>ATUALIZAR</div>
             </div>
 
           </div>
